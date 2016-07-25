@@ -1,0 +1,6 @@
+framework module JSMulitChooseView {
+  umbrella header "JSMulitChooseView.h"
+
+  export *
+  module * { export * }
+}

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="16A254g" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="兰亭黑 GBK.TTF">
+            <string>FZLTHK--GBK1-0</string>
+            <string>FZLTHK--GBK1-0</string>
+        </mutableArray>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="433" id="KGk-i7-Jjw" customClass="ExpertReplyTableViewCell" customModule="智慧田园" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="687" height="470"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="687" height="469"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P2w-7u-2zF">
+                        <rect key="frame" x="10" y="0.0" width="667" height="54"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2m7-6b-hta">
+                                <rect key="frame" x="614" y="39" width="43" height="10"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rlS-Kk-kfu">
+                                        <rect key="frame" x="0.0" y="0.0" width="43" height="10"/>
+                                        <fontDescription key="fontDescription" name="FZLTHK--GBK1-0" family="FZLanTingHei-R-GBK" pointSize="8"/>
+                                        <state key="normal" title="15分钟前" image="Forum_Time_White">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" image="Forum_Photo2" translatesAutoresizingMaskIntoConstraints="NO" id="KWd-a2-JyN">
+                                <rect key="frame" x="10" y="5" width="35" height="35"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="35" id="8g9-9h-eQQ"/>
+                                    <constraint firstAttribute="width" constant="35" id="iDc-eO-VYa"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" text="??" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZAK-md-Z0u">
+                                <rect key="frame" x="55" y="10" width="597" height="19"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="THA-iw-dlj"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="FZLTHK--GBK1-0" family="FZLanTingHei-R-GBK" pointSize="16"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="THA-iw-dlj"/>
+                                    </mask>
+                                </variation>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.40000000000000002" green="0.80000000000000004" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="ZAK-md-Z0u" secondAttribute="trailing" constant="15" id="24W-LC-tea"/>
+                            <constraint firstAttribute="bottom" secondItem="2m7-6b-hta" secondAttribute="bottom" constant="5" id="8aQ-ui-272"/>
+                            <constraint firstItem="KWd-a2-JyN" firstAttribute="top" secondItem="P2w-7u-2zF" secondAttribute="top" constant="5" id="KP7-Qc-Umo"/>
+                            <constraint firstAttribute="bottom" secondItem="2m7-6b-hta" secondAttribute="bottom" constant="5" id="c5X-tL-Uc1"/>
+                            <constraint firstItem="ZAK-md-Z0u" firstAttribute="top" secondItem="P2w-7u-2zF" secondAttribute="top" constant="10" id="dSo-2q-VXS"/>
+                            <constraint firstItem="KWd-a2-JyN" firstAttribute="leading" secondItem="ZAK-md-Z0u" secondAttribute="trailing" constant="-473" id="dzm-Cc-tGU"/>
+                            <constraint firstAttribute="trailing" secondItem="KWd-a2-JyN" secondAttribute="trailing" constant="466" id="jOj-LM-Lfz"/>
+                            <constraint firstAttribute="trailing" secondItem="2m7-6b-hta" secondAttribute="trailing" constant="10" id="o7f-lF-X7p"/>
+                            <constraint firstItem="KWd-a2-JyN" firstAttribute="leading" secondItem="P2w-7u-2zF" secondAttribute="leading" constant="10" id="pKz-Jl-yEA"/>
+                            <constraint firstItem="2m7-6b-hta" firstAttribute="top" secondItem="ZAK-md-Z0u" secondAttribute="bottom" constant="10" id="qq3-9J-u3p"/>
+                            <constraint firstItem="ZAK-md-Z0u" firstAttribute="leading" secondItem="KWd-a2-JyN" secondAttribute="trailing" constant="10" id="uIq-TG-ptt"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="dzm-Cc-tGU"/>
+                                <exclude reference="jOj-LM-Lfz"/>
+                                <exclude reference="8aQ-ui-272"/>
+                            </mask>
+                        </variation>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="P2w-7u-2zF" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="-10" id="K3P-3f-LBl"/>
+                    <constraint firstAttribute="trailing" secondItem="P2w-7u-2zF" secondAttribute="trailing" constant="10" id="MEK-K8-RYk"/>
+                    <constraint firstItem="P2w-7u-2zF" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="U5v-zf-5j2"/>
+                    <constraint firstItem="P2w-7u-2zF" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="a68-2d-pQn"/>
+                    <constraint firstAttribute="bottom" secondItem="P2w-7u-2zF" secondAttribute="bottom" constant="10" id="dcy-QF-LG1"/>
+                    <constraint firstItem="P2w-7u-2zF" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="gva-L3-Tsr"/>
+                </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="K3P-3f-LBl"/>
+                        <exclude reference="dcy-QF-LG1"/>
+                        <exclude reference="gva-L3-Tsr"/>
+                    </mask>
+                </variation>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="ButtonTime" destination="rlS-Kk-kfu" id="8nw-qO-6IV"/>
+                <outlet property="ImageViewHead" destination="KWd-a2-JyN" id="0wH-Db-KQz"/>
+                <outlet property="LabelContent" destination="ZAK-md-Z0u" id="0Bm-re-RO3"/>
+                <outlet property="newContentView" destination="P2w-7u-2zF" id="SKB-tn-ldQ"/>
+            </connections>
+            <point key="canvasLocation" x="200.5" y="86"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="Forum_Photo2" width="30" height="30"/>
+        <image name="Forum_Time_White" width="9" height="9"/>
+    </resources>
+</document>

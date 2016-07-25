@@ -1,0 +1,36 @@
+#platform :ios, '8.0'
+
+target '智慧田园' do
+
+use_frameworks!
+
+pod 'Alamofire'
+
+pod 'MBProgressHUD','~>0.9.2'
+
+pod 'SnapKit', '~> 0.19.1'
+
+pod 'SDWebImage', '~> 3.7.5'
+
+pod 'STPopup'
+
+pod 'MMTweenAnimation', '~> 1.1'
+
+pod 'PNChart'
+
+pod ‘CocoaAsyncSocket’
+
+pod 'KeyboardMan', '~> 0.6.0'
+
+pod 'JTCalendar', '~> 2.0'
+
+pod ‘RealmSwift’
+
+pod 'AMap2DMap' #2D地图SDK(2D地图和3D地图不能同时使用)
+
+pod 'AMapLocation'
+
+pod ‘MJRefresh’
+
+end
+

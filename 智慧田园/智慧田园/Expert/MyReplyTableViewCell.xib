@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="16A254g" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="兰亭黑 GBK.TTF">
+            <string>FZLTHK--GBK1-0</string>
+            <string>FZLTHK--GBK1-0</string>
+        </mutableArray>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="360" id="KGk-i7-Jjw" customClass="MyReplyTableViewCell" customModule="智慧田园" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="840" height="360"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="840" height="359"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pIr-rJ-kQD">
+                        <rect key="frame" x="10" y="0.0" width="549" height="150"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" misplaced="YES" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qj7-yF-kOt">
+                                <rect key="frame" x="15" y="10" width="285" height="184"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="qzy-74-JPD"/>
+                                </constraints>
+                                <string key="text">什么时候喷，单独喷还是可以和农药混合在一起喷？什么时候喷，单独喷还是可以和农药混合在一起喷？什么时候喷，单独喷还是可以和农药混合在一起喷？什么时候喷，单独喷还是可以和农药混合在一起喷？什么时候喷，单独喷还是可以和农药混合在一起喷？什么时候喷，单独喷还是可以和农药混合在一起喷？什么时候喷，单独喷还是可以和农药混合在一起喷？</string>
+                                <fontDescription key="fontDescription" name="FZLTHK--GBK1-0" family="FZLanTingHei-R-GBK" pointSize="16"/>
+                                <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="qzy-74-JPD"/>
+                                    </mask>
+                                </variation>
+                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2P9-w8-oTs">
+                                <rect key="frame" x="496" y="135" width="43" height="10"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jlQ-gs-6ca">
+                                        <rect key="frame" x="0.0" y="0.0" width="43" height="10"/>
+                                        <fontDescription key="fontDescription" name="FZLTHK--GBK1-0" family="FZLanTingHei-R-GBK" pointSize="8"/>
+                                        <state key="normal" title="15分钟前" image="Forum_Time">
+                                            <color key="titleColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" misplaced="YES" image="Forum_Photo2" translatesAutoresizingMaskIntoConstraints="NO" id="Dzr-uT-2cI">
+                                <rect key="frame" x="504" y="5" width="35" height="35"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="35" id="Gse-yD-tVD"/>
+                                    <constraint firstAttribute="width" constant="35" id="i7d-C3-aUR"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="2P9-w8-oTs" secondAttribute="trailing" constant="10" id="8CD-yV-pdH"/>
+                            <constraint firstAttribute="bottom" secondItem="2P9-w8-oTs" secondAttribute="bottom" constant="5" id="Gyd-XI-yB4"/>
+                            <constraint firstItem="Dzr-uT-2cI" firstAttribute="leading" secondItem="Qj7-yF-kOt" secondAttribute="trailing" constant="-473" id="HSP-sA-TDo"/>
+                            <constraint firstItem="Dzr-uT-2cI" firstAttribute="leading" secondItem="Qj7-yF-kOt" secondAttribute="trailing" constant="10" id="JHb-db-c3S"/>
+                            <constraint firstItem="2P9-w8-oTs" firstAttribute="top" secondItem="Qj7-yF-kOt" secondAttribute="bottom" constant="15" id="LIp-S0-Ch4"/>
+                            <constraint firstAttribute="trailing" secondItem="Dzr-uT-2cI" secondAttribute="trailing" constant="466" id="NQQ-WK-Kle"/>
+                            <constraint firstItem="Qj7-yF-kOt" firstAttribute="top" secondItem="pIr-rJ-kQD" secondAttribute="top" constant="10" id="RQ9-BE-1bl"/>
+                            <constraint firstAttribute="bottom" secondItem="2P9-w8-oTs" secondAttribute="bottom" constant="5" id="gBr-46-jD5"/>
+                            <constraint firstItem="Dzr-uT-2cI" firstAttribute="top" secondItem="pIr-rJ-kQD" secondAttribute="top" constant="5" id="hnG-Ty-dvA"/>
+                            <constraint firstAttribute="trailing" secondItem="Qj7-yF-kOt" secondAttribute="trailing" constant="15" id="kvX-j5-X47"/>
+                            <constraint firstItem="Qj7-yF-kOt" firstAttribute="leading" secondItem="pIr-rJ-kQD" secondAttribute="leading" constant="15" id="oVz-vz-t3J"/>
+                            <constraint firstAttribute="trailing" secondItem="Dzr-uT-2cI" secondAttribute="trailing" constant="10" id="u9n-AL-sEp"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="kvX-j5-X47"/>
+                                <exclude reference="HSP-sA-TDo"/>
+                                <exclude reference="NQQ-WK-Kle"/>
+                                <exclude reference="Gyd-XI-yB4"/>
+                            </mask>
+                        </variation>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="pIr-rJ-kQD" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="1xg-8D-zua"/>
+                    <constraint firstItem="pIr-rJ-kQD" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="5Ib-dg-Ari"/>
+                    <constraint firstItem="pIr-rJ-kQD" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="10" id="D1G-ga-NJO"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="pIr-rJ-kQD" secondAttribute="trailing" constant="10" id="HgX-Sh-BR3"/>
+                    <constraint firstAttribute="trailing" secondItem="pIr-rJ-kQD" secondAttribute="trailing" constant="10" id="ast-E6-3eB"/>
+                    <constraint firstItem="pIr-rJ-kQD" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="eU0-zq-Ptf"/>
+                </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="1xg-8D-zua"/>
+                        <exclude reference="D1G-ga-NJO"/>
+                        <exclude reference="HgX-Sh-BR3"/>
+                    </mask>
+                </variation>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="ButtonTime" destination="jlQ-gs-6ca" id="SAb-mc-V9b"/>
+                <outlet property="ImageViewHead" destination="Dzr-uT-2cI" id="8BE-cw-HxV"/>
+                <outlet property="LabelContent" destination="Qj7-yF-kOt" id="q1d-xd-PRY"/>
+                <outlet property="newContentView" destination="pIr-rJ-kQD" id="Ttg-cH-Q97"/>
+            </connections>
+            <point key="canvasLocation" x="465" y="385"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="Forum_Photo2" width="30" height="30"/>
+        <image name="Forum_Time" width="9" height="9"/>
+    </resources>
+</document>

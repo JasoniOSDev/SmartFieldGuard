@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="兰亭黑 GBK.TTF">
+            <string>FZLTHK--GBK1-0</string>
+            <string>FZLTHK--GBK1-0</string>
+            <string>FZLTHK--GBK1-0</string>
+            <string>FZLTHK--GBK1-0</string>
+            <string>FZLTHK--GBK1-0</string>
+        </mutableArray>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="TYAnalyze" customModule="智慧田园" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="240"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="vUN-9P-lcB">
+                    <rect key="frame" x="325" y="5" width="40" height="184"/>
+                    <subviews>
+                        <button opaque="NO" tag="101" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wQA-3I-tDc">
+                            <rect key="frame" x="0.0" y="0.0" width="40" height="31"/>
+                            <fontDescription key="fontDescription" name="FZLTHK--GBK1-0" family="FZLanTingHei-R-GBK" pointSize="16"/>
+                            <state key="normal" title="天">
+                                <color key="titleColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                            <state key="selected">
+                                <color key="titleColor" red="0.40000000000000002" green="0.80000000000000004" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="ButtonPageClicked:" destination="iN0-l3-epB" eventType="touchUpInside" id="Pyg-UA-1PL"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" tag="102" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BGq-Iu-RvY">
+                            <rect key="frame" x="0.0" y="51" width="40" height="31"/>
+                            <fontDescription key="fontDescription" name="FZLTHK--GBK1-0" family="FZLanTingHei-R-GBK" pointSize="16"/>
+                            <state key="normal" title="周">
+                                <color key="titleColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                            <state key="selected">
+                                <color key="titleColor" red="0.40000000000000002" green="0.80000000000000004" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="ButtonPageClicked:" destination="iN0-l3-epB" eventType="touchUpInside" id="a5y-wC-kw2"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" tag="103" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pt1-15-0eg">
+                            <rect key="frame" x="0.0" y="102" width="40" height="31"/>
+                            <fontDescription key="fontDescription" name="FZLTHK--GBK1-0" family="FZLanTingHei-R-GBK" pointSize="16"/>
+                            <state key="normal" title="月">
+                                <color key="titleColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                            <state key="selected">
+                                <color key="titleColor" red="0.40000000000000002" green="0.80000000000000004" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="ButtonPageClicked:" destination="iN0-l3-epB" eventType="touchUpInside" id="ESA-85-gm1"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" tag="104" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pgu-JI-fGg">
+                            <rect key="frame" x="0.0" y="153" width="40" height="31"/>
+                            <fontDescription key="fontDescription" name="FZLTHK--GBK1-0" family="FZLanTingHei-R-GBK" pointSize="16"/>
+                            <state key="normal" title="年">
+                                <color key="titleColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                            <state key="selected">
+                                <color key="titleColor" red="0.40000000000000002" green="0.80000000000000004" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="ButtonPageClicked:" destination="iN0-l3-epB" eventType="touchUpInside" id="o9J-f5-ubD"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="40" id="MRQ-wl-aMC"/>
+                    </constraints>
+                </stackView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="？？" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3OK-Wr-bK1">
+                    <rect key="frame" x="5" y="10" width="28" height="17"/>
+                    <fontDescription key="fontDescription" name="FZLTHK--GBK1-0" family="FZLanTingHei-R-GBK" pointSize="14"/>
+                    <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g8g-wy-2rX">
+                    <rect key="frame" x="10" y="37" width="305" height="193"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="g8g-wy-2rX" secondAttribute="bottom" constant="10" id="IO4-w5-daE"/>
+                <constraint firstItem="3OK-Wr-bK1" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="5" id="Rmz-SH-LHg"/>
+                <constraint firstAttribute="trailing" secondItem="vUN-9P-lcB" secondAttribute="trailing" constant="10" id="SB1-b3-zXX"/>
+                <constraint firstItem="vUN-9P-lcB" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="5" id="YCF-sx-NG0"/>
+                <constraint firstItem="vUN-9P-lcB" firstAttribute="leading" secondItem="g8g-wy-2rX" secondAttribute="trailing" constant="10" id="fGY-kS-L9T"/>
+                <constraint firstItem="3OK-Wr-bK1" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="10" id="gKC-Ae-mya"/>
+                <constraint firstItem="g8g-wy-2rX" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="10" id="pX4-Tw-VWS"/>
+                <constraint firstItem="g8g-wy-2rX" firstAttribute="top" secondItem="3OK-Wr-bK1" secondAttribute="bottom" constant="10" id="svL-00-I3F"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="ButtonFour" destination="Pgu-JI-fGg" id="6X1-R7-q7G"/>
+                <outlet property="ButtonOne" destination="wQA-3I-tDc" id="Jva-yR-X6v"/>
+                <outlet property="ButtonThird" destination="pt1-15-0eg" id="bwW-vr-3ak"/>
+                <outlet property="ButtonTwo" destination="BGq-Iu-RvY" id="ObU-lt-0XN"/>
+                <outlet property="ChartContentView" destination="g8g-wy-2rX" id="drj-de-Ehx"/>
+                <outlet property="LabelTitle" destination="3OK-Wr-bK1" id="N9p-LZ-UU9"/>
+                <outlet property="StackView" destination="vUN-9P-lcB" id="2As-k3-snr"/>
+            </connections>
+            <point key="canvasLocation" x="765.5" y="351"/>
+        </view>
+    </objects>
+</document>

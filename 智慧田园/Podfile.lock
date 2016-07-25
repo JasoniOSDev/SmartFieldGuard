@@ -1,0 +1,68 @@
+PODS:
+  - Alamofire (3.2.1)
+  - AMap2DMap (3.3.0)
+  - AMapLocation (1.2.2)
+  - CocoaAsyncSocket (7.4.3):
+    - CocoaAsyncSocket/All (= 7.4.3)
+  - CocoaAsyncSocket/All (7.4.3):
+    - CocoaAsyncSocket/GCD
+    - CocoaAsyncSocket/RunLoop
+  - CocoaAsyncSocket/GCD (7.4.3)
+  - CocoaAsyncSocket/RunLoop (7.4.3)
+  - JTCalendar (2.1.5)
+  - KeyboardMan (0.6.0)
+  - MBProgressHUD (0.9.2)
+  - MJRefresh (3.1.0)
+  - MMTweenAnimation (1.1):
+    - pop
+  - PNChart (0.8.8):
+    - UICountingLabel (~> 1.2.0)
+  - pop (1.0.9)
+  - Realm (0.103.1):
+    - Realm/Headers (= 0.103.1)
+  - Realm/Headers (0.103.1)
+  - RealmSwift (0.103.1):
+    - Realm (= 0.103.1)
+  - SDWebImage (3.7.5):
+    - SDWebImage/Core (= 3.7.5)
+  - SDWebImage/Core (3.7.5)
+  - SnapKit (0.19.1)
+  - STPopup (1.6.1)
+  - UICountingLabel (1.2.0)
+
+DEPENDENCIES:
+  - Alamofire
+  - AMap2DMap
+  - AMapLocation
+  - CocoaAsyncSocket
+  - JTCalendar (~> 2.0)
+  - KeyboardMan (~> 0.6.0)
+  - MBProgressHUD (~> 0.9.2)
+  - MJRefresh
+  - MMTweenAnimation (~> 1.1)
+  - PNChart
+  - RealmSwift
+  - SDWebImage (~> 3.7.5)
+  - SnapKit (~> 0.19.1)
+  - STPopup
+
+SPEC CHECKSUMS:
+  Alamofire: f11d8624a05f5d39e0c99309b3e600a3ba64298a
+  AMap2DMap: e53461cdc345375e514579db17dbd721ff9ed9eb
+  AMapLocation: 5412fbf0385716d4d481e39a95929057cddc093f
+  CocoaAsyncSocket: a18c75dca4b08723628a0bacca6e94803d90be91
+  JTCalendar: 57a4420f12d10c93c3b28da96803e7043d1c9281
+  KeyboardMan: 665211f180093f5bb3c6ff7e8b7f858c432c6ccf
+  MBProgressHUD: 1569cf7ace17a8bac47aabfbb8580a49690386d1
+  MJRefresh: 743e6404967d1c2c688472ea3ecfde247d872db4
+  MMTweenAnimation: a095d3203731fcb32a9b8039c4776cef0dbd2a58
+  PNChart: 25f91e9c4688af49c3647489760624d037f5383f
+  pop: f667631a5108a2e60d9e8797c9b32ddaf2080bce
+  Realm: 9ed57109332e95bdc48a7caedff80b70c51d5ef4
+  RealmSwift: 56629adb4acd2dc33eb2c8199fe856585dfd3ba3
+  SDWebImage: 69c6303e3348fba97e03f65d65d4fbc26740f461
+  SnapKit: eff58d6e3451bf2f482db2eccf86aecf371dc62d
+  STPopup: f32dc6a944b57311b6d2d6e3afd789f83a0c4cbc
+  UICountingLabel: 1db4e7d023e1762171eb226d6dff47a7a84f27aa
+
+COCOAPODS: 0.39.0
