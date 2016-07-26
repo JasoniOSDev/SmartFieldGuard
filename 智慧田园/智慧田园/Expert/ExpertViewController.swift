@@ -20,21 +20,19 @@ class ExpertViewController: TYViewController {
     var selectIndex = -1
     var token: NotificationToken!
     var cellHeight = [Int:CGFloat]()
-    var cropsID:String?{
-        didSet{
-            self.cropsIDs = [cropsID!]
-        }
-    }
-    var cropsName:String?{
-        didSet{
-            self.cropsNames = [cropsName!]
-        }
-    }
-    var cropsIDs = [String]()
-    var cropsNames = [String]()
-    var check:Bool!//查看的内容，true表示自己，false表示所有
-    lazy var experViewController:ExpertClassChooseController = {
+    var cropsID = ""
+    var cropsName = ""
+    var own:Bool = true//查看的内容，true表示自己，false表示所有
+    lazy var experClassChooseViewController:ExpertClassChooseController = {
         let vc = ExpertClassChooseController()
+        vc.selectBlock = {
+           [weak self] id,name,own in
+            self?.cropsID = id
+            self?.cropsName = name
+            self?.own = own
+            self?.LoadData()
+            self?.checkNewTopic()
+        }
         return vc
     }()
     
@@ -45,6 +43,7 @@ class ExpertViewController: TYViewController {
         TYUserDefaults.userID.bindAndFireListener("ExpertViewController") { [weak self] _ in
             //用来粗略处理切换账号的情况
             self?.LoadData()
+            self?.checkNewTopic()
         }
     }
     
@@ -54,6 +53,7 @@ class ExpertViewController: TYViewController {
     }
 
     private func LoadData(){
+        //用于获取当前账号对应的话题数据
         switch TYUserDefaults.role.value {
         case RoleNormalMemeber:
             self.ExpertThemes = ModelManager.getObjects(ExpertTheme).filter("self.userID = %@", TYUserDefaults.userID.value!).sorted("timeInterval", ascending: true)
@@ -87,8 +87,17 @@ class ExpertViewController: TYViewController {
             break
         }
         self.tableView.reloadData()
-        
     }
+    
+    private func checkNewTopic(){
+        //检查是否有新增的话题，在别的手机上发送的
+        NetWorkManager.CheckNewExperTopic(own, type: "", callback: {[weak self] in
+            self?.ExpertThemes?.forEach({ (x) in
+                NetWorkManager.updateTopicReply(x)
+            })
+        })
+    }
+    
     
     func prepareUI(){
         tableViewConfigure()
@@ -118,8 +127,8 @@ class ExpertViewController: TYViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let vc = segue.destinationViewController as? TYNavigationViewController{
             if let vc2 = vc.visibleViewController as? PushNewForumViewController{
-                vc2.cropsID = self.cropsIDs.first
-                vc2.cropsName = self.cropsNames.first
+                vc2.cropsID = cropsID
+                vc2.cropsName = cropsName
                 vc2.style = .Expert
             }
         }
@@ -154,7 +163,10 @@ class ExpertViewController: TYViewController {
     }
     
     @IBAction func ButtonClassClicked(sender: AnyObject) {
-        self.presentViewController(TYNavigationViewController(rootViewController: experViewController), animated: true,completion: nil)
+        experClassChooseViewController.cropsID = cropsID
+        experClassChooseViewController.cropsName = cropsName
+        experClassChooseViewController.mySelfSelect = own ? "自己":"所以"
+        self.presentViewController(TYNavigationViewController(rootViewController: experClassChooseViewController), animated: true,completion: nil)
     }
     
     class func PushExpertViewController(){

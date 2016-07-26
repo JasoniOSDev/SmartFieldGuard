@@ -203,8 +203,8 @@ class CardDetailViewController: TYViewController {
         }
         if let vc = segue.destinationViewController as? TYNavigationViewController{
             if let vc2 = vc.visibleViewController as? ExpertViewController{
-                vc2.cropsID = self.farmland.crops?.id
-                vc2.cropsName = self.farmland.crops?.name
+                vc2.cropsID = (self.farmland.crops?.id)!
+                vc2.cropsName = (self.farmland.crops?.name)!
             }
         }
         
