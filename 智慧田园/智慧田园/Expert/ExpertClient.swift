@@ -78,7 +78,7 @@ class ExpertClient:NSObject,GCDAsyncSocketDelegate{
                                     message.replySn = object["replySn"] as! Int
                                     message.userID = object["userId"] as! String
                                     message.name = object["username"] as! String
-                                    message.timeInterval = (object["replyDate"] as! [String:AnyObject])["time"] as! Double
+                                    message.timeInterval = object["replyDate"] as! Double
                                     let topic = (sSelf.topics.filter("self.ID == %@",topicID).first)!
                                     message.Theme = topic
                                     message.updateTheme(true)

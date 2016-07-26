@@ -10,7 +10,7 @@ import UIKit
 
 class ExpertClassChooseController: TYViewController,UITableViewDataSource,UITableViewDelegate {
 
-    var selectBlock:(()->Void)!
+    var selectBlock:((cropsID:String,cropsName:String,own:Bool)->Void)!
     var tableView = UITableView()
     var cropClasses = [CropsClass]()
     var crops = [Int:[Crops]]()
@@ -19,6 +19,10 @@ class ExpertClassChooseController: TYViewController,UITableViewDataSource,UITabl
     var tableHeadView = [ExpertClassChooseTableHeadView]()
     var cellHeight = [Int:CGFloat]()
     var cellWidth = [Int:[Int:CGFloat]]()
+    var cropsID = ""
+    var cropsName = ""
+    var preSelect = 0
+    var mySelfSelect = "自己"
     lazy var tableViewCell:ExpertClassChooseTableViewCell = {
         let cell = self.tableView.dequeueReusableCellWithIdentifier(ExpertClassChooseTableViewCell.reuseIdentifier) as! ExpertClassChooseTableViewCell
         cell.collectionView.delegate = self
@@ -34,8 +38,6 @@ class ExpertClassChooseController: TYViewController,UITableViewDataSource,UITabl
         super.viewDidLoad()
         prepareUI()
         LoadCropsClass()
-        
-    
     }
     
     private func prepareUI(){
@@ -92,7 +94,7 @@ class ExpertClassChooseController: TYViewController,UITableViewDataSource,UITabl
             NetWorkManager.GetCropsList(self.cropClasses[index].id, callback: { [weak self] cropsList in
                 if let sSelf = self {
                     sSelf.crops[index] = cropsList
-                    sSelf.tableView.reloadSections(NSIndexSet(index: index), withRowAnimation: .Automatic)
+                    sSelf.tableView.reloadSections(NSIndexSet(index: index+1), withRowAnimation: .Automatic)
                 }
             })
         }else{
@@ -106,7 +108,9 @@ class ExpertClassChooseController: TYViewController,UITableViewDataSource,UITabl
     }
     
     func selectAction(){
-        
+        self.closeCurrentView { [weak self] in
+            self?.selectBlock(cropsID: (self?.cropsID)!,cropsName: (self?.cropsName)!,own:(self?.mySelfSelect)! == "自己")
+        }
     }
     
 
@@ -124,9 +128,13 @@ extension ExpertClassChooseController{
     }
     
     private func cellHeightForIndex(index:Int) -> CGFloat{
+        if index > 0 && (crops[index-1] == nil || crops[index-1]!.count == 0){
+            return 0
+        }
         if cellHeight[index] == nil {
             tableViewCell.index = index
             tableViewCell.layoutIfNeeded()
+            tableViewCell.collectionView.reloadData()
             cellHeight[index] = tableViewCell.collectionView.contentSize.height + 20
         }
         return cellHeight[index]!
@@ -200,6 +208,7 @@ extension ExpertClassChooseController:UICollectionViewDelegateFlowLayout,UIColle
         if let result = selected[collectionView.tag] where result == true {
             if crops[collectionView.tag - 1] == nil{
                 LoadCropsListForIndex(collectionView.tag - 1)
+                return 0
             }
             return crops[collectionView.tag - 1] == nil ? 0 : (crops[collectionView.tag - 1]?.count)!
         }
@@ -213,11 +222,32 @@ extension ExpertClassChooseController:UICollectionViewDelegateFlowLayout,UIColle
         }else{
             cell.title = crops[collectionView.tag - 1]![indexPath.row].name
         }
+        if cell.title == mySelfSelect || cell.title == cropsName{
+            cell.Select(true)
+        }else{
+            cell.Select(false)
+        }
         return cell
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize{
         return CGSizeMake(cellWidthForIndexAndSection(collectionView.tag,index:indexPath.row),40)
     }
+    
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        if collectionView.tag != 0 {
+            let selectCrops = crops[collectionView.tag - 1]!
+            cropsID = selectCrops[indexPath.row].id
+            cropsName = selectCrops[indexPath.row].name
+            tableView.reloadSections(NSIndexSet(index: self.preSelect), withRowAnimation: .Automatic)
+            tableView.reloadSections(NSIndexSet(index: collectionView.tag), withRowAnimation: .Automatic)
+            self.preSelect = collectionView.tag
+        }else{
+            mySelfSelect = mySelf[indexPath.row]
+            tableView.reloadSections(NSIndexSet(index:0), withRowAnimation: .Automatic)
+        }
+    }
+    
+    
     
 }

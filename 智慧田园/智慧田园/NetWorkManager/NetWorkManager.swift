@@ -354,7 +354,11 @@ public class NetWorkManager:NSObject{
                         if let json = response.result.value as? [String:AnyObject]{
                             if let msg = json["message"] as? String where msg == "success"{
                                 dispatch_async(dispatch_get_main_queue(), {
-                                    
+                                    var replyInfo = (json["replyInfo"] as! String).componentsSeparatedByString("|")
+                                    let sn = Int(replyInfo[1])!
+                                    let time = Double(replyInfo[2])!
+                                    message.replySn = sn
+                                    message.timeInterval = time
                                     ModelManager.add(message)
                                     message.updateTheme()
                                     if let block = callback{
@@ -420,8 +424,84 @@ public class NetWorkManager:NSObject{
         }
     }
     
+    class func CheckNewExperTopic(own:Bool?=true,type:String = "",callback:(()->Void)? = nil){
+        guard let lastestTime = ModelManager.getObjects(ExpertTheme).sorted("timeInterval", ascending: true).last?.timeInterval else{return}
+        let dict = NSMutableDictionary(dictionary: ["type":"Expert","pageIndex":1,"pageCount":65535,"parentArea":type])
+        if own == true && TYUserDefaults.role.value != RoleExpert{
+            dict.setObject(TYUserDefaults.userID.value!, forKey: "userId")
+        }
+        dict.setObject(lastestTime, forKey: "lastDate")
+        NetWorkManager.updateSession {
+            TYRequest(.Forum, parameters: dict as! [String:AnyObject]).TYResponseJSON { (JSON) in
+                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), {
+                    let localTheme = ModelManager.getObjects(ExpertTheme)
+                    if let msg = JSON["message"] as? String where msg == "success"{
+                        if let array = (JSON["postList"] as! [String:AnyObject])["list"] as? NSArray{
+                            for x in array{
+                                let object = x as! [String:AnyObject]
+                                let topic = ExpertTheme()
+                                if let content = object["content"] as? String{
+                                    topic.content = content
+                                }else{
+                                    topic.content = ""
+                                }
+                                topic.timeInterval = object["createDate"] as! Double
+                                topic.ID = object["postNo"] as! String
+                                topic.headPhoto = TYUserDefaults.UrlPrefix.value + (object["headImage"] as! String)
+                                topic.lastReply = object["lastReplyDate"] as! Double
+                                topic.name = object["username"] as! String
+                                topic.userID = object["userId"] as! String
+                                if let images = object["images"] as? [String]{
+                                    topic.images = images.map(){TYUserDefaults.UrlPrefix.value + $0}
+                                }
+                                if !localTheme.contains({$0.ID == topic.ID}){
+                                    dispatch_async(dispatch_get_main_queue(), {
+                                        ModelManager.add(topic)
+                                    })
+                                }
+                            }
+                        }
+                        if let block = callback{
+                            dispatch_async(dispatch_get_main_queue(), { 
+                                block()
+                            })
+                        }
+                    }
+                })
+            }
+        }
+    }
+    
+    class func updateTopicReply(topic:ExpertTheme){
+        let latestSn = ModelManager.getObjects(ExpertMessage).filter("self.Theme.ID = %@", topic.ID).sorted("replySn", ascending: true).last?.replySn ?? 0
+        NetWorkManager.updateSession({
+            TYRequest(.Reply, parameters: ["pageIndex":1,"pageCount":65535,"postNo":topic.ID,"type":"Expert","lastReplySn":latestSn]).TYResponseJSON(Block: { (JSON) in
+                if let list = (JSON["replyList"] as! [String:AnyObject])["list"] as? NSArray{
+                    list.forEach({ (x) in
+                        let object = x as! [String:AnyObject]
+                        let message = ExpertMessage()
+                        if let content = object["content"] as? String{
+                            message.content = content
+                        }
+                        message.headPhoto = TYUserDefaults.UrlPrefix.value + (object["headImage"] as! String)
+                        message.replySn = object["replySn"] as! Int
+                        message.userID = object["userId"] as! String
+                        message.name = object["username"] as! String
+                        message.timeInterval = object["replyDate"]  as! Double
+                        message.Theme = topic
+                        dispatch_async(dispatch_get_main_queue(), { 
+                            message.updateTheme(true)
+                            ModelManager.add(message)
+                        })
+                    })
+                }
+            })
+        })
+    }
+
+    
     class func updateLocalExpertTopic(){
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)) { 
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)) {
             LoadExpertReplay()
         }
     }
