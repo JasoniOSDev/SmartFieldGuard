@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "Login_LoginWriteFrame.png",
+      "filename" : "UserCenter_TextFieldNameBK_R.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "Login_LoginWriteFrame@2x.png",
+      "filename" : "UserCenter_TextFieldNameBK_R@2x.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "Login_LoginWriteFrame@3x.png",
+      "filename" : "UserCenter_TextFieldNameBK_R@3x.png",
       "scale" : "3x"
     }
   ],

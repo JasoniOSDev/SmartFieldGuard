@@ -17,6 +17,7 @@ class UserCenterViewController: UIViewController,UITextFieldDelegate {
     @IBOutlet weak var ImgView: UIImageView!
     @IBOutlet weak var ButtonEdit: UIButton!
     @IBOutlet weak var ButtonExpert: UIButton!
+    @IBOutlet weak var ButtonUploadPhoto: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
         TextFieldUserName.text = TYUserDefaults.username.value
@@ -29,7 +30,7 @@ class UserCenterViewController: UIViewController,UITextFieldDelegate {
     
     override func loadView() {
         super.loadView()
-        self.contentSizeInPopup = CGSizeMake(300, 391)
+        self.contentSizeInPopup = CGSizeMake(300, 330)
     }
 
 
@@ -38,9 +39,12 @@ class UserCenterViewController: UIViewController,UITextFieldDelegate {
         sender.selected = !sender.selected
         ButtonExit.selected = sender.selected
         TextFieldUserName.enabled = sender.selected
+        ButtonExpert.hidden = sender.selected
+        ButtonUploadPhoto.hidden = sender.selected
+        
         if sender.selected == true{
             TextFieldUserName.becomeFirstResponder()
-            TextFieldUserName.background = UIImage(named: "Login_LoginWriteFrame")
+            TextFieldUserName.background = UIImage(named: "UserCenter_TextFieldNameBK_W")
         }else{
             TextFieldUserName.background = nil
             TextFieldUserName.resignFirstResponder()
@@ -71,6 +75,11 @@ class UserCenterViewController: UIViewController,UITextFieldDelegate {
             ExpertViewController.PushExpertViewController()
         }
     }
+    
+    @IBAction func ButtonUploadPhotoClicked() {
+        
+    }
+    
     class func pushAlertInViewController(viewController:UIViewController){
         let story = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
         let vc = story.instantiateViewControllerWithIdentifier("UserCenterViewController") as! UserCenterViewController
