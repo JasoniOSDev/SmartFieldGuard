@@ -13,7 +13,7 @@ class ExpertClassChooseController: TYViewController,UITableViewDataSource,UITabl
     var selectBlock:((cropsID:String,cropsName:String,own:Bool)->Void)!
     var tableView = UITableView()
     var cropClasses = [CropsClass]()
-    var crops = [Int:[Crops]]()
+    var crops = [Int:[LocalCrops]]()
     var selected = [Int:Bool]()
     var mySelf = ["自己","所有"]
     var tableHeadView = [ExpertClassChooseTableHeadView]()
@@ -237,6 +237,12 @@ extension ExpertClassChooseController:UICollectionViewDelegateFlowLayout,UIColle
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         if collectionView.tag != 0 {
             let selectCrops = crops[collectionView.tag - 1]!
+            if cropsID == selectCrops[indexPath.row].id{
+                cropsID = ""
+                cropsName = ""
+                tableView.reloadSections(NSIndexSet(index: self.preSelect), withRowAnimation: .Automatic)
+                return
+            }
             cropsID = selectCrops[indexPath.row].id
             cropsName = selectCrops[indexPath.row].name
             tableView.reloadSections(NSIndexSet(index: self.preSelect), withRowAnimation: .Automatic)

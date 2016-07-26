@@ -122,9 +122,9 @@ extension NSTimeInterval{
              let dateFormatter = NSDateFormatter()
             let dis = -date.timeIntervalSinceNow
             if dis < 86400 {
-                dateFormatter.dateFormat = "HH:mm"
+                return self.ForumDateDescription
             }else{
-                dateFormatter.dateFormat = "YYYY.MM.dd"
+                dateFormatter.dateFormat = "MM-dd"
             }
             return dateFormatter.stringFromDate(NSDate(timeIntervalSince1970: self/1000))
         }

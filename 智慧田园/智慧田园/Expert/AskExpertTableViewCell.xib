@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="16A254g" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -28,19 +28,19 @@
                             <stackView opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="751" distribution="equalSpacing" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="bse-VZ-rJL">
                                 <rect key="frame" x="20" y="112" width="0.0" height="80"/>
                                 <subviews>
-                                    <imageView hidden="YES" userInteractionEnabled="NO" tag="101" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Z9Y-PL-bm5">
+                                    <imageView hidden="YES" tag="103" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Z9Y-PL-bm5" customClass="MessagePhotoView" customModule="智慧田园" customModuleProvider="target">
                                         <rect key="frame" x="-30" y="-112" width="0.0" height="0.0"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="Z9Y-PL-bm5" secondAttribute="height" multiplier="1:1" id="dcZ-e3-0mw"/>
                                         </constraints>
                                     </imageView>
-                                    <imageView hidden="YES" userInteractionEnabled="NO" tag="102" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bap-3B-jC1">
+                                    <imageView hidden="YES" tag="101" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bap-3B-jC1" customClass="MessagePhotoView" customModule="智慧田园" customModuleProvider="target">
                                         <rect key="frame" x="-30" y="-112" width="0.0" height="0.0"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="bap-3B-jC1" secondAttribute="height" multiplier="1:1" id="Xu6-ul-yz1"/>
                                         </constraints>
                                     </imageView>
-                                    <imageView hidden="YES" userInteractionEnabled="NO" tag="103" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gML-Mo-ZDA">
+                                    <imageView hidden="YES" tag="102" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gML-Mo-ZDA" customClass="MessagePhotoView" customModule="智慧田园" customModuleProvider="target">
                                         <rect key="frame" x="-30" y="-112" width="0.0" height="0.0"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="gML-Mo-ZDA" secondAttribute="height" id="kbK-dd-K2L"/>
@@ -51,16 +51,16 @@
                                     <constraint firstAttribute="height" constant="80" id="XIQ-Mv-g7z"/>
                                 </constraints>
                             </stackView>
-                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5i2-mO-VrB">
-                                <rect key="frame" x="320" y="198" width="43" height="20"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="5i2-mO-VrB">
+                                <rect key="frame" x="271" y="205" width="92" height="22"/>
                                 <subviews>
-                                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Expert_Replied" translatesAutoresizingMaskIntoConstraints="NO" id="Ty5-Je-hJW">
-                                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="20"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Expert_Replied" translatesAutoresizingMaskIntoConstraints="NO" id="Ty5-Je-hJW">
+                                        <rect key="frame" x="0.0" y="1" width="58" height="20"/>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dBB-XX-AY0">
-                                        <rect key="frame" x="0.0" y="0.0" width="43" height="20"/>
+                                        <rect key="frame" x="58" y="0.0" width="34" height="22"/>
                                         <fontDescription key="fontDescription" name="FZLTHK--GBK1-0" family="FZLanTingHei-R-GBK" pointSize="8"/>
-                                        <state key="normal" title="15分钟前" image="Forum_Time">
+                                        <state key="normal" title="15分钟前">
                                             <color key="titleColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                     </button>
@@ -102,7 +102,7 @@
                             <constraint firstItem="U91-yW-LhV" firstAttribute="leading" secondItem="BTR-WK-EkS" secondAttribute="trailing" constant="10" id="D15-yH-Til"/>
                             <constraint firstAttribute="bottom" secondItem="BTR-WK-EkS" secondAttribute="bottom" constant="124" id="EDg-eY-PkH"/>
                             <constraint firstAttribute="bottom" secondItem="5i2-mO-VrB" secondAttribute="bottom" constant="5" id="UEo-je-qSv"/>
-                            <constraint firstItem="5i2-mO-VrB" firstAttribute="centerY" secondItem="QSq-wA-0Cb" secondAttribute="centerY" constant="-5" id="Xh4-LJ-OC5"/>
+                            <constraint firstItem="5i2-mO-VrB" firstAttribute="centerY" secondItem="QSq-wA-0Cb" secondAttribute="centerY" constant="3" id="Xh4-LJ-OC5"/>
                             <constraint firstItem="QSq-wA-0Cb" firstAttribute="leading" secondItem="4R4-fA-juV" secondAttribute="leading" constant="10" id="YhK-9b-0aI"/>
                             <constraint firstAttribute="bottom" secondItem="QSq-wA-0Cb" secondAttribute="bottom" constant="5" id="sxI-sf-SOd"/>
                             <constraint firstAttribute="trailing" secondItem="U91-yW-LhV" secondAttribute="trailing" constant="10" id="tgF-um-pl8"/>
@@ -152,6 +152,5 @@
     <resources>
         <image name="Expert_Replied" width="58" height="20"/>
         <image name="Forum_Photo" width="35" height="36"/>
-        <image name="Forum_Time" width="9" height="9"/>
     </resources>
 </document>

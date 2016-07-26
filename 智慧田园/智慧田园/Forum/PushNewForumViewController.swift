@@ -34,7 +34,6 @@ class PushNewForumViewController: TYViewController,UITextViewDelegate,UIImagePic
     }()
     var cropsID:String!
     var cropsName:String!
-    var contentClass:String!
     var imgs = [UIImage]()
     var imgButtons = [UIButton]()
     var imgButton:UIButton {
@@ -62,71 +61,10 @@ class PushNewForumViewController: TYViewController,UITextViewDelegate,UIImagePic
         case .Expert:
             self.title = "专家咨询"
         }
-        contentClass = "水稻"
-        ButtonContentClass.setTitle(self.contentClass, forState: .Normal)
-    }
-
-    @IBAction func LeftButtonClicked(sender: UIBarButtonItem) {
-        TextViewContent.resignFirstResponder()
-        self.dismissViewControllerAnimated(true, completion: nil)
-        
-    }
-    @IBAction func RightBarButtonClicked(sender: AnyObject) {
-        TextViewContent.resignFirstResponder()
-        if style == .Forum{
-            if let content = TextViewContent.text {
-                NetWorkManager.updateSession({ 
-                    Alamofire.upload(.POST, ContentType.PulishNewForum.url, multipartFormData: { [weak self] data in
-                        if let sSelf = self{
-                            var i = 0
-                            for image in sSelf.imgs{
-                                if let imageData = UIImageJPEGRepresentation(image, 0.95) {
-                                    //                            data.appendBodyPa rt(data: imageData, name: "fileImages")
-                                    data.appendBodyPart(data: imageData, name: "file", fileName: "images.jpg", mimeType: "image/jpg")
-                                    i += 1
-                                }
-                            }
-                        }
-                        let contentData = content.dataUsingEncoding(NSUTF8StringEncoding)
-                        data.appendBodyPart(data: contentData!, name: "content")
-                        }, encodingCompletion: { (result) in
-                            switch result{
-                            case .Success(let request,  _,  _):
-                                request.TYresponseJSON(completionHandler: { (response) in
-                                    TYUserDefaults.NewForum.value = true
-                                })
-                            case .Failure(_):
-                                break
-                            }
-                    })
-                })
-                self.dismissViewControllerAnimated(true, completion: nil)
-            }
-        }else{
-            if let content = TextViewContent.text {
-                let topic = ExpertTheme()
-                topic.classifyID = cropsID
-                topic.classifyName = cropsName
-                topic.content = content
-                topic.headPhoto = TYUserDefaults.headImage.value!
-                topic.userID = TYUserDefaults.userID.value!
-                NetWorkManager.PushNewExpertTopic(topic, images: imgs, callback: { (tag) in
-                    if tag {
-                        MBProgressHUD.showSuccess("发送成功", toView: nil)
-                        self.closeCurrentView()
-                    }else{
-                        MBProgressHUD.showError("发送失败", toView: nil)
-                    }
-                })
-            }
-        }
+        ButtonContentClass.setTitle(self.cropsName, forState: .Normal)
     }
     
-    @IBAction func ButtonAddClicked(sender: AnyObject) {
-        self.presentViewController(ImgPickViewController, animated: true, completion: nil)
-    }
-    
-    func AddImg(img:UIImage){
+    private func AddImg(img:UIImage){
         let btn = imgButton
         btn.tag = imgs.count
         btn.setBackgroundImage(img, forState: .Normal)
@@ -135,6 +73,14 @@ class PushNewForumViewController: TYViewController,UITextViewDelegate,UIImagePic
         StackViewImg.addArrangedSubview(btn)
         if btn.tag == 2 {
             ButtonAdd.hidden = true
+        }
+    }
+    
+    func clearContent(){
+        guard TextViewContent != nil else{return}
+        TextViewContent.text = nil
+        for x in imgButtons{
+            imgButtonDelete(x)
         }
     }
     
@@ -157,5 +103,69 @@ class PushNewForumViewController: TYViewController,UITextViewDelegate,UIImagePic
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {
         picker.dismissViewControllerAnimated(true, completion: nil)
     }
+
+    @IBAction func LeftButtonClicked(sender: UIBarButtonItem) {
+        TextViewContent.resignFirstResponder()
+        self.dismissViewControllerAnimated(true, completion: nil)
+        
+    }
+    
+    @IBAction func RightBarButtonClicked(sender: AnyObject) {
+        TextViewContent.resignFirstResponder()
+        if style == .Forum{
+            if let content = TextViewContent.text {
+                NetWorkManager.updateSession({ 
+                    Alamofire.upload(.POST, ContentType.PulishNewForum.url, multipartFormData: { [weak self] data in
+                        if let sSelf = self{
+                            var i = 0
+                            for image in sSelf.imgs{
+                                if let imageData = UIImageJPEGRepresentation(image, 0.95) {
+                                    //                            data.appendBodyPa rt(data: imageData, name: "fileImages")
+                                    data.appendBodyPart(data: imageData, name: "file", fileName: "images.jpg", mimeType: "image/jpg")
+                                    i += 1
+                                }
+                            }
+                        }
+                        let contentData = content.dataUsingEncoding(NSUTF8StringEncoding)
+                        data.appendBodyPart(data: contentData!, name: "content")
+                        data.appendBodyPart(data: (self?.cropsID)!.dataUsingEncoding(NSUTF8StringEncoding)!, name: "parentArea")
+                        }, encodingCompletion: { (result) in
+                            switch result{
+                            case .Success(let request,  _,  _):
+                                request.TYresponseJSON(completionHandler: { (response) in
+                                    TYUserDefaults.NewForum.value = true
+                                })
+                            case .Failure(_):
+                                break
+                            }
+                    })
+                })
+                self.dismissViewControllerAnimated(true, completion: nil)
+            }
+        }else{
+            if let content = TextViewContent.text {
+                let topic = ExpertTheme()
+                topic.classifyID = cropsID
+                topic.classifyName = cropsName
+                topic.content = content
+                topic.headPhoto = TYUserDefaults.headImage.value!
+                topic.userID = TYUserDefaults.userID.value!
+                NetWorkManager.PushNewExpertTopic(topic, images: imgs, callback: { [weak self] tag in
+                    if tag {
+                        MBProgressHUD.showSuccess("发送成功", toView: nil)
+                    }else{
+                        UIApplication.sharedApplication().keyWindow?.rootViewController?.presentViewController((self?.navigationController)!, animated: true, completion: nil)
+                        MBProgressHUD.showError("发送失败", toView: nil)
+                    }
+                })
+                self.dismissViewControllerAnimated(true, completion: nil)
+            }
+        }
+    }
+    
+    @IBAction func ButtonAddClicked(sender: AnyObject) {
+        self.presentViewController(ImgPickViewController, animated: true, completion: nil)
+    }
+
 
 }

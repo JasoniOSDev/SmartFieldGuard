@@ -56,7 +56,16 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
                 let message = json["message"] as! String
                 if(message == "success"){
                     if let sSelf = self{
-                        sSelf.dismissViewControllerAnimated(true, completion: nil)
+                        sSelf.dismissViewControllerAnimated(true, completion: {
+                            //登录之后，下载对应的专家话题
+                            NetWorkManager.LoadExperTopic(true)
+                            //下载植物分类
+                            NetWorkManager.GetCropsClass({ (_) in
+                                
+                            })
+                            //后期整理应将登录后所要做的操作分出来
+                        })
+                        
                     }
                 }else{
                     if let sSelf = self{

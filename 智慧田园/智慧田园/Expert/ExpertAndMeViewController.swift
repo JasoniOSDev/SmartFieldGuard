@@ -25,7 +25,9 @@ class ExpertAndMeViewController: TYViewController {
             if token == nil {
                 token = self.messages?.addNotificationBlock({ [weak self ]change in
                     switch change{
-                    case .Initial(_):self?.tableView.reloadData()
+                    case .Initial(_):
+                        self?.tableView.reloadData()
+                        self?.tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: (self?.messages!.count)!, inSection: 0), atScrollPosition: .Bottom, animated: true)
                     case .Update(_, deletions: _, insertions: let insertions, modifications: _):
                         if self?.tableView != nil {
                             if insertions.count>0{
@@ -45,7 +47,6 @@ class ExpertAndMeViewController: TYViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         prepareUI()
-        
     }
     
     func prepareUI(){

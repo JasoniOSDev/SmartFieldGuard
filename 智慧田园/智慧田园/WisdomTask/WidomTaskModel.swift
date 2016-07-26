@@ -17,6 +17,15 @@ class CropsClass:Object{
     dynamic var imageUrl = ""
 }
 
+class LocalCrops: Object {
+    dynamic var id:String = ""
+    dynamic var name:String = ""
+    dynamic var cropsClassID = ""
+    dynamic var url = ""
+    dynamic var urlHome = ""
+    dynamic var urlDetail = ""
+}
+
 class HistoryFertilize:Object{
     dynamic var operatorid = ""//取决于他是哪块田的哪块种植
     let history = List<Fertilize>()

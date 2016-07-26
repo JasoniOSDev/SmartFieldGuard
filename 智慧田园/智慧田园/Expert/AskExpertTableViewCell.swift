@@ -39,6 +39,12 @@ class AskExpertTableViewCell: UITableViewCell,Reusable {
             self.ImageViewHead.sd_setImageWithURL(NSURL(string: theme.headPhoto))
             self.LabelContent.text = theme.content
             self.ImageViewReplayTag.hidden = !theme.unRead
+            //由于服务器没有存储类名，所以此处需要从本地获取
+            if theme.classifyName == ""{
+                try! ModelManager.realm.write({ 
+                    theme.classifyName = (ModelManager.getObjects(LocalCrops).filter("self.id = %@", theme.classifyID).first?.name)!
+                })
+            }
             self.LabelClassify.text = theme.classifyName
         }
     }

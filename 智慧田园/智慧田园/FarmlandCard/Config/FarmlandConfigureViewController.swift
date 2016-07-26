@@ -28,7 +28,7 @@ class FarmlandConfigureViewController: TYViewController {
     var positionStr:String?
     var cropCreateTime:NSTimeInterval = 0
     var cropCreateDate:NSDate?
-    var selectCrop:Crops?
+    var selectCrop:LocalCrops?
     let locationManager = AMapLocationManager()
     var farmLand:Farmland!{
         didSet{
@@ -123,7 +123,9 @@ class FarmlandConfigureViewController: TYViewController {
                             wrongInfo = "Success"
                             //向服务器发送请求
                             if self.selectCrop == nil {
-                                self.selectCrop = farmLand.crops
+                                let crops = LocalCrops()
+                                crops.id = (farmLand.crops?.id)!
+                                self.selectCrop = crops
                             }
                             NetWorkManager.updateSession{
                                 TYRequest(ContentType.fieldSet, parameters: ["fieldNo":self.farmLand.id,"fieldName":name,"fieldArea":String(format: "%.f",self.area),"longitude":self.position!.longitude,"latitude":self.position!.latitude,"cropNo":self.selectCrop!.id,"startTime":String(format: "%.f",Double(self.cropCreateTime))]).TYresponseJSON(completionHandler: { [weak self] response in

@@ -12,7 +12,7 @@ import MJRefresh
 class AlertCropsChooseViewController: TYViewController {
 
     @IBOutlet weak var tableView: UITableView!
-    var block:((Crops) -> Void)?
+    var block:((LocalCrops) -> Void)?
     var cropsClass = [CropsClass]()
     lazy var cropChooseViewController:CropsChooseViewController = {
         let layout = UICollectionViewFlowLayout()
@@ -29,44 +29,24 @@ class AlertCropsChooseViewController: TYViewController {
     var needAnimation = true
     override func viewDidLoad() {
         super.viewDidLoad()
+        LoadData()
+        prepareUI()
+    }
+    
+    private func prepareUI(){
         tableViewConfigure()
         self.title = "分类选择"
     }
     
-    func tableViewConfigure(){
+    private func tableViewConfigure(){
         tableView.registerReusableCell(CropClassTableViewCell)
         tableView.separatorStyle = .None
-        let mjfooter = MJRefreshAutoNormalFooter(refreshingBlock: { [weak self] in
-            NetWorkManager.updateSession{
-                if let sSelf = self {
-                    TYRequest(ContentType.CropsClassName, parameters: ["cropTypeNo":"000"]).TYresponseJSON(completionHandler: { (response) in
-                        if response.result.isSuccess {
-                            if let json = response.result.value as? [String : AnyObject]{
-                                if let msg = json["message"] as? String where msg == "success"{
-                                    if let cropTypes = json["cropTypes"] as? NSArray{
-                                        cropTypes.forEach({ (x) in
-                                            if let object = x as? [String : AnyObject]{
-                                                let cropClass = CropsClass()
-                                                cropClass.id = object["cropTypeNo"] as! String
-                                                cropClass.name = object["cropTypeName"] as! String
-                                                cropClass.imageUrl = TYUserDefaults.UrlPrefix.value + (object["imageUrl"] as! String)
-                                                sSelf.cropsClass.append(cropClass)
-                                            }
-                                        })
-                                        sSelf.tableView.reloadData()
-                                        sSelf.tableView.mj_footer.endRefreshing()
-                                        sSelf.tableView.mj_footer.hidden = true
-                                    }
-                                }
-                            }
-                        }
-                    })
-                }
-            }
-            })
-        mjfooter.setTitle("正在加载农作物分类,请稍后", forState: MJRefreshState.Refreshing)
-        tableView.mj_footer = mjfooter
-        tableView.mj_footer.beginRefreshing()
+    }
+    
+    private func LoadData(){
+        NetWorkManager.GetCropsClass { [weak self] cropsClassList in
+            self?.cropsClass
+        }
     }
     
     override func loadView() {
@@ -75,7 +55,7 @@ class AlertCropsChooseViewController: TYViewController {
     }
     
     
-    class func pushAlertInViewController(viewController:TYViewController, block:(Crops) -> Void){
+    class func pushAlertInViewController(viewController:TYViewController, block:(LocalCrops) -> Void){
         let story = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
         let vc = story.instantiateViewControllerWithIdentifier("AlertCropsChooseViewController") as! AlertCropsChooseViewController
         vc.block = block

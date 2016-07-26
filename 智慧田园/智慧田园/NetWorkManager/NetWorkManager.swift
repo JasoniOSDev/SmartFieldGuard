@@ -71,7 +71,6 @@ public class NetWorkManager:NSObject{
                         TYUserDefaults.tel.value = userInfo[TelKey] as? String
                         TYUserDefaults.username.value = userInfo[UsernameKey] as? String
                         TYUserDefaults.passWord.value = parameters["password"] as? String
-                        LoadExperTopic(true)
                         ExpertClient.shareClient.connect()
                     }else{
                         TYUserDefaults.cookie.value = TYUserDefaults.cookieDefault
@@ -317,9 +316,10 @@ public class NetWorkManager:NSObject{
                                     topic.ID = info[0]
                                     let time = Double(info[1])
                                     topic.timeInterval = time!
+                                    topic.lastReply = time!
                                     var images = [String]()
                                     for x in 2..<info.count{
-                                        images.append(info[x])
+                                        images.append(TYUserDefaults.UrlPrefix.value + info[x])
                                     }
                                     if images.count > 0 {
                                         topic.images = images
@@ -390,6 +390,7 @@ public class NetWorkManager:NSObject{
                 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), {
                     let localTheme = ModelManager.getObjects(ExpertTheme)
                     if let msg = JSON["message"] as? String where msg == "success"{
+                        print(JSON)
                         if let array = (JSON["postList"] as! [String:AnyObject])["list"] as? NSArray{
                             for x in array{
                                 let object = x as! [String:AnyObject]
@@ -399,14 +400,15 @@ public class NetWorkManager:NSObject{
                                 }else{
                                     topic.content = ""
                                 }
+                                topic.classifyID = object["parentArea"] as! String
                                 topic.timeInterval = object["createDate"] as! Double
                                 topic.ID = object["postNo"] as! String
                                 topic.headPhoto = TYUserDefaults.UrlPrefix.value + (object["headImage"] as! String)
                                 topic.lastReply = object["lastReplyDate"] as! Double
                                 topic.name = object["username"] as! String
                                 topic.userID = object["userId"] as! String
-                                if let images = object["images"] as? [String]{
-                                    topic.images = images.map(){TYUserDefaults.UrlPrefix.value + $0}
+                                if let images = object["images"] as? String{
+                                    topic.images = images.componentsSeparatedByString("|").map(){return TYUserDefaults.UrlPrefix.value + $0}
                                 }
                                 if !localTheme.contains({$0.ID == topic.ID}){
                                     dispatch_async(dispatch_get_main_queue(), {
@@ -436,28 +438,30 @@ public class NetWorkManager:NSObject{
                 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), {
                     let localTheme = ModelManager.getObjects(ExpertTheme)
                     if let msg = JSON["message"] as? String where msg == "success"{
-                        if let array = (JSON["postList"] as! [String:AnyObject])["list"] as? NSArray{
-                            for x in array{
-                                let object = x as! [String:AnyObject]
-                                let topic = ExpertTheme()
-                                if let content = object["content"] as? String{
-                                    topic.content = content
-                                }else{
-                                    topic.content = ""
-                                }
-                                topic.timeInterval = object["createDate"] as! Double
-                                topic.ID = object["postNo"] as! String
-                                topic.headPhoto = TYUserDefaults.UrlPrefix.value + (object["headImage"] as! String)
-                                topic.lastReply = object["lastReplyDate"] as! Double
-                                topic.name = object["username"] as! String
-                                topic.userID = object["userId"] as! String
-                                if let images = object["images"] as? [String]{
-                                    topic.images = images.map(){TYUserDefaults.UrlPrefix.value + $0}
-                                }
-                                if !localTheme.contains({$0.ID == topic.ID}){
-                                    dispatch_async(dispatch_get_main_queue(), {
-                                        ModelManager.add(topic)
-                                    })
+                        if let postList = JSON["postList"] as? [String:AnyObject]{
+                            if let array = postList["list"] as? NSArray{
+                                for x in array{
+                                    let object = x as! [String:AnyObject]
+                                    let topic = ExpertTheme()
+                                    if let content = object["content"] as? String{
+                                        topic.content = content
+                                    }else{
+                                        topic.content = ""
+                                    }
+                                    topic.timeInterval = object["createDate"] as! Double
+                                    topic.ID = object["postNo"] as! String
+                                    topic.headPhoto = TYUserDefaults.UrlPrefix.value + (object["headImage"] as! String)
+                                    topic.lastReply = object["lastReplyDate"] as! Double
+                                    topic.name = object["username"] as! String
+                                    topic.userID = object["userId"] as! String
+                                    if let images = object["images"] as? [String]{
+                                        topic.images = images.map(){TYUserDefaults.UrlPrefix.value + $0}
+                                    }
+                                    if !localTheme.contains({$0.ID == topic.ID}){
+                                        dispatch_async(dispatch_get_main_queue(), {
+                                            ModelManager.add(topic)
+                                        })
+                                    }
                                 }
                             }
                         }
@@ -476,42 +480,44 @@ public class NetWorkManager:NSObject{
         let latestSn = ModelManager.getObjects(ExpertMessage).filter("self.Theme.ID = %@", topic.ID).sorted("replySn", ascending: true).last?.replySn ?? 0
         NetWorkManager.updateSession({
             TYRequest(.Reply, parameters: ["pageIndex":1,"pageCount":65535,"postNo":topic.ID,"type":"Expert","lastReplySn":latestSn]).TYResponseJSON(Block: { (JSON) in
-                if let list = (JSON["replyList"] as! [String:AnyObject])["list"] as? NSArray{
-                    list.forEach({ (x) in
-                        let object = x as! [String:AnyObject]
-                        let message = ExpertMessage()
-                        if let content = object["content"] as? String{
-                            message.content = content
-                        }
-                        message.headPhoto = TYUserDefaults.UrlPrefix.value + (object["headImage"] as! String)
-                        message.replySn = object["replySn"] as! Int
-                        message.userID = object["userId"] as! String
-                        message.name = object["username"] as! String
-                        message.timeInterval = object["replyDate"]  as! Double
-                        message.Theme = topic
-                        dispatch_async(dispatch_get_main_queue(), { 
-                            message.updateTheme(true)
-                            ModelManager.add(message)
+                if let replyList = JSON["replyList"] as? [String:AnyObject]{
+                    if let list = replyList["list"] as? NSArray{
+                        list.forEach({ (x) in
+                            let object = x as! [String:AnyObject]
+                            let message = ExpertMessage()
+                            if let content = object["content"] as? String{
+                                message.content = content
+                            }
+                            message.headPhoto = TYUserDefaults.UrlPrefix.value + (object["headImage"] as! String)
+                            message.replySn = object["replySn"] as! Int
+                            message.userID = object["userId"] as! String
+                            message.name = object["username"] as! String
+                            message.timeInterval = object["replyDate"]  as! Double
+                            message.Theme = topic
+                            dispatch_async(dispatch_get_main_queue(), { 
+                                message.updateTheme(true)
+                                ModelManager.add(message)
+                            })
                         })
-                    })
+                    }
                 }
             })
         })
     }
-
-    
-    class func updateLocalExpertTopic(){
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)) {
-            LoadExpertReplay()
-        }
-    }
-    
-    class func LoadExpertReplay(){
-        
-    }
     
     class func GetCropsClass(callback:([CropsClass]->Void)){
-        
+        let cropsClassList = ModelManager.getObjects(CropsClass)
+        if cropsClassList.count > 0 {
+            var cropsClass = [CropsClass]()
+            for x in cropsClassList{
+                cropsClass.append(x)
+                GetCropsList(x.id, callback: { (_) in
+                    
+                })
+            }
+            callback(cropsClass)
+            return
+        }
         NetWorkManager.updateSession{
                 TYRequest(ContentType.CropsClassName, parameters: ["cropTypeNo":"000"]).TYresponseJSON(completionHandler: { (response) in
                     var cropsClass = [CropsClass]()
@@ -532,32 +538,47 @@ public class NetWorkManager:NSObject{
                             }
                         }
                     }
+                    for x in cropsClass{
+                        ModelManager.add(x)
+                        GetCropsList(x.id, callback: { (_) in
+                            
+                        })
+                    }
                     callback(cropsClass)
                 })
         }
     }
     
     //仅仅用于专家页面选择分类
-    class func GetCropsList(no:String,callback:([Crops]->Void)){
+    class func GetCropsList(no:String,callback:([LocalCrops]->Void)){
+        let cropsList = ModelManager.getObjects(LocalCrops).filter("self.cropsClassID = %@", no)
+        if cropsList.count > 0 {
+            var crops = [LocalCrops]()
+            for x in cropsList{
+                crops.append(x)
+            }
+            callback(crops)
+            return
+        }
         NetWorkManager.updateSession{
             TYRequest(ContentType.CropsList, parameters: ["cropTypeNo":no]).TYresponseJSON(completionHandler: { (response) in
-                var crops = [Crops]()
+                var crops = [LocalCrops]()
                 if response.result.isSuccess {
                     if let json = response.result.value as? [String:AnyObject]{
                         if let msg = json["message"] as? String where msg == "success"{
                             if let cropList = json["cropList"] as? NSArray{
                                 cropList.forEach({ (x) in
                                     if let object = x as? [String:AnyObject] {
-                                        let crop = Crops()
+                                        let crop = LocalCrops()
                                         crop.name = object["cropName"] as! String
                                         crop.id = object["cropNo"] as! String
-                                        let urls = (object["imageUrl"] as! String).componentsSeparatedByString("|")
+                                        let urls = (object["imageUrl"] as! String).componentsSeparatedByString("|").map(){TYUserDefaults.UrlPrefix.value + $0}
                                         if urls.count == 3{
-                                            crop.urlHome = TYUserDefaults.UrlPrefix.value + urls[0]
-                                            crop.urlDetail = TYUserDefaults.UrlPrefix.value +  urls[1]
-                                            crop.url = TYUserDefaults.UrlPrefix.value +  urls[2]
+                                            crop.urlHome = urls[0]
+                                            crop.urlDetail = urls[1]
+                                            crop.url = urls[2]
                                         }else{
-                                            crop.url = TYUserDefaults.UrlPrefix.value + urls[0]
+                                            crop.url = urls[0]
                                         }
                                         crops.append(crop)
                                     }
@@ -565,6 +586,9 @@ public class NetWorkManager:NSObject{
                             }
                         }
                     }
+                }
+                for x in crops{
+                    ModelManager.add(x)
                 }
                 callback(crops)
             })

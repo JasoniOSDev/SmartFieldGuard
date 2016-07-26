@@ -17,7 +17,7 @@ class ExpertMessage:Object {
     dynamic var replySn:Int = 0 //第几个回复
     var time:String{
         get{
-            return NSTimeInterval(timeInterval).ForumDateDescription
+            return NSTimeInterval(timeInterval).ReplyDateDescription
         }
     }
     dynamic var content:String = ""
@@ -43,7 +43,7 @@ class ExpertTheme:Object{
     dynamic var lastReply = 0.0
     var time:String{
         get{
-            return NSTimeInterval(timeInterval).ForumDateDescription
+            return NSTimeInterval(timeInterval).ReplyDateDescription
         }
     }
     
@@ -54,7 +54,7 @@ class ExpertTheme:Object{
             return array
         }
         set{
-            imagesString = images.reduce("", combine: { (origin, now) -> String in
+            imagesString = newValue.reduce("", combine: { (origin, now) -> String in
                 return origin + now + "|"
             })
         }

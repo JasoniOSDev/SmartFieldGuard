@@ -8,6 +8,7 @@
 
 import UIKit
 import RealmSwift
+import MBProgressHUD
 class ExpertViewController: TYViewController {
 
     @IBOutlet weak var ConstraintButtonAddBottom: NSLayoutConstraint!
@@ -32,7 +33,18 @@ class ExpertViewController: TYViewController {
             self?.own = own
             self?.LoadData()
             self?.checkNewTopic()
+            if name == ""{
+                self?.title = "专家咨询区"
+            }else{
+                self?.title = "专家咨询区(\(name))"
+            }
         }
+        return vc
+    }()
+    lazy var newFormViewController:PushNewForumViewController = {
+        let story = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
+        let vc = story.instantiateViewControllerWithIdentifier("PushNewForumViewController") as! PushNewForumViewController
+        vc.style = .Expert
         return vc
     }()
     
@@ -54,35 +66,51 @@ class ExpertViewController: TYViewController {
 
     private func LoadData(){
         //用于获取当前账号对应的话题数据
+        self.ExpertThemes = ModelManager.getObjects(ExpertTheme).sorted("lastReply", ascending: false)
+        if self.cropsID != ""{
+            self.ExpertThemes = self.ExpertThemes?.filter("self.classifyID = %@", self.cropsID)
+        }
+        if own == true{
+            self.ExpertThemes = self.ExpertThemes?.filter("self.userID = %@", TYUserDefaults.userID.value!)
+        }
         switch TYUserDefaults.role.value {
         case RoleNormalMemeber:
-            self.ExpertThemes = ModelManager.getObjects(ExpertTheme).filter("self.userID = %@", TYUserDefaults.userID.value!).sorted("timeInterval", ascending: true)
             self.token = self.ExpertThemes!.addNotificationBlock({[weak self] change in
                 switch change{
                 case .Initial(_):self?.tableView.reloadData()
-                case .Update(_, deletions: _, insertions: let news, modifications: let modify): 
-                    if modify.count > 0 {
+                case .Update(_, deletions: let deletions, insertions: let news, modifications: let modify):
+                if modify.count > 0 {
                     self?.tableView.reloadRowsAtIndexPaths(modify.map{NSIndexPath(forRow: $0, inSection: 0)}, withRowAnimation: .Automatic)
-                    }
-                    if news.count > 0 {
+                }
+                if news.count > 0 {
                 self?.tableView.insertRowsAtIndexPaths(news.map{NSIndexPath(forRow: $0, inSection: 0)}, withRowAnimation: .Automatic)
-                    }
+                }
+                if deletions.count > 0{
+                    self?.tableView.deleteRowsAtIndexPaths(deletions.map{NSIndexPath(forRow: $0, inSection: 0)}, withRowAnimation: .None)
+                }
                 self?.cellHeight.removeAll()
                 case .Error(_):break
                 }
-                })
+            })
         case RoleExpert:
-            self.ExpertThemes = ModelManager.getObjects(ExpertTheme).sorted("timeInterval", ascending: true)
+            
             self.token = self.ExpertThemes!.addNotificationBlock({[weak self] change in
                 switch change{
                 case .Initial(_):self?.tableView.reloadData()
-                case .Update(_, deletions: _, insertions: let news, modifications: let modify): break
-                self?.tableView.reloadRowsAtIndexPaths(modify.map{NSIndexPath(forRow: $0, inSection: 0)}, withRowAnimation: .Automatic)
-                self?.tableView.insertRowsAtIndexPaths(news.map{NSIndexPath(forRow: $0, inSection: 0)}, withRowAnimation: .Automatic)
+                case .Update(_, deletions: let deletions, insertions: let news, modifications: let modify):
+                if modify.count > 0{
+                    self?.tableView.reloadRowsAtIndexPaths(modify.map{NSIndexPath(forRow: $0, inSection: 0)}, withRowAnimation: .Automatic)
+                }
+                if news.count > 0{
+                    self?.tableView.insertRowsAtIndexPaths(news.map{NSIndexPath(forRow: $0, inSection: 0)}, withRowAnimation: .Automatic)
+                }
+                if deletions.count > 0{
+                    self?.tableView.deleteRowsAtIndexPaths(deletions.map{NSIndexPath(forRow: $0, inSection: 0)}, withRowAnimation: .None)
+                }
                 self?.cellHeight.removeAll()
                 case .Error(_):break
                 }
-                })
+            })
         default:
             break
         }
@@ -101,7 +129,11 @@ class ExpertViewController: TYViewController {
     
     func prepareUI(){
         tableViewConfigure()
-        self.title = "专家咨询区"
+        if cropsName != ""{
+            self.title = "专家咨询区(\(cropsName))"
+        }else{
+            self.title = "专家咨询区"
+        }
     }
     
     func tableViewConfigure(){
@@ -124,27 +156,6 @@ class ExpertViewController: TYViewController {
         return cellHeight[index]!
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let vc = segue.destinationViewController as? TYNavigationViewController{
-            if let vc2 = vc.visibleViewController as? PushNewForumViewController{
-                vc2.cropsID = cropsID
-                vc2.cropsName = cropsName
-                vc2.style = .Expert
-            }
-        }
-        if let vc = segue.destinationViewController as? ExpertAndMeViewController{
-            vc.theme = self.ExpertThemes![selectIndex]
-        }
-    }
-    
-    @IBAction func LeftButtonClicked(sender: UIBarButtonItem) {
-        self.dismissViewControllerAnimated(true, completion: nil)
-    }
-    
-    @IBAction func ButtonMenuClicked(sender: AnyObject) {
-        setMenuHidden(ButtonMenu.selected)
-    }
-    
     private func setMenuHidden(hidden:Bool){
         let constant:CGFloat = ButtonMenu.selected == false ? 50:-50
         if hidden == false{
@@ -162,17 +173,46 @@ class ExpertViewController: TYViewController {
         }
     }
     
+    private func pushNewForumViewController(){
+        if cropsID == ""{
+            MBProgressHUD.showError("请选择分类后再继续", toView: nil)
+            return
+        }
+        newFormViewController.cropsID = cropsID
+        newFormViewController.cropsName = cropsName
+        newFormViewController.clearContent()
+        self.presentViewController(TYNavigationViewController(rootViewController: self.newFormViewController), animated: true, completion: nil)
+    }
+    
+    @IBAction func ButtonAddClicked() {
+        pushNewForumViewController()
+    }
+    @IBAction func LeftButtonClicked(sender: UIBarButtonItem) {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    @IBAction func ButtonMenuClicked(sender: AnyObject) {
+        setMenuHidden(ButtonMenu.selected)
+    }
+    
     @IBAction func ButtonClassClicked(sender: AnyObject) {
         experClassChooseViewController.cropsID = cropsID
         experClassChooseViewController.cropsName = cropsName
-        experClassChooseViewController.mySelfSelect = own ? "自己":"所以"
+        experClassChooseViewController.mySelfSelect = own ? "自己":"所有"
         self.presentViewController(TYNavigationViewController(rootViewController: experClassChooseViewController), animated: true,completion: nil)
     }
     
     class func PushExpertViewController(){
         let story = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
         let vc = story.instantiateViewControllerWithIdentifier("ExpertViewController") as! ExpertViewController
+        vc.own = false
         UIApplication.sharedApplication().keyWindow?.rootViewController?.presentViewController(TYNavigationViewController(rootViewController: vc), animated: true, completion: nil)
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if let vc = segue.destinationViewController as? ExpertAndMeViewController{
+            vc.theme = self.ExpertThemes![selectIndex]
+        }
     }
 
 }
