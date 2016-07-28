@@ -56,6 +56,10 @@ class AskExpertTableViewCell: UITableViewCell,Reusable {
         imageViews.appendContentsOf([imageViewOne,imageViewTwo,imageViewThd])
         ImageViewHead.layer.cornerRadius = 17.5
         ImageViewHead.clipsToBounds = true
+        for x in imageViews{
+            x.layer.cornerRadius = 4
+            x.clipsToBounds = true
+        }
     }
     
     func newContentViewUI(){

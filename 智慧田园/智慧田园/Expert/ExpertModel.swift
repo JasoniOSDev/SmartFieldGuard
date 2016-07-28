@@ -24,7 +24,9 @@ class ExpertMessage:Object {
 
     func updateTheme(unRead:Bool = false){
         try! ModelManager.realm.write {
-            self.Theme?.unRead = unRead
+            if unRead == true{
+                self.Theme?.unRead = unRead
+            }
             self.Theme!.lastReply = max(self.Theme!.lastReply,timeInterval)
         }
     }

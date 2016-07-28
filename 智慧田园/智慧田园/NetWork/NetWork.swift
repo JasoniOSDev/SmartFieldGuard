@@ -9,6 +9,7 @@
 import Foundation
 import Alamofire
 let mainURL:String = "http://139.129.5.192/SZTY/"
+//let mainURL:String = "https://139.129.5.192:8443/SZTY/"
 public enum ContentType:String{
     
     var url:String{

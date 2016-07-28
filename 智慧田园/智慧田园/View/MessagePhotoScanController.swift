@@ -75,6 +75,7 @@ class MessagePhotoScanController: UIViewController,UIScrollViewDelegate {
         scrollView.delegate = self
         scrollView.showsVerticalScrollIndicator = false
         scrollView.showsHorizontalScrollIndicator = false
+        scrollView.maximumZoomScale = 2.0
     }
     
     private func labelInfoConfigure(){
@@ -98,15 +99,15 @@ class MessagePhotoScanController: UIViewController,UIScrollViewDelegate {
         //获得fromTransform
         let fromSize = animatedImageView.frame.size
         animatedImageView.sizeToFit()
-        let photoWidth = min(MaxPhotoWidth,animatedImageView.frame.width)
-        let scale = photoWidth / fromSize.width
+        var photoWidth = min(MaxPhotoWidth,animatedImageView.frame.width)
+        var scale = photoWidth / fromSize.width
         let toSize = CGSizeMake(fromSize.width * scale, fromSize.height * scale)
         fromTransform = CGAffineTransformMakeScale(fromSize.width/toSize.width, fromSize.height/toSize.height)
         for x in images{
             x.clipsToBounds = false
             x.sizeToFit()
-            let photoWidth = min(MaxPhotoWidth,x.frame.width)
-            let scale = photoWidth / x.frame.width
+            photoWidth = min(MaxPhotoWidth,x.frame.width)
+            scale = photoWidth / x.frame.width
             x.frame.size = CGSizeMake(x.frame.width * scale, x.frame.height * scale)
             x.center = CGPointMake(posX, posY)
             x.clipsToBounds = true
@@ -150,6 +151,7 @@ class MessagePhotoScanController: UIViewController,UIScrollViewDelegate {
     }
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
+        guard !scrollView.zooming else{return}
         let contentOffset = scrollView.contentOffset
         let width = UIScreen.mainScreen().bounds.width
         self.index = Int((contentOffset.x + 50) / width)
@@ -157,6 +159,10 @@ class MessagePhotoScanController: UIViewController,UIScrollViewDelegate {
     
     func scrollViewDidEndScrollingAnimation(scrollView: UIScrollView) {
         slide = false
+    }
+    
+    func viewForZoomingInScrollView(scrollView: UIScrollView) -> UIView? {
+        return animatedImageView
     }
 
 }

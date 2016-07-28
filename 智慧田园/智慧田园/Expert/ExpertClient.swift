@@ -66,30 +66,6 @@ class ExpertClient:NSObject,GCDAsyncSocketDelegate{
                         length = length*256 + Int(head)
 
                         if length <= sSelf.finalReceiveData.length - 5,let json = try? NSJSONSerialization.JSONObjectWithData(sSelf.finalReceiveData.subdataWithRange(NSMakeRange(5, length)), options: NSJSONReadingOptions.AllowFragments){
-                            if let list = json["replyList"] as? NSArray{
-                                for x in list{
-                                    let object = x as! [String:AnyObject]
-                                    let message = ExpertMessage()
-                                    if let content = object["content"] as? String{
-                                        message.content = content
-                                    }
-                                    message.headPhoto = TYUserDefaults.UrlPrefix.value + (object["headImage"] as! String)
-                                    let topicID = object["postNo"] as! String
-                                    message.replySn = object["replySn"] as! Int
-                                    message.userID = object["userId"] as! String
-                                    message.name = object["username"] as! String
-                                    message.timeInterval = object["replyDate"] as! Double
-                                    let topic = (sSelf.topics.filter("self.ID == %@",topicID).first)!
-                                    message.Theme = topic
-                                    message.updateTheme(true)
-                                    ModelManager.add(message)
-                                }
-                            }
-                            if (sSelf.finalReceiveData.length - 5 - length != 5){
-                            sSelf.finalReceiveData = NSMutableData(data: sSelf.finalReceiveData.subdataWithRange(NSMakeRange(5+length, sSelf.finalReceiveData.length - 5 - length)))
-                            }else{
-                                sSelf.finalReceiveData = NSMutableData()
-                            }
                             if let key = json["key"] as? Int{
                                 let json = ["mType":"GetInform","sendUser":TYUserDefaults.userID.value!,"informKey":key]
                                 let headArray:[UInt8] = [2]
@@ -108,6 +84,31 @@ class ExpertClient:NSObject,GCDAsyncSocketDelegate{
                                 finalData.appendData(length)
                                 finalData.appendData(content)
                                 sSelf.socket.writeData(finalData, withTimeout: -1, tag: 111)
+                            }
+                            if let list = json["replyList"] as? NSArray{
+                                for x in list{
+                                    let object = x as! [String:AnyObject]
+                                    let message = ExpertMessage()
+                                    if let content = object["content"] as? String{
+                                        message.content = content
+                                    }
+                                    message.headPhoto = TYUserDefaults.UrlPrefix.value + (object["headImage"] as! String)
+                                    let topicID = object["postNo"] as! String
+                                    message.replySn = object["replySn"] as! Int
+                                    message.userID = object["userId"] as! String
+                                    message.name = object["username"] as! String
+                                    message.timeInterval = object["replyDate"] as! Double
+                                    if let topic = (sSelf.topics.filter("self.ID == %@",topicID).first){
+                                        message.Theme = topic
+                                        message.updateTheme(true)
+                                        ModelManager.add(message)
+                                    }
+                                }
+                            }
+                            if (sSelf.finalReceiveData.length - length != 5){
+                            sSelf.finalReceiveData = NSMutableData(data: sSelf.finalReceiveData.subdataWithRange(NSMakeRange(5+length, sSelf.finalReceiveData.length - 5 - length)))
+                            }else{
+                                sSelf.finalReceiveData = NSMutableData()
                             }
                         }else{
                             break

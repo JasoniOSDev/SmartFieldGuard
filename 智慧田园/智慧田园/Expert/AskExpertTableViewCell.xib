@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="16A254g" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -19,46 +19,20 @@
             <rect key="frame" x="0.0" y="0.0" width="388" height="556"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" horizontalHuggingPriority="248" verticalHuggingPriority="248" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="388" height="555"/>
+                <rect key="frame" x="0.0" y="0.0" width="388" height="555.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view contentMode="scaleToFill" horizontalHuggingPriority="249" verticalHuggingPriority="249" translatesAutoresizingMaskIntoConstraints="NO" id="4R4-fA-juV">
+                    <view contentMode="scaleToFill" horizontalHuggingPriority="249" verticalHuggingPriority="249" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4R4-fA-juV">
                         <rect key="frame" x="10" y="0.0" width="368" height="226"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="751" distribution="equalSpacing" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="bse-VZ-rJL">
-                                <rect key="frame" x="20" y="112" width="0.0" height="80"/>
-                                <subviews>
-                                    <imageView hidden="YES" tag="103" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Z9Y-PL-bm5" customClass="MessagePhotoView" customModule="智慧田园" customModuleProvider="target">
-                                        <rect key="frame" x="-30" y="-112" width="0.0" height="0.0"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" secondItem="Z9Y-PL-bm5" secondAttribute="height" multiplier="1:1" id="dcZ-e3-0mw"/>
-                                        </constraints>
-                                    </imageView>
-                                    <imageView hidden="YES" tag="101" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bap-3B-jC1" customClass="MessagePhotoView" customModule="智慧田园" customModuleProvider="target">
-                                        <rect key="frame" x="-30" y="-112" width="0.0" height="0.0"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" secondItem="bap-3B-jC1" secondAttribute="height" multiplier="1:1" id="Xu6-ul-yz1"/>
-                                        </constraints>
-                                    </imageView>
-                                    <imageView hidden="YES" tag="102" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gML-Mo-ZDA" customClass="MessagePhotoView" customModule="智慧田园" customModuleProvider="target">
-                                        <rect key="frame" x="-30" y="-112" width="0.0" height="0.0"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" secondItem="gML-Mo-ZDA" secondAttribute="height" id="kbK-dd-K2L"/>
-                                        </constraints>
-                                    </imageView>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="80" id="XIQ-Mv-g7z"/>
-                                </constraints>
-                            </stackView>
-                            <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="5i2-mO-VrB">
-                                <rect key="frame" x="271" y="205" width="92" height="22"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="5i2-mO-VrB">
+                                <rect key="frame" x="271" y="205" width="91" height="22"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Expert_Replied" translatesAutoresizingMaskIntoConstraints="NO" id="Ty5-Je-hJW">
                                         <rect key="frame" x="0.0" y="1" width="58" height="20"/>
                                     </imageView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dBB-XX-AY0">
-                                        <rect key="frame" x="58" y="0.0" width="34" height="22"/>
+                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dBB-XX-AY0">
+                                        <rect key="frame" x="58" y="0.0" width="33" height="22"/>
                                         <fontDescription key="fontDescription" name="FZLTHK--GBK1-0" family="FZLanTingHei-R-GBK" pointSize="8"/>
                                         <state key="normal" title="15分钟前">
                                             <color key="titleColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
@@ -66,13 +40,13 @@
                                     </button>
                                 </subviews>
                             </stackView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="水稻专区" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QSq-wA-0Cb">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="水稻专区" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QSq-wA-0Cb">
                                 <rect key="frame" x="10" y="204" width="56" height="17"/>
                                 <fontDescription key="fontDescription" name="FZLTHK--GBK1-0" family="FZLanTingHei-R-GBK" pointSize="14"/>
                                 <color key="textColor" red="0.40000000000000002" green="0.80000000000000004" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="751" text="水稻专用叶面肥近年来用的比较多，能够全面补充水稻在营养期和孕穗期所需要的营养，提高对养分和水分的吸收能力，增强光合作用。而使用碧邦液肥水稻专用叶面肥会有哪些益处呢？" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BTR-WK-EkS">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="751" misplaced="YES" text="水稻专用叶面肥近年来用的比较多，能够全面补充水稻在营养期和孕穗期所需要的营养，提高对养分和水分的吸收能力，增强光合作用。而使用碧邦液肥水稻专用叶面肥会有哪些益处呢？" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BTR-WK-EkS">
                                 <rect key="frame" x="10" y="10" width="303" height="92"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="Foz-pm-z3h"/>
@@ -93,23 +67,55 @@
                                     <constraint firstAttribute="height" constant="36" id="hCx-1O-T3o"/>
                                 </constraints>
                             </imageView>
+                            <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" distribution="fillEqually" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="eey-fJ-dgm">
+                                <rect key="frame" x="10" y="119" width="244" height="80"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" tag="101" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="kFx-wZ-Id5" customClass="MessagePhotoView" customModule="智慧田园" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="kFx-wZ-Id5" secondAttribute="height" multiplier="1:1" id="ZGb-Bc-Rgi"/>
+                                        </constraints>
+                                    </imageView>
+                                    <imageView clipsSubviews="YES" tag="102" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="NXr-dN-Ayq" customClass="MessagePhotoView" customModule="智慧田园" customModuleProvider="target">
+                                        <rect key="frame" x="82" y="0.0" width="80" height="80"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="NXr-dN-Ayq" secondAttribute="height" multiplier="1:1" id="zFM-mv-90O"/>
+                                        </constraints>
+                                    </imageView>
+                                    <imageView clipsSubviews="YES" tag="103" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="I7g-Uc-O5c" customClass="MessagePhotoView" customModule="智慧田园" customModuleProvider="target">
+                                        <rect key="frame" x="164" y="0.0" width="80" height="80"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="I7g-Uc-O5c" secondAttribute="height" multiplier="1:1" id="kgH-XM-9Un"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="80" id="WO4-K7-U5b"/>
+                                    <constraint firstAttribute="width" constant="300" id="aB9-ZN-zS7"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="aB9-ZN-zS7"/>
+                                    </mask>
+                                </variation>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="5i2-mO-VrB" secondAttribute="trailing" constant="5" id="7r0-Er-FXN"/>
                             <constraint firstItem="BTR-WK-EkS" firstAttribute="leading" secondItem="4R4-fA-juV" secondAttribute="leading" constant="10" id="8B9-Da-Pxg"/>
-                            <constraint firstItem="bse-VZ-rJL" firstAttribute="leading" secondItem="4R4-fA-juV" secondAttribute="leading" constant="20" id="A1c-X7-rr8"/>
                             <constraint firstItem="U91-yW-LhV" firstAttribute="leading" secondItem="BTR-WK-EkS" secondAttribute="trailing" constant="10" id="D15-yH-Til"/>
                             <constraint firstAttribute="bottom" secondItem="BTR-WK-EkS" secondAttribute="bottom" constant="124" id="EDg-eY-PkH"/>
                             <constraint firstAttribute="bottom" secondItem="5i2-mO-VrB" secondAttribute="bottom" constant="5" id="UEo-je-qSv"/>
                             <constraint firstItem="5i2-mO-VrB" firstAttribute="centerY" secondItem="QSq-wA-0Cb" secondAttribute="centerY" constant="3" id="Xh4-LJ-OC5"/>
                             <constraint firstItem="QSq-wA-0Cb" firstAttribute="leading" secondItem="4R4-fA-juV" secondAttribute="leading" constant="10" id="YhK-9b-0aI"/>
+                            <constraint firstItem="eey-fJ-dgm" firstAttribute="leading" secondItem="BTR-WK-EkS" secondAttribute="leading" id="lAV-vb-gs6"/>
+                            <constraint firstItem="QSq-wA-0Cb" firstAttribute="top" secondItem="eey-fJ-dgm" secondAttribute="bottom" constant="5" id="rEm-s3-48t"/>
                             <constraint firstAttribute="bottom" secondItem="QSq-wA-0Cb" secondAttribute="bottom" constant="5" id="sxI-sf-SOd"/>
                             <constraint firstAttribute="trailing" secondItem="U91-yW-LhV" secondAttribute="trailing" constant="10" id="tgF-um-pl8"/>
                             <constraint firstItem="BTR-WK-EkS" firstAttribute="top" secondItem="4R4-fA-juV" secondAttribute="top" constant="10" id="uun-Dz-zxg"/>
                             <constraint firstItem="U91-yW-LhV" firstAttribute="top" secondItem="4R4-fA-juV" secondAttribute="top" constant="5" id="wGh-f5-BUF"/>
                             <constraint firstItem="5i2-mO-VrB" firstAttribute="centerY" secondItem="QSq-wA-0Cb" secondAttribute="centerY" constant="5" id="xIM-Up-Bn4"/>
-                            <constraint firstItem="bse-VZ-rJL" firstAttribute="top" secondItem="BTR-WK-EkS" secondAttribute="bottom" constant="10" id="zRZ-H5-Xuq"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
@@ -140,10 +146,10 @@
                 <outlet property="ImageViewReplayTag" destination="Ty5-Je-hJW" id="XDg-Jh-yLP"/>
                 <outlet property="LabelClassify" destination="QSq-wA-0Cb" id="AsK-Xn-OZK"/>
                 <outlet property="LabelContent" destination="BTR-WK-EkS" id="uyP-FN-I55"/>
-                <outlet property="StackViewImageView" destination="bse-VZ-rJL" id="dkz-Sy-pP1"/>
-                <outlet property="imageViewOne" destination="gML-Mo-ZDA" id="l1I-65-NLo"/>
-                <outlet property="imageViewThd" destination="Z9Y-PL-bm5" id="1wv-lP-50p"/>
-                <outlet property="imageViewTwo" destination="bap-3B-jC1" id="b5Q-fn-ktS"/>
+                <outlet property="StackViewImageView" destination="eey-fJ-dgm" id="UKk-h3-qS0"/>
+                <outlet property="imageViewOne" destination="kFx-wZ-Id5" id="I2z-ai-UNn"/>
+                <outlet property="imageViewThd" destination="I7g-Uc-O5c" id="Fco-Jb-5Qy"/>
+                <outlet property="imageViewTwo" destination="NXr-dN-Ayq" id="ZBb-TG-Bhq"/>
                 <outlet property="newContentView" destination="4R4-fA-juV" id="Vfx-NR-oRd"/>
             </connections>
             <point key="canvasLocation" x="478" y="610"/>
