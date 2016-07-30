@@ -119,10 +119,10 @@ class Farmland: Object{
     dynamic var lastCheckFertilizeTime = 0.0
     dynamic var lastFertility = 0.0
     dynamic var lastFeritilizeTIme = 0.0
-    dynamic var soil_t = 0.0//土壤温度
-    dynamic var soil_w = 0.0//土壤湿度
-    dynamic var air_t = 0.0
-    dynamic var air_w = 0.0
+    dynamic var soilT = 0.0//土壤温度
+    dynamic var soilW = 0.0//土壤湿度
+    dynamic var airT = 0.0
+    dynamic var airW = 0.0
     dynamic var co2 = 0.0
     dynamic var light = 0.0
     dynamic var status = ""
@@ -303,18 +303,18 @@ class Farmland: Object{
                 if let json = response.result.value as? [String:AnyObject]{
                     if let fieldData = json["fieldData"] as? [String:AnyObject]{
                        try! ModelManager.realm.write({
-                            self.air_t = fieldData["airT"] as! Double
-                            self.air_w = fieldData["airW"] as! Double
+                            self.airT = fieldData["airT"] as! Double
+                            self.airW = fieldData["airW"] as! Double
                             self.co2 = fieldData["co2"] as! Double
                             self.light = fieldData["light"] as! Double
-                            self.soil_t = fieldData["soilT"] as! Double
-                            self.soil_w = fieldData["soilW"] as! Double
+                            self.soilT = fieldData["soilT"] as! Double
+                            self.soilW = fieldData["soilW"] as! Double
                             if let finishBlock = block {
                                 finishBlock(self)
                             }
                         
                             if let action = self.fillDataInViewAction{
-                                action(air_t: self.air_t,air_w: self.air_w,soil_t: self.soil_t,soil_w: self.soil_w,co2: self.co2,light: self.light)
+                                action(air_t: self.airT,air_w: self.airW,soil_t: self.soilT,soil_w: self.soilW,co2: self.co2,light: self.light)
                             }
                         })
 

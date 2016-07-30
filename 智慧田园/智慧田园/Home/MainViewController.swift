@@ -42,10 +42,6 @@ class MainViewController: TYViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableViewConfigure()
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
         TYUserDefaults.userID.bindAndFireListener("MainViewController") { [weak self] _ in
             if let sSelf = self{
                 if TYUserDefaults.isLogined{
@@ -72,18 +68,13 @@ class MainViewController: TYViewController {
                 }
             }
         }
-
-        
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
         self.navigationController?.navigationBar.subviews[0].alpha = 1
         self.navigationController?.navigationBar.tintColor = UIColor.HightBlackColor()
         UIApplication.sharedApplication().setStatusBarStyle(.Default, animated: true)
-        
-    }
-    
-    
-    override func viewDidDisappear(animated: Bool) {
-        super.viewDidDisappear(animated)
-        TYUserDefaults.userID.removeListenerWithName("MainViewController")
     }
     
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
@@ -93,7 +84,8 @@ class MainViewController: TYViewController {
     func tableViewConfigure(){
         self.view.addSubview(tableView)
         tableView.snp_makeConstraints { (make) in
-            make.top.left.right.bottom.equalTo(self.view)
+            make.left.right.bottom.equalTo(self.view)
+            make.top.equalTo(self.view).offset(64)
         }
         tableView.backgroundColor = UIColor.BackgroundColor()
         tableView.delegate = self
@@ -139,6 +131,10 @@ class MainViewController: TYViewController {
         }else{
             UserCenterViewController.pushAlertInViewController(self)
         }
+    }
+    
+    deinit{
+        TYUserDefaults.userID.removeListenerWithName("MainViewController")
     }
 
 }

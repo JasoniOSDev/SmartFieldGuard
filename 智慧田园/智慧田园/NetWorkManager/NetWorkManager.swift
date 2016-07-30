@@ -65,12 +65,12 @@ public class NetWorkManager:NSObject{
                     if(message == "success"){
                         TYUserDefaults.UrlPrefix.value = json["staticUrlPrefix"] as! String
                         let userInfo = json["userInfo"] as! [String:AnyObject]
-                        TYUserDefaults.userID.value = userInfo[UserIDKey] as? String
                         TYUserDefaults.headImage.value = TYUserDefaults.UrlPrefix.value + (userInfo[HeadImageKey] as! String)
                         TYUserDefaults.role.value = userInfo[RoleKey] as! String
                         TYUserDefaults.tel.value = userInfo[TelKey] as? String
                         TYUserDefaults.username.value = userInfo[UsernameKey] as? String
                         TYUserDefaults.passWord.value = parameters["password"] as? String
+                        TYUserDefaults.userID.value = userInfo[UserIDKey] as? String
                         ExpertClient.shareClient.connect()
                     }else{
                         TYUserDefaults.cookie.value = TYUserDefaults.cookieDefault
