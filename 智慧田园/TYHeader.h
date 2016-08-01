@@ -13,4 +13,3 @@
 #import "SystemConfiguration/SCNetworkReachability.h"
 #import "Reachability.h"
 #import "MBProgressHUD/MBProgressHUD.h"
-#import "JSMulitChooseView/JSMulitChooseView.h"

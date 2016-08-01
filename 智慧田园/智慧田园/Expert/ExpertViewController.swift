@@ -80,12 +80,15 @@ class ExpertViewController: TYViewController {
                 case .Initial(_):self?.tableView.reloadData()
                 case .Update(_, deletions: let deletions, insertions: let news, modifications: let modify):
                 if modify.count > 0 {
+                    //有数据发生改变
                     self?.tableView.reloadRowsAtIndexPaths(modify.map{NSIndexPath(forRow: $0, inSection: 0)}, withRowAnimation: .Automatic)
                 }
                 if news.count > 0 {
-                self?.tableView.insertRowsAtIndexPaths(news.map{NSIndexPath(forRow: $0, inSection: 0)}, withRowAnimation: .Automatic)
+                    //有新的数据增加
+                    self?.tableView.insertRowsAtIndexPaths(news.map{NSIndexPath(forRow: $0, inSection: 0)}, withRowAnimation: .Automatic)
                 }
                 if deletions.count > 0{
+                    //有数据被删除
                     self?.tableView.deleteRowsAtIndexPaths(deletions.map{NSIndexPath(forRow: $0, inSection: 0)}, withRowAnimation: .None)
                 }
                 self?.cellHeight.removeAll()

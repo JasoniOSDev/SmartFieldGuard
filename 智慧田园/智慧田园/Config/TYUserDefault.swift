@@ -23,6 +23,7 @@ let UrlPrefixKey = "UrlPrefix"
 let PushNewForumKey = "PushNewForum"
 let RoleNormalMemeber = "NormalMember"
 let RoleExpert = "Expert"
+
 struct Listener<T>:Hashable{
     let name:String
     typealias Action = T->Void
@@ -52,7 +53,6 @@ class Listenable<T>{
         listenerSet.insert(listener)
     }
     
-    
     func bindAndFireListener(name:String,action:Listener<T>.Action){
         bindListener(name, action: action)
         action(value)
@@ -80,6 +80,13 @@ class Listenable<T>{
 public class TYUserDefaults{
     static var defaults = NSUserDefaults(suiteName: "com.jason.TY")!
     
+    static var userID:Listenable<String?> = {
+        let userID = defaults.stringForKey(UserIDKey)
+        return Listenable<String?>(userID){ userID in
+            defaults.setObject(userID, forKey: UserIDKey)
+        }
+    }()
+    
     static var isLogined: Bool {
         let lastTime = TYUserDefaults.lastConnectTime.value
         let dis = TYUserDefaults.sessionInvalidTime.value + NSDate(timeIntervalSince1970: lastTime).timeIntervalSinceNow
@@ -106,13 +113,6 @@ public class TYUserDefaults{
         let tel = defaults.stringForKey(TelKey)
         return Listenable<String?>(tel){ tel in
             defaults.setObject(tel, forKey: TelKey)
-        }
-    }()
-    
-    static var userID:Listenable<String?> = {
-        let userID = defaults.stringForKey(UserIDKey)
-        return Listenable<String?>(userID){ userID in
-            defaults.setObject(userID, forKey: UserIDKey)
         }
     }()
     

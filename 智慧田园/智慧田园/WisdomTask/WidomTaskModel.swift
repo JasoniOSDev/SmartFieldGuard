@@ -220,7 +220,6 @@ class Farmland: Object{
                         //判断前驱任务
                         if task.lastTaskid != "0" {
                             let x = tasking.filter("self.realTaskNo = %@ ",task.lastTaskid).first
-                            
                             if x == nil {
                                 continue
                             }
@@ -228,8 +227,6 @@ class Farmland: Object{
                                 continue
                             }
                         }
-                        //判断触发条件
-                        
                         //前面都通过了
                         //说明该任务可做。则生成正在执行的任务
                         signal += 1

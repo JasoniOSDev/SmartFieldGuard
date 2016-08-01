@@ -11,78 +11,27 @@
 import Alamofire
 public class NetWorkManager:NSObject{
     static let shareManager = NetWorkManager()
-    var actions = [String:[NetWorkAction]]()
-    var locActions = [String:[locNetWorkAction]]()
-    var actionsKey = [String:Set<ActionKey>]()
-    private override init(){
-        super.init()
-
-    }
-    typealias NetWorkAction = ()->Void
-    typealias locNetWorkAction = ()->Void
-    
-    enum ActionKey:String{
-        case UpdateAdvice = "UpdateAdvice"
-        case NeedUpdateSession = "NeedUpdateSession"
-    }
-    enum observerKey:String{
-        case UpdateSession = "UpdateSession"
-        case Logined = "Logined"
-    }
-    
-    private func ActionForKey(key:observerKey){
-        if let Actions = actions[key.rawValue]{
-            for x in  Actions{
-                x()
-            }
-        }
-        if let Actions = locActions[key.rawValue]{
-            for x in Actions{
-                x()
-            }
-        }
-    }
-    
-    let UpdateAdvice:NetWorkAction = {
-        //更新存在数据库的设备信息
-    }
-    
-    let NeedUpdateSession:NetWorkAction = {
-        if let username = TYUserDefaults.userID.value,let pwd = TYUserDefaults.passWord.value{
-            let parameters:[String:AnyObject] = ["username":username,"password":pwd]
-            TYRequest(.Login, parameters: parameters)
-        }
-    }
     
     class func login(parameters:[String:AnyObject],action:(json:[String:AnyObject])->Void){
-        TYRequest(.Login, parameters: parameters).TYresponseJSON(completionHandler: {  response in
-            if(response.result.isSuccess){
-                print("----------LOGIN------------")
-                print(response)
-                print("----------LOGIN------------")
-                if let json = response.result.value as? [String:AnyObject]{
-                    let message = json["message"] as! String
-                    if(message == "success"){
-                        TYUserDefaults.UrlPrefix.value = json["staticUrlPrefix"] as! String
-                        let userInfo = json["userInfo"] as! [String:AnyObject]
-                        TYUserDefaults.headImage.value = TYUserDefaults.UrlPrefix.value + (userInfo[HeadImageKey] as! String)
-                        TYUserDefaults.role.value = userInfo[RoleKey] as! String
-                        TYUserDefaults.tel.value = userInfo[TelKey] as? String
-                        TYUserDefaults.username.value = userInfo[UsernameKey] as? String
-                        TYUserDefaults.passWord.value = parameters["password"] as? String
-                        TYUserDefaults.userID.value = userInfo[UserIDKey] as? String
-                        ExpertClient.shareClient.connect()
-                    }else{
-                        TYUserDefaults.cookie.value = TYUserDefaults.cookieDefault
-                        TYUserDefaults.lastConnectTime.value = 0
-                        TYUserDefaults.userID.value = nil
-                    }
-                    action(json: json)
-                }
+        TYRequest(.Login, parameters: parameters).TYResponseJSON { (json) in
+            let message = json["message"] as! String
+            if(message == "success"){
+                TYUserDefaults.UrlPrefix.value = json["staticUrlPrefix"] as! String
+                let userInfo = json["userInfo"] as! [String:AnyObject]
+                TYUserDefaults.headImage.value = TYUserDefaults.UrlPrefix.value + (userInfo[HeadImageKey] as! String)
+                TYUserDefaults.role.value = userInfo[RoleKey] as! String
+                TYUserDefaults.tel.value = userInfo[TelKey] as? String
+                TYUserDefaults.username.value = userInfo[UsernameKey] as? String
+                TYUserDefaults.passWord.value = parameters["password"] as? String
+                TYUserDefaults.userID.value = userInfo[UserIDKey] as? String
+                ExpertClient.shareClient.connect()
             }else{
-                print(response)
+                TYUserDefaults.cookie.value = TYUserDefaults.cookieDefault
+                TYUserDefaults.lastConnectTime.value = 0
+                TYUserDefaults.userID.value = nil
             }
-        })
+            action(json: json)
+        }
     }
     //message:unlogin
     class func updateSession(action:(()->Void)? = nil) {
@@ -551,6 +500,7 @@ public class NetWorkManager:NSObject{
     
     //仅仅用于专家页面选择分类
     class func GetCropsList(no:String,callback:([LocalCrops]->Void)){
+        //检查是否已经在本地数据库已缓存，如有则直接返回
         let cropsList = ModelManager.getObjects(LocalCrops).filter("self.cropsClassID = %@", no)
         if cropsList.count > 0 {
             var crops = [LocalCrops]()
@@ -560,37 +510,45 @@ public class NetWorkManager:NSObject{
             callback(crops)
             return
         }
+        //如果没有，则向网络发送请求
         NetWorkManager.updateSession{
             TYRequest(ContentType.CropsList, parameters: ["cropTypeNo":no]).TYresponseJSON(completionHandler: { (response) in
-                var crops = [LocalCrops]()
-                if response.result.isSuccess {
-                    if let json = response.result.value as? [String:AnyObject]{
-                        if let msg = json["message"] as? String where msg == "success"{
-                            if let cropList = json["cropList"] as? NSArray{
-                                cropList.forEach({ (x) in
-                                    if let object = x as? [String:AnyObject] {
-                                        let crop = LocalCrops()
-                                        crop.name = object["cropName"] as! String
-                                        crop.id = object["cropNo"] as! String
-                                        let urls = (object["imageUrl"] as! String).componentsSeparatedByString("|").map(){TYUserDefaults.UrlPrefix.value + $0}
-                                        if urls.count == 3{
-                                            crop.urlHome = urls[0]
-                                            crop.urlDetail = urls[1]
-                                            crop.url = urls[2]
-                                        }else{
-                                            crop.url = urls[0]
+                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), {
+                    //异步处理数据
+                    var crops = [LocalCrops]()
+                    if response.result.isSuccess {
+                        if let json = response.result.value as? [String:AnyObject]{
+                            if let msg = json["message"] as? String where msg == "success"{
+                                if let cropList = json["cropList"] as? NSArray{
+                                    cropList.forEach({ (x) in
+                                        if let object = x as? [String:AnyObject] {
+                                            let crop = LocalCrops()
+                                            crop.name = object["cropName"] as! String
+                                            crop.id = object["cropNo"] as! String
+                                            let urls = (object["imageUrl"] as! String).componentsSeparatedByString("|").map(){TYUserDefaults.UrlPrefix.value + $0}
+                                            if urls.count == 3{
+                                                crop.urlHome = urls[0]
+                                                crop.urlDetail = urls[1]
+                                                crop.url = urls[2]
+                                            }else{
+                                                crop.url = urls[0]
+                                            }
+                                            crops.append(crop)
                                         }
-                                        crops.append(crop)
-                                    }
-                                })
+                                    })
+                                }
                             }
                         }
                     }
-                }
-                for x in crops{
-                    ModelManager.add(x)
-                }
-                callback(crops)
+//                    当所有数据请求完成之后，主线程回调
+                    dispatch_async(dispatch_get_main_queue(), {
+                        //将处理完的数据用数据库缓存
+                        for x in crops{
+                            ModelManager.add(x)
+                        }
+                        callback(crops)
+                    })
+                })
             })
         }
     }

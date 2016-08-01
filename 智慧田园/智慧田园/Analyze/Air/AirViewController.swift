@@ -13,10 +13,6 @@ class AirViewController: TYViewController {
     var AnalyzeViewT:TYAnalyze!//展示温度
     var AnalyzeViewW:TYAnalyze!//展示湿度
     var AnalyzeViewCO2:TYAnalyze!//展示二氧化碳
-    
-    var lineChartT:PNLineChart!
-    var lineChartW:PNLineChart!
-    var lineChartCO2:PNLineChart!
     weak var crop:Crops!
     weak var field:Farmland!
     var scrollView:UIScrollView!

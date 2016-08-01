@@ -11,10 +11,10 @@ import PNChart
 class GrowthViewController: TYViewController {
     
     @IBOutlet weak var StackViewLabel: UIStackView!
-    var CirChart: PNCircleChart!
-    var CirChart2:PNCircleChart!
     @IBOutlet weak var LabelCount: UILabel!
     @IBOutlet weak var LabelSum: UILabel!
+    var CirChart: PNCircleChart!
+    var CirChart2:PNCircleChart!
     var crop:Crops!
     override func viewDidLoad() {
         super.viewDidLoad()

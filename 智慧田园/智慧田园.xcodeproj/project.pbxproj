@@ -7,9 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9603B8811D41CA1D0082AF84 /* JSMulitChooseView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9603B8801D41CA1D0082AF84 /* JSMulitChooseView.framework */; };
-		9603B8A01D41CAF40082AF84 /* MulitChooseSwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9603B89F1D41CAF40082AF84 /* MulitChooseSwiftTests.swift */; };
-		9603B8AB1D41CAF40082AF84 /* MulitChooseSwiftUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9603B8AA1D41CAF40082AF84 /* MulitChooseSwiftUITests.swift */; };
 		96076C3A1CF96148002E3F1E /* MBProgressHUD+MJ.m in Sources */ = {isa = PBXBuildFile; fileRef = 96076C391CF96148002E3F1E /* MBProgressHUD+MJ.m */; };
 		96076C3C1CF964C8002E3F1E /* MBProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 96076C3B1CF964C8002E3F1E /* MBProgressHUD.bundle */; };
 		96076C541CF9C1B7002E3F1E /* WidomTaskModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96076C531CF9C1B7002E3F1E /* WidomTaskModel.swift */; };
@@ -33,7 +30,6 @@
 		9638713F1CF4039C00653D11 /* NewRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9638713E1CF4039C00653D11 /* NewRecordViewController.swift */; };
 		963BDD231CFAB0F4003DB16E /* TaskDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963BDD221CFAB0F4003DB16E /* TaskDetailViewController.swift */; };
 		963BDD291CFB427A003DB16E /* AnalyzeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963BDD281CFB427A003DB16E /* AnalyzeViewController.swift */; };
-		963BDD2D1CFB42AE003DB16E /* AnalyzeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963BDD2C1CFB42AE003DB16E /* AnalyzeModel.swift */; };
 		963BDD311CFB4DB8003DB16E /* AnalyzeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963BDD2F1CFB4DB8003DB16E /* AnalyzeCollectionViewCell.swift */; };
 		963BDD351CFB5002003DB16E /* GrowthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963BDD341CFB5002003DB16E /* GrowthViewController.swift */; };
 		963BDD371CFB6125003DB16E /* TYAnalyze.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963BDD361CFB6125003DB16E /* TYAnalyze.swift */; };
@@ -92,8 +88,6 @@
 		9697638F1CF861F300F11E7C /* ForumModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9697638E1CF861F300F11E7C /* ForumModel.swift */; };
 		9699F1BD1CEF40BF0013031B /* FarmlandCardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9699F1BB1CEF40BF0013031B /* FarmlandCardTableViewCell.swift */; };
 		9699F1BE1CEF40BF0013031B /* FarmlandCardTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9699F1BC1CEF40BF0013031B /* FarmlandCardTableViewCell.xib */; };
-		96A04E741D42494200EE66CA /* MutiCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 96A04E721D42494200EE66CA /* MutiCollectionViewCell.xib */; };
-		96A04E751D42494200EE66CA /* MutiTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 96A04E731D42494200EE66CA /* MutiTableViewCell.xib */; };
 		96A04E8B1D44D9EB00EE66CA /* ExpertClassChooseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A04E891D44D9EB00EE66CA /* ExpertClassChooseTableViewCell.swift */; };
 		96A04E8C1D44D9EB00EE66CA /* ExpertClassChooseTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 96A04E8A1D44D9EB00EE66CA /* ExpertClassChooseTableViewCell.xib */; };
 		96A04E8E1D44DA6D00EE66CA /* ExpertClassChooseTableHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A04E8D1D44DA6D00EE66CA /* ExpertClassChooseTableHeadView.swift */; };
@@ -109,22 +103,11 @@
 		96A567C51CF7DF73000733A1 /* NetWorkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A567C41CF7DF73000733A1 /* NetWorkManager.swift */; };
 		96AC87521D3F6F5C0075C451 /* ExpertModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AC87511D3F6F5C0075C451 /* ExpertModel.swift */; };
 		96D040951D42343200011D15 /* ExpertClassChooseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D040941D42343200011D15 /* ExpertClassChooseController.swift */; };
-		96D040991D423D2500011D15 /* JSMulitChooseView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96D040981D423D2500011D15 /* JSMulitChooseView.framework */; };
-		96D0409A1D423D3000011D15 /* JSMulitChooseView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96D040981D423D2500011D15 /* JSMulitChooseView.framework */; };
-		96D0409B1D423D3000011D15 /* JSMulitChooseView.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 96D040981D423D2500011D15 /* JSMulitChooseView.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		96D040B01D42429700011D15 /* JSMulitChooseViewBundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 96D040AF1D42429700011D15 /* JSMulitChooseViewBundle.bundle */; };
 		96D29D8D1D3F976800B990DB /* ExpertClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D29D8C1D3F976800B990DB /* ExpertClient.swift */; };
 		C9A1C89BA3BC187084745576 /* Pods_____.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 369374F3B9AB6392C3D772EC /* Pods_____.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		9603B8B61D41CC040082AF84 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 96336E2E1CED569400BA5BF3 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 96336E351CED569400BA5BF3;
-			remoteInfo = "智慧田园";
-		};
 		96336E4B1CED569500BA5BF3 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 96336E2E1CED569400BA5BF3 /* Project object */;
@@ -149,7 +132,6 @@
 			dstSubfolderSpec = 10;
 			files = (
 				960C45D51D2EBD1F00E896CC /* (null) in Embed Frameworks */,
-				96D0409B1D423D3000011D15 /* JSMulitChooseView.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -179,11 +161,8 @@
 /* Begin PBXFileReference section */
 		369374F3B9AB6392C3D772EC /* Pods_____.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = "Pods_____.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		800828A745BC94227B7D9391 /* Pods-智慧田园.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-智慧田园.debug.xcconfig"; path = "Pods/Target Support Files/Pods-智慧田园/Pods-智慧田园.debug.xcconfig"; sourceTree = "<group>"; };
-		9603B8801D41CA1D0082AF84 /* JSMulitChooseView.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JSMulitChooseView.framework; path = "/Users/Jason/Downloads/智慧田园/智慧田园/JSMulitChooseView.framework"; sourceTree = "<absolute>"; };
-		9603B89B1D41CAF40082AF84 /* MulitChooseSwiftTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MulitChooseSwiftTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9603B89F1D41CAF40082AF84 /* MulitChooseSwiftTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MulitChooseSwiftTests.swift; sourceTree = "<group>"; };
 		9603B8A11D41CAF40082AF84 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		9603B8A61D41CAF40082AF84 /* MulitChooseSwiftUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MulitChooseSwiftUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9603B8AA1D41CAF40082AF84 /* MulitChooseSwiftUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MulitChooseSwiftUITests.swift; sourceTree = "<group>"; };
 		9603B8AC1D41CAF40082AF84 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		96076C381CF96148002E3F1E /* MBProgressHUD+MJ.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MBProgressHUD+MJ.h"; sourceTree = "<group>"; };
@@ -218,7 +197,6 @@
 		9638713E1CF4039C00653D11 /* NewRecordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NewRecordViewController.swift; path = Record/NewRecordViewController.swift; sourceTree = "<group>"; };
 		963BDD221CFAB0F4003DB16E /* TaskDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TaskDetailViewController.swift; path = FarmlandCard/TaskDetailViewController.swift; sourceTree = "<group>"; };
 		963BDD281CFB427A003DB16E /* AnalyzeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AnalyzeViewController.swift; path = Analyze/AnalyzeViewController.swift; sourceTree = "<group>"; };
-		963BDD2C1CFB42AE003DB16E /* AnalyzeModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AnalyzeModel.swift; path = Analyze/AnalyzeModel.swift; sourceTree = "<group>"; };
 		963BDD2F1CFB4DB8003DB16E /* AnalyzeCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AnalyzeCollectionViewCell.swift; path = Analyze/AnalyzeCollectionViewCell.swift; sourceTree = "<group>"; };
 		963BDD341CFB5002003DB16E /* GrowthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GrowthViewController.swift; path = Analyze/Growth/GrowthViewController.swift; sourceTree = "<group>"; };
 		963BDD361CFB6125003DB16E /* TYAnalyze.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TYAnalyze.swift; path = Analyze/TYAnalyze.swift; sourceTree = "<group>"; };
@@ -294,8 +272,6 @@
 		9697638E1CF861F300F11E7C /* ForumModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ForumModel.swift; path = Forum/ForumModel.swift; sourceTree = "<group>"; };
 		9699F1BB1CEF40BF0013031B /* FarmlandCardTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FarmlandCardTableViewCell.swift; path = FarmlandCard/FarmlandCardTableViewCell.swift; sourceTree = "<group>"; };
 		9699F1BC1CEF40BF0013031B /* FarmlandCardTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FarmlandCardTableViewCell.xib; path = FarmlandCard/FarmlandCardTableViewCell.xib; sourceTree = "<group>"; };
-		96A04E721D42494200EE66CA /* MutiCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MutiCollectionViewCell.xib; sourceTree = "<group>"; };
-		96A04E731D42494200EE66CA /* MutiTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MutiTableViewCell.xib; sourceTree = "<group>"; };
 		96A04E891D44D9EB00EE66CA /* ExpertClassChooseTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExpertClassChooseTableViewCell.swift; path = Expert/ExpertClassChooseTableViewCell.swift; sourceTree = "<group>"; };
 		96A04E8A1D44D9EB00EE66CA /* ExpertClassChooseTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ExpertClassChooseTableViewCell.xib; path = Expert/ExpertClassChooseTableViewCell.xib; sourceTree = "<group>"; };
 		96A04E8D1D44DA6D00EE66CA /* ExpertClassChooseTableHeadView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExpertClassChooseTableHeadView.swift; path = Expert/ExpertClassChooseTableHeadView.swift; sourceTree = "<group>"; };
@@ -311,36 +287,17 @@
 		96A567C41CF7DF73000733A1 /* NetWorkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NetWorkManager.swift; path = NetWorkManager/NetWorkManager.swift; sourceTree = "<group>"; };
 		96AC87511D3F6F5C0075C451 /* ExpertModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExpertModel.swift; path = Expert/ExpertModel.swift; sourceTree = "<group>"; };
 		96D040941D42343200011D15 /* ExpertClassChooseController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExpertClassChooseController.swift; path = Expert/ExpertClassChooseController.swift; sourceTree = "<group>"; };
-		96D040981D423D2500011D15 /* JSMulitChooseView.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = JSMulitChooseView.framework; sourceTree = "<group>"; };
-		96D040AF1D42429700011D15 /* JSMulitChooseViewBundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = JSMulitChooseViewBundle.bundle; sourceTree = "<group>"; };
 		96D29D8C1D3F976800B990DB /* ExpertClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExpertClient.swift; path = Expert/ExpertClient.swift; sourceTree = "<group>"; };
 		BB38657AA1CBDF22B65A16CC /* Pods-智慧田园.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-智慧田园.release.xcconfig"; path = "Pods/Target Support Files/Pods-智慧田园/Pods-智慧田园.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		9603B8981D41CAF40082AF84 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		9603B8A31D41CAF40082AF84 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		96336E331CED569400BA5BF3 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				96A567AE1CF71551000733A1 /* Realm.framework in Frameworks */,
-				9603B8811D41CA1D0082AF84 /* JSMulitChooseView.framework in Frameworks */,
 				968889141CEF23BA00B99FD4 /* SystemConfiguration.framework in Frameworks */,
-				96D0409A1D423D3000011D15 /* JSMulitChooseView.framework in Frameworks */,
-				96D040991D423D2500011D15 /* JSMulitChooseView.framework in Frameworks */,
 				96A567B21CF71563000733A1 /* RealmSwift.framework in Frameworks */,
 				C9A1C89BA3BC187084745576 /* Pods_____.framework in Frameworks */,
 			);
@@ -397,14 +354,6 @@
 				369374F3B9AB6392C3D772EC /* Pods_____.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		9603B87F1D41CA0D0082AF84 /* framework */ = {
-			isa = PBXGroup;
-			children = (
-				96D040981D423D2500011D15 /* JSMulitChooseView.framework */,
-			);
-			name = framework;
 			sourceTree = "<group>";
 		};
 		9603B89E1D41CAF40082AF84 /* MulitChooseSwiftTests */ = {
@@ -472,7 +421,7 @@
 		962ABF601CF2B26E00990AC2 /* Record */ = {
 			isa = PBXGroup;
 			children = (
-				9638713E1CF4039C00653D11 /* NewRecordViewController.swift */,
+				963D2D8C1D4CD78F00375E23 /* Controller */,
 			);
 			name = Record;
 			sourceTree = "<group>";
@@ -497,8 +446,6 @@
 				96336E361CED569400BA5BF3 /* 智慧田园.app */,
 				96336E4A1CED569500BA5BF3 /* 智慧田园Tests.xctest */,
 				96336E551CED569500BA5BF3 /* 智慧田园UITests.xctest */,
-				9603B89B1D41CAF40082AF84 /* MulitChooseSwiftTests.xctest */,
-				9603B8A61D41CAF40082AF84 /* MulitChooseSwiftUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -506,24 +453,21 @@
 		96336E381CED569400BA5BF3 /* 智慧田园 */ = {
 			isa = PBXGroup;
 			children = (
-				96B89AFC1D3625C200B92ECF /* View */,
 				963BDD271CFB424F003DB16E /* Analyze */,
 				96076C501CF9B5E7002E3F1E /* WisdomTask */,
-				96A567C31CF7DF33000733A1 /* NetWorkManager */,
 				96A567B51CF72EEB000733A1 /* Login */,
 				962ABF601CF2B26E00990AC2 /* Record */,
 				962ABF521CF2893200990AC2 /* Instroduce */,
 				965A53FE1CF1D36B00CA9B53 /* Expert */,
-				965A53E71CF13BEC00CA9B53 /* PageButton */,
-				965A53DE1CF1377600CA9B53 /* MulitPage */,
 				965A53DB1CF1366C00CA9B53 /* Forum */,
 				9699F1BA1CEF407C0013031B /* FarmlandCard */,
 				9688890A1CEE9C2700B99FD4 /* AddDevice */,
-				968889041CEE035E00B99FD4 /* Config */,
 				968889021CEE028100B99FD4 /* Home */,
+				96A567C31CF7DF33000733A1 /* NetWorkManager */,
+				968889041CEE035E00B99FD4 /* Config */,
 				968888FB1CEE011200B99FD4 /* Base */,
 				9677B7C61CF698BA008ADEA4 /* Resource */,
-				9603B87F1D41CA0D0082AF84 /* framework */,
+				963D2D8B1D4CD76000375E23 /* Extension */,
 				96336E391CED569400BA5BF3 /* AppDelegate.swift */,
 				96336E3D1CED569400BA5BF3 /* Main.storyboard */,
 				96336E401CED569400BA5BF3 /* Assets.xcassets */,
@@ -570,7 +514,6 @@
 				963BDD3A1CFB64FE003DB16E /* Air */,
 				963BDD331CFB4FDA003DB16E /* Growth */,
 				963BDD2E1CFB4D8E003DB16E /* View */,
-				963BDD2B1CFB4296003DB16E /* Model */,
 				963BDD2A1CFB428E003DB16E /* Controller */,
 			);
 			name = Analyze;
@@ -582,14 +525,6 @@
 				963BDD281CFB427A003DB16E /* AnalyzeViewController.swift */,
 			);
 			name = Controller;
-			sourceTree = "<group>";
-		};
-		963BDD2B1CFB4296003DB16E /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				963BDD2C1CFB42AE003DB16E /* AnalyzeModel.swift */,
-			);
-			name = Model;
 			sourceTree = "<group>";
 		};
 		963BDD2E1CFB4D8E003DB16E /* View */ = {
@@ -640,6 +575,23 @@
 				963BDD441CFBD152003DB16E /* FertilizeViewController.swift */,
 			);
 			name = Fertilize;
+			sourceTree = "<group>";
+		};
+		963D2D8B1D4CD76000375E23 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				965A53E71CF13BEC00CA9B53 /* PageButton */,
+				96B89AFC1D3625C200B92ECF /* MessagePhotoScanController */,
+			);
+			name = Extension;
+			sourceTree = "<group>";
+		};
+		963D2D8C1D4CD78F00375E23 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				9638713E1CF4039C00653D11 /* NewRecordViewController.swift */,
+			);
+			name = Controller;
 			sourceTree = "<group>";
 		};
 		965A53C31CF072AD00CA9B53 /* View */ = {
@@ -710,13 +662,6 @@
 				965A53EA1CF1616100CA9B53 /* Controller */,
 			);
 			name = Forum;
-			sourceTree = "<group>";
-		};
-		965A53DE1CF1377600CA9B53 /* MulitPage */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = MulitPage;
 			sourceTree = "<group>";
 		};
 		965A53E71CF13BEC00CA9B53 /* PageButton */ = {
@@ -817,9 +762,6 @@
 		9677B7C61CF698BA008ADEA4 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
-				96A04E721D42494200EE66CA /* MutiCollectionViewCell.xib */,
-				96A04E731D42494200EE66CA /* MutiTableViewCell.xib */,
-				96D040AF1D42429700011D15 /* JSMulitChooseViewBundle.bundle */,
 				96076C3B1CF964C8002E3F1E /* MBProgressHUD.bundle */,
 				96336E6B1CED57C300BA5BF3 /* Font */,
 			);
@@ -937,53 +879,18 @@
 			name = Model;
 			sourceTree = "<group>";
 		};
-		96B89AFC1D3625C200B92ECF /* View */ = {
+		96B89AFC1D3625C200B92ECF /* MessagePhotoScanController */ = {
 			isa = PBXGroup;
 			children = (
 				963123071D3779A200476592 /* MessagePhotoScanController.swift */,
 				963123081D3779A200476592 /* MessagePhotoView.swift */,
 			);
-			name = View;
+			name = MessagePhotoScanController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		9603B89A1D41CAF40082AF84 /* MulitChooseSwiftTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 9603B8B01D41CAF40082AF84 /* Build configuration list for PBXNativeTarget "MulitChooseSwiftTests" */;
-			buildPhases = (
-				9603B8971D41CAF40082AF84 /* Sources */,
-				9603B8981D41CAF40082AF84 /* Frameworks */,
-				9603B8991D41CAF40082AF84 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = MulitChooseSwiftTests;
-			productName = MulitChooseSwiftTests;
-			productReference = 9603B89B1D41CAF40082AF84 /* MulitChooseSwiftTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		9603B8A51D41CAF40082AF84 /* MulitChooseSwiftUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 9603B8B31D41CAF40082AF84 /* Build configuration list for PBXNativeTarget "MulitChooseSwiftUITests" */;
-			buildPhases = (
-				9603B8A21D41CAF40082AF84 /* Sources */,
-				9603B8A31D41CAF40082AF84 /* Frameworks */,
-				9603B8A41D41CAF40082AF84 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				9603B8B71D41CC040082AF84 /* PBXTargetDependency */,
-			);
-			name = MulitChooseSwiftUITests;
-			productName = MulitChooseSwiftUITests;
-			productReference = 9603B8A61D41CAF40082AF84 /* MulitChooseSwiftUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 		96336E351CED569400BA5BF3 /* 智慧田园 */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 96336E5E1CED569500BA5BF3 /* Build configuration list for PBXNativeTarget "智慧田园" */;
@@ -1056,14 +963,6 @@
 				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = jason;
 				TargetAttributes = {
-					9603B89A1D41CAF40082AF84 = {
-						CreatedOnToolsVersion = 7.3.1;
-						TestTargetID = 9603B8871D41CAF40082AF84;
-					};
-					9603B8A51D41CAF40082AF84 = {
-						CreatedOnToolsVersion = 7.3.1;
-						TestTargetID = 9603B8871D41CAF40082AF84;
-					};
 					96336E351CED569400BA5BF3 = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = PG83M8BXTM;
@@ -1108,33 +1007,16 @@
 				96336E351CED569400BA5BF3 /* 智慧田园 */,
 				96336E491CED569500BA5BF3 /* 智慧田园Tests */,
 				96336E541CED569500BA5BF3 /* 智慧田园UITests */,
-				9603B89A1D41CAF40082AF84 /* MulitChooseSwiftTests */,
-				9603B8A51D41CAF40082AF84 /* MulitChooseSwiftUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		9603B8991D41CAF40082AF84 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		9603B8A41D41CAF40082AF84 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		96336E341CED569400BA5BF3 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				965A54061CF1D4BE00CA9B53 /* ExpertReplyTableViewCell.xib in Resources */,
-				96A04E741D42494200EE66CA /* MutiCollectionViewCell.xib in Resources */,
 				965A53F81CF19A7200CA9B53 /* ReplyTableViewCell.xib in Resources */,
 				965A53DA1CF0916100CA9B53 /* FarmlandConfigTableViewCell.xib in Resources */,
 				96A04E8C1D44D9EB00EE66CA /* ExpertClassChooseTableViewCell.xib in Resources */,
@@ -1142,14 +1024,12 @@
 				965A54101CF1F03D00CA9B53 /* MyReplyTableViewCell.xib in Resources */,
 				96076C3C1CF964C8002E3F1E /* MBProgressHUD.bundle in Resources */,
 				9699F1BE1CEF40BF0013031B /* FarmlandCardTableViewCell.xib in Resources */,
-				96A04E751D42494200EE66CA /* MutiTableViewCell.xib in Resources */,
 				965A53EF1CF1618100CA9B53 /* ForumTableViewCell.xib in Resources */,
 				96336E6A1CED57AA00BA5BF3 /* 兰亭细黑 GBK Mobil.TTF in Resources */,
 				9677B7B01CF5C70E008ADEA4 /* CropClassTableViewCell.xib in Resources */,
 				9688890C1CEE9C5700B99FD4 /* AddDevice.storyboard in Resources */,
 				96A04E921D44DD3A00EE66CA /* ExpertClassChooseCollectionViewCell.xib in Resources */,
 				9677B7B61CF5D319008ADEA4 /* CropsCollectionViewCell.xib in Resources */,
-				96D040B01D42429700011D15 /* JSMulitChooseViewBundle.bundle in Resources */,
 				965A53D11CF078A500CA9B53 /* TaskTableViewCell.xib in Resources */,
 				965A540A1CF1D4E600CA9B53 /* AskExpertTableViewCell.xib in Resources */,
 				963BDD391CFB6134003DB16E /* TYAnalyze.xib in Resources */,
@@ -1270,22 +1150,6 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		9603B8971D41CAF40082AF84 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				9603B8A01D41CAF40082AF84 /* MulitChooseSwiftTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		9603B8A21D41CAF40082AF84 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				9603B8AB1D41CAF40082AF84 /* MulitChooseSwiftUITests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		96336E321CED569400BA5BF3 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1335,7 +1199,6 @@
 				963BDD371CFB6125003DB16E /* TYAnalyze.swift in Sources */,
 				9688890E1CEEA98200B99FD4 /* AlertAddDeviceSecondViewController.swift in Sources */,
 				96A567C11CF73D80000733A1 /* RegisterViewController.swift in Sources */,
-				963BDD2D1CFB42AE003DB16E /* AnalyzeModel.swift in Sources */,
 				9677B7AF1CF5C70E008ADEA4 /* CropClassTableViewCell.swift in Sources */,
 				965A53F71CF19A7200CA9B53 /* ReplyTableViewCell.swift in Sources */,
 				965A53F21CF1727400CA9B53 /* MeForumViewController.swift in Sources */,
@@ -1383,11 +1246,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		9603B8B71D41CC040082AF84 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 96336E351CED569400BA5BF3 /* 智慧田园 */;
-			targetProxy = 9603B8B61D41CC040082AF84 /* PBXContainerItemProxy */;
-		};
 		96336E4C1CED569500BA5BF3 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 96336E351CED569400BA5BF3 /* 智慧田园 */;
@@ -1420,52 +1278,6 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		9603B8B11D41CAF40082AF84 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				INFOPLIST_FILE = MulitChooseSwiftTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.jason.MulitChooseSwiftTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MulitChooseSwift.app/MulitChooseSwift";
-			};
-			name = Debug;
-		};
-		9603B8B21D41CAF40082AF84 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				INFOPLIST_FILE = MulitChooseSwiftTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.jason.MulitChooseSwiftTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MulitChooseSwift.app/MulitChooseSwift";
-			};
-			name = Release;
-		};
-		9603B8B41D41CAF40082AF84 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				INFOPLIST_FILE = MulitChooseSwiftUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.jason.MulitChooseSwiftUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_TARGET_NAME = MulitChooseSwift;
-			};
-			name = Debug;
-		};
-		9603B8B51D41CAF40082AF84 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				INFOPLIST_FILE = MulitChooseSwiftUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.jason.MulitChooseSwiftUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_TARGET_NAME = MulitChooseSwift;
-			};
-			name = Release;
-		};
 		96336E5C1CED569500BA5BF3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1706,24 +1518,6 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		9603B8B01D41CAF40082AF84 /* Build configuration list for PBXNativeTarget "MulitChooseSwiftTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				9603B8B11D41CAF40082AF84 /* Debug */,
-				9603B8B21D41CAF40082AF84 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		9603B8B31D41CAF40082AF84 /* Build configuration list for PBXNativeTarget "MulitChooseSwiftUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				9603B8B41D41CAF40082AF84 /* Debug */,
-				9603B8B51D41CAF40082AF84 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		96336E311CED569400BA5BF3 /* Build configuration list for PBXProject "智慧田园" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
