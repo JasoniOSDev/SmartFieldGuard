@@ -10,7 +10,6 @@ import UIKit
 
 class MessagePhotoView: UIImageView,NSCopying {
     
-    
     func copyWithZone(zone: NSZone) -> AnyObject {
         let object = MessagePhotoView()
         object.image = self.image

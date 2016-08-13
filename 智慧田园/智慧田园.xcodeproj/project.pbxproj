@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		96076C3A1CF96148002E3F1E /* MBProgressHUD+MJ.m in Sources */ = {isa = PBXBuildFile; fileRef = 96076C391CF96148002E3F1E /* MBProgressHUD+MJ.m */; };
-		96076C3C1CF964C8002E3F1E /* MBProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 96076C3B1CF964C8002E3F1E /* MBProgressHUD.bundle */; };
 		96076C541CF9C1B7002E3F1E /* WidomTaskModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96076C531CF9C1B7002E3F1E /* WidomTaskModel.swift */; };
 		96076C561CF9C1CE002E3F1E /* WisdomTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96076C551CF9C1CE002E3F1E /* WisdomTask.swift */; };
 		960C45D51D2EBD1F00E896CC /* (null) in Embed Frameworks */ = {isa = PBXBuildFile; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -17,16 +15,12 @@
 		962ABF5B1CF29ECB00990AC2 /* InstroduceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 962ABF591CF29ECB00990AC2 /* InstroduceTableViewCell.swift */; };
 		962ABF5C1CF29ECB00990AC2 /* InstroduceTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 962ABF5A1CF29ECB00990AC2 /* InstroduceTableViewCell.xib */; };
 		962ABF5F1CF2ABAD00990AC2 /* TaskModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 962ABF5E1CF2ABAD00990AC2 /* TaskModel.swift */; };
-		963123091D3779A200476592 /* MessagePhotoScanController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963123071D3779A200476592 /* MessagePhotoScanController.swift */; };
-		9631230A1D3779A200476592 /* MessagePhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963123081D3779A200476592 /* MessagePhotoView.swift */; };
 		96336E3A1CED569400BA5BF3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96336E391CED569400BA5BF3 /* AppDelegate.swift */; };
 		96336E3F1CED569400BA5BF3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 96336E3D1CED569400BA5BF3 /* Main.storyboard */; };
 		96336E411CED569400BA5BF3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 96336E401CED569400BA5BF3 /* Assets.xcassets */; };
 		96336E441CED569400BA5BF3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 96336E421CED569400BA5BF3 /* LaunchScreen.storyboard */; };
 		96336E4F1CED569500BA5BF3 /* ____Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96336E4E1CED569500BA5BF3 /* ____Tests.swift */; };
 		96336E5A1CED569500BA5BF3 /* ____UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96336E591CED569500BA5BF3 /* ____UITests.swift */; };
-		96336E691CED57AA00BA5BF3 /* 兰亭黑 GBK.TTF in Resources */ = {isa = PBXBuildFile; fileRef = 96336E671CED57AA00BA5BF3 /* 兰亭黑 GBK.TTF */; };
-		96336E6A1CED57AA00BA5BF3 /* 兰亭细黑 GBK Mobil.TTF in Resources */ = {isa = PBXBuildFile; fileRef = 96336E681CED57AA00BA5BF3 /* 兰亭细黑 GBK Mobil.TTF */; };
 		9638713F1CF4039C00653D11 /* NewRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9638713E1CF4039C00653D11 /* NewRecordViewController.swift */; };
 		963BDD231CFAB0F4003DB16E /* TaskDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963BDD221CFAB0F4003DB16E /* TaskDetailViewController.swift */; };
 		963BDD291CFB427A003DB16E /* AnalyzeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963BDD281CFB427A003DB16E /* AnalyzeViewController.swift */; };
@@ -38,7 +32,6 @@
 		963BDD3F1CFB682A003DB16E /* SoilViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963BDD3E1CFB682A003DB16E /* SoilViewController.swift */; };
 		963BDD421CFB6874003DB16E /* SunViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963BDD411CFB6874003DB16E /* SunViewController.swift */; };
 		963BDD451CFBD152003DB16E /* FertilizeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963BDD441CFBD152003DB16E /* FertilizeViewController.swift */; };
-		965A53BF1CF0011400CA9B53 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 965A53BD1CF0011400CA9B53 /* Reachability.m */; };
 		965A53C01CF0011400CA9B53 /* TYConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965A53BE1CF0011400CA9B53 /* TYConfig.swift */; };
 		965A53C21CF014D900CA9B53 /* CardDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965A53C11CF014D900CA9B53 /* CardDetailViewController.swift */; };
 		965A53C71CF073D300CA9B53 /* TYTabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965A53C61CF073D300CA9B53 /* TYTabBarItem.swift */; };
@@ -48,7 +41,6 @@
 		965A53D91CF0916100CA9B53 /* FarmlandConfigTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965A53D71CF0916100CA9B53 /* FarmlandConfigTableViewCell.swift */; };
 		965A53DA1CF0916100CA9B53 /* FarmlandConfigTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 965A53D81CF0916100CA9B53 /* FarmlandConfigTableViewCell.xib */; };
 		965A53DD1CF1369600CA9B53 /* ForumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965A53DC1CF1369600CA9B53 /* ForumViewController.swift */; };
-		965A53E91CF13C3700CA9B53 /* PageButtonMidLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965A53E81CF13C3700CA9B53 /* PageButtonMidLine.swift */; };
 		965A53EE1CF1618100CA9B53 /* ForumTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965A53EC1CF1618100CA9B53 /* ForumTableViewCell.swift */; };
 		965A53EF1CF1618100CA9B53 /* ForumTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 965A53ED1CF1618100CA9B53 /* ForumTableViewCell.xib */; };
 		965A53F21CF1727400CA9B53 /* MeForumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965A53F11CF1727400CA9B53 /* MeForumViewController.swift */; };
@@ -64,6 +56,14 @@
 		965A540C1CF1E23200CA9B53 /* ExpertAndMeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965A540B1CF1E23200CA9B53 /* ExpertAndMeViewController.swift */; };
 		965A540F1CF1F03D00CA9B53 /* MyReplyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965A540D1CF1F03D00CA9B53 /* MyReplyTableViewCell.swift */; };
 		965A54101CF1F03D00CA9B53 /* MyReplyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 965A540E1CF1F03D00CA9B53 /* MyReplyTableViewCell.xib */; };
+		965B31B21D5EC28A000ABA83 /* MessagePhotoScanController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965B31B01D5EC28A000ABA83 /* MessagePhotoScanController.swift */; };
+		965B31B31D5EC28A000ABA83 /* MessagePhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965B31B11D5EC28A000ABA83 /* MessagePhotoView.swift */; };
+		965B31B51D5EC28F000ABA83 /* PageButtonMidLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965B31B41D5EC28F000ABA83 /* PageButtonMidLine.swift */; };
+		965B31B81D5EC29A000ABA83 /* MBProgressHUD+MJ.m in Sources */ = {isa = PBXBuildFile; fileRef = 965B31B71D5EC29A000ABA83 /* MBProgressHUD+MJ.m */; };
+		965B31BB1D5EC2B1000ABA83 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 965B31BA1D5EC2B1000ABA83 /* Reachability.m */; };
+		965B31C01D5EC306000ABA83 /* 兰亭细黑 GBK Mobil.TTF in Resources */ = {isa = PBXBuildFile; fileRef = 965B31BD1D5EC306000ABA83 /* 兰亭细黑 GBK Mobil.TTF */; };
+		965B31C11D5EC306000ABA83 /* 兰亭黑 GBK.TTF in Resources */ = {isa = PBXBuildFile; fileRef = 965B31BE1D5EC306000ABA83 /* 兰亭黑 GBK.TTF */; };
+		965B31C21D5EC306000ABA83 /* MBProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 965B31BF1D5EC306000ABA83 /* MBProgressHUD.bundle */; };
 		9677B7AA1CF5B686008ADEA4 /* AlertTimeChooseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9677B7A91CF5B686008ADEA4 /* AlertTimeChooseViewController.swift */; };
 		9677B7AC1CF5C63A008ADEA4 /* AlertCropsChooseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9677B7AB1CF5C63A008ADEA4 /* AlertCropsChooseViewController.swift */; };
 		9677B7AF1CF5C70E008ADEA4 /* CropClassTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9677B7AD1CF5C70E008ADEA4 /* CropClassTableViewCell.swift */; };
@@ -161,13 +161,6 @@
 /* Begin PBXFileReference section */
 		369374F3B9AB6392C3D772EC /* Pods_____.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = "Pods_____.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		800828A745BC94227B7D9391 /* Pods-智慧田园.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-智慧田园.debug.xcconfig"; path = "Pods/Target Support Files/Pods-智慧田园/Pods-智慧田园.debug.xcconfig"; sourceTree = "<group>"; };
-		9603B89F1D41CAF40082AF84 /* MulitChooseSwiftTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MulitChooseSwiftTests.swift; sourceTree = "<group>"; };
-		9603B8A11D41CAF40082AF84 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		9603B8AA1D41CAF40082AF84 /* MulitChooseSwiftUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MulitChooseSwiftUITests.swift; sourceTree = "<group>"; };
-		9603B8AC1D41CAF40082AF84 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		96076C381CF96148002E3F1E /* MBProgressHUD+MJ.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MBProgressHUD+MJ.h"; sourceTree = "<group>"; };
-		96076C391CF96148002E3F1E /* MBProgressHUD+MJ.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MBProgressHUD+MJ.m"; sourceTree = "<group>"; };
-		96076C3B1CF964C8002E3F1E /* MBProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MBProgressHUD.bundle; sourceTree = "<group>"; };
 		96076C531CF9C1B7002E3F1E /* WidomTaskModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WidomTaskModel.swift; path = WisdomTask/WidomTaskModel.swift; sourceTree = "<group>"; };
 		96076C551CF9C1CE002E3F1E /* WisdomTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WisdomTask.swift; path = WisdomTask/WisdomTask.swift; sourceTree = "<group>"; };
 		961DF0741CF6ACE700A8942D /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
@@ -178,8 +171,6 @@
 		962ABF591CF29ECB00990AC2 /* InstroduceTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InstroduceTableViewCell.swift; path = Instroduce/InstroduceTableViewCell.swift; sourceTree = "<group>"; };
 		962ABF5A1CF29ECB00990AC2 /* InstroduceTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = InstroduceTableViewCell.xib; path = Instroduce/InstroduceTableViewCell.xib; sourceTree = "<group>"; };
 		962ABF5E1CF2ABAD00990AC2 /* TaskModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TaskModel.swift; path = FarmlandCard/Model/TaskModel.swift; sourceTree = "<group>"; };
-		963123071D3779A200476592 /* MessagePhotoScanController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessagePhotoScanController.swift; path = View/MessagePhotoScanController.swift; sourceTree = "<group>"; };
-		963123081D3779A200476592 /* MessagePhotoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessagePhotoView.swift; path = View/MessagePhotoView.swift; sourceTree = "<group>"; };
 		96336E361CED569400BA5BF3 /* 智慧田园.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "智慧田园.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		96336E391CED569400BA5BF3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		96336E3E1CED569400BA5BF3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -192,8 +183,6 @@
 		96336E551CED569500BA5BF3 /* 智慧田园UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "智慧田园UITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		96336E591CED569500BA5BF3 /* ____UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "____UITests.swift"; sourceTree = "<group>"; };
 		96336E5B1CED569500BA5BF3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		96336E671CED57AA00BA5BF3 /* 兰亭黑 GBK.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; name = "兰亭黑 GBK.TTF"; path = "../兰亭黑 GBK.TTF"; sourceTree = "<group>"; };
-		96336E681CED57AA00BA5BF3 /* 兰亭细黑 GBK Mobil.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; name = "兰亭细黑 GBK Mobil.TTF"; path = "../兰亭细黑 GBK Mobil.TTF"; sourceTree = "<group>"; };
 		9638713E1CF4039C00653D11 /* NewRecordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NewRecordViewController.swift; path = Record/NewRecordViewController.swift; sourceTree = "<group>"; };
 		963BDD221CFAB0F4003DB16E /* TaskDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TaskDetailViewController.swift; path = FarmlandCard/TaskDetailViewController.swift; sourceTree = "<group>"; };
 		963BDD281CFB427A003DB16E /* AnalyzeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AnalyzeViewController.swift; path = Analyze/AnalyzeViewController.swift; sourceTree = "<group>"; };
@@ -205,8 +194,6 @@
 		963BDD3E1CFB682A003DB16E /* SoilViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SoilViewController.swift; path = Analyze/Soil/SoilViewController.swift; sourceTree = "<group>"; };
 		963BDD411CFB6874003DB16E /* SunViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SunViewController.swift; path = Analyze/Sun/SunViewController.swift; sourceTree = "<group>"; };
 		963BDD441CFBD152003DB16E /* FertilizeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FertilizeViewController.swift; path = Analyze/Fertilize/FertilizeViewController.swift; sourceTree = "<group>"; };
-		965A53BC1CF0011400CA9B53 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Reachability.h; path = Config/Reachability.h; sourceTree = "<group>"; };
-		965A53BD1CF0011400CA9B53 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Reachability.m; path = Config/Reachability.m; sourceTree = "<group>"; };
 		965A53BE1CF0011400CA9B53 /* TYConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TYConfig.swift; path = Config/TYConfig.swift; sourceTree = "<group>"; };
 		965A53C11CF014D900CA9B53 /* CardDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CardDetailViewController.swift; path = FarmlandCard/CardDetailViewController.swift; sourceTree = "<group>"; };
 		965A53C61CF073D300CA9B53 /* TYTabBarItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TYTabBarItem.swift; path = Base/TYTabBarItem.swift; sourceTree = "<group>"; };
@@ -216,7 +203,6 @@
 		965A53D71CF0916100CA9B53 /* FarmlandConfigTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FarmlandConfigTableViewCell.swift; path = FarmlandCard/Config/FarmlandConfigTableViewCell.swift; sourceTree = "<group>"; };
 		965A53D81CF0916100CA9B53 /* FarmlandConfigTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FarmlandConfigTableViewCell.xib; path = FarmlandCard/Config/FarmlandConfigTableViewCell.xib; sourceTree = "<group>"; };
 		965A53DC1CF1369600CA9B53 /* ForumViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ForumViewController.swift; path = Forum/ForumViewController.swift; sourceTree = "<group>"; };
-		965A53E81CF13C3700CA9B53 /* PageButtonMidLine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PageButtonMidLine.swift; path = PageButton/PageButtonMidLine.swift; sourceTree = "<group>"; };
 		965A53EC1CF1618100CA9B53 /* ForumTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ForumTableViewCell.swift; path = Forum/ForumTableViewCell.swift; sourceTree = "<group>"; };
 		965A53ED1CF1618100CA9B53 /* ForumTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ForumTableViewCell.xib; path = Forum/ForumTableViewCell.xib; sourceTree = "<group>"; };
 		965A53F11CF1727400CA9B53 /* MeForumViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MeForumViewController.swift; path = Forum/MeForumViewController.swift; sourceTree = "<group>"; };
@@ -232,6 +218,16 @@
 		965A540B1CF1E23200CA9B53 /* ExpertAndMeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExpertAndMeViewController.swift; path = Expert/ExpertAndMeViewController.swift; sourceTree = "<group>"; };
 		965A540D1CF1F03D00CA9B53 /* MyReplyTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MyReplyTableViewCell.swift; path = Expert/MyReplyTableViewCell.swift; sourceTree = "<group>"; };
 		965A540E1CF1F03D00CA9B53 /* MyReplyTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MyReplyTableViewCell.xib; path = Expert/MyReplyTableViewCell.xib; sourceTree = "<group>"; };
+		965B31B01D5EC28A000ABA83 /* MessagePhotoScanController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessagePhotoScanController.swift; path = Extension/MessagePhotoScanController/MessagePhotoScanController.swift; sourceTree = "<group>"; };
+		965B31B11D5EC28A000ABA83 /* MessagePhotoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessagePhotoView.swift; path = Extension/MessagePhotoScanController/MessagePhotoView.swift; sourceTree = "<group>"; };
+		965B31B41D5EC28F000ABA83 /* PageButtonMidLine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PageButtonMidLine.swift; path = Extension/PageButton/PageButtonMidLine.swift; sourceTree = "<group>"; };
+		965B31B61D5EC29A000ABA83 /* MBProgressHUD+MJ.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "MBProgressHUD+MJ.h"; path = "Extension/MBProgressHUD+MJ.h"; sourceTree = "<group>"; };
+		965B31B71D5EC29A000ABA83 /* MBProgressHUD+MJ.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "MBProgressHUD+MJ.m"; path = "Extension/MBProgressHUD+MJ.m"; sourceTree = "<group>"; };
+		965B31B91D5EC2B1000ABA83 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Reachability.h; path = Extension/Reachability.h; sourceTree = "<group>"; };
+		965B31BA1D5EC2B1000ABA83 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Reachability.m; path = Extension/Reachability.m; sourceTree = "<group>"; };
+		965B31BD1D5EC306000ABA83 /* 兰亭细黑 GBK Mobil.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = "兰亭细黑 GBK Mobil.TTF"; sourceTree = "<group>"; };
+		965B31BE1D5EC306000ABA83 /* 兰亭黑 GBK.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = "兰亭黑 GBK.TTF"; sourceTree = "<group>"; };
+		965B31BF1D5EC306000ABA83 /* MBProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = MBProgressHUD.bundle; path = "智慧田园/Resource/MBProgressHUD.bundle"; sourceTree = "<group>"; };
 		9677B7A91CF5B686008ADEA4 /* AlertTimeChooseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AlertTimeChooseViewController.swift; path = FarmlandCard/Config/AlertTimeChooseViewController.swift; sourceTree = "<group>"; };
 		9677B7AB1CF5C63A008ADEA4 /* AlertCropsChooseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AlertCropsChooseViewController.swift; path = FarmlandCard/Config/AlertCropsChooseViewController.swift; sourceTree = "<group>"; };
 		9677B7AD1CF5C70E008ADEA4 /* CropClassTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CropClassTableViewCell.swift; path = FarmlandCard/Config/CropClassTableViewCell.swift; sourceTree = "<group>"; };
@@ -356,24 +352,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		9603B89E1D41CAF40082AF84 /* MulitChooseSwiftTests */ = {
-			isa = PBXGroup;
-			children = (
-				9603B89F1D41CAF40082AF84 /* MulitChooseSwiftTests.swift */,
-				9603B8A11D41CAF40082AF84 /* Info.plist */,
-			);
-			path = MulitChooseSwiftTests;
-			sourceTree = "<group>";
-		};
-		9603B8A91D41CAF40082AF84 /* MulitChooseSwiftUITests */ = {
-			isa = PBXGroup;
-			children = (
-				9603B8AA1D41CAF40082AF84 /* MulitChooseSwiftUITests.swift */,
-				9603B8AC1D41CAF40082AF84 /* Info.plist */,
-			);
-			path = MulitChooseSwiftUITests;
-			sourceTree = "<group>";
-		};
 		96076C501CF9B5E7002E3F1E /* WisdomTask */ = {
 			isa = PBXGroup;
 			children = (
@@ -432,8 +410,6 @@
 				96336E381CED569400BA5BF3 /* 智慧田园 */,
 				96336E4D1CED569500BA5BF3 /* 智慧田园Tests */,
 				96336E581CED569500BA5BF3 /* 智慧田园UITests */,
-				9603B89E1D41CAF40082AF84 /* MulitChooseSwiftTests */,
-				9603B8A91D41CAF40082AF84 /* MulitChooseSwiftUITests */,
 				96336E371CED569400BA5BF3 /* Products */,
 				7BE539810E714B91C1B5BA81 /* Frameworks */,
 				05B6926B35AD3B39BF649183 /* Pods */,
@@ -493,16 +469,6 @@
 				96336E5B1CED569500BA5BF3 /* Info.plist */,
 			);
 			path = "智慧田园UITests";
-			sourceTree = "<group>";
-		};
-		96336E6B1CED57C300BA5BF3 /* Font */ = {
-			isa = PBXGroup;
-			children = (
-				96336E671CED57AA00BA5BF3 /* 兰亭黑 GBK.TTF */,
-				96336E681CED57AA00BA5BF3 /* 兰亭细黑 GBK Mobil.TTF */,
-			);
-			name = Font;
-			path = "智慧田园";
 			sourceTree = "<group>";
 		};
 		963BDD271CFB424F003DB16E /* Analyze */ = {
@@ -580,8 +546,15 @@
 		963D2D8B1D4CD76000375E23 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				965B31B61D5EC29A000ABA83 /* MBProgressHUD+MJ.h */,
+				965B31B71D5EC29A000ABA83 /* MBProgressHUD+MJ.m */,
+				965B31B91D5EC2B1000ABA83 /* Reachability.h */,
+				965B31BA1D5EC2B1000ABA83 /* Reachability.m */,
 				965A53E71CF13BEC00CA9B53 /* PageButton */,
+				965B31B41D5EC28F000ABA83 /* PageButtonMidLine.swift */,
 				96B89AFC1D3625C200B92ECF /* MessagePhotoScanController */,
+				965B31B01D5EC28A000ABA83 /* MessagePhotoScanController.swift */,
+				965B31B11D5EC28A000ABA83 /* MessagePhotoView.swift */,
 			);
 			name = Extension;
 			sourceTree = "<group>";
@@ -667,7 +640,6 @@
 		965A53E71CF13BEC00CA9B53 /* PageButton */ = {
 			isa = PBXGroup;
 			children = (
-				965A53E81CF13C3700CA9B53 /* PageButtonMidLine.swift */,
 			);
 			name = PageButton;
 			sourceTree = "<group>";
@@ -732,6 +704,16 @@
 			name = View;
 			sourceTree = "<group>";
 		};
+		965B31BC1D5EC306000ABA83 /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				965B31BD1D5EC306000ABA83 /* 兰亭细黑 GBK Mobil.TTF */,
+				965B31BE1D5EC306000ABA83 /* 兰亭黑 GBK.TTF */,
+			);
+			name = Font;
+			path = "智慧田园/Resource/Font";
+			sourceTree = "<group>";
+		};
 		9677B7BD1CF68BBA008ADEA4 /* Area */ = {
 			isa = PBXGroup;
 			children = (
@@ -762,8 +744,8 @@
 		9677B7C61CF698BA008ADEA4 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
-				96076C3B1CF964C8002E3F1E /* MBProgressHUD.bundle */,
-				96336E6B1CED57C300BA5BF3 /* Font */,
+				965B31BC1D5EC306000ABA83 /* Font */,
+				965B31BF1D5EC306000ABA83 /* MBProgressHUD.bundle */,
 			);
 			name = Resource;
 			path = ..;
@@ -799,11 +781,7 @@
 		968889041CEE035E00B99FD4 /* Config */ = {
 			isa = PBXGroup;
 			children = (
-				96076C381CF96148002E3F1E /* MBProgressHUD+MJ.h */,
-				96076C391CF96148002E3F1E /* MBProgressHUD+MJ.m */,
 				96A567BB1CF73B25000733A1 /* TYUserDefault.swift */,
-				965A53BC1CF0011400CA9B53 /* Reachability.h */,
-				965A53BD1CF0011400CA9B53 /* Reachability.m */,
 				965A53BE1CF0011400CA9B53 /* TYConfig.swift */,
 				968889151CEF24DE00B99FD4 /* TYExtension.swift */,
 				961DF08C1CF6C79400A8942D /* TYHeader.h */,
@@ -882,8 +860,6 @@
 		96B89AFC1D3625C200B92ECF /* MessagePhotoScanController */ = {
 			isa = PBXGroup;
 			children = (
-				963123071D3779A200476592 /* MessagePhotoScanController.swift */,
-				963123081D3779A200476592 /* MessagePhotoView.swift */,
 			);
 			name = MessagePhotoScanController;
 			sourceTree = "<group>";
@@ -1020,15 +996,14 @@
 				965A53F81CF19A7200CA9B53 /* ReplyTableViewCell.xib in Resources */,
 				965A53DA1CF0916100CA9B53 /* FarmlandConfigTableViewCell.xib in Resources */,
 				96A04E8C1D44D9EB00EE66CA /* ExpertClassChooseTableViewCell.xib in Resources */,
-				96336E691CED57AA00BA5BF3 /* 兰亭黑 GBK.TTF in Resources */,
 				965A54101CF1F03D00CA9B53 /* MyReplyTableViewCell.xib in Resources */,
-				96076C3C1CF964C8002E3F1E /* MBProgressHUD.bundle in Resources */,
 				9699F1BE1CEF40BF0013031B /* FarmlandCardTableViewCell.xib in Resources */,
 				965A53EF1CF1618100CA9B53 /* ForumTableViewCell.xib in Resources */,
-				96336E6A1CED57AA00BA5BF3 /* 兰亭细黑 GBK Mobil.TTF in Resources */,
 				9677B7B01CF5C70E008ADEA4 /* CropClassTableViewCell.xib in Resources */,
 				9688890C1CEE9C5700B99FD4 /* AddDevice.storyboard in Resources */,
+				965B31C11D5EC306000ABA83 /* 兰亭黑 GBK.TTF in Resources */,
 				96A04E921D44DD3A00EE66CA /* ExpertClassChooseCollectionViewCell.xib in Resources */,
+				965B31C01D5EC306000ABA83 /* 兰亭细黑 GBK Mobil.TTF in Resources */,
 				9677B7B61CF5D319008ADEA4 /* CropsCollectionViewCell.xib in Resources */,
 				965A53D11CF078A500CA9B53 /* TaskTableViewCell.xib in Resources */,
 				965A540A1CF1D4E600CA9B53 /* AskExpertTableViewCell.xib in Resources */,
@@ -1037,6 +1012,7 @@
 				96336E411CED569400BA5BF3 /* Assets.xcassets in Resources */,
 				96336E3F1CED569400BA5BF3 /* Main.storyboard in Resources */,
 				962ABF5C1CF29ECB00990AC2 /* InstroduceTableViewCell.xib in Resources */,
+				965B31C21D5EC306000ABA83 /* MBProgressHUD.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1161,12 +1137,12 @@
 				965A54091CF1D4E600CA9B53 /* AskExpertTableViewCell.swift in Sources */,
 				968889161CEF24DE00B99FD4 /* TYExtension.swift in Sources */,
 				965A53DD1CF1369600CA9B53 /* ForumViewController.swift in Sources */,
-				963123091D3779A200476592 /* MessagePhotoScanController.swift in Sources */,
 				96076C561CF9C1CE002E3F1E /* WisdomTask.swift in Sources */,
 				965A53EE1CF1618100CA9B53 /* ForumTableViewCell.swift in Sources */,
 				965A53D01CF078A500CA9B53 /* TaskTableViewCell.swift in Sources */,
 				965A540C1CF1E23200CA9B53 /* ExpertAndMeViewController.swift in Sources */,
 				96D29D8D1D3F976800B990DB /* ExpertClient.swift in Sources */,
+				965B31B51D5EC28F000ABA83 /* PageButtonMidLine.swift in Sources */,
 				965A54011CF1D38300CA9B53 /* ExpertViewController.swift in Sources */,
 				9677B7AA1CF5B686008ADEA4 /* AlertTimeChooseViewController.swift in Sources */,
 				9677B7B21CF5D233008ADEA4 /* CropsChooseViewController.swift in Sources */,
@@ -1178,6 +1154,8 @@
 				963BDD3C1CFB6513003DB16E /* AirViewController.swift in Sources */,
 				9677B7BC1CF688C1008ADEA4 /* GPSWayViewController.swift in Sources */,
 				962ABF581CF2898400990AC2 /* InstroduceHeaderView.swift in Sources */,
+				965B31B31D5EC28A000ABA83 /* MessagePhotoView.swift in Sources */,
+				965B31B21D5EC28A000ABA83 /* MessagePhotoScanController.swift in Sources */,
 				96A04E8E1D44DA6D00EE66CA /* ExpertClassChooseTableHeadView.swift in Sources */,
 				963BDD291CFB427A003DB16E /* AnalyzeViewController.swift in Sources */,
 				965A53C71CF073D300CA9B53 /* TYTabBarItem.swift in Sources */,
@@ -1189,17 +1167,17 @@
 				963BDD421CFB6874003DB16E /* SunViewController.swift in Sources */,
 				96A567C51CF7DF73000733A1 /* NetWorkManager.swift in Sources */,
 				962ABF5F1CF2ABAD00990AC2 /* TaskModel.swift in Sources */,
-				965A53E91CF13C3700CA9B53 /* PageButtonMidLine.swift in Sources */,
 				96A567BF1CF73B6F000733A1 /* NetWork.swift in Sources */,
 				965A53D41CF0898800CA9B53 /* FarmlandConfigureViewController.swift in Sources */,
-				965A53BF1CF0011400CA9B53 /* Reachability.m in Sources */,
 				965A53C01CF0011400CA9B53 /* TYConfig.swift in Sources */,
 				9677B7BA1CF688AF008ADEA4 /* AreaViewController.swift in Sources */,
 				9677B7AC1CF5C63A008ADEA4 /* AlertCropsChooseViewController.swift in Sources */,
 				963BDD371CFB6125003DB16E /* TYAnalyze.swift in Sources */,
 				9688890E1CEEA98200B99FD4 /* AlertAddDeviceSecondViewController.swift in Sources */,
 				96A567C11CF73D80000733A1 /* RegisterViewController.swift in Sources */,
+				965B31B81D5EC29A000ABA83 /* MBProgressHUD+MJ.m in Sources */,
 				9677B7AF1CF5C70E008ADEA4 /* CropClassTableViewCell.swift in Sources */,
+				965B31BB1D5EC2B1000ABA83 /* Reachability.m in Sources */,
 				965A53F71CF19A7200CA9B53 /* ReplyTableViewCell.swift in Sources */,
 				965A53F21CF1727400CA9B53 /* MeForumViewController.swift in Sources */,
 				96A04E8B1D44D9EB00EE66CA /* ExpertClassChooseTableViewCell.swift in Sources */,
@@ -1213,9 +1191,7 @@
 				96076C541CF9C1B7002E3F1E /* WidomTaskModel.swift in Sources */,
 				96A567B71CF72F03000733A1 /* LoginHomeViewController.swift in Sources */,
 				963BDD3F1CFB682A003DB16E /* SoilViewController.swift in Sources */,
-				9631230A1D3779A200476592 /* MessagePhotoView.swift in Sources */,
 				965A53D91CF0916100CA9B53 /* FarmlandConfigTableViewCell.swift in Sources */,
-				96076C3A1CF96148002E3F1E /* MBProgressHUD+MJ.m in Sources */,
 				968888FF1CEE01F800B99FD4 /* TYNavigationViewController.swift in Sources */,
 				962ABF5B1CF29ECB00990AC2 /* InstroduceTableViewCell.swift in Sources */,
 				96A567BC1CF73B25000733A1 /* TYUserDefault.swift in Sources */,
