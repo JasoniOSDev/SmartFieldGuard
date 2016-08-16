@@ -80,22 +80,18 @@ class ExpertClassChooseController: TYViewController,UITableViewDataSource,UITabl
     }
     
     private func LoadCropsClass(){
-        NetWorkManager.GetCropsClass { [weak self] cropsClassList in
-            if let sSelf = self {
-                sSelf.cropClasses = cropsClassList
-                sSelf.tableHeadViewConfigure()
-                sSelf.tableView.reloadData()
-            }
+        NetWorkManager.GetCropsClass {  cropsClassList in
+            self.cropClasses = cropsClassList
+            self.tableHeadViewConfigure()
+            self.tableView.reloadData()
         }
     }
     
     private func LoadCropsListForIndex(index:Int){
         if crops[index] == nil {
-            NetWorkManager.GetCropsList(self.cropClasses[index].id, callback: { [weak self] cropsList in
-                if let sSelf = self {
-                    sSelf.crops[index] = cropsList
-                    sSelf.tableView.reloadSections(NSIndexSet(index: index+1), withRowAnimation: .Automatic)
-                }
+            NetWorkManager.GetCropsList(self.cropClasses[index].id, callback: {  cropsList in
+                    self.crops[index] = cropsList
+                    self.tableView.reloadSections(NSIndexSet(index: index+1), withRowAnimation: .Automatic)
             })
         }else{
             self.tableView.reloadSections(NSIndexSet(index: index), withRowAnimation: .Automatic)
@@ -108,11 +104,10 @@ class ExpertClassChooseController: TYViewController,UITableViewDataSource,UITabl
     }
     
     func selectAction(){
-        self.closeCurrentView { [weak self] in
-            self?.selectBlock(cropsID: (self?.cropsID)!,cropsName: (self?.cropsName)!,own:(self?.mySelfSelect)! == "自己")
+        self.closeCurrentView {
+            self.selectBlock(cropsID: self.cropsID,cropsName: self.cropsName,own:self.mySelfSelect == "自己")
         }
     }
-    
 
 }
 //tableView'delegate dataSourece

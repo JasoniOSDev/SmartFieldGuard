@@ -21,6 +21,7 @@ class ForumTableViewCell: UITableViewCell,Reusable {
     @IBOutlet weak var ImageViewTwo: UIImageView!
     @IBOutlet weak var ImageViewThd: UIImageView!
     var imageViews = [UIImageView]()
+    var forum:Forum!
     var haveImg:Bool = false{
         didSet{
             if haveImg == false{
@@ -30,7 +31,6 @@ class ForumTableViewCell: UITableViewCell,Reusable {
             }
         }
     }
-    var forum:Forum!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -39,6 +39,20 @@ class ForumTableViewCell: UITableViewCell,Reusable {
         imageViews.append(ImageViewOne)
         imageViews.append(ImageViewTwo)
         imageViews.append(ImageViewThd)
+    }
+    
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        if let view = touches.first?.view where (view.tag >= 101 && view.tag <= 103){
+            let index = view.tag - 101
+            var array = [UIImageView]()
+            for x in imageViews where x.hidden == false{
+                array.append(x.copy() as! UIImageView)
+            }
+            MessagePhotoScanController.setImages(array, index: index, fromPoint: StackViewImgButton.convertPoint(imageViews[index].center, toView: MessagePhotoScanController.shareMessagePhotoScan.view))
+            MessagePhotoScanController.pushScanController()
+            return
+        }
+        super.touchesBegan(touches, withEvent: event)
     }
     
     func loadData(){
@@ -60,20 +74,5 @@ class ForumTableViewCell: UITableViewCell,Reusable {
             imageViews[i].hidden = false
         }
     }
-    
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        if let view = touches.first?.view where (view.tag >= 101 && view.tag <= 103){
-            let index = view.tag - 101
-            var array = [UIImageView]()
-            for x in imageViews where x.hidden == false{
-                array.append(x.copy() as! UIImageView)
-            }
-            MessagePhotoScanController.setImages(array, index: index, fromPoint: StackViewImgButton.convertPoint(imageViews[index].center, toView: MessagePhotoScanController.shareMessagePhotoScan.view))
-            MessagePhotoScanController.pushScanController()
-            return
-        }
-        super.touchesBegan(touches, withEvent: event)
-    }
-    
     
 }

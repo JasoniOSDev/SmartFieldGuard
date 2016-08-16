@@ -9,15 +9,19 @@
 import UIKit
 import STPopup
 import MBProgressHUD
-class TaskDetailViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
+class TaskDetailViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
+    var firstCellHeight:CGFloat = 0
+    var secondCelleHeight:CGFloat = 0
+    var tableViewRegister = false
     var headerView = [InstroduceHeaderView(type: .Green,title: "类型"),InstroduceHeaderView(type: .Yellow,title: "阶段"),InstroduceHeaderView(type: .Blue, title: "任务内容"),InstroduceHeaderView(type: .Red, title: "注意事项")]
     var tasking:Tasking!{
         didSet{
             self.title = tasking.name
         }
     }
+    
     lazy var buttonFinish:UIView = {
         let view = UIView()
         let btn = UIButton()
@@ -31,6 +35,7 @@ class TaskDetailViewController: UIViewController,UITableViewDelegate,UITableView
         btn.sizeToFit()
         return view
     }()
+    
     lazy var popController:STPopupController = {
         let popController = STPopupController(rootViewController: self)
         popController.containerView.layer.cornerRadius = 4
@@ -43,9 +48,29 @@ class TaskDetailViewController: UIViewController,UITableViewDelegate,UITableView
         return popController
     }()
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        tableViewConfigure()
+        contentSizeInPopupCalc()
+         self.tableView.reloadData()
+    }
     
-    var firstCellHeight:CGFloat = 0
-    var secondCelleHeight:CGFloat = 0
+    func taskFinish(){
+        tasking.taskCompete()
+        MBProgressHUD.showSuccess("任务已经完成", toView: nil)
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    
+    func tableViewConfigure(){
+        if tableViewRegister == false{
+            tableViewRegister = true
+            tableView.registerReusableCell(InstroduceTableViewCell)
+            if tasking.status == false{
+                tableView.tableFooterView = buttonFinish
+            }
+        }
+    }
     
     func contentSizeInPopupCalc(){
         var height:CGFloat = 160
@@ -68,37 +93,14 @@ class TaskDetailViewController: UIViewController,UITableViewDelegate,UITableView
         self.contentSizeInPopup = CGSizeMake(ScreenWidth - 40, height)
     }
     
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        tableViewConfigure()
-        contentSizeInPopupCalc()
-         self.tableView.reloadData()
-    }
-    
-    func taskFinish(){
-        tasking.taskCompete()
-        MBProgressHUD.showSuccess("任务已经完成", toView: nil)
-        self.dismissViewControllerAnimated(true, completion: nil)
-    }
-    
-    var tableViewRegister = false
-    
-    func tableViewConfigure(){
-        if tableViewRegister == false{
-            tableViewRegister = true
-            tableView.registerReusableCell(InstroduceTableViewCell)
-            if tasking.status == false{
-                tableView.tableFooterView = buttonFinish
-            }
-        }
-    }
-    
     func PushViewControllerInViewController(viewController:UIViewController){
         popController.presentInViewController(viewController)
     }
     
+}
+//tableView's Delegate
+extension TaskDetailViewController:UITableViewDelegate,UITableViewDataSource{
     
-    //tableView's Delegate
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 4
     }
@@ -134,7 +136,7 @@ class TaskDetailViewController: UIViewController,UITableViewDelegate,UITableView
             headerView[section].title = "类型:  \(tasking.taskType == "Everyday" ? "日常任务":"临时任务")"
         }
         if section == 1{
-             headerView[section].title = "阶段:  " + ((tasking.crop?.propertyDict[tasking.periodNo] as? String) ?? "无")
+            headerView[section].title = "阶段:  " + ((tasking.crop?.propertyDict[tasking.periodNo] as? String) ?? "无")
         }
         return headerView[section]
     }
@@ -142,6 +144,4 @@ class TaskDetailViewController: UIViewController,UITableViewDelegate,UITableView
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 40
     }
-    
-    
 }

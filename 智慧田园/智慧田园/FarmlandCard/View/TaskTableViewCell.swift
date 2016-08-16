@@ -53,6 +53,7 @@ class TaskTableViewCell: UITableViewCell,Reusable {
             ImgViewTag.image = UIImage(named: "Task" + self.taskStatus.rawValue + self.taskStyle.rawValue)
         }
     }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
     }

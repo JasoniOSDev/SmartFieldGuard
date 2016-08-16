@@ -31,6 +31,7 @@ class InstroduceViewController: TYViewController {
         self.contentSizeInPopup = CGSizeMake(ScreenWidth - 40, ScreenHeight - 150)
         
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.whiteColor()
@@ -57,7 +58,7 @@ class InstroduceViewController: TYViewController {
         }
     }
     
-     func PushViewControllerInViewController(viewController:UIViewController){
+    func PushViewControllerInViewController(viewController:UIViewController){
         popController.presentInViewController(viewController)
     }
     

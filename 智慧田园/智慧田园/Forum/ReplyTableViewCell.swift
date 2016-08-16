@@ -32,29 +32,27 @@ class ReplyTableViewCell: UITableViewCell,Reusable {
             }
         }
     }
-    @IBAction func ButtonSupportClicked(sender: AnyObject) {
-        NetWorkManager.updateSession{ [weak self] in
-            if let sSelf = self{
-                TYRequest(.ReplySupport, parameters: ["postNo":sSelf.reply.postNo,"replySn":sSelf.reply.replySn]).TYresponseJSON(completionHandler: { (response) in
-                    if response.result.isSuccess{
-                        if let json = response.result.value as? [String:AnyObject]{
-                            if let msg = json["message"] as? String where msg == "success"{
-                                sSelf.reply.IfSupport = !sSelf.reply.IfSupport
-                                sSelf.ButtonSupport.selected = sSelf.reply.IfSupport
-                                sSelf.reply.agreeNum =  sSelf.reply.agreeNum + (sSelf.reply.IfSupport == true ? 1 : -1)
-                                sSelf.ButtonSupport.setTitle("\(sSelf.reply.agreeNum)", forState: .Normal)
-                            }
-                        }
-                    }
-                })
-            }
-        }
-    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         ImgPhoto.layer.cornerRadius = 15
         ImgPhoto.clipsToBounds = true
     }
-
-
+    
+    @IBAction func ButtonSupportClicked(sender: AnyObject) {
+        NetWorkManager.updateSession{
+            TYRequest(.ReplySupport, parameters: ["postNo":self.reply.postNo,"replySn":self.reply.replySn]).TYresponseJSON(completionHandler: { (response) in
+                    if response.result.isSuccess{
+                        if let json = response.result.value as? [String:AnyObject]{
+                            if let msg = json["message"] as? String where msg == "success"{
+                                self.reply.IfSupport = !self.reply.IfSupport
+                                self.ButtonSupport.selected = self.reply.IfSupport
+                                self.reply.agreeNum =  self.reply.agreeNum + (self.reply.IfSupport == true ? 1 : -1)
+                                self.ButtonSupport.setTitle("\(self.reply.agreeNum)", forState: .Normal)
+                            }
+                        }
+                    }
+                })
+        }
+    }
 }

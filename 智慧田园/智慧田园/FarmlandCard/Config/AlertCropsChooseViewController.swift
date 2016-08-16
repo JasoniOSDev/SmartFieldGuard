@@ -14,6 +14,7 @@ class AlertCropsChooseViewController: TYViewController {
     @IBOutlet weak var tableView: UITableView!
     var block:((LocalCrops) -> Void)?
     var cropsClass = [CropsClass]()
+    var needAnimation = true
     lazy var cropChooseViewController:CropsChooseViewController = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .Vertical
@@ -26,7 +27,12 @@ class AlertCropsChooseViewController: TYViewController {
         vc.block = self.block
         return vc
     }()
-    var needAnimation = true
+    
+    override func loadView() {
+        super.loadView()
+        self.contentSizeInPopup = CGSize(width: ScreenWidth - 40 , height: ScreenHeight - 140)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         LoadData()
@@ -44,16 +50,11 @@ class AlertCropsChooseViewController: TYViewController {
     }
     
     private func LoadData(){
-        NetWorkManager.GetCropsClass { [weak self] cropsClassList in
-            self?.cropsClass
+        NetWorkManager.GetCropsClass { cropsClassList in
+            self.cropsClass = cropsClassList
+            self.tableView.reloadData()
         }
     }
-    
-    override func loadView() {
-        super.loadView()
-        self.contentSizeInPopup = CGSize(width: ScreenWidth - 40 , height: ScreenHeight - 140)
-    }
-    
     
     class func pushAlertInViewController(viewController:TYViewController, block:(LocalCrops) -> Void){
         let story = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())

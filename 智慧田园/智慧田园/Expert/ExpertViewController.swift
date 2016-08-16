@@ -52,16 +52,22 @@ class ExpertViewController: TYViewController {
         super.viewDidLoad()
         UIApplication.sharedApplication().setStatusBarStyle(.Default, animated: true)
         prepareUI()
-        TYUserDefaults.userID.bindAndFireListener("ExpertViewController") { [weak self] _ in
+        TYUserDefaults.userID.bindAndFireListener("ExpertViewController") { _ in
             //用来粗略处理切换账号的情况
-            self?.LoadData()
-            self?.checkNewTopic()
+            self.LoadData()
+            self.checkNewTopic()
         }
     }
     
     override func viewDidDisappear(animated: Bool) {
         super.viewDidDisappear(animated)
         setMenuHidden(true)
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if let vc = segue.destinationViewController as? ExpertAndMeViewController{
+            vc.theme = self.ExpertThemes![selectIndex]
+        }
     }
 
     private func LoadData(){
@@ -122,15 +128,14 @@ class ExpertViewController: TYViewController {
     
     private func checkNewTopic(){
         //检查是否有新增的话题，在别的手机上发送的
-        NetWorkManager.CheckNewExperTopic(own, type: "", callback: {[weak self] in
-            self?.ExpertThemes?.forEach({ (x) in
+        NetWorkManager.CheckNewExperTopic(own, type: "", callback: { 
+            self.ExpertThemes?.forEach({ (x) in
                 NetWorkManager.updateTopicReply(x)
             })
         })
     }
     
-    
-    func prepareUI(){
+    private func prepareUI(){
         tableViewConfigure()
         if cropsName != ""{
             self.title = "专家咨询区(\(cropsName))"
@@ -139,7 +144,7 @@ class ExpertViewController: TYViewController {
         }
     }
     
-    func tableViewConfigure(){
+    private func tableViewConfigure(){
         tableView.registerReusableCell(AskExpertTableViewCell)
         tableView.separatorStyle = .None
         tableView.contentInset = UIEdgeInsetsMake(10, 0, 0, 0)
@@ -187,9 +192,17 @@ class ExpertViewController: TYViewController {
         self.presentViewController(TYNavigationViewController(rootViewController: self.newFormViewController), animated: true, completion: nil)
     }
     
+    class func PushExpertViewController(){
+        let story = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
+        let vc = story.instantiateViewControllerWithIdentifier("ExpertViewController") as! ExpertViewController
+        vc.own = false
+        UIApplication.sharedApplication().keyWindow?.rootViewController?.presentViewController(TYNavigationViewController(rootViewController: vc), animated: true, completion: nil)
+    }
+    
     @IBAction func ButtonAddClicked() {
         pushNewForumViewController()
     }
+    
     @IBAction func LeftButtonClicked(sender: UIBarButtonItem) {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
@@ -204,20 +217,6 @@ class ExpertViewController: TYViewController {
         experClassChooseViewController.mySelfSelect = own ? "自己":"所有"
         self.presentViewController(TYNavigationViewController(rootViewController: experClassChooseViewController), animated: true,completion: nil)
     }
-    
-    class func PushExpertViewController(){
-        let story = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
-        let vc = story.instantiateViewControllerWithIdentifier("ExpertViewController") as! ExpertViewController
-        vc.own = false
-        UIApplication.sharedApplication().keyWindow?.rootViewController?.presentViewController(TYNavigationViewController(rootViewController: vc), animated: true, completion: nil)
-    }
-    
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let vc = segue.destinationViewController as? ExpertAndMeViewController{
-            vc.theme = self.ExpertThemes![selectIndex]
-        }
-    }
-
 }
 
 extension ExpertViewController:UITableViewDelegate,UITableViewDataSource{

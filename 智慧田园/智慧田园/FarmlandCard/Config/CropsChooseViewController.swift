@@ -8,20 +8,20 @@
 
 import UIKit
 import MJRefresh
-class CropsChooseViewController: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource {
-
+class CropsChooseViewController: UIViewController {
+    @IBOutlet weak var collectionView: UICollectionView!
     var cropClass:String!
+    var crops = [LocalCrops]()
+    var block:((LocalCrops) -> Void)?
     var cropTypeNo = ""{
         didSet{
-            NetWorkManager.GetCropsList(cropTypeNo) { [weak self] list in
-                self?.crops = list
-                self?.collectionView.reloadData()
+            NetWorkManager.GetCropsList(cropTypeNo) { list in
+                self.crops = list
+                self.collectionView.reloadData()
             }
         }
     }
-    var crops = [LocalCrops]()
-    @IBOutlet weak var collectionView: UICollectionView!
-    var block:((LocalCrops) -> Void)?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         prepareUI()
@@ -40,6 +40,9 @@ class CropsChooseViewController: UIViewController,UICollectionViewDelegate,UICol
         layout.minimumLineSpacing = 5
         collectionView.collectionViewLayout = layout
     }
+}
+
+extension CropsChooseViewController:UICollectionViewDelegate,UICollectionViewDataSource{
     
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
         return 1
@@ -61,6 +64,4 @@ class CropsChooseViewController: UIViewController,UICollectionViewDelegate,UICol
         }
         self.popupController.dismissWithCompletion(nil)
     }
-    
-
 }

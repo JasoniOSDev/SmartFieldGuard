@@ -20,8 +20,9 @@ class AlertAddDeviceThirdViewController: TYViewController {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.updateStatus), name: UIApplicationDidBecomeActiveNotification, object: nil)
     }
     
-    deinit{
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+    override func loadView() {
+        super.loadView()
+        self.contentSizeInPopup = CGSizeMake(335, 373)
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -45,11 +46,11 @@ class AlertAddDeviceThirdViewController: TYViewController {
 
     }
     
-    override func loadView() {
-        super.loadView()
-        self.contentSizeInPopup = CGSizeMake(335, 373)
-    }
     @IBAction func ButtonSetClicked(sender: AnyObject) {
        UIApplication.sharedApplication().openURL(NSURL(string: "prefs:root=WIFI")!)
+    }
+    
+    deinit{
+        NSNotificationCenter.defaultCenter().removeObserver(self)
     }
 }

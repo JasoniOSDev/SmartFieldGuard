@@ -67,7 +67,7 @@ class FarmlandCardTableViewCell: UITableViewCell,Reusable {
     
     //采取遍历的方式去更新每一个模块的颜色
     func updateModuleState(){
-        
+      //待实现
     }
     
 }

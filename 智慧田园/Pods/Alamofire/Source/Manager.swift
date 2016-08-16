@@ -153,7 +153,7 @@ public class Manager {
 
     private func commonInit(serverTrustPolicyManager serverTrustPolicyManager: ServerTrustPolicyManager?) {
         session.serverTrustPolicyManager = serverTrustPolicyManager
-
+        
         delegate.sessionDidFinishEventsForBackgroundURLSession = { [weak self] session in
             guard let strongSelf = self else { return }
             dispatch_async(dispatch_get_main_queue()) { strongSelf.backgroundCompletionHandler?() }

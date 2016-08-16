@@ -38,21 +38,10 @@ class ForumDetailViewController: TYViewController {
     var cellHeight = [Int:CGFloat]()
     var myForum = false
     lazy var cell:ReplyTableViewCell = {
-        
         let cell = self.tableView.dequeueReusableCellWithIdentifier(ReplyTableViewCell.reuseIdentifier) as! ReplyTableViewCell
         cell.frame.size.width = ScreenWidth
         return cell
     }()
-    
-    func calcHeightAtIndex(index:Int) -> CGFloat{
-        //计算
-        if cellHeight[index] == nil{
-            cell.reply = replies[index]
-            cell.layoutIfNeeded()
-            cellHeight[index] = cell.NewContentView.frame.height
-        }
-        return cellHeight[index]!
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,25 +52,32 @@ class ForumDetailViewController: TYViewController {
         loadForum()
         keyboardMan.animateWhenKeyboardAppear = {
             [weak self] appearPostIndex, keyboardHeight, keyboardHeightIncrement in
-            if let strongSelf = self{
-                strongSelf.ConstraintContentbarBottom.constant = keyboardHeight
-                strongSelf.view.layoutIfNeeded()
+            if let sSelf = self{
+                sSelf.ConstraintContentbarBottom.constant = keyboardHeight
+                sSelf.view.layoutIfNeeded()
             }
         }
         keyboardMan.animateWhenKeyboardDisappear = { [weak self] keyboardHeight in
-            
-            if let strongSelf = self {
-                
-                strongSelf.ConstraintContentbarBottom.constant = 0
-                strongSelf.view.layoutIfNeeded()
+            if let sSelf = self {
+                sSelf.ConstraintContentbarBottom.constant = 0
+                sSelf.view.layoutIfNeeded()
             }
         }
-        
         loadDataFromNet()
-        
     }
     
-    func loadForum(){
+    
+    private func calcHeightAtIndex(index:Int) -> CGFloat{
+        //计算
+        if cellHeight[index] == nil{
+            cell.reply = replies[index]
+            cell.layoutIfNeeded()
+            cellHeight[index] = cell.NewContentView.frame.height
+        }
+        return cellHeight[index]!
+    }
+    
+    private func loadForum(){
         if forum.userId == TYUserDefaults.userID.value && self.forum.status == "Unsolved"{
             ConstraintViewTipTop.constant = 0
             myForum = true
@@ -105,78 +101,72 @@ class ForumDetailViewController: TYViewController {
     }
     
     func loadDataFromNet(){
-        NetWorkManager.updateSession{ [weak self] in
-            if let sSelf = self{
-                let tableViewTmp = sSelf.tableView
-                TYRequest(.Reply, parameters: ["pageIndex":sSelf.pageIndex + (sSelf.currentCount == sSelf.pageCount ? 1 : 0),"pageCount":sSelf.pageCount,"postNo":sSelf.forum.postNo]).TYresponseJSON { response in
-                    print(response)
-                    if response.result.isSuccess{
-                        if let json = response.result.value as? [String:AnyObject] {
-                            if let message = json["message"] as? String where message == "success"{
-                                if let content = json["replyList"] as? [String:AnyObject]{
-                                    if let list = content["list"] as? NSArray{
-                                        if sSelf.currentCount == sSelf.pageCount {
-                                            sSelf.currentCount = 0
-                                        }
-                                        sSelf.pageIndex = content["pageIndex"] as! Int
-                                        for i in sSelf.currentCount..<list.count{
-                                            if let dict = list[i] as? [String:AnyObject] {
-                                                let forumObject = Replay(dict: dict)
-                                                sSelf.replies.append(forumObject)
-                                            }
-                                        }
-                                        sSelf.currentCount = content["currentCount"] as! Int
-                                        tableViewTmp.mj_footer.endRefreshing()
-                                        tableViewTmp.reloadData()
-                                    }else{
-                                        tableViewTmp.mj_footer.endRefreshingWithNoMoreData()
-                                        tableViewTmp.mj_footer.resetNoMoreData()
+        NetWorkManager.updateSession{
+            let tableViewTmp = self.tableView
+            TYRequest(.Reply, parameters: ["pageIndex":self.pageIndex + (self.currentCount == self.pageCount ? 1 : 0),"pageCount":self.pageCount,"postNo":self.forum.postNo]).TYresponseJSON { response in
+                if response.result.isSuccess{
+                    if let json = response.result.value as? [String:AnyObject] {
+                        if let message = json["message"] as? String where message == "success"{
+                            if let content = json["replyList"] as? [String:AnyObject]{
+                                if let list = content["list"] as? NSArray{
+                                    if self.currentCount == self.pageCount {
+                                        self.currentCount = 0
                                     }
+                                    self.pageIndex = content["pageIndex"] as! Int
+                                    for i in self.currentCount..<list.count{
+                                        if let dict = list[i] as? [String:AnyObject] {
+                                            let forumObject = Replay(dict: dict)
+                                            self.replies.append(forumObject)
+                                        }
+                                    }
+                                    self.currentCount = content["currentCount"] as! Int
+                                    tableViewTmp.mj_footer.endRefreshing()
+                                    tableViewTmp.reloadData()
+                                }else{
+                                    tableViewTmp.mj_footer.endRefreshingWithNoMoreData()
+                                    tableViewTmp.mj_footer.resetNoMoreData()
                                 }
-                            }else{
-                                print(json["message"])
                             }
+                        }else{
+                            print(json["message"])
                         }
                     }
                 }
             }
         }
     }
-
-    @IBAction func ButtonHidenContentView(sender: AnyObject) {
-        TapGestureContentViewTap()
-    }
+    
     func TapGestureContentViewTap() {
         MainContentViewScale = !ConstraintContentHeight.active
         UIView.animateWithDuration(0.5) {
-            [weak self] in
-            if let sSelf = self{
-                sSelf.ConstraintContentHeight.active = !sSelf.ConstraintContentHeight.active
-                sSelf.view.layoutIfNeeded()
-            }
+            self.ConstraintContentHeight.active = !self.ConstraintContentHeight.active
+            self.view.layoutIfNeeded()
         }
     }
+    
+    @IBAction func ButtonHidenContentView(sender: AnyObject) {
+        TapGestureContentViewTap()
+    }
+    
     @IBAction func ButtonSenderClicked(sender: UIButton) {
         if let content = TextFieldSend.text {
-            NetWorkManager.updateSession({[weak self] in
-                if let sSelf = self {
-                    TYRequest(.PushAReply, parameters: ["content":content,"postNo":sSelf.forum.postNo]).TYresponseJSON(completionHandler: { (response) in
-                        if response.result.isSuccess{
-                            if let json = response.result.value as? [String:AnyObject]{
-                                if let msg = json["message"] as? String where msg == "success"{
-                                    dispatch_async(dispatch_get_main_queue(), { 
-                                        MBProgressHUD.showSuccess("发送成功", toView: nil)
-                                        sSelf.loadDataFromNet()
-                                    })
-                                }else{
-                                    dispatch_async(dispatch_get_main_queue(), {
-                                        MBProgressHUD.showError("发送失败", toView: nil)
-                                    })
-                                }
+            NetWorkManager.updateSession({
+                TYRequest(.PushAReply, parameters: ["content":content,"postNo":self.forum.postNo]).TYresponseJSON(completionHandler: { (response) in
+                    if response.result.isSuccess{
+                        if let json = response.result.value as? [String:AnyObject]{
+                            if let msg = json["message"] as? String where msg == "success"{
+                                dispatch_async(dispatch_get_main_queue(), { 
+                                    MBProgressHUD.showSuccess("发送成功", toView: nil)
+                                    self.loadDataFromNet()
+                                })
+                            }else{
+                                dispatch_async(dispatch_get_main_queue(), {
+                                    MBProgressHUD.showError("发送失败", toView: nil)
+                                })
                             }
                         }
-                    })
-                }
+                    }
+                })
             })
         }
         TextFieldSend.text = nil
@@ -198,16 +188,12 @@ extension ForumDetailViewController:UITableViewDelegate,UITableViewDataSource{
     func scrollViewDidScroll(scrollView: UIScrollView) {
         guard MainContentViewScale == false else {return}
         UIView.animateWithDuration(0.5) {
-            [weak self] in
-            if let sSelf = self{
-                sSelf.ConstraintContentHeight.active = !sSelf.ConstraintContentHeight.active
-                sSelf.view.layoutIfNeeded()
-            }
+            self.ConstraintContentHeight.active = !self.ConstraintContentHeight.active
+            self.view.layoutIfNeeded()
         }
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        
         return 1
     }
     

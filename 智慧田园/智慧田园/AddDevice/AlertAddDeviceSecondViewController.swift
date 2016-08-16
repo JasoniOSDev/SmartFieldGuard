@@ -22,20 +22,31 @@ class AlertAddDeviceSecondViewController: TYViewController,UITextFieldDelegate {
         self.title = "第二步"
         self.reach = Reachability.reachabilityForInternetConnection()
         self.reach!.reachableBlock = {
-            (let reach: Reachability!) -> Void in
-            dispatch_async(dispatch_get_main_queue()) {[weak self] in
+            [weak self] reach in
+            dispatch_async(dispatch_get_main_queue()) {
                 self?.nextworkStatusChange()
             }
         }
         
         self.reach!.unreachableBlock = {
-            (let reach: Reachability!) -> Void in
-            dispatch_async(dispatch_get_main_queue()) {[weak self] in
-               self?.nextworkStatusChange()
+            [weak self] reach in
+            dispatch_async(dispatch_get_main_queue()) {
+                self?.nextworkStatusChange()
             }
         }
         self.reach!.startNotifier()
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.updateButtonNext(_:)), name: UITextFieldTextDidChangeNotification, object: nil)
+    }
+    
+    override func loadView() {
+        super.loadView()
+        self.contentSizeInPopup = CGSizeMake(335, 250)
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        nextworkStatusChange()
+        ButtonNext.enabled = false
     }
     
     func updateButtonNext(noti:NSNotification){
@@ -49,16 +60,6 @@ class AlertAddDeviceSecondViewController: TYViewController,UITextFieldDelegate {
         }else{
             ButtonNext.enabled = false
         }
-    }
-    
-    deinit{
-//        self.reach?.stopNotifier()
-        NSNotificationCenter.defaultCenter().removeObserver(self)
-    }
-    
-    override func loadView() {
-        super.loadView()
-        self.contentSizeInPopup = CGSizeMake(335, 250)
     }
     
     func nextworkStatusChange(){
@@ -75,12 +76,7 @@ class AlertAddDeviceSecondViewController: TYViewController,UITextFieldDelegate {
             TextFieldWiFiPassWord.text = nil
         }
     }
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-        nextworkStatusChange()
-        ButtonNext.enabled = false
-    }
-    
+
     //保存wifi名称和密码
     func saveNetInfo(){
         AlertAddDeviceSecondViewController.wifiName = LabelWiFiName.text!
@@ -97,6 +93,11 @@ class AlertAddDeviceSecondViewController: TYViewController,UITextFieldDelegate {
         let story = UIStoryboard(name: "AddDevice", bundle: NSBundle.mainBundle())
         let vc = story.instantiateViewControllerWithIdentifier("Third") as! AlertAddDeviceThirdViewController
         self.popupController.pushViewController(vc, animated: true)
+    }
+    
+    deinit{
+        self.reach!.stopNotifier()
+        NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
 }

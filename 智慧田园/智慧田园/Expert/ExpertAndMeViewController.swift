@@ -17,6 +17,14 @@ class ExpertAndMeViewController: TYViewController {
     @IBOutlet weak var ConstraintContentbarBottom: NSLayoutConstraint!
     var cellHeights = [Int:CGFloat]()
     let keyboardMan = KeyboardMan()
+    var messages:Results<ExpertMessage>?
+    var token:NotificationToken?
+    lazy var ReplyCell:MyReplyTableViewCell = {
+        let cell = self.tableView.dequeueReusableCellWithIdentifier(MyReplyTableViewCell.reuseIdentifier) as! MyReplyTableViewCell
+        cell.frame.size.width = self.view.frame.size.width
+        return cell
+    }()
+    
     var theme:ExpertTheme!{
         didSet{
             cellHeights.removeAll()
@@ -31,9 +39,9 @@ class ExpertAndMeViewController: TYViewController {
                     case .Update(_, deletions: _, insertions: let insertions, modifications: _):
                         if self?.tableView != nil {
                             if insertions.count>0{
-                            self?.theme.setRead()
-                            self?.tableView.insertRowsAtIndexPaths(insertions.map{NSIndexPath(forRow: $0 + 1, inSection: 0)}, withRowAnimation: .Automatic)
-                            self?.tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: (self?.messages?.count)!, inSection: 0), atScrollPosition: .Bottom, animated: true)
+                                self?.theme.setRead()
+                                self?.tableView.insertRowsAtIndexPaths(insertions.map{NSIndexPath(forRow: $0 + 1, inSection: 0)}, withRowAnimation: .Automatic)
+                                self?.tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: (self?.messages?.count)!, inSection: 0), atScrollPosition: .Bottom, animated: true)
                             }
                         }
                     case .Error(_):break
@@ -42,14 +50,13 @@ class ExpertAndMeViewController: TYViewController {
             }
         }
     }
-    var messages:Results<ExpertMessage>?
-    var token:NotificationToken?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         prepareUI()
     }
     
-    func prepareUI(){
+    private func prepareUI(){
         tableViewConfigure()
         keyboardManConfigure()
         self.title = "详情"
@@ -84,13 +91,7 @@ class ExpertAndMeViewController: TYViewController {
         tableView.reloadData()
     }
     
-    lazy var ReplyCell:MyReplyTableViewCell = {
-        let cell = self.tableView.dequeueReusableCellWithIdentifier(MyReplyTableViewCell.reuseIdentifier) as! MyReplyTableViewCell
-        cell.frame.size.width = self.view.frame.size.width
-        return cell
-    }()
-    
-    func cellHeightForIndex(index:Int) -> CGFloat{
+    private func cellHeightForIndex(index:Int) -> CGFloat{
         guard messages != nil else {return 0 }
         let key =  index == 0 ? 0 : messages![index - 1].replySn
         if cellHeights[key] == nil {

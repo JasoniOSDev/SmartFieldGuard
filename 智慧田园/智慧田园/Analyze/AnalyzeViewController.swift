@@ -23,6 +23,7 @@ class AnalyzeViewController: TYViewController {
     lazy var lastButton:UIButton = {
         return self.ButtonGrowth
     }()
+    
     lazy var growthViewController:GrowthViewController = {
         let story = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
         let vc = story.instantiateViewControllerWithIdentifier("GrowthViewController") as! GrowthViewController

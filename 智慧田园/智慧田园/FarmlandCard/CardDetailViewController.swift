@@ -89,11 +89,17 @@ class CardDetailViewController: TYViewController {
         }
     }
     var visbileTask:Results<Tasking>!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         prepareUI()
         //第一次更新数据
         scrollView.mj_header.beginRefreshing()
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        loadData()
     }
     
     func prepareUI(){
@@ -122,11 +128,6 @@ class CardDetailViewController: TYViewController {
                 LabeFertilizer.text = "当前位置 肥沃(\(String(format: "%.f%%",FertilizerSlider.value * 100)))"
             }
         }
-    }
-    
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-        loadData()
     }
     
     func loadData(block:(()->Void)? = nil){

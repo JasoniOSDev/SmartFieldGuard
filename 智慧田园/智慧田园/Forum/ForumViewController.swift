@@ -33,6 +33,7 @@ class ForumViewController: TYViewController{
     var unSolveDataPageSize = 20
     var unSolveCellHeight = [Int:CGFloat]()
     var crops:Crops!
+    var SolveCellHeight = [Int:CGFloat]()
     var dataInfo:(index:Int,count:Int,end:Int,pageSize:Int){
         get{
             if !PageButtonUnSolve.selected {
@@ -106,26 +107,16 @@ class ForumViewController: TYViewController{
 
         }
     }
-    
-    var SolveCellHeight = [Int:CGFloat]()
     lazy var cell:ForumTableViewCell = {
         let cell = self.unSolveTableView.dequeueReusableCellWithIdentifier(ForumTableViewCell.reuseIdentifier) as! ForumTableViewCell
         cell.frame.size.width = ScreenWidth
         return cell
     }()
     
-    func calcHeightAtIndex(index:Int,solve:Bool) -> CGFloat{
-        //计算
-        if cellHeight[index] == nil{
-            cell.forum = forums[index]
-            cell.loadData()
-            cell.layoutIfNeeded()
-            cellHeight[index] = cell.NewContentView.frame.height
-        }
-        return cellHeight[index]!
-    }
-    
-    
+    lazy var forumTableViewCell:ForumTableViewCell = {
+        return self.SolveTableView.dequeueReusableCellWithIdentifier(ForumTableViewCell.reuseIdentifier) as! ForumTableViewCell
+    }()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         prepareUI()
@@ -133,7 +124,25 @@ class ForumViewController: TYViewController{
         userDefaultConfigure()
     }
     
-    func userDefaultConfigure(){
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if let vc = segue.destinationViewController as? ForumDetailViewController{
+            vc.forum = self.selectedForum
+        }
+        if let vc = segue.destinationViewController as? TYNavigationViewController{
+            if let vc2 = vc.visibleViewController as? PushNewForumViewController{
+                vc2.cropsID = self.crops.id
+                vc2.cropsName = self.crops.name
+            }
+        }
+    }
+    
+    override func viewWillLayoutSubviews() {
+        ConstraintContentWidth.constant = 2 * self.view.frame.size.width
+        ConstraintContentHeight.constant = self.view.frame.size.height - 64
+        super.viewWillLayoutSubviews()
+    }
+    
+    private func userDefaultConfigure(){
         TYUserDefaults.NewForum.bindListener("ForumViewController") { (value) in
             if value == true {
                 self.ButtonPageClicked(self.PageButtonUnSolve)
@@ -147,45 +156,42 @@ class ForumViewController: TYViewController{
         }
     }
     
-    func prepareUI(){
+    private func prepareUI(){
         UIApplication.sharedApplication().setStatusBarStyle(.Default, animated: true)
         tableViewConfigure()
         self.title = crops.name + "讨论区"
     }
     
     func LoadData(){
-        NetWorkManager.updateSession{ [weak self] in
-            if let sSelf = self{
-                let tableViewTmp = sSelf.tableView
-                TYRequest(.Forum, parameters: ["pageIndex":sSelf.dataInfo.0 + 1,"pageCount":sSelf.dataInfo.3,"parentArea":"","status":sSelf.forumStatus]).TYresponseJSON { response in
-                    print(response)
-                    if response.result.isSuccess{
-                        if let json = response.result.value as? [String:AnyObject] {
-                            if let message = json["message"] as? String where message == "success"{
-                               let UrlPrefix = TYUserDefaults.UrlPrefix.value
-                                if let content = json["postList"] as? [String:AnyObject]{
-                                    if let list = content["list"] as? NSArray{
-                                        sSelf.dataInfo.0 = content["pageIndex"] as! Int
-                                        sSelf.dataInfo.1 = content["dataCount"] as! Int
-                                        sSelf.dataInfo.2 = content["dataEnd"] as! Int
-                                        for object in list{
-                                            if let dict = object as? [String:AnyObject] {
-                                                var dict2 = dict
-                                                dict2["UrlPrefix"] = UrlPrefix
-                                                let forumObject = Forum(dict: dict2)
-                                                sSelf.forums.append(forumObject)
-                                            }
+        NetWorkManager.updateSession{
+            let tableViewTmp = self.tableView
+            TYRequest(.Forum, parameters: ["pageIndex":self.dataInfo.0 + 1,"pageCount":self.dataInfo.3,"parentArea":"","status":self.forumStatus]).TYresponseJSON { response in
+                if response.result.isSuccess{
+                    if let json = response.result.value as? [String:AnyObject] {
+                        if let message = json["message"] as? String where message == "success"{
+                           let UrlPrefix = TYUserDefaults.UrlPrefix.value
+                            if let content = json["postList"] as? [String:AnyObject]{
+                                if let list = content["list"] as? NSArray{
+                                    self.dataInfo.0 = content["pageIndex"] as! Int
+                                    self.dataInfo.1 = content["dataCount"] as! Int
+                                    self.dataInfo.2 = content["dataEnd"] as! Int
+                                    for object in list{
+                                        if let dict = object as? [String:AnyObject] {
+                                            var dict2 = dict
+                                            dict2["UrlPrefix"] = UrlPrefix
+                                            let forumObject = Forum(dict: dict2)
+                                            self.forums.append(forumObject)
                                         }
-                                        tableViewTmp.mj_footer.endRefreshing()
-                                        tableViewTmp.reloadData()
-                                    }else{
-                                        tableViewTmp.mj_footer.endRefreshingWithNoMoreData()
-                                        tableViewTmp.mj_footer.resetNoMoreData()
                                     }
+                                    tableViewTmp.mj_footer.endRefreshing()
+                                    tableViewTmp.reloadData()
+                                }else{
+                                    tableViewTmp.mj_footer.endRefreshingWithNoMoreData()
+                                    tableViewTmp.mj_footer.resetNoMoreData()
                                 }
-                            }else{
-                                print(json["message"])
                             }
+                        }else{
+                            print(json["message"])
                         }
                     }
                 }
@@ -193,7 +199,7 @@ class ForumViewController: TYViewController{
         }
     }
     
-    func tableViewConfigure(){
+    private func tableViewConfigure(){
         unSolveTableView.clearOtherLine()
         unSolveTableView.registerReusableCell(ForumTableViewCell)
         unSolveTableView.mj_footer = MJRefreshAutoNormalFooter(refreshingTarget: self, refreshingAction: #selector(self.LoadData))
@@ -202,18 +208,15 @@ class ForumViewController: TYViewController{
         SolveTableView.mj_footer = MJRefreshAutoNormalFooter(refreshingTarget: self, refreshingAction: #selector(self.LoadData))
     }
     
-    lazy var forumTableViewCell:ForumTableViewCell = {
-        return self.SolveTableView.dequeueReusableCellWithIdentifier(ForumTableViewCell.reuseIdentifier) as! ForumTableViewCell
-    }()
-    
-    override func viewWillLayoutSubviews() {
-        ConstraintContentWidth.constant = 2 * self.view.frame.size.width
-        ConstraintContentHeight.constant = self.view.frame.size.height - 64
-        super.viewWillLayoutSubviews()
-    }
-    
-    deinit{
-        TYUserDefaults.NewForum.removeListenerWithName("ForumViewController")
+    private func calcHeightAtIndex(index:Int,solve:Bool) -> CGFloat{
+        //计算
+        if cellHeight[index] == nil{
+            cell.forum = forums[index]
+            cell.loadData()
+            cell.layoutIfNeeded()
+            cellHeight[index] = cell.NewContentView.frame.height
+        }
+        return cellHeight[index]!
     }
     
     @IBAction func ButtonPageClicked(sender: PageButtonMidLine) {
@@ -231,7 +234,6 @@ class ForumViewController: TYViewController{
         }
     }
     
-    
     @IBAction func LeftButtonClicked(sender: UIBarButtonItem) {
         
         self.dismissViewControllerAnimated(true, completion: nil)
@@ -246,16 +248,8 @@ class ForumViewController: TYViewController{
         
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let vc = segue.destinationViewController as? ForumDetailViewController{
-            vc.forum = self.selectedForum
-        }
-        if let vc = segue.destinationViewController as? TYNavigationViewController{
-            if let vc2 = vc.visibleViewController as? PushNewForumViewController{
-                vc2.cropsID = self.crops.id
-                vc2.cropsName = self.crops.name
-            }
-        }
+    deinit{
+        TYUserDefaults.NewForum.removeListenerWithName("ForumViewController")
     }
 }
 
@@ -288,7 +282,6 @@ extension ForumViewController:UITableViewDelegate,UITableViewDataSource{
 
 extension ForumViewController:UIScrollViewDelegate{
     
-    
     func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
         
         if(scrollView.tag != 111){
@@ -313,7 +306,6 @@ extension ForumViewController:UIScrollViewDelegate{
         }
     }
     
-    
     func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         if(scrollView.tag == 111){
             return
@@ -322,7 +314,5 @@ extension ForumViewController:UIScrollViewDelegate{
             HScrollView.setContentOffset(CGPointMake(0, 0), animated: true)
         }
     }
-    
-    
     
 }

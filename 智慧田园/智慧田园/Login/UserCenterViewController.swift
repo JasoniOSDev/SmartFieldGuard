@@ -18,6 +18,7 @@ class UserCenterViewController: UIViewController,UITextFieldDelegate {
     @IBOutlet weak var ButtonEdit: UIButton!
     @IBOutlet weak var ButtonExpert: UIButton!
     @IBOutlet weak var ButtonUploadPhoto: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         TextFieldUserName.text = TYUserDefaults.username.value
@@ -32,10 +33,19 @@ class UserCenterViewController: UIViewController,UITextFieldDelegate {
         super.loadView()
         self.contentSizeInPopup = CGSizeMake(300, 330)
     }
-
-
+    
+    class func pushAlertInViewController(viewController:UIViewController){
+        let story = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
+        let vc = story.instantiateViewControllerWithIdentifier("UserCenterViewController") as! UserCenterViewController
+        let popController = STPopupController(rootViewController: vc)
+        popController.containerView.layer.cornerRadius = 4
+        popController.navigationBar.titleTextAttributes = [NSFontAttributeName:UIFont.NavigationBarNormalTitleFont(),NSForegroundColorAttributeName:UIColor.MidBlackColor()]
+        popController.navigationBar.tintColor = UIColor.whiteColor()
+        popController.navigationBar.subviews[0].alpha = 0
+        popController.presentInViewController(viewController, completion: nil)
+    }
+    
     @IBAction func ButtonEditClicked(sender: UIButton) {
-        
         sender.selected = !sender.selected
         ButtonExit.selected = sender.selected
         TextFieldUserName.enabled = sender.selected
@@ -52,43 +62,29 @@ class UserCenterViewController: UIViewController,UITextFieldDelegate {
     }
     
     @IBAction func ButtonExitClicked(sender: UIButton) {
-        
         if sender.selected == true{
             TextFieldUserName.text = TYUserDefaults.username.value
             ButtonEditClicked(ButtonEdit)
         }else{
-            TYRequest(.Logout, parameters: nil).TYresponseJSON(completionHandler: { [weak self] response in
-                if let sSelf = self {
+            TYRequest(.Logout, parameters: nil).TYresponseJSON(completionHandler: { response in
                     TYUserDefaults.cookie.value = ";JSESSIONID=FC5E8F590ACF0AFDBF095F1222E83B4C"
                     TYUserDefaults.lastConnectTime.value = 0
                     TYUserDefaults.userID.value = nil
                     ModelManager.removeAll()
                     ExpertClient.shareClient.disConnect()
-                    sSelf.dismissViewControllerAnimated(true, completion: nil)
-                }
-            })
+                    self.dismissViewControllerAnimated(true, completion: nil)
+                })
         }
     }
     
     @IBAction func ButtonExpertClicked() {
-        self.dismissViewControllerAnimated(true) { 
+        self.dismissViewControllerAnimated(true) {
             ExpertViewController.PushExpertViewController()
         }
     }
     
     @IBAction func ButtonUploadPhotoClicked() {
         
-    }
-    
-    class func pushAlertInViewController(viewController:UIViewController){
-        let story = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
-        let vc = story.instantiateViewControllerWithIdentifier("UserCenterViewController") as! UserCenterViewController
-        let popController = STPopupController(rootViewController: vc)
-        popController.containerView.layer.cornerRadius = 4
-        popController.navigationBar.titleTextAttributes = [NSFontAttributeName:UIFont.NavigationBarNormalTitleFont(),NSForegroundColorAttributeName:UIColor.MidBlackColor()]
-        popController.navigationBar.tintColor = UIColor.whiteColor()
-        popController.navigationBar.subviews[0].alpha = 0
-        popController.presentInViewController(viewController, completion: nil)
     }
 
     //MARK:-TextField's Delegate

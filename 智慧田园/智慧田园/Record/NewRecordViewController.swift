@@ -18,12 +18,22 @@ class NewRecordViewController: TYViewController {
     @IBOutlet weak var ConstraintCalenderTop: NSLayoutConstraint!
     @IBOutlet weak var ButtonStart: UIButton!
     @IBOutlet weak var ButtonEnd: UIButton!
+    @IBOutlet weak var tableView: UITableView!
+    let calendarManager = JTCalendarManager()
+    var Tasks = List<Tasking>()
+    var visibleTask = [Tasking]()
+    var buttonTag = 0
+    var calendarHidden = false
+    lazy var taskDetailViewController:TaskDetailViewController = {
+        let story = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
+        let vc = story.instantiateViewControllerWithIdentifier("TaskDetailViewController") as! TaskDetailViewController
+        return vc
+    }()
     lazy var dateFormatter:NSDateFormatter = {
         let formatter = NSDateFormatter()
         formatter.dateFormat = "yyyy/MM/dd"
         return formatter
     }()
-    let calendarManager = JTCalendarManager()
     var StartSelectDate:NSDate = NSDate(){
         didSet{
             ButtonStart.setTitle(dateFormatter.stringFromDate(StartSelectDate), forState: .Normal)
@@ -51,17 +61,6 @@ class NewRecordViewController: TYViewController {
         }
     }
     
-    var buttonTag = 0
-    var calendarHidden = false
-    lazy var taskDetailViewController:TaskDetailViewController = {
-        let story = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
-        let vc = story.instantiateViewControllerWithIdentifier("TaskDetailViewController") as! TaskDetailViewController
-        return vc
-    }()
-    
-    @IBOutlet weak var tableView: UITableView!
-    var Tasks = List<Tasking>()
-    var visibleTask = [Tasking]()
     override func viewDidLoad() {
         super.viewDidLoad()
          UIApplication.sharedApplication().setStatusBarStyle(.Default, animated: true)
@@ -79,12 +78,50 @@ class NewRecordViewController: TYViewController {
         ButtonCalenderSureClicked(ButtonSure)
     }
     
-    func tableViewConfigure(){
+    private func tableViewConfigure(){
         tableView.registerReusableCell(TaskTableViewCell)
         tableView.clearOtherLine()
         tableView.layoutMargins = UIEdgeInsetsZero
         tableView.separatorInset = UIEdgeInsetsZero
         tableView.separatorStyle = .SingleLine
+    }
+    
+    private func CloseCalenderView(timeInterval:Double){
+        dispatch_async(dispatch_get_main_queue()) {
+            UIView.animateWithDuration(timeInterval) {
+                if(self.calendarHidden == false){
+                    self.calendarHidden = true
+                    self.ConstraintCalenderTop.constant = -self.CalendarViewContent.frame.height
+                    self.view.layoutIfNeeded()
+                }
+            }
+            
+        }
+    }
+    
+    private func OpenCalenderView(timeInterval:Double){
+        dispatch_async(dispatch_get_main_queue()) {
+            UIView.animateWithDuration(timeInterval, animations: {
+                if(self.calendarHidden == true){
+                    self.calendarHidden = false
+                    self.ConstraintCalenderTop.constant = 0
+                    self.view.layoutIfNeeded()
+                }
+            })
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), {                 NSThread.sleepForTimeInterval(timeInterval)
+                    dispatch_async(dispatch_get_main_queue(), {
+                        self.calendarManager.setDate(self.currentSelectDate ?? NSDate())
+                    })
+                })
+        }
+    }
+    
+    private func checkChooseDayOK(date:NSDate) -> Bool{
+        if(buttonTag == 110){
+            return EndSelectDate.timeIntervalSinceDate(date) >= 0
+        }else{
+            return date.timeIntervalSinceDate(StartSelectDate) >= 0
+        }
     }
     
     @IBAction func ButtonGotoToDay(sender: AnyObject) {
@@ -103,8 +140,6 @@ class NewRecordViewController: TYViewController {
         self.tableView.reloadData()
     }
     
-    
-    
     @IBAction func ButtonCloseClicked(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
@@ -120,62 +155,16 @@ class NewRecordViewController: TYViewController {
             ButtonEnd.selected = true
         }
         if(calendarHidden == false){
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), { [weak self] in
-                if let sSelf = self{
-                    sSelf.CloseCalenderView(0.25)
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), { 
+                    self.CloseCalenderView(0.25)
                     NSThread.sleepForTimeInterval(0.25)
-                    sSelf.OpenCalenderView(0.25)
-                }
+                    self.OpenCalenderView(0.25)
                 })
         }else{
             OpenCalenderView(0.5)
         }
     }
     
-    private func CloseCalenderView(timeInterval:Double){
-        dispatch_async(dispatch_get_main_queue()) {
-            UIView.animateWithDuration(timeInterval) {[weak self] in
-                if let strongSelf = self{
-                    if(strongSelf.calendarHidden == false){
-                        strongSelf.calendarHidden = true
-                        strongSelf.ConstraintCalenderTop.constant = -strongSelf.CalendarViewContent.frame.height
-                        strongSelf.view.layoutIfNeeded()
-                    }
-                }
-            }
-            
-        }
-    }
-    
-    private func OpenCalenderView(timeInterval:Double){
-        dispatch_async(dispatch_get_main_queue()) {
-            UIView.animateWithDuration(timeInterval, animations: {[weak self] in
-                if let strongSelf = self{
-                    if(strongSelf.calendarHidden == true){
-                        strongSelf.calendarHidden = false
-                        strongSelf.ConstraintCalenderTop.constant = 0
-                        strongSelf.view.layoutIfNeeded()
-                    }
-                }
-            })
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), { [weak self] in
-                NSThread.sleepForTimeInterval(timeInterval)
-                if let sSelf = self {
-                    dispatch_async(dispatch_get_main_queue(), { 
-                        sSelf.calendarManager.setDate(sSelf.currentSelectDate ?? NSDate())
-                    })
-                }
-            })
-        }
-    }
-    
-    private func checkChooseDayOK(date:NSDate) -> Bool{
-        if(buttonTag == 110){
-            return EndSelectDate.timeIntervalSinceDate(date) >= 0
-        }else{
-            return date.timeIntervalSinceDate(StartSelectDate) >= 0
-        }
-    }
 }
 
 extension NewRecordViewController:UITableViewDelegate,UITableViewDataSource{
@@ -189,7 +178,6 @@ extension NewRecordViewController:UITableViewDelegate,UITableViewDataSource{
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(indexPath: indexPath) as TaskTableViewCell
-        
         cell.task = self.visibleTask[indexPath.row]
         return cell
     }
@@ -206,7 +194,6 @@ extension NewRecordViewController:UITableViewDelegate,UITableViewDataSource{
         taskDetailViewController.tasking = Tasks[indexPath.row]
         taskDetailViewController.PushViewControllerInViewController(self)
     }
-    
     
 }
 
@@ -252,9 +239,9 @@ extension NewRecordViewController:JTCalendarDelegate{
             guard checkChooseDayOK(dayView.date) == true else {return}
             currentSelectDate = dayView.date
             dayView.circleView.transform = CGAffineTransformScale(CGAffineTransformIdentity, 0.1, 0.1)
-            UIView.transitionWithView(dayView, duration: 0.3, options: UIViewAnimationOptions.CurveEaseIn,  animations: { [weak self] in
+            UIView.transitionWithView(dayView, duration: 0.3, options: UIViewAnimationOptions.CurveEaseIn,  animations: {
                 dayView.circleView.transform = CGAffineTransformIdentity
-                self?.calendarManager.reload()
+                self.calendarManager.reload()
                 }, completion: nil)
             if !self.calendarManager.dateHelper.date(calendarContentView.date, isTheSameMonthThan: dayView.date){
                 if calendarContentView.date.compare(dayView.date) == .OrderedAscending{

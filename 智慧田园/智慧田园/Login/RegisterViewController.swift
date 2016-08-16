@@ -14,6 +14,7 @@ class RegisterViewController: UIViewController,UITextFieldDelegate {
     @IBOutlet weak var TextFieldPhone: UITextField!
     @IBOutlet weak var TextFieldUserName: UITextField!
     var UserNameForUser = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -21,48 +22,6 @@ class RegisterViewController: UIViewController,UITextFieldDelegate {
     override func loadView() {
         super.loadView()
         self.contentSizeInPopup = CGSizeMake(300, 441)
-    }
-
-    @IBAction func ButtonRegisterClicked(sender: UIButton) {
-        if let phone = TextFieldPhone.text{
-            if let passWord = TextFieldPassWord.text{
-                if let username = TextFieldUserName.text{
-                    let hud = MBProgressHUD.showMessage(nil, view: nil)
-                    TYRequest(.Register, parameters: ["tel":phone,"password":passWord,"username":username]).TYresponseJSON(completionHandler: {[weak self] response in
-                        if let sSelf = self {
-                            if response.result.isSuccess{
-                                if let json = response.result.value as? [String:AnyObject]{
-                                    if let message = json["message"] as? String where message == "success",let userID = json["userId"] as? String{
-                                        TYUserDefaults.username.value = username
-                                        TYUserDefaults.tel.value = phone
-                                        TYUserDefaults.passWord.value = passWord
-                                        TYUserDefaults.userID.value = userID
-                                        NetWorkManager.updateSession({
-                                            sSelf.dismissViewControllerAnimated(true, completion: nil)
-                                            dispatch_async(dispatch_get_main_queue(), {
-                                                hud.hide(true)
-                                                NSThread.sleepForTimeInterval(0.5)
-                                                MBProgressHUD.showSuccess("注册成功", toView: nil)
-                                            })
-                                        })
-                                        
-                                    }else{
-                                        dispatch_async(dispatch_get_main_queue(), {
-                                            hud.hide(true)
-                                            NSThread.sleepForTimeInterval(0.5)
-                                            MBProgressHUD.showError(json["message"] as! String, toView: nil)
-                                        })
-                                    }
-                                }
-                            }
-                        }
-                    })
-                }
-            }
-        }
-        
-        
-        
     }
 
     func textFieldShouldReturn(textField: UITextField) -> Bool {
@@ -78,7 +37,6 @@ class RegisterViewController: UIViewController,UITextFieldDelegate {
         
         return true
     }
-    
     
     func textFieldShouldEndEditing(textField: UITextField) -> Bool {
         if textField.tag == 103 && textField.text != nil && textField.text != ""{
@@ -98,5 +56,44 @@ class RegisterViewController: UIViewController,UITextFieldDelegate {
             }
         }
 
+    }
+    
+    @IBAction func ButtonRegisterClicked(sender: UIButton) {
+        if let phone = TextFieldPhone.text{
+            if let passWord = TextFieldPassWord.text{
+                if let username = TextFieldUserName.text{
+                    let hud = MBProgressHUD.showMessage(nil, view: nil)
+                    TYRequest(.Register, parameters: ["tel":phone,"password":passWord,"username":username]).TYresponseJSON(completionHandler: { response in
+                        if response.result.isSuccess{
+                            if let json = response.result.value as? [String:AnyObject]{
+                                if let message = json["message"] as? String where message == "success",let userID = json["userId"] as? String{
+                                    TYUserDefaults.username.value = username
+                                    TYUserDefaults.tel.value = phone
+                                    TYUserDefaults.passWord.value = passWord
+                                    TYUserDefaults.userID.value = userID
+                                    NetWorkManager.updateSession({
+                                        self.dismissViewControllerAnimated(true, completion: nil)
+                                        dispatch_async(dispatch_get_main_queue(), {
+                                            hud.hide(true)
+                                            NSThread.sleepForTimeInterval(0.5)
+                                            MBProgressHUD.showSuccess("注册成功", toView: nil)
+                                        })
+                                    })
+                                }else{
+                                    dispatch_async(dispatch_get_main_queue(), {
+                                        hud.hide(true)
+                                        NSThread.sleepForTimeInterval(0.5)
+                                        MBProgressHUD.showError(json["message"] as! String, toView: nil)
+                                    })
+                                }
+                            }
+                        }
+                    })
+                }
+            }
+        }
+        
+        
+        
     }
 }

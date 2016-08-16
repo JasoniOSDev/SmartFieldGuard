@@ -23,6 +23,7 @@ class AlertAddDeviceViewController: TYViewController {
         super.loadView()
         self.contentSizeInPopup = CGSizeMake(335, 250)
     }
+    
     class func PushAlertAddDeviceInViewController(viewController:UIViewController){
         let story = UIStoryboard(name: "AddDevice", bundle: NSBundle.mainBundle())
         let vc = story.instantiateViewControllerWithIdentifier("First") as! AlertAddDeviceViewController

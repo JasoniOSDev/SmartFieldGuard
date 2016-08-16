@@ -39,13 +39,13 @@ class GPSWayViewController: UIViewController,MAMapViewDelegate {
     
     override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
         if keyPath == "hidden"{
-            UIView.animateWithDuration(0.5, animations: { [weak self] in
+            UIView.animateWithDuration(0.5, animations: {
                 if(change!["new"] as! Bool == false){
-                    self?.ConstraintButtonFinishCenterY.constant = 78.5
+                   self.ConstraintButtonFinishCenterY.constant = 78.5
                 }else{
-                   self?.ConstraintButtonFinishCenterY.constant = 0
+                   self.ConstraintButtonFinishCenterY.constant = 0
                 }
-                self?.view.layoutIfNeeded()
+                self.view.layoutIfNeeded()
             })
         }
     }

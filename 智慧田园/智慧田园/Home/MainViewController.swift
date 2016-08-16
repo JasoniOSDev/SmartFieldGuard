@@ -41,33 +41,8 @@ class MainViewController: TYViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableViewConfigure()
-        TYUserDefaults.userID.bindAndFireListener("MainViewController") { [weak self] _ in
-            if let sSelf = self{
-                if TYUserDefaults.isLogined{
-                    sSelf.tip = nil
-                    sSelf.tableView.mj_header.hidden = false
-                    if sSelf.farmLands.count > 0 {
-                        NetWorkManager.updateFarmland({ tag in
-                            if tag == true{
-                                sSelf.tableView.reloadData()
-                            }
-                            if sSelf.farmLands.count > 0{
-                                sSelf.tip = nil
-                            }else{
-                                sSelf.tip = "NODATA"
-                            }
-                        })
-                    }else{
-                        sSelf.tableView.mj_header.beginRefreshing()
-                    }
-                }else{
-                    sSelf.tip = "NOLOGIN"
-                    sSelf.tableView.reloadData()
-                    sSelf.tableView.mj_header.hidden = true
-                }
-            }
-        }
+        prepareUI()
+        notificationConfigure()
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -79,6 +54,38 @@ class MainViewController: TYViewController {
     
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
         return .Default
+    }
+
+    
+    func prepareUI(){
+        tableViewConfigure()
+    }
+    
+    func notificationConfigure(){
+        TYUserDefaults.userID.bindAndFireListener("MainViewController") { _ in
+            if TYUserDefaults.isLogined{
+                self.tip = nil
+                self.tableView.mj_header.hidden = false
+                if self.farmLands.count > 0 {
+                    NetWorkManager.updateFarmland({ tag in
+                        if tag == true{
+                            self.tableView.reloadData()
+                        }
+                        if self.farmLands.count > 0{
+                            self.tip = nil
+                        }else{
+                            self.tip = "NODATA"
+                        }
+                    })
+                }else{
+                    self.tableView.mj_header.beginRefreshing()
+                }
+            }else{
+                self.tip = "NOLOGIN"
+                self.tableView.reloadData()
+                self.tableView.mj_header.hidden = true
+            }
+        }
     }
     
     func tableViewConfigure(){
@@ -97,17 +104,15 @@ class MainViewController: TYViewController {
         tableView.showsVerticalScrollIndicator = false
         self.view.bringSubviewToFront(LabelTip)
         let headerFresh = MJRefreshNormalHeader {
-            NetWorkManager.updateFarmland({ [weak self] tag in
-                if let sSelf = self {
-                    sSelf.tableView.mj_header.endRefreshing()
-                    if tag == true{
-                        sSelf.tableView.reloadData()
-                    }
-                    if sSelf.farmLands.count > 0{
-                        sSelf.tip = nil
-                    }else{
-                        sSelf.tip = "NODATA"
-                    }
+            NetWorkManager.updateFarmland({  tag in
+                self.tableView.mj_header.endRefreshing()
+                if tag == true{
+                    self.tableView.reloadData()
+                }
+                if self.farmLands.count > 0{
+                    self.tip = nil
+                }else{
+                    self.tip = "NODATA"
                 }
             })
         }

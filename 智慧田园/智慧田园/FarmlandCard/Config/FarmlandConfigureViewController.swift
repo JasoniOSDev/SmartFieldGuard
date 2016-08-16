@@ -61,28 +61,35 @@ class FarmlandConfigureViewController: TYViewController {
         prepareUI()
     }
     
-    func prepareUI(){
-        tableViewConfigure()
-        navigationItemConfigure()
-    }
-    
-    func navigationItemConfigure(){
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "Close_White"), style: .Plain, target: self, action: #selector(self.closeAction))
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "OK_White"), style: .Plain, target: self, action: #selector(self.FinishAction))
-    }
-    
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         loadData()
     }
     
-    func locationManagerConfigure(){
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.subviews[0].alpha = 0
+        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
+        UIApplication.sharedApplication().setStatusBarStyle(.LightContent, animated: true)
+    }
+    
+    private func prepareUI(){
+        tableViewConfigure()
+        navigationItemConfigure()
+    }
+    
+    private func navigationItemConfigure(){
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "Close_White"), style: .Plain, target: self, action: #selector(self.closeAction))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "OK_White"), style: .Plain, target: self, action: #selector(self.FinishAction))
+    }
+    
+    private func locationManagerConfigure(){
         AMapLocationServices.sharedServices().apiKey = GDKey
         locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
 //        getFarmLandPostion()
     }
     
-    func getFarmLandPostion(){
+    private func getFarmLandPostion(){
         self.labelPostion?.text = "正在获取位置"
         locationManager.requestLocationWithReGeocode(true) { [weak self] location, geoCode, error in
             if let sSelf = self where error == nil{
@@ -94,7 +101,7 @@ class FarmlandConfigureViewController: TYViewController {
         }
     }
     
-    func loadData(){
+    private func loadData(){
         if let crop = farmLand.crops{
             LabelTitle.text = farmLand.name
             LabelStartTime.text = "播种日期 " + farmLand.startTimeStr
@@ -128,39 +135,36 @@ class FarmlandConfigureViewController: TYViewController {
                                 self.selectCrop = crops
                             }
                             NetWorkManager.updateSession{
-                                TYRequest(ContentType.fieldSet, parameters: ["fieldNo":self.farmLand.id,"fieldName":name,"fieldArea":String(format: "%.f",self.area),"longitude":self.position!.longitude,"latitude":self.position!.latitude,"cropNo":self.selectCrop!.id,"startTime":String(format: "%.f",Double(self.cropCreateTime))]).TYresponseJSON(completionHandler: { [weak self] response in
+                                TYRequest(ContentType.fieldSet, parameters: ["fieldNo":self.farmLand.id,"fieldName":name,"fieldArea":String(format: "%.f",self.area),"longitude":self.position!.longitude,"latitude":self.position!.latitude,"cropNo":self.selectCrop!.id,"startTime":String(format: "%.f",Double(self.cropCreateTime))]).TYresponseJSON(completionHandler: {  response in
                                     print(response)
                                      try! ModelManager.realm.write({
-                                        if self?.positionChange == true{
-                                            self?.farmLand.positionStr = (self?.labelPostion?.text)!
-                                            self?.farmLand.latitude = (self?.position!.latitude)!
-                                            self?.farmLand.longitude = (self?.position!.longitude)!
+                                        if self.positionChange == true{
+                                            self.farmLand.positionStr = self.labelPostion!.text!
+                                            self.farmLand.latitude = self.position!.latitude
+                                            self.farmLand.longitude = self.position!.longitude
                                         }
-                                        if self?.areaChange == true{
-                                            self?.farmLand.mianji = (self?.area)!
+                                        if self.areaChange == true{
+                                            self.farmLand.mianji = self.area
                                         }
-                                        self?.farmLand.name = name
-                                        if let crop = self!.farmLand.crops,let sSelf = self{
-                                            crop.startDate = sSelf.cropCreateDate!
-                                            crop.starTime = sSelf.cropCreateTime
+                                        self.farmLand.name = name
+                                        if let crop = self.farmLand.crops{
+                                            crop.startDate = self.cropCreateDate!
+                                            crop.starTime = self.cropCreateTime
                                         }
                                     })
-                                    self?.loadData()
-                                    if self?.cropChange == true{
-                                        if let sSelf = self,let crop = sSelf.selectCrop {
-                                            NetWorkManager.getCrops(crop.id, action: { [weak self] crop in
+                                    self.loadData()
+                                    if self.cropChange == true{
+                                        if let crop = self.selectCrop {
+                                            NetWorkManager.getCrops(crop.id, action: { crop in
                                                 try! ModelManager.realm.write({
-                                                    if let sSelf = self {
-                                                        crop.operatorid = sSelf.farmLand.id + crop.id + String(format: "%.f", (NSDate().timeIntervalSinceReferenceDate)%10000)
-                                                        crop.startDate = sSelf.cropCreateDate!
-                                                        crop.starTime = sSelf.cropCreateTime
-                                                        sSelf.farmLand.crops = crop
-                                                        sSelf.farmLand.tasking.removeAll()
+                                                        crop.operatorid = self.farmLand.id + crop.id + String(format: "%.f", (NSDate().timeIntervalSinceReferenceDate)%10000)
+                                                        crop.startDate = self.cropCreateDate!
+                                                        crop.starTime = self.cropCreateTime
+                                                        self.farmLand.crops = crop
+                                                        self.farmLand.tasking.removeAll()
                                                         MBProgressHUD.showSuccess("设置成功", toView: nil)
-                                                        sSelf.loadData()
-                                                    }
+                                                    self.loadData()
                                                 })
-                                                
                                             })
                                         }
                                     }else{
@@ -177,13 +181,6 @@ class FarmlandConfigureViewController: TYViewController {
         if wrongInfo != "Success"{
             MBProgressHUD.showError(wrongInfo, toView: nil)
         }
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        self.navigationController?.navigationBar.subviews[0].alpha = 0
-        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
-        UIApplication.sharedApplication().setStatusBarStyle(.LightContent, animated: true)
     }
     
     func tableViewConfigure(){
@@ -261,32 +258,28 @@ extension FarmlandConfigureViewController:UITableViewDelegate,UITableViewDataSou
             textFieldName?.resignFirstResponder()
             switch indexPath.row {
             case 1:
-                AlertTimeChooseViewController.pushAlertInViewController(self, date: cropCreateDate ?? NSDate(), block: { [weak self] date in
+                AlertTimeChooseViewController.pushAlertInViewController(self, date: cropCreateDate ?? NSDate(), block: {  date in
                     //要把数据替换掉
                     //然后显示出来
-                    self?.cropCreateDate = date
-                    self?.cropCreateTime = date.timeIntervalSince1970
-                    self?.time = self?.formatter.stringFromDate(date)
-                    self?.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .None)
+                    self.cropCreateDate = date
+                    self.cropCreateTime = date.timeIntervalSince1970
+                    self.time = self.formatter.stringFromDate(date)
+                    self.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .None)
                     })
             case 2:
-                AlertCropsChooseViewController.pushAlertInViewController(self, block: { [weak self] crop in
-                    if let sSelf = self {
-                        if sSelf.selectCrop?.id != crop.id{
-                            sSelf.selectCrop = crop
-                            sSelf.cropChange = true
-                            sSelf.cropsName = crop.name
-                            sSelf.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .None)
-                        }
+                AlertCropsChooseViewController.pushAlertInViewController(self, block: { crop in
+                    if self.selectCrop?.id != crop.id{
+                        self.selectCrop = crop
+                        self.cropChange = true
+                        self.cropsName = crop.name
+                        self.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .None)
                     }
                 })
             case 3:
-                AreaGetWayChooseViewController.pushAlertInViewController(self, block: { [weak self] value in
-                    if let sSelf = self {
-                        sSelf.area = value
-                        sSelf.areaChange = true
-                        sSelf.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .None)
-                    }
+                AreaGetWayChooseViewController.pushAlertInViewController(self, block: { value in
+                        self.area = value
+                        self.areaChange = true
+                        self.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .None)
                 })
             case 4:
                 getFarmLandPostion()

@@ -48,7 +48,8 @@ class AskExpertTableViewCell: UITableViewCell,Reusable {
             self.LabelClassify.text = theme.classifyName
         }
     }
-    var imageViews = [UIImageView]();
+    var imageViews = [UIImageView]()
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         self.backgroundColor = UIColor.BackgroundColor()
@@ -60,14 +61,6 @@ class AskExpertTableViewCell: UITableViewCell,Reusable {
             x.layer.cornerRadius = 4
             x.clipsToBounds = true
         }
-    }
-    
-    func newContentViewUI(){
-        newContentView.layer.shadowColor = UIColor.LowBlackColor().CGColor
-        newContentView.layer.shadowOffset = CGSizeMake(1, 1.5)
-        newContentView.layer.shadowRadius = 2
-        newContentView.layer.shadowOpacity = 1
-        newContentView.layer.cornerRadius = 4
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -84,4 +77,11 @@ class AskExpertTableViewCell: UITableViewCell,Reusable {
         super.touchesBegan(touches, withEvent: event)
     }
     
+    func newContentViewUI(){
+        newContentView.layer.shadowColor = UIColor.LowBlackColor().CGColor
+        newContentView.layer.shadowOffset = CGSizeMake(1, 1.5)
+        newContentView.layer.shadowRadius = 2
+        newContentView.layer.shadowOpacity = 1
+        newContentView.layer.cornerRadius = 4
+    }
 }

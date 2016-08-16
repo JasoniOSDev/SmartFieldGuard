@@ -14,6 +14,8 @@ class AlertAddDeviceFourViewController: TYViewController,GCDAsyncSocketDelegate 
     @IBOutlet weak var LabelProgress: UILabel!
     @IBOutlet weak var ButtonClose: UIButton!
     var mySocket:GCDAsyncSocket!
+    let shapeLayer = CAShapeLayer()
+    var timer:NSTimer?
     var progress:Double = 0{
         didSet{
             if(progress>=100){
@@ -23,8 +25,13 @@ class AlertAddDeviceFourViewController: TYViewController,GCDAsyncSocketDelegate 
             self.LabelProgress.text = String(format: "%.f", progress) + "%"
         }
     }
-    let shapeLayer = CAShapeLayer()
-    var timer:NSTimer?
+    
+    override func loadView() {
+        super.loadView()
+        self.contentSizeInPopup = CGSizeMake(335, 335)
+        setProgress()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.whiteColor()
@@ -58,12 +65,6 @@ class AlertAddDeviceFourViewController: TYViewController,GCDAsyncSocketDelegate 
         print( String(data: data, encoding: NSUTF8StringEncoding))
     }
     
-    override func loadView() {
-        super.loadView()
-        self.contentSizeInPopup = CGSizeMake(335, 335)
-        setProgress()
-    }
-    
     func setProgress(){
         let baseShapeLayer = CAShapeLayer()
         let path = UIBezierPath(ovalInRect: CGRectMake(0, 0, 160, 160)).CGPath
@@ -92,12 +93,10 @@ class AlertAddDeviceFourViewController: TYViewController,GCDAsyncSocketDelegate 
         if(self.progress + Double(len) >= 100){
             return
         }
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0)) {
-            NSThread.sleepForTimeInterval(1)
-                dispatch_async(dispatch_get_main_queue(), { [weak self] in
-                self?.updateProgress()
-                })
-         }
+        
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(1*NSEC_PER_SEC)), dispatch_get_main_queue()) {
+            self.updateProgress()
+        }
     }
     
     func updateProgressWithAnimation(len:Int){
@@ -105,9 +104,9 @@ class AlertAddDeviceFourViewController: TYViewController,GCDAsyncSocketDelegate 
         let strokeDis = CGFloat(progressDis/100)
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)) { 
             for _ in 0..<40{
-                dispatch_async(dispatch_get_main_queue(), { [weak self] in
-                    self?.progress += progressDis
-                    self?.shapeLayer.strokeEnd += strokeDis
+                dispatch_async(dispatch_get_main_queue(), {
+                    self.progress += progressDis
+                    self.shapeLayer.strokeEnd += strokeDis
                 })
                 NSThread.sleepForTimeInterval(0.025)
             }
@@ -126,6 +125,4 @@ class AlertAddDeviceFourViewController: TYViewController,GCDAsyncSocketDelegate 
     @IBAction func ButtonCloseClicked(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
-    
-
 }

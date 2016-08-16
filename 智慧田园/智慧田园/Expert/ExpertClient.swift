@@ -48,77 +48,75 @@ class ExpertClient:NSObject,GCDAsyncSocketDelegate{
     
     //接受到的只有message，theme本地创建的时候即保存
     func socket(sock: GCDAsyncSocket!, didReadData data: NSData!, withTag tag: Int) {
-        dispatch_async(dispatch_get_main_queue()) {[weak self] in
-            if let sSelf = self{
-                sSelf.finalReceiveData.appendData(data)
-                while(sSelf.finalReceiveData.length > 0){
-                    var head:Int8 = 0
-                    var length = 0
-                    sSelf.finalReceiveData.getBytes(&head, range:  NSMakeRange(0, 1))
-                    if head == 3{
-                        sSelf.finalReceiveData.getBytes(&head, range:  NSMakeRange(1, 1))
-                        length = length*256 + Int(head)
-                        sSelf.finalReceiveData.getBytes(&head, range:  NSMakeRange(2, 1))
-                        length = length*256 + Int(head)
-                        sSelf.finalReceiveData.getBytes(&head, range:  NSMakeRange(3, 1))
-                        length = length*256 + Int(head)
-                        sSelf.finalReceiveData.getBytes(&head, range:  NSMakeRange(4, 1))
-                        length = length*256 + Int(head)
+        dispatch_async(dispatch_get_main_queue()) {
+            self.finalReceiveData.appendData(data)
+            while(self.finalReceiveData.length > 0){
+                var head:Int8 = 0
+                var length = 0
+                self.finalReceiveData.getBytes(&head, range:  NSMakeRange(0, 1))
+                if head == 3{
+                    self.finalReceiveData.getBytes(&head, range:  NSMakeRange(1, 1))
+                    length = length*256 + Int(head)
+                    self.finalReceiveData.getBytes(&head, range:  NSMakeRange(2, 1))
+                    length = length*256 + Int(head)
+                    self.finalReceiveData.getBytes(&head, range:  NSMakeRange(3, 1))
+                    length = length*256 + Int(head)
+                    self.finalReceiveData.getBytes(&head, range:  NSMakeRange(4, 1))
+                    length = length*256 + Int(head)
 
-                        if length <= sSelf.finalReceiveData.length - 5,let json = try? NSJSONSerialization.JSONObjectWithData(sSelf.finalReceiveData.subdataWithRange(NSMakeRange(5, length)), options: NSJSONReadingOptions.AllowFragments){
-                            if let key = json["key"] as? Int{
-                                let json = ["mType":"GetInform","sendUser":TYUserDefaults.userID.value!,"informKey":key]
-                                let headArray:[UInt8] = [2]
-                                let content = try! NSJSONSerialization.dataWithJSONObject(json, options: NSJSONWritingOptions())
-                                let head = NSData(bytes: headArray, length: 1)
-                                var lengthArray:[UInt8] = []
-                                var contentLength = content.length
-                                for _ in 0...3{
-                                    lengthArray.append(UInt8(contentLength%256))
-                                    contentLength/=256
+                    if length <= self.finalReceiveData.length - 5,let json = try? NSJSONSerialization.JSONObjectWithData(self.finalReceiveData.subdataWithRange(NSMakeRange(5, length)), options: NSJSONReadingOptions.AllowFragments){
+                        if let key = json["key"] as? Int{
+                            let json = ["mType":"GetInform","sendUser":TYUserDefaults.userID.value!,"informKey":key]
+                            let headArray:[UInt8] = [2]
+                            let content = try! NSJSONSerialization.dataWithJSONObject(json, options: NSJSONWritingOptions())
+                            let head = NSData(bytes: headArray, length: 1)
+                            var lengthArray:[UInt8] = []
+                            var contentLength = content.length
+                            for _ in 0...3{
+                                lengthArray.append(UInt8(contentLength%256))
+                                contentLength/=256
+                            }
+                            lengthArray = lengthArray.reverse()
+                            let length = NSData(bytes: lengthArray, length: 4)
+                            let finalData = NSMutableData()
+                            finalData.appendData(head)
+                            finalData.appendData(length)
+                            finalData.appendData(content)
+                            self.socket.writeData(finalData, withTimeout: -1, tag: 111)
+                        }
+                        if let list = json["replyList"] as? NSArray{
+                            for x in list{
+                                let object = x as! [String:AnyObject]
+                                let message = ExpertMessage()
+                                if let content = object["content"] as? String{
+                                    message.content = content
                                 }
-                                lengthArray = lengthArray.reverse()
-                                let length = NSData(bytes: lengthArray, length: 4)
-                                let finalData = NSMutableData()
-                                finalData.appendData(head)
-                                finalData.appendData(length)
-                                finalData.appendData(content)
-                                sSelf.socket.writeData(finalData, withTimeout: -1, tag: 111)
-                            }
-                            if let list = json["replyList"] as? NSArray{
-                                for x in list{
-                                    let object = x as! [String:AnyObject]
-                                    let message = ExpertMessage()
-                                    if let content = object["content"] as? String{
-                                        message.content = content
-                                    }
-                                    message.headPhoto = TYUserDefaults.UrlPrefix.value + (object["headImage"] as! String)
-                                    let topicID = object["postNo"] as! String
-                                    message.replySn = object["replySn"] as! Int
-                                    message.userID = object["userId"] as! String
-                                    message.name = object["username"] as! String
-                                    message.timeInterval = object["replyDate"] as! Double
-                                    if let topic = (sSelf.topics.filter("self.ID == %@",topicID).first){
-                                        message.Theme = topic
-                                        message.updateTheme(true)
-                                        ModelManager.add(message)
-                                    }
+                                message.headPhoto = TYUserDefaults.UrlPrefix.value + (object["headImage"] as! String)
+                                let topicID = object["postNo"] as! String
+                                message.replySn = object["replySn"] as! Int
+                                message.userID = object["userId"] as! String
+                                message.name = object["username"] as! String
+                                message.timeInterval = object["replyDate"] as! Double
+                                if let topic = (self.topics.filter("self.ID == %@",topicID).first){
+                                    message.Theme = topic
+                                    message.updateTheme(true)
+                                    ModelManager.add(message)
                                 }
                             }
-                            if (sSelf.finalReceiveData.length - length != 5){
-                            sSelf.finalReceiveData = NSMutableData(data: sSelf.finalReceiveData.subdataWithRange(NSMakeRange(5+length, sSelf.finalReceiveData.length - 5 - length)))
-                            }else{
-                                sSelf.finalReceiveData = NSMutableData()
-                            }
+                        }
+                        if (self.finalReceiveData.length - length != 5){
+                        self.finalReceiveData = NSMutableData(data: self.finalReceiveData.subdataWithRange(NSMakeRange(5+length, self.finalReceiveData.length - 5 - length)))
                         }else{
-                            break
+                            self.finalReceiveData = NSMutableData()
                         }
                     }else{
                         break
                     }
+                }else{
+                    break
                 }
-                sSelf.socket.readDataWithTimeout(-1, tag: 0)
             }
+            self.socket.readDataWithTimeout(-1, tag: 0)
         }
         
     }
@@ -127,9 +125,9 @@ class ExpertClient:NSObject,GCDAsyncSocketDelegate{
     func socket(sock: GCDAsyncSocket!, didConnectToHost host: String!, port: UInt16) {
         NSNotificationCenter.defaultCenter().postNotificationName(ExpertClientNotificationEnum.Connection.rawValue, object: self, userInfo: nil)
         let json = ["mType":"NewConnect","sendUser":TYUserDefaults.userID.value!]
-        var headArray:[UInt8] = [2]
+        let headArray:[UInt8] = [2]
         let content = try! NSJSONSerialization.dataWithJSONObject(json, options: NSJSONWritingOptions())
-        var head = NSData(bytes: headArray, length: 1)
+        let head = NSData(bytes: headArray, length: 1)
         var lengthArray:[UInt8] = []
         var contentLength = content.length
         for _ in 0...3{
@@ -138,8 +136,8 @@ class ExpertClient:NSObject,GCDAsyncSocketDelegate{
         }
         lengthArray = lengthArray.reverse()
         
-        var length = NSData(bytes: lengthArray, length: 4)
-        var finalData = NSMutableData()
+        let length = NSData(bytes: lengthArray, length: 4)
+        let finalData = NSMutableData()
         finalData.appendData(head)
         finalData.appendData(length)
         finalData.appendData(content)

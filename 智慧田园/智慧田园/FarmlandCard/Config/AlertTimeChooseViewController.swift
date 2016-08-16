@@ -12,11 +12,10 @@ import JTCalendar
 class AlertTimeChooseViewController: TYViewController {
 
     @IBOutlet weak var LabelSelectDate: UILabel!
-//    var calenderMenuView: JTCalendarMenuView!
-    
     @IBOutlet weak var calenderMenuView: JTCalendarMenuView!
     @IBOutlet weak var calenderView: JTHorizontalCalendarView!
     var calenderManager:JTCalendarManager!
+    var block:((NSDate) -> Void)?
     lazy var dateFormatter:NSDateFormatter = {
         let formatter = NSDateFormatter()
         formatter.dateFormat = "当前选择: yyyy年MM月dd日"
@@ -30,17 +29,6 @@ class AlertTimeChooseViewController: TYViewController {
         }
     }
     
-    var block:((NSDate) -> Void)?
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        calenderManagerConfigure()
-        LabelSelectDate.text = dateFormatter.stringFromDate(selectDate)
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "OK_White"), style: .Plain, target: self, action: #selector(self.close))
-    }
-    
-    func close(){
-        self.dismissViewControllerAnimated(true, completion: nil)
-    }
     override func loadView() {
         super.loadView()
         self.contentSizeInPopup = CGSize(width: ScreenWidth - 40, height: 280)
@@ -53,7 +41,18 @@ class AlertTimeChooseViewController: TYViewController {
         }
     }
     
-    func calenderManagerConfigure(){
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        calenderManagerConfigure()
+        LabelSelectDate.text = dateFormatter.stringFromDate(selectDate)
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "OK_White"), style: .Plain, target: self, action: #selector(self.close))
+    }
+    
+    func close(){
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    private func calenderManagerConfigure(){
         self.calenderManager = JTCalendarManager()
         calenderManager.delegate = self
         calenderManager.menuView = self.calenderMenuView
@@ -113,9 +112,9 @@ extension AlertTimeChooseViewController:JTCalendarDelegate{
         if let dayView = dayView as? JTCalendarDayView{
             selectDate = dayView.date
             dayView.circleView.transform = CGAffineTransformScale(CGAffineTransformIdentity, 0.1, 0.1)
-            UIView.transitionWithView(dayView, duration: 0.3, options: UIViewAnimationOptions.CurveEaseIn,  animations: { [weak self] in
+            UIView.transitionWithView(dayView, duration: 0.3, options: UIViewAnimationOptions.CurveEaseIn,  animations: { 
                 dayView.circleView.transform = CGAffineTransformIdentity
-                self?.calenderManager.reload()
+                self.calenderManager.reload()
                 }, completion: nil)
             if !self.calenderManager.dateHelper.date(calenderView.date, isTheSameMonthThan: dayView.date){
                 if calenderView.date.compare(dayView.date) == .OrderedAscending{

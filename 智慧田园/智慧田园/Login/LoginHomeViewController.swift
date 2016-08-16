@@ -22,8 +22,6 @@ class LoginHomeViewController: UIViewController {
         return vc
     }()
 
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -44,6 +42,7 @@ class LoginHomeViewController: UIViewController {
         popController.navigationBar.subviews[0].alpha = 0
         popController.presentInViewController(viewController, completion: nil)
     }
+    
     @IBAction func ButtonRegisterClicked(sender: AnyObject) {
         self.popupController.pushViewController(registerViewController, animated: true)
     }
