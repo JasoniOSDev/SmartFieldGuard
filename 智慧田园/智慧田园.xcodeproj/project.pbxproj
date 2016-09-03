@@ -10,6 +10,9 @@
 		96076C541CF9C1B7002E3F1E /* WidomTaskModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96076C531CF9C1B7002E3F1E /* WidomTaskModel.swift */; };
 		96076C561CF9C1CE002E3F1E /* WisdomTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96076C551CF9C1CE002E3F1E /* WisdomTask.swift */; };
 		960C45D51D2EBD1F00E896CC /* (null) in Embed Frameworks */ = {isa = PBXBuildFile; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		961FFCA01D79A83D001F363B /* TYCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961FFC9F1D79A83D001F363B /* TYCache.swift */; };
+		961FFCA31D79A864001F363B /* NetWork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961FFCA11D79A864001F363B /* NetWork.swift */; };
+		961FFCA41D79A864001F363B /* NetWorkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961FFCA21D79A864001F363B /* NetWorkManager.swift */; };
 		962ABF541CF2895800990AC2 /* InstroduceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 962ABF531CF2895800990AC2 /* InstroduceViewController.swift */; };
 		962ABF581CF2898400990AC2 /* InstroduceHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 962ABF571CF2898400990AC2 /* InstroduceHeaderView.swift */; };
 		962ABF5B1CF29ECB00990AC2 /* InstroduceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 962ABF591CF29ECB00990AC2 /* InstroduceTableViewCell.swift */; };
@@ -98,9 +101,7 @@
 		96A567B71CF72F03000733A1 /* LoginHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A567B61CF72F03000733A1 /* LoginHomeViewController.swift */; };
 		96A567B91CF72FEA000733A1 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A567B81CF72FEA000733A1 /* LoginViewController.swift */; };
 		96A567BC1CF73B25000733A1 /* TYUserDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A567BB1CF73B25000733A1 /* TYUserDefault.swift */; };
-		96A567BF1CF73B6F000733A1 /* NetWork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A567BE1CF73B6F000733A1 /* NetWork.swift */; };
 		96A567C11CF73D80000733A1 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A567C01CF73D80000733A1 /* RegisterViewController.swift */; };
-		96A567C51CF7DF73000733A1 /* NetWorkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A567C41CF7DF73000733A1 /* NetWorkManager.swift */; };
 		96AC87521D3F6F5C0075C451 /* ExpertModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AC87511D3F6F5C0075C451 /* ExpertModel.swift */; };
 		96D040951D42343200011D15 /* ExpertClassChooseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D040941D42343200011D15 /* ExpertClassChooseController.swift */; };
 		96D29D8D1D3F976800B990DB /* ExpertClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D29D8C1D3F976800B990DB /* ExpertClient.swift */; };
@@ -166,6 +167,9 @@
 		961DF0741CF6ACE700A8942D /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		961DF0761CF6B95D00A8942D /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		961DF08C1CF6C79400A8942D /* TYHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TYHeader.h; sourceTree = SOURCE_ROOT; };
+		961FFC9F1D79A83D001F363B /* TYCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TYCache.swift; path = Helper/Cache/TYCache.swift; sourceTree = "<group>"; };
+		961FFCA11D79A864001F363B /* NetWork.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NetWork.swift; path = Helper/NetWorkManager/NetWork.swift; sourceTree = "<group>"; };
+		961FFCA21D79A864001F363B /* NetWorkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NetWorkManager.swift; path = Helper/NetWorkManager/NetWorkManager.swift; sourceTree = "<group>"; };
 		962ABF531CF2895800990AC2 /* InstroduceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InstroduceViewController.swift; path = Instroduce/InstroduceViewController.swift; sourceTree = "<group>"; };
 		962ABF571CF2898400990AC2 /* InstroduceHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InstroduceHeaderView.swift; path = Instroduce/InstroduceHeaderView.swift; sourceTree = "<group>"; };
 		962ABF591CF29ECB00990AC2 /* InstroduceTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InstroduceTableViewCell.swift; path = Instroduce/InstroduceTableViewCell.swift; sourceTree = "<group>"; };
@@ -278,9 +282,7 @@
 		96A567B61CF72F03000733A1 /* LoginHomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginHomeViewController.swift; path = Login/LoginHomeViewController.swift; sourceTree = "<group>"; };
 		96A567B81CF72FEA000733A1 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginViewController.swift; path = Login/LoginViewController.swift; sourceTree = "<group>"; };
 		96A567BB1CF73B25000733A1 /* TYUserDefault.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TYUserDefault.swift; path = Config/TYUserDefault.swift; sourceTree = "<group>"; };
-		96A567BE1CF73B6F000733A1 /* NetWork.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NetWork.swift; path = NetWork/NetWork.swift; sourceTree = "<group>"; };
 		96A567C01CF73D80000733A1 /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RegisterViewController.swift; path = Login/RegisterViewController.swift; sourceTree = "<group>"; };
-		96A567C41CF7DF73000733A1 /* NetWorkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NetWorkManager.swift; path = NetWorkManager/NetWorkManager.swift; sourceTree = "<group>"; };
 		96AC87511D3F6F5C0075C451 /* ExpertModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExpertModel.swift; path = Expert/ExpertModel.swift; sourceTree = "<group>"; };
 		96D040941D42343200011D15 /* ExpertClassChooseController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExpertClassChooseController.swift; path = Expert/ExpertClassChooseController.swift; sourceTree = "<group>"; };
 		96D29D8C1D3F976800B990DB /* ExpertClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExpertClient.swift; path = Expert/ExpertClient.swift; sourceTree = "<group>"; };
@@ -361,6 +363,23 @@
 			name = WisdomTask;
 			sourceTree = "<group>";
 		};
+		961FFC9D1D79A7EE001F363B /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				961FFC9E1D79A802001F363B /* Cache */,
+				96A567C31CF7DF33000733A1 /* NetWorkManager */,
+			);
+			name = Helper;
+			sourceTree = "<group>";
+		};
+		961FFC9E1D79A802001F363B /* Cache */ = {
+			isa = PBXGroup;
+			children = (
+				961FFC9F1D79A83D001F363B /* TYCache.swift */,
+			);
+			name = Cache;
+			sourceTree = "<group>";
+		};
 		962ABF521CF2893200990AC2 /* Instroduce */ = {
 			isa = PBXGroup;
 			children = (
@@ -439,7 +458,7 @@
 				9699F1BA1CEF407C0013031B /* FarmlandCard */,
 				9688890A1CEE9C2700B99FD4 /* AddDevice */,
 				968889021CEE028100B99FD4 /* Home */,
-				96A567C31CF7DF33000733A1 /* NetWorkManager */,
+				961FFC9D1D79A7EE001F363B /* Helper */,
 				968889041CEE035E00B99FD4 /* Config */,
 				968888FB1CEE011200B99FD4 /* Base */,
 				9677B7C61CF698BA008ADEA4 /* Resource */,
@@ -551,8 +570,8 @@
 				965B31B91D5EC2B1000ABA83 /* Reachability.h */,
 				965B31BA1D5EC2B1000ABA83 /* Reachability.m */,
 				965A53E71CF13BEC00CA9B53 /* PageButton */,
-				965B31B41D5EC28F000ABA83 /* PageButtonMidLine.swift */,
 				96B89AFC1D3625C200B92ECF /* MessagePhotoScanController */,
+				965B31B41D5EC28F000ABA83 /* PageButtonMidLine.swift */,
 				965B31B01D5EC28A000ABA83 /* MessagePhotoScanController.swift */,
 				965B31B11D5EC28A000ABA83 /* MessagePhotoView.swift */,
 			);
@@ -842,8 +861,8 @@
 		96A567C31CF7DF33000733A1 /* NetWorkManager */ = {
 			isa = PBXGroup;
 			children = (
-				96A567C41CF7DF73000733A1 /* NetWorkManager.swift */,
-				96A567BE1CF73B6F000733A1 /* NetWork.swift */,
+				961FFCA11D79A864001F363B /* NetWork.swift */,
+				961FFCA21D79A864001F363B /* NetWorkManager.swift */,
 			);
 			name = NetWorkManager;
 			sourceTree = "<group>";
@@ -1156,18 +1175,19 @@
 				962ABF581CF2898400990AC2 /* InstroduceHeaderView.swift in Sources */,
 				965B31B31D5EC28A000ABA83 /* MessagePhotoView.swift in Sources */,
 				965B31B21D5EC28A000ABA83 /* MessagePhotoScanController.swift in Sources */,
+				961FFCA31D79A864001F363B /* NetWork.swift in Sources */,
 				96A04E8E1D44DA6D00EE66CA /* ExpertClassChooseTableHeadView.swift in Sources */,
 				963BDD291CFB427A003DB16E /* AnalyzeViewController.swift in Sources */,
 				965A53C71CF073D300CA9B53 /* TYTabBarItem.swift in Sources */,
 				96336E3A1CED569400BA5BF3 /* AppDelegate.swift in Sources */,
 				963BDD451CFBD152003DB16E /* FertilizeViewController.swift in Sources */,
+				961FFCA41D79A864001F363B /* NetWorkManager.swift in Sources */,
 				9677B7B81CF5FCA9008ADEA4 /* AreaGetWayChooseViewController.swift in Sources */,
 				965A53F41CF18FE800CA9B53 /* PushNewForumViewController.swift in Sources */,
 				96D040951D42343200011D15 /* ExpertClassChooseController.swift in Sources */,
+				961FFCA01D79A83D001F363B /* TYCache.swift in Sources */,
 				963BDD421CFB6874003DB16E /* SunViewController.swift in Sources */,
-				96A567C51CF7DF73000733A1 /* NetWorkManager.swift in Sources */,
 				962ABF5F1CF2ABAD00990AC2 /* TaskModel.swift in Sources */,
-				96A567BF1CF73B6F000733A1 /* NetWork.swift in Sources */,
 				965A53D41CF0898800CA9B53 /* FarmlandConfigureViewController.swift in Sources */,
 				965A53C01CF0011400CA9B53 /* TYConfig.swift in Sources */,
 				9677B7BA1CF688AF008ADEA4 /* AreaViewController.swift in Sources */,

@@ -98,6 +98,8 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-智慧田园/STPopup.framework"
   install_framework "Pods-智慧田园/SnapKit.framework"
   install_framework "Pods-智慧田园/UICountingLabel.framework"
+  install_framework "Pods-智慧田园/YYCache.framework"
+  install_framework "Pods-智慧田园/YYFPSLabel.framework"
   install_framework "Pods-智慧田园/pop.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
@@ -115,5 +117,7 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-智慧田园/STPopup.framework"
   install_framework "Pods-智慧田园/SnapKit.framework"
   install_framework "Pods-智慧田园/UICountingLabel.framework"
+  install_framework "Pods-智慧田园/YYCache.framework"
+  install_framework "Pods-智慧田园/YYFPSLabel.framework"
   install_framework "Pods-智慧田园/pop.framework"
 fi

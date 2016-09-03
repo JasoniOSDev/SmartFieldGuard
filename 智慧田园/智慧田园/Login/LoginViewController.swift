@@ -93,7 +93,7 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
         
         NetWorkManager.login(["username":phone,"password":passWord]) { json in
             let message = json["message"] as! String
-            if(message == "success"){
+            if( message == "success"){
                     self.dismissViewControllerAnimated(true, completion: {
                         //登录之后，下载对应的专家话题
                         NetWorkManager.LoadExperTopic(true)

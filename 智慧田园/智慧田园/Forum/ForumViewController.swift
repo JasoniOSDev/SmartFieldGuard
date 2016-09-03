@@ -142,6 +142,10 @@ class ForumViewController: TYViewController{
         super.viewWillLayoutSubviews()
     }
     
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return .Default
+    }
+    
     private func userDefaultConfigure(){
         TYUserDefaults.NewForum.bindListener("ForumViewController") { (value) in
             if value == true {
@@ -160,6 +164,7 @@ class ForumViewController: TYViewController{
         UIApplication.sharedApplication().setStatusBarStyle(.Default, animated: true)
         tableViewConfigure()
         self.title = crops.name + "讨论区"
+        self.view.addSubview(fpsLabel)
     }
     
     func LoadData(){

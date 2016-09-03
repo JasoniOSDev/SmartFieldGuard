@@ -8,9 +8,9 @@ pod 'Alamofire'
 
 pod 'MBProgressHUD','~>0.9.2'
 
-pod 'SnapKit', '~> 0.19.1'
+pod 'SnapKit'
 
-pod 'SDWebImage', '~> 3.7.5'
+pod 'SDWebImage'
 
 pod 'STPopup'
 
@@ -31,6 +31,10 @@ pod 'AMap2DMap' #2D地图SDK(2D地图和3D地图不能同时使用)
 pod 'AMapLocation'
 
 pod ‘MJRefresh’
+
+pod 'YYFPSLabel', '~> 0.0.1'
+
+pod 'YYCache', '~> 1.0.3'
 
 end
 

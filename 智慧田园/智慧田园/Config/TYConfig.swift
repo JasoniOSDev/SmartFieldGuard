@@ -8,6 +8,9 @@
 
 import UIKit
 
+//存放所有通知的名称
+let NOTIFICATIONFARMLANDCONFIGUREMODIFYFINISH = "farmlandConfigureModifyFinish"//农田信息修改完成
+
 let LightLanTingHeiFontName = "FZLanTingHei-L-GBK-M"
 let NormalLanTingHeiFontName = "FZLanTingHei-R-GBK"
 let ScreenHeight = UIScreen.mainScreen().bounds.height

@@ -304,29 +304,6 @@ extern "C" {
         return [NSString stringWithFormat:@"{%@, %@}", MAStringFromMapPoint(rect.origin), MAStringFromMapSize(rect.size)];
     }
     
-    /// 坐标类型枚举
-    typedef NS_ENUM(NSUInteger, MACoordinateType)
-    {
-        MACoordinateTypeBaidu = 0, // Baidu
-        MACoordinateTypeMapBar, // MapBar
-        MACoordinateTypeMapABC, // MapABC
-        MACoordinateTypeSoSoMap, // SoSoMap
-        MACoordinateTypeAliYun, // AliYun
-        MACoordinateTypeGoogle, // Google
-        MACoordinateTypeGPS, // GPS
-    };
-    
-    /**
-     *  转换目标经纬度为高德坐标系
-     *
-     *  @param coordinate 待转换的经纬度
-     *  @param type       坐标系类型
-     *
-     *  @return 高德坐标系经纬度
-     */
-    extern CLLocationCoordinate2D MACoordinateConvert(CLLocationCoordinate2D coordinate, MACoordinateType type);
-
-    
 #ifdef __cplusplus
 }
 #endif

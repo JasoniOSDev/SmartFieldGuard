@@ -1,0 +1,6 @@
+framework module YYFPSLabel {
+  umbrella header "YYFPSLabel-umbrella.h"
+
+  export *
+  module * { export * }
+}

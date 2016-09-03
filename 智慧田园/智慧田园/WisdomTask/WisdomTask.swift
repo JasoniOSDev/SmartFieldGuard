@@ -9,7 +9,6 @@
 import Foundation
 import RealmSwift
 class WisdomTask{
-    
 //    var str2 = "您的作物是杂交水稻，您的农田为#亩，需要#KG种子处理&&~B-NONGTIAN-AREA,@ADD/ B-NONGTIAN-AREA|B-NONGXUOWU-MEIMUZHONGZI"
     class func updateTask(){
         let farmlands = ModelManager.getObjects(Farmland)

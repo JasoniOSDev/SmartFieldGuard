@@ -50,7 +50,6 @@ class ExpertViewController: TYViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        UIApplication.sharedApplication().setStatusBarStyle(.Default, animated: true)
         prepareUI()
         TYUserDefaults.userID.bindAndFireListener("ExpertViewController") { _ in
             //用来粗略处理切换账号的情况
@@ -136,12 +135,14 @@ class ExpertViewController: TYViewController {
     }
     
     private func prepareUI(){
+        UIApplication.sharedApplication().setStatusBarStyle(.Default, animated: true)
         tableViewConfigure()
         if cropsName != ""{
             self.title = "专家咨询区(\(cropsName))"
         }else{
             self.title = "专家咨询区"
         }
+        self.view.addSubview(fpsLabel)
     }
     
     private func tableViewConfigure(){
@@ -150,11 +151,12 @@ class ExpertViewController: TYViewController {
         tableView.contentInset = UIEdgeInsetsMake(10, 0, 0, 0)
         tableView.contentOffset = CGPointMake(0, -10)
         tableView.backgroundColor = UIColor.BackgroundColor()
+        tableView.estimatedRowHeight = 80
         tableView.registerReusableCell(AskExpertTableViewCell)
         tableView.clearOtherLine()
     }
     
-    private func cellHeightForIndex(index:Int) -> CGFloat{
+    private func  cellHeightForIndex(index:Int) -> CGFloat{
         let cell = self.tableView.dequeueReusableCellWithIdentifier(AskExpertTableViewCell.reuseIdentifier) as! AskExpertTableViewCell
         if self.cellHeight[index] == nil {
             cell.theme = self.ExpertThemes![index]

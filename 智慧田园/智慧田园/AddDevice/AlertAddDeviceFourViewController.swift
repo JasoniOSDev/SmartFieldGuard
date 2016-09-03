@@ -51,7 +51,7 @@ class AlertAddDeviceFourViewController: TYViewController,GCDAsyncSocketDelegate 
         print("已连接到")
         print("host:\(host)\tport:\(port)")
         let wifiInfo = "{\"type\":\"connect_wifi\", \"ssid\":\(AlertAddDeviceSecondViewController.wifiName),\"psw\":\(AlertAddDeviceSecondViewController.wifiPassWord), \"encryption\":\"psk2\",\"userId\":\((TYUserDefaults.userID.value)!)}".dataUsingEncoding(NSUTF8StringEncoding)
-        mySocket.writeData(wifiInfo, withTimeout: 10, tag: 1)
+        mySocket.writeData(wifiInfo!, withTimeout: 10, tag: 1)
         
     }
     

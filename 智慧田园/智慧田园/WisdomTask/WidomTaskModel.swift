@@ -61,8 +61,6 @@ class Crops: Object {
     dynamic var urlDetail = ""
     dynamic var growDays = 0
     dynamic var url = ""
-    let tasks = List<Task>()
-    let FinishTask = List<Task>()
     dynamic var startDate = NSDate()
     dynamic var starTime = 0.0
     dynamic var quickLook:String = ""
@@ -71,6 +69,9 @@ class Crops: Object {
     dynamic var waterQuickLook:String = ""
     dynamic var soilQuickLook:String = ""
     dynamic var properties: NSData =  NSData()
+    dynamic var cropsImage = NSData()
+    let tasks = List<Task>()
+    let FinishTask = List<Task>()
     var currentTime:Int{
         get{
             let today = NSDate()
@@ -108,7 +109,7 @@ class Crops: Object {
 //农田类
 class Farmland: Object{
     dynamic var userID:String = ""
-    dynamic var id:String = ""
+    dynamic var id:String = "" //用户农田的唯一标示
     dynamic var name:String = ""
     dynamic var mianji:Double = 0.0
     dynamic var longitude:Double = 0.0
@@ -208,7 +209,7 @@ class Farmland: Object{
                     Block()
                 }
             })
-            var signal = crop.tasks.count
+           var signal = crop.tasks.count
            for task in crop.tasks{
               signal -= 1
                 //从这个作物的任务表里面遍历出符合触发条件的任务
@@ -317,12 +318,9 @@ class Farmland: Object{
 
                     }
                 }
-                
                 print("------ ------ 农田数据")
             }
         }
-        
-        
     }
     //检查一下该农田的任务，更新正在进行的任务,并在更新完成之后执行回调
     func dispatchTask(block:()->Void){
@@ -330,7 +328,6 @@ class Farmland: Object{
     }
     
     func getValueFrom(name:String,action:(Double)->Void){
-        
         if let value = self.valueForKey(name) as? Double {
             action(value)
         }else{

@@ -9,7 +9,6 @@
 import UIKit
 
 class PageButtonMidLine: UIButton {
-
     
     override func awakeFromNib() {
         super.awakeFromNib()

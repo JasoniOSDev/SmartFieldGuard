@@ -17,31 +17,39 @@ class FarmlandConfigureViewController: TYViewController {
     @IBOutlet weak var tableView: UITableView!
     var titles = ["名称","播种日期","农作物","农田面积","农田位置"]
     weak var textFieldName:UITextField?
-    weak var labelTime:UILabel?
-    weak var labelCropsName:UILabel?
-    weak var labelArea:UILabel?
+//    weak var labelTime:UILabel?
+//    weak var labelCropsName:UILabel?
+//    weak var labelArea:UILabel?
     weak var labelPostion:UILabel?
-    var time:String?
-    var cropsName:String?
-    var area = 0.0
     var position:CLLocationCoordinate2D?
-    var positionStr:String?
     var cropCreateTime:NSTimeInterval = 0
     var cropCreateDate:NSDate?
     var selectCrop:LocalCrops?
     let locationManager = AMapLocationManager()
+    var nameChange = false
+    var dateChange = false
+    var cropChange = false
+    var areaChange = false
+    var positionChange = false
+    var preName:String?
+    var preDate:String?
+    var preCrops:String?
+    var preArea = 0.0
+    var prePosition:String?
     var farmLand:Farmland!{
         didSet{
+            preName = self.farmLand.name
+            preArea = farmLand.mianji
+           
             if let crop = farmLand.crops{
                 cropCreateDate = crop.startDate
                 cropCreateTime = crop.starTime
-            }
-            self.time = self.formatter.stringFromDate(cropCreateDate!)
-            self.cropsName = self.farmLand.name
-            area = farmLand.mianji
-            if farmLand.positionStr != ""{
-                positionStr = farmLand.positionStr
-                position = CLLocationCoordinate2D(latitude: farmLand.latitude, longitude: farmLand.longitude)
+                preDate = formatter.stringFromDate(cropCreateDate!)
+                //在真机当中，如有作物，则肯定不是第一次配置，则相应的定位都有，但在模拟器中不能定位
+                if farmLand.positionStr != ""{
+                    prePosition = farmLand.positionStr
+                    position = CLLocationCoordinate2D(latitude: farmLand.latitude, longitude: farmLand.longitude)
+                }
             }
         }
     }
@@ -50,15 +58,11 @@ class FarmlandConfigureViewController: TYViewController {
         formatter.dateFormat = "yyyy年MM月dd日"
         return formatter
     }()
-    var nameChange = false
-    var timeChange = false
-    var cropChange = false
-    var areaChange = false
-    var positionChange = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         prepareUI()
+        locationManagerConfigure()
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -76,6 +80,9 @@ class FarmlandConfigureViewController: TYViewController {
     private func prepareUI(){
         tableViewConfigure()
         navigationItemConfigure()
+        if let imageURL = farmLand.crops?.urlDetail{
+            CropsImg.sd_setImageWithURL(NSURL(string: imageURL), placeholderImage: UIImage(named:  "FarmCard_Crops_UnSet"))
+        }
     }
     
     private func navigationItemConfigure(){
@@ -84,17 +91,17 @@ class FarmlandConfigureViewController: TYViewController {
     }
     
     private func locationManagerConfigure(){
-        AMapLocationServices.sharedServices().apiKey = GDKey
+        AMapServices.sharedServices().apiKey = GDKey
         locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
-//        getFarmLandPostion()
     }
     
     private func getFarmLandPostion(){
         self.labelPostion?.text = "正在获取位置"
+        prePosition = "正在获取位置"
         locationManager.requestLocationWithReGeocode(true) { [weak self] location, geoCode, error in
             if let sSelf = self where error == nil{
                 sSelf.position = location.coordinate
-                sSelf.positionStr = geoCode.province + " " + geoCode.city + " " + geoCode.district
+                sSelf.prePosition = geoCode.province + " " + geoCode.city + " " + geoCode.district
                 sSelf.positionChange = true
                 sSelf.tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: 4, inSection: 0)], withRowAnimation: .None)
             }
@@ -107,7 +114,6 @@ class FarmlandConfigureViewController: TYViewController {
             LabelStartTime.text = "播种日期 " + farmLand.startTimeStr
             CropsImg.sd_setImageWithURL(NSURL(string: crop.urlDetail), placeholderImage: UIImage(named:  "FarmCard_Crops_UnSet"))
         }
-         locationManagerConfigure()
     }
 
     
@@ -116,71 +122,105 @@ class FarmlandConfigureViewController: TYViewController {
         self.navigationController?.popViewControllerAnimated(true)
     }
     
-    func FinishAction(){
-        var wrongInfo = "名称过长或为空"
-        if let name = textFieldName?.text where (name.characters.count <= 6 && name != "") {
-            wrongInfo = "播种日期未选择"
-            if let _ = labelTime?.text where cropCreateDate != nil{
-                wrongInfo = "农作物未选择"
-                if let cropsName = labelCropsName?.text where cropsName != "选择中" && cropsName != ""{
-                    wrongInfo = "农田面积未设置"
-                    if area != 0.0{
-                        wrongInfo = "等待农田定位"
-                        if position != nil{
-                            wrongInfo = "Success"
-                            //向服务器发送请求
-                            if self.selectCrop == nil {
-                                let crops = LocalCrops()
-                                crops.id = (farmLand.crops?.id)!
-                                self.selectCrop = crops
-                            }
-                            NetWorkManager.updateSession{
-                                TYRequest(ContentType.fieldSet, parameters: ["fieldNo":self.farmLand.id,"fieldName":name,"fieldArea":String(format: "%.f",self.area),"longitude":self.position!.longitude,"latitude":self.position!.latitude,"cropNo":self.selectCrop!.id,"startTime":String(format: "%.f",Double(self.cropCreateTime))]).TYresponseJSON(completionHandler: {  response in
-                                    print(response)
-                                     try! ModelManager.realm.write({
-                                        if self.positionChange == true{
-                                            self.farmLand.positionStr = self.labelPostion!.text!
-                                            self.farmLand.latitude = self.position!.latitude
-                                            self.farmLand.longitude = self.position!.longitude
-                                        }
-                                        if self.areaChange == true{
-                                            self.farmLand.mianji = self.area
-                                        }
-                                        self.farmLand.name = name
-                                        if let crop = self.farmLand.crops{
-                                            crop.startDate = self.cropCreateDate!
-                                            crop.starTime = self.cropCreateTime
-                                        }
-                                    })
-                                    self.loadData()
-                                    if self.cropChange == true{
-                                        if let crop = self.selectCrop {
-                                            NetWorkManager.getCrops(crop.id, action: { crop in
-                                                try! ModelManager.realm.write({
-                                                        crop.operatorid = self.farmLand.id + crop.id + String(format: "%.f", (NSDate().timeIntervalSinceReferenceDate)%10000)
-                                                        crop.startDate = self.cropCreateDate!
-                                                        crop.starTime = self.cropCreateTime
-                                                        self.farmLand.crops = crop
-                                                        self.farmLand.tasking.removeAll()
-                                                        MBProgressHUD.showSuccess("设置成功", toView: nil)
-                                                    self.loadData()
-                                                })
-                                            })
-                                        }
-                                    }else{
-                                        MBProgressHUD.showSuccess("设置成功", toView: nil)
-                                    }
-                                })
-                            }
-                            
-                        }
+    private func checkName() -> FarmlandConfigureViewController?{
+        
+        if(preName == nil || preName == ""){
+            MBProgressHUD.showError("名称为空",toView: nil)
+            return nil
+        }
+        
+        if(preName?.characters.count > 6){
+            MBProgressHUD.showError("名称过长",toView: nil)
+            return nil
+        }
+        
+        return self
+    }
+    private func checkDate() -> FarmlandConfigureViewController?{
+        if(preDate == nil){
+            MBProgressHUD.showError("播种日期未选择",toView: nil)
+            return nil
+        }
+        
+        return self
+    }
+    private func checkCrops() -> FarmlandConfigureViewController?{
+        if preCrops == nil {
+            MBProgressHUD.showError("农作物未选择",toView: nil)
+            return nil
+        }
+        
+        return self
+    }
+    private func checkArea() -> FarmlandConfigureViewController?{
+        if(preArea == 0.0){
+            MBProgressHUD.showError("农田面积未设置",toView: nil)
+            return nil
+        }
+        return self
+    }
+    
+    private func checkPosition() -> FarmlandConfigureViewController?{
+        if(position == nil && prePosition == nil){
+            MBProgressHUD.showError("还未获取农田位置", toView: nil)
+            return nil
+        }
+        if(prePosition == "正在获取位置"){
+            MBProgressHUD.showError("正在获取农田位置", toView: nil)
+            return nil
+        }
+        return self
+    }
+    
+    func saveAction(){
+        if self.selectCrop == nil {
+            let crops = LocalCrops()
+            crops.id = (farmLand.crops?.id)!
+            self.selectCrop = crops
+        }
+        NetWorkManager.updateSession{
+            TYRequest(ContentType.fieldSet, parameters: ["fieldNo":self.farmLand.id,"fieldName":self.preName!,"fieldArea":String(format: "%.f",self.preArea),"longitude":self.position!.longitude,"latitude":self.position!.latitude,"cropNo":self.selectCrop!.id,"startTime":String(format: "%.f",Double(self.cropCreateTime))]).TYresponseJSON(completionHandler: {  response in
+                try! ModelManager.realm.write({
+                    if self.positionChange == true{
+                        self.farmLand.positionStr = self.labelPostion!.text!
+                        self.farmLand.latitude = self.position!.latitude
+                        self.farmLand.longitude = self.position!.longitude
                     }
+                    if self.areaChange == true{
+                        self.farmLand.mianji = self.preArea
+                    }
+                    self.farmLand.name = self.preName!
+                    if let crop = self.farmLand.crops{
+                        crop.startDate = self.cropCreateDate!
+                        crop.starTime = self.cropCreateTime
+                    }
+                })
+                self.loadData()
+                if self.cropChange == true{
+                    if let crop = self.selectCrop {
+                        NetWorkManager.getCrops(crop.id, action: { crop in
+                            try! ModelManager.realm.write({
+                                crop.operatorid = self.farmLand.id + crop.id + String(format: "%.f", (NSDate().timeIntervalSinceReferenceDate)%10000)
+                                crop.startDate = self.cropCreateDate!
+                                crop.starTime = self.cropCreateTime
+                                self.farmLand.crops = crop
+                                self.farmLand.tasking.removeAll()
+                                NSNotificationCenter.defaultCenter().postNotificationName(NOTIFICATIONFARMLANDCONFIGUREMODIFYFINISH, object: nil, userInfo: ["result":true])
+                                MBProgressHUD.showSuccess("设置成功", toView: nil)
+                                self.loadData()
+                            })
+                        })
+                    }
+                }else{
+                    NSNotificationCenter.defaultCenter().postNotificationName(NOTIFICATIONFARMLANDCONFIGUREMODIFYFINISH, object: nil, userInfo: ["result":false])
+                    MBProgressHUD.showSuccess("设置成功", toView: nil)
                 }
-            }
+            })
         }
-        if wrongInfo != "Success"{
-            MBProgressHUD.showError(wrongInfo, toView: nil)
-        }
+    }
+    
+    func FinishAction(){
+        self.checkName()?.checkArea()?.checkDate()?.checkCrops()?.checkPosition()?.saveAction()
     }
     
     func tableViewConfigure(){
@@ -193,6 +233,20 @@ extension FarmlandConfigureViewController:UITableViewDelegate,UITableViewDataSou
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         textField.resignFirstResponder()
+        return true
+    }
+    
+    func textFieldShouldEndEditing(textField: UITextField) -> Bool {
+        if textField.text == nil || textField.text == "" {
+            MBProgressHUD.showError("名字为空", toView: nil)
+            return false
+        }
+        if textField.text?.characters.count > 6 {
+            MBProgressHUD.showError("名字大于6个字符", toView: nil)
+            return false
+        }
+        preName = textField.text
+        nameChange = farmLand.name != preName
         return true
     }
     
@@ -210,40 +264,28 @@ extension FarmlandConfigureViewController:UITableViewDelegate,UITableViewDataSou
             let cell = tableView.dequeueReusableCell(indexPath: indexPath) as FarmlandConfigTableViewCell
             cell.selectionStyle = .None
             cell.title = titles[indexPath.row]
-            cell.TextFieldDetail.text = farmLand.name == "未设置" ? nil : farmLand.name
-            self.textFieldName = cell.TextFieldDetail
-            self.textFieldName?.delegate = self
+            cell.TextFieldDetail.text = farmLand.name == "未设置" ? nil : preName
+            textFieldName = cell.TextFieldDetail
+            textFieldName?.delegate = self
             return cell
         }else{
             let cell = tableView.dequeueReusableCellWithIdentifier("cell")!
             cell.textLabel?.text = titles[indexPath.row]
             switch indexPath.row {
             case 1:
-                //先要获取一下当前有没有设置了时间
-                if self.labelTime == nil {
-                    self.labelTime = cell.detailTextLabel
+                if preDate != nil{
+                    cell.detailTextLabel?.text = preDate
                 }
-                if cropCreateDate != nil{
-                    cell.detailTextLabel?.text = time
-                }
-                
             case 2:
-                if self.labelCropsName == nil{
-                    self.labelCropsName = cell.detailTextLabel
-                }
-                cell.detailTextLabel?.text = cropsName
-                
+                cell.detailTextLabel?.text = preCrops
             case 3:
-                if self.labelArea == nil {
-                    self.labelArea = cell.detailTextLabel
-                }
-                cell.detailTextLabel?.text = String(format: "%.f亩", area)
+                cell.detailTextLabel?.text = String(format: "%.f亩", preArea)
             case 4:
                 if self.labelPostion == nil {
                     self.labelPostion = cell.detailTextLabel
                 }
-                if farmLand.positionStr != ""{
-                    self.labelPostion?.text = self.positionStr
+                if prePosition != ""{
+                     cell.detailTextLabel?.text = prePosition
                 }
             default:
                 break
@@ -256,6 +298,9 @@ extension FarmlandConfigureViewController:UITableViewDelegate,UITableViewDataSou
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         if indexPath.row != 0 {
             textFieldName?.resignFirstResponder()
+            if textFieldName?.isFirstResponder() == true{
+                return 
+            }
             switch indexPath.row {
             case 1:
                 AlertTimeChooseViewController.pushAlertInViewController(self, date: cropCreateDate ?? NSDate(), block: {  date in
@@ -263,21 +308,22 @@ extension FarmlandConfigureViewController:UITableViewDelegate,UITableViewDataSou
                     //然后显示出来
                     self.cropCreateDate = date
                     self.cropCreateTime = date.timeIntervalSince1970
-                    self.time = self.formatter.stringFromDate(date)
+                    self.preDate = self.formatter.stringFromDate(date)
+                    self.dateChange = self.preDate != self.formatter.stringFromDate(date)
                     self.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .None)
                     })
             case 2:
                 AlertCropsChooseViewController.pushAlertInViewController(self, block: { crop in
                     if self.selectCrop?.id != crop.id{
                         self.selectCrop = crop
+                        self.preName = crop.name
                         self.cropChange = true
-                        self.cropsName = crop.name
                         self.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .None)
                     }
                 })
             case 3:
                 AreaGetWayChooseViewController.pushAlertInViewController(self, block: { value in
-                        self.area = value
+                        self.preArea = value
                         self.areaChange = true
                         self.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .None)
                 })

@@ -7,9 +7,15 @@
 //
 
 import UIKit
-
+import YYFPSLabel
 class TYViewController: UIViewController {
     var loading = false
+    lazy var fpsLabel:YYFPSLabel = {
+        let label = YYFPSLabel()
+        label.frame = CGRectMake(30, ScreenHeight - 30, 0, 0)
+        label.sizeToFit()
+        return label
+    }()
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.BackgroundColor()

@@ -91,7 +91,7 @@ public class TYUserDefaults{
         let lastTime = TYUserDefaults.lastConnectTime.value
         let dis = TYUserDefaults.sessionInvalidTime.value + NSDate(timeIntervalSince1970: lastTime).timeIntervalSinceNow
         
-        if  dis < 600 &&  dis > 0 {
+        if  dis < 300 &&  dis > 0 {
             //当距离过期期限小于10分钟的时候，向服务器发个请求
             TYUserDefaults.needUpdateSession.value = true
         }

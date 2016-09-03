@@ -26,15 +26,17 @@ class AskExpertTableViewCell: UITableViewCell,Reusable {
             for x in self.imageViews{
                 x.hidden = true
             }
+            
             if theme.images == nil || theme.images.count == 0 {
                 ConstraintBottom.constant = 44
             }else{
+                ConstraintBottom.constant = 124
                 for x in theme.images.enumerate(){
                     self.imageViews[x.index].sd_setImageWithURL(NSURL(string: x.element))
                     self.imageViews[x.index].hidden = false
                 }
-                ConstraintBottom.constant = 124
             }
+            
             self.ButtonTime.setTitle(theme.time, forState: .Normal)
             self.ImageViewHead.sd_setImageWithURL(NSURL(string: theme.headPhoto))
             self.LabelContent.text = theme.content
@@ -55,12 +57,6 @@ class AskExpertTableViewCell: UITableViewCell,Reusable {
         self.backgroundColor = UIColor.BackgroundColor()
         newContentViewUI()
         imageViews.appendContentsOf([imageViewOne,imageViewTwo,imageViewThd])
-        ImageViewHead.layer.cornerRadius = 17.5
-        ImageViewHead.clipsToBounds = true
-        for x in imageViews{
-            x.layer.cornerRadius = 4
-            x.clipsToBounds = true
-        }
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -78,10 +74,10 @@ class AskExpertTableViewCell: UITableViewCell,Reusable {
     }
     
     func newContentViewUI(){
-        newContentView.layer.shadowColor = UIColor.LowBlackColor().CGColor
-        newContentView.layer.shadowOffset = CGSizeMake(1, 1.5)
-        newContentView.layer.shadowRadius = 2
-        newContentView.layer.shadowOpacity = 1
+//        newContentView.layer.shadowColor = UIColor.LowBlackColor().CGColor
+//        newContentView.layer.shadowOffset = CGSizeMake(1, 1.5)
+//        newContentView.layer.shadowRadius = 2
+//        newContentView.layer.shadowOpacity = 1
         newContentView.layer.cornerRadius = 4
     }
 }

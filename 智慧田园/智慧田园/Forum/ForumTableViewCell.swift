@@ -35,7 +35,7 @@ class ForumTableViewCell: UITableViewCell,Reusable {
     override func awakeFromNib() {
         super.awakeFromNib()
         ImgPhoto.layer.cornerRadius = 17.5
-        ImgPhoto.clipsToBounds = true
+//        ImgPhoto.clipsToBounds = true
         imageViews.append(ImageViewOne)
         imageViews.append(ImageViewTwo)
         imageViews.append(ImageViewThd)

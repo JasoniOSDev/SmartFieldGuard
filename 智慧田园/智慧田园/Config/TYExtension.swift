@@ -217,3 +217,42 @@ extension UITableView {
         return self.dequeueReusableHeaderFooterViewWithIdentifier(T.reuseIdentifier) as! T?
     }
 }
+
+extension CALayer{
+    
+    func makeCornerRadius(radius:CGFloat){
+        let maskPath = UIBezierPath(roundedRect: bounds, cornerRadius: radius)
+        let maskLayer = CAShapeLayer()
+        maskLayer.frame = bounds
+        maskLayer.path = maskPath.CGPath
+        mask = maskLayer
+    }
+}
+extension UIImage{
+    
+    func kt_drawRectWithRoundedCorner(radius radius: CGFloat, _ sizetoFit: CGSize) -> UIImage {
+        let rect = CGRect(origin: CGPoint(x: 0, y: 0), size: sizetoFit)
+        
+        UIGraphicsBeginImageContextWithOptions(rect.size, false, UIScreen.mainScreen().scale)
+        CGContextAddPath(UIGraphicsGetCurrentContext(),
+                         UIBezierPath(roundedRect: rect, byRoundingCorners: UIRectCorner.AllCorners,
+                            cornerRadii: CGSize(width: radius, height: radius)).CGPath)
+        CGContextClip(UIGraphicsGetCurrentContext())
+        
+        self.drawInRect(rect)
+        CGContextDrawPath(UIGraphicsGetCurrentContext(), .FillStroke)
+        let output = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        
+        return output
+    }
+    
+}
+
+extension UIImageView {
+    func kt_addCorner(radius radius: CGFloat) {
+        self.image = self.image?.kt_drawRectWithRoundedCorner(radius: radius, self.bounds.size)
+    }
+}
+
+

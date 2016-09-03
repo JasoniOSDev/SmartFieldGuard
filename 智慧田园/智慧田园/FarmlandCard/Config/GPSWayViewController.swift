@@ -254,7 +254,6 @@ class GPSWayViewController: UIViewController,MAMapViewDelegate {
         
     }
     func mapViewConfigure(){
-        MAMapServices.sharedServices().apiKey = GDKey
         mapView.delegate = self
         mapView.userTrackingMode = .Follow
         mapView.allowsBackgroundLocationUpdates = true

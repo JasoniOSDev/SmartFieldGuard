@@ -2,6 +2,8 @@
 
 #import "STPopup.h"
 #import "STPopupController.h"
+#import "STPopupControllerTransitioningFade.h"
+#import "STPopupControllerTransitioningSlideVertical.h"
 #import "STPopupLeftBarItem.h"
 #import "STPopupNavigationBar.h"
 #import "UIResponder+STPopup.h"

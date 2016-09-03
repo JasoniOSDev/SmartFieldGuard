@@ -95,6 +95,12 @@ class CardDetailViewController: TYViewController {
         prepareUI()
         //第一次更新数据
         scrollView.mj_header.beginRefreshing()
+        NSNotificationCenter.defaultCenter().addObserverForName(NOTIFICATIONFARMLANDCONFIGUREMODIFYFINISH, object: nil, queue: nil) { noti in
+            self.fillFarmLandData()
+            if let result = noti.userInfo!["result"] as? Bool where result == true{
+                self.loadData()
+            }
+        }
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -102,10 +108,28 @@ class CardDetailViewController: TYViewController {
         loadData()
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        self.scrollView.contentOffset.y = 0
+        self.navigationController?.navigationBar.subviews[0].alpha = 0
+        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
+        UIApplication.sharedApplication().setStatusBarStyle(.LightContent, animated: true)
+    }
+    
     func prepareUI(){
         tableViewConfigure()
         sliderConfigure()
         navigationItemConfigure()
+        fillFarmLandData()
+    }
+    
+    func fillFarmLandData(){
+        //用于加载农田的信息
+        LabelTitle.text = farmland.name
+        LabelStartTime.text = "播种日期 " + farmland.startTimeStr
+        if let imageURL = farmland.crops?.urlDetail{
+            CropsImg.sd_setImageWithURL(NSURL(string: imageURL), placeholderImage: UIImage(named:  "FarmCard_Crops_UnSet"))
+        }
     }
     
     func navigationItemConfigure(){
@@ -130,18 +154,16 @@ class CardDetailViewController: TYViewController {
         }
     }
     
+    //主要用于更新任务信息，可以定时更新或者手动更新
     func loadData(block:(()->Void)? = nil){
         guard loading == false else{return}
         loading = true
+        //获取农田环境数据
         self.farmland.updateEnvironmentData { [weak self] field in
+            //更新任务信息
              field.updateTasking({
                 dispatch_async(dispatch_get_main_queue(), { 
                     if let sSelf = self {
-                        if let crop = sSelf.farmland.crops{
-                            sSelf.LabelTitle.text = sSelf.farmland.name
-                            sSelf.LabelStartTime.text = "播种日期 " + sSelf.farmland.startTimeStr
-                            sSelf.CropsImg.sd_setImageWithURL(NSURL(string: crop.urlDetail), placeholderImage: UIImage(named:  "FarmCard_Crops_UnSet"))
-                        }
                         sSelf.tableView.reloadData()
                         if let backCall = block{
                             backCall()
@@ -170,14 +192,6 @@ class CardDetailViewController: TYViewController {
         tableView.clearOtherLine()
         tableView.layoutMargins = UIEdgeInsetsZero
         tableView.separatorInset = UIEdgeInsetsZero
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        self.scrollView.contentOffset.y = 0
-        self.navigationController?.navigationBar.subviews[0].alpha = 0
-        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
-        UIApplication.sharedApplication().setStatusBarStyle(.LightContent, animated: true)
     }
     
     func ButtonEditClicked(){
@@ -218,6 +232,11 @@ class CardDetailViewController: TYViewController {
         }else{
             MBProgressHUD.showError("目前不需要录入", toView: nil)
         }
+    }
+    
+    
+    deinit{
+        NSNotificationCenter.defaultCenter().removeObserver(self)
     }
 }
 

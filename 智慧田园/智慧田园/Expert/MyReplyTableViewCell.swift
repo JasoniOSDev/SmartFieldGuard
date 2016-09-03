@@ -31,15 +31,13 @@ class MyReplyTableViewCell: UITableViewCell,Reusable {
         super.awakeFromNib()
         self.backgroundColor = UIColor.BackgroundColor()
         newContentViewUI()
-        ImageViewHead.layer.cornerRadius = 17.5
-        ImageViewHead.clipsToBounds = true
     }
 
     func newContentViewUI(){
-        newContentView.layer.shadowColor = UIColor.LowBlackColor().CGColor
-        newContentView.layer.shadowOffset = CGSizeMake(1, 1.5)
-        newContentView.layer.shadowRadius = 2
-        newContentView.layer.shadowOpacity = 1
+//        newContentView.layer.shadowColor = UIColor.LowBlackColor().CGColor
+//        newContentView.layer.shadowOffset = CGSizeMake(1, 1.5)
+//        newContentView.layer.shadowRadius = 2
+//        newContentView.layer.shadowOpacity = 1
         newContentView.layer.cornerRadius = 4
     }
 }

@@ -56,7 +56,6 @@ class MainViewController: TYViewController {
         return .Default
     }
 
-    
     func prepareUI(){
         tableViewConfigure()
     }
