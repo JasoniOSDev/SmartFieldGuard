@@ -19,63 +19,94 @@ class MessagePhotoScanController: UIViewController,UIScrollViewDelegate {
     let height = UIScreen.mainScreen().bounds.height
     private var scrollView = UIScrollView()
     private let scrollViewContentView = UIView()
+    private var total:Int!
+    private var photoScanData = [PhotoScanModel]()
+    private var labelInfo:UILabel = UILabel()
+    private var slide = false
+    private var singleTapGesture:UITapGestureRecognizer!
+    private var doubleTapGesture:UITapGestureRecognizer!
+    private var fromPoint:CGPoint!{
+        get{
+            let preImageView = photoScanData[index].preImageView
+            let preSupreView = preImageView.superview
+            let point = preSupreView?.convertPoint(preImageView.center, toView: self.view)
+            return point
+        }
+    }
+    private(set) var toPoint:CGPoint = CGPointMake(UIScreen.mainScreen().bounds.width / 2, UIScreen.mainScreen().bounds.height / 2)
+    private var currentCell:PhotoScanCollectionViewCell? {
+        get{
+            if(collectionView.visibleCells().count > 1){
+                return collectionView.visibleCells().last as? PhotoScanCollectionViewCell
+            }
+            return collectionView.visibleCells().first as? PhotoScanCollectionViewCell
+        }
+    }
+    private var currentModel:PhotoScanModel {
+        get{
+            return photoScanData[index]
+        }
+    }
+    
     private var index:Int = 0{
         didSet{
             labelInfo.text = "\(index + 1) / \(total)"
             labelInfo.sizeToFit()
-            animatedImageView = self.images[index]
-            fromPoint = CGPointMake(origionPoint.x + width * CGFloat(index), origionPoint.y)
-            toPoint = CGPointMake(width * CGFloat(index * 2 + 1 )/2, height / 2)
         }
     }
-    private var total:Int!
-    private var images = [UIImageView]()
-    private var labelInfo:UILabel = UILabel()
-    private var slide = false
-    private var tapGesture:UITapGestureRecognizer!
-    private(set) var backView = UIView()
-    private(set) var animatedImageView:UIImageView!
-    private(set) var fromTransform:CGAffineTransform!
-    private(set) var toTransform:CGAffineTransform = CGAffineTransformMakeScale(1, 1)
-    private(set) var fromPoint:CGPoint!
-    private(set) var origionPoint:CGPoint!
-    private(set) var toPoint:CGPoint = CGPointMake(UIScreen.mainScreen().bounds.width / 2, UIScreen.mainScreen().bounds.height / 2)
-    private func gestureConfigure(){
-        tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.tapGestureAction))
-        self.view.addGestureRecognizer(tapGesture)
-    }
-    
-    func tapGestureAction(){
-        self.dismissViewControllerAnimated(true, completion: nil)
-    }
-    
-    private func prepareUI(){
-        self.view.backgroundColor = UIColor.clearColor()
-        backViewConfigure()
-        scrollViewConfigure()
-        labelInfoConfigure()
-    }
+    private let collectionView:UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.itemSize = CGSizeMake(ScreenWidth, ScreenHeight)
+        layout.minimumLineSpacing = 0
+        layout.minimumInteritemSpacing = 10
+        layout.scrollDirection = .Horizontal
+        let collectionView = UICollectionView(frame: CGRectMake(0, 0, ScreenWidth, ScreenHeight), collectionViewLayout: layout)
+        collectionView.registerReusableCell(PhotoScanCollectionViewCell)
+        collectionView.backgroundColor = UIColor.clearColor()
+        collectionView.pagingEnabled = true
+        return collectionView
+    }()
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         labelInfo.center.x = self.view.frame.width / 2
     }
     
-    private func backViewConfigure(){
-        self.view.addSubview(backView)
-        backView.backgroundColor = UIColor.blackColor()
-        backView.alpha = 0.6
-        backView.frame = self.view.bounds
+    private func prepareUI(){
+        self.view.backgroundColor = UIColor.clearColor()
+        collectionViewConfigure()
+        labelInfoConfigure()
     }
     
-    private func scrollViewConfigure(){
-        self.view.addSubview(scrollView)
-        scrollView.frame = self.view.bounds
-        scrollView.pagingEnabled = true
-        scrollView.delegate = self
-        scrollView.showsVerticalScrollIndicator = false
-        scrollView.showsHorizontalScrollIndicator = false
-        scrollView.maximumZoomScale = 2.0
+    private func gestureConfigure(){
+        singleTapGesture = UITapGestureRecognizer(target: self, action: #selector(self.singleTapGestureAction))
+        singleTapGesture.numberOfTapsRequired = 1
+        singleTapGesture.numberOfTouchesRequired = 1
+        doubleTapGesture = UITapGestureRecognizer(target: self, action: #selector(self.doubleTapGestureAction))
+        doubleTapGesture.numberOfTouchesRequired = 1
+        doubleTapGesture.numberOfTapsRequired = 2
+        singleTapGesture.requireGestureRecognizerToFail(doubleTapGesture)
+        self.view.addGestureRecognizer(doubleTapGesture)
+        self.view.addGestureRecognizer(singleTapGesture)
+    }
+    
+    func singleTapGestureAction(){
+        if let cell = currentCell{
+            cell.zoom(1)
+        }
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    func doubleTapGestureAction(){
+        if let cell = currentCell{
+            cell.zoom()
+        }
+    }
+    
+    private func collectionViewConfigure(){
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        self.view.addSubview(collectionView)
     }
     
     private func labelInfoConfigure(){
@@ -88,56 +119,38 @@ class MessagePhotoScanController: UIViewController,UIScrollViewDelegate {
         labelInfo.text = "1 / 5"
         labelInfo.sizeToFit()
     }
+    private func loadCurrentCell(){
+        collectionView.reloadData()
+        //不加reloadData的话，再选择一个图片数量不一样的时候会发生崩溃
+        collectionView.contentSize = CGSizeMake(ScreenWidth * CGFloat(total), ScreenHeight)
+        collectionView.scrollToItemAtIndexPath(NSIndexPath(forRow: index, inSection: 0), atScrollPosition: .None, animated: false)
+        collectionView.reloadItemsAtIndexPaths([NSIndexPath(forRow: index, inSection: 0)])
+    }
     
-    private func refreshUI(){
+    class func setImages(images:[UIImageView],imagesURL:[String],index:Int = 0){
+        shareMessagePhotoScan.setImages(images, imagesURL: imagesURL, index: index)
+    }
+
+    func setImages(images:[UIImageView],imagesURL:[String],index:Int = 0){
+        self.photoScanData.removeAll(keepCapacity: false)
+        self.total = imagesURL.count
+        self.index = index
+        for i in 0..<imagesURL.count{
+            self.photoScanData.append(PhotoScanModel(preImageView: images[i], url: imagesURL[i]))
+        }
+    }
+    
+    
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        let contentOffset = scrollView.contentOffset
         let width = UIScreen.mainScreen().bounds.width
-        //设置图片大小
-        let MaxPhotoWidth = width - 100 //两旁预留50
-        let posY = UIScreen.mainScreen().bounds.height / 2
-        var posX = width / 2
-        //考虑到图片比例不一定，所以这边高度要根据具体情况
-        //获得fromTransform
-        let fromSize = animatedImageView.frame.size
-        animatedImageView.sizeToFit()
-        var photoWidth = min(MaxPhotoWidth,animatedImageView.frame.width)
-        var scale = photoWidth / fromSize.width
-        let toSize = CGSizeMake(fromSize.width * scale, fromSize.height * scale)
-        fromTransform = CGAffineTransformMakeScale(fromSize.width/toSize.width, fromSize.height/toSize.height)
-        for x in images{
-            x.clipsToBounds = false
-            x.sizeToFit()
-            photoWidth = min(MaxPhotoWidth,x.frame.width)
-            scale = photoWidth / x.frame.width
-            x.frame.size = CGSizeMake(x.frame.width * scale, x.frame.height * scale)
-            x.center = CGPointMake(posX, posY)
-            x.clipsToBounds = true
-            x.layer.cornerRadius = 4
-            posX += width
-            scrollView.addSubview(x)
+        let percent = (contentOffset.x ) / width * 10 % 10 / 10
+        let newIndex = Int((contentOffset.x) / width)
+        let result = newIndex != index ? percent < 0.3 : percent > 0.7
+        if let cell = (index < newIndex ? collectionView.visibleCells().last : collectionView.visibleCells().first) as? PhotoScanCollectionViewCell where  result{
+            cell.zoom(1)
+            index = newIndex
         }
-        scrollView.contentSize = CGSizeMake(width * CGFloat(total), UIScreen.mainScreen().bounds.height)
-        scrollView.contentOffset.x = width * CGFloat(index)
-    }
-    
-    class func setImages(images:[UIImageView],index:Int = 0,fromPoint:CGPoint = CGPointMake(shareMessagePhotoScan.width/2, shareMessagePhotoScan.height / 2)){
-        for x in shareMessagePhotoScan.images{
-            x.removeFromSuperview()
-        }
-        shareMessagePhotoScan.images.removeAll(keepCapacity: false)
-        shareMessagePhotoScan.images = images
-        shareMessagePhotoScan.total = images.count
-        shareMessagePhotoScan.setFromPoint(fromPoint)
-        shareMessagePhotoScan.index = index
-        shareMessagePhotoScan.refreshUI()
-    }
-    
-    func setFromPoint(fromPoint:CGPoint){
-        self.fromPoint = fromPoint
-        self.origionPoint = fromPoint
-    }
-    
-    class func setIndex(index:Int){
-        shareMessagePhotoScan.index = index
     }
     
     class func pushScanController(point:CGPoint? = nil){
@@ -149,22 +162,30 @@ class MessagePhotoScanController: UIViewController,UIScrollViewDelegate {
             UIApplication.sharedApplication().keyWindow?.rootViewController!.presentViewController(shareMessagePhotoScan, animated: true, completion: nil)
         }
     }
-    
-    func scrollViewDidScroll(scrollView: UIScrollView) {
-        guard !scrollView.zooming else{return}
-        let contentOffset = scrollView.contentOffset
-        let width = UIScreen.mainScreen().bounds.width
-        self.index = Int((contentOffset.x + 50) / width)
-    }
-    
-    func scrollViewDidEndScrollingAnimation(scrollView: UIScrollView) {
-        slide = false
-    }
-    
-    func viewForZoomingInScrollView(scrollView: UIScrollView) -> UIView? {
-        return animatedImageView
-    }
 
+}
+
+extension MessagePhotoScanController:UICollectionViewDelegate,UICollectionViewDataSource{
+    
+    private func configureCell(cell: PhotoScanCollectionViewCell,data:PhotoScanModel){
+        cell.loadImage(data.preImageView.image!, url: data.url)
+        cell.setImageViewSize(data.aftSize)
+    }
+    
+    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return total
+    }
+    
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(PhotoScanCollectionViewCell.reuseIdentifier, forIndexPath: indexPath) as! PhotoScanCollectionViewCell
+        configureCell(cell, data: photoScanData[indexPath.row])
+        return cell
+    }
+    
 }
 
 extension MessagePhotoScanController:UIViewControllerAnimatedTransitioning,UIViewControllerTransitioningDelegate{
@@ -182,19 +203,21 @@ extension MessagePhotoScanController:UIViewControllerAnimatedTransitioning,UIVie
     }
     
     func animateTransition(transitionContext: UIViewControllerContextTransitioning){
-        guard let containerView = transitionContext.containerView() else {return}
+        let containerView = transitionContext.containerView()
         let duration = self.transitionDuration(transitionContext)
         if let toVC = transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey) as? MessagePhotoScanController,
             let toView = transitionContext.viewForKey(UITransitionContextToViewKey){
             if toVC.isBeingPresented(){
-                let animatedView = toVC.animatedImageView
-                let backView = toVC.backView
+                toVC.loadCurrentCell()
+                let animatedView = toVC.currentCell!.imageView
+                let backView = toVC.currentCell!.backView
+                let model = toVC.currentModel
                 containerView.addSubview(toView)
-                animatedView.transform = toVC.fromTransform
+                animatedView.transform = model.fromTransform
                 animatedView.center = toVC.fromPoint
                 backView.alpha = 0
-                UIView.animateWithDuration(duration, animations: { 
-                    animatedView.transform = toVC.toTransform
+                UIView.animateWithDuration(duration, animations: {
+                    animatedView.transform = model.toTransform
                     animatedView.center = toVC.toPoint
                     backView.alpha = 0.6
                     }, completion: { (_) in
@@ -205,19 +228,24 @@ extension MessagePhotoScanController:UIViewControllerAnimatedTransitioning,UIVie
         }else{
             if let fromVC = transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey) as? MessagePhotoScanController,let fromView = transitionContext.viewForKey(UITransitionContextFromViewKey){
                 if fromVC.isBeingDismissed(){
-                    let animatedView = fromVC.animatedImageView
-                    let backView = fromVC.backView
+                    let animatedView = fromVC.currentCell!.imageView
+                    let backView = fromVC.currentCell!.backView
+                    let model = fromVC.currentModel
                     UIView.animateWithDuration(duration, animations: {
-                        animatedView.transform = fromVC.fromTransform
+                        animatedView.transform = model.fromTransform
                         animatedView.center = fromVC.fromPoint
                         backView.alpha = 0
                         }, completion: { (_) in
                             fromView.removeFromSuperview()
                             let isCancelled = transitionContext.transitionWasCancelled()
                             transitionContext.completeTransition(!isCancelled)
+                            backView.alpha = 0.6
+                            animatedView.transform = model.toTransform
+                            animatedView.center = fromVC.toPoint
                     })
                 }
             }
         }
     }
+
 }

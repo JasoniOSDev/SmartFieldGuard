@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11198.2" systemVersion="16A313a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="PhotoScanCollectionViewCell" customModule="智慧田园" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="254" height="210"/>
+            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="254" height="210"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RI1-Fk-XbT">
+                        <frame key="frameInset" width="254" height="210"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yqr-Hh-RpS">
+                                <rect key="frame" x="7" y="41" width="240" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                        </subviews>
+                    </scrollView>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="RI1-Fk-XbT" secondAttribute="trailing" id="2uj-La-I9G"/>
+                <constraint firstItem="RI1-Fk-XbT" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="90U-ED-Q5n"/>
+                <constraint firstAttribute="bottom" secondItem="RI1-Fk-XbT" secondAttribute="bottom" id="S5Z-zQ-81B"/>
+                <constraint firstItem="RI1-Fk-XbT" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="bUA-9p-sJq"/>
+            </constraints>
+            <size key="customSize" width="254" height="210"/>
+            <connections>
+                <outlet property="imageView" destination="yqr-Hh-RpS" id="hlc-qr-yEu"/>
+                <outlet property="scrollView" destination="RI1-Fk-XbT" id="jHv-oJ-PsV"/>
+            </connections>
+            <point key="canvasLocation" x="-1080" y="90"/>
+        </collectionViewCell>
+    </objects>
+</document>
