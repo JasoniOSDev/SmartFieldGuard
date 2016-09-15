@@ -30,6 +30,12 @@ PODS:
   - UICountingLabel (1.2.0)
   - YYCache (1.0.3)
   - YYFPSLabel (0.0.1)
+  - YYImage (1.0.3):
+    - YYImage/Core (= 1.0.3)
+  - YYImage/Core (1.0.3)
+  - YYWebImage (1.0.4):
+    - YYCache
+    - YYImage
 
 DEPENDENCIES:
   - Alamofire
@@ -48,6 +54,7 @@ DEPENDENCIES:
   - STPopup
   - YYCache (~> 1.0.3)
   - YYFPSLabel (~> 0.0.1)
+  - YYWebImage (~> 1.0.4)
 
 SPEC CHECKSUMS:
   Alamofire: 6aa33201d20d069e1598891cf928883ff1888c7a
@@ -70,5 +77,7 @@ SPEC CHECKSUMS:
   UICountingLabel: 1db4e7d023e1762171eb226d6dff47a7a84f27aa
   YYCache: 282f35b5b0990833d0b7a06d864a87141a021da2
   YYFPSLabel: 20f389c22748b3cf563e83b54360e2e36df0d516
+  YYImage: 362f44ffba1fc498f2152060f3bb54ed84600981
+  YYWebImage: 0431ed108e104527669b86f75efd58958425cca2
 
 COCOAPODS: 0.39.0

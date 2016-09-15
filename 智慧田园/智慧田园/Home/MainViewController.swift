@@ -12,6 +12,7 @@ import SnapKit
 import Alamofire
 import MJRefresh
 import MBProgressHUD
+import RealmSwift
 class MainViewController: TYViewController {
 
     @IBOutlet weak var LabelTip: UILabel!
@@ -23,6 +24,8 @@ class MainViewController: TYViewController {
         return vc
     }()
     let farmLands = ModelManager.getObjects(Farmland)
+    var needAnimation = true
+    var notiToken:NotificationToken!
     var tip:String? = nil{
         didSet{
             if tip == nil {
@@ -47,8 +50,8 @@ class MainViewController: TYViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.navigationBar.subviews[0].alpha = 1
-        self.navigationController?.navigationBar.tintColor = UIColor.HightBlackColor()
+        self.navigationController?.navigationBar.subviews[0].alpha = 0
+        self.navigationController?.navigationBar.tintColor = UIColor.MidBlackColor()
         UIApplication.sharedApplication().setStatusBarStyle(.Default, animated: true)
     }
     
@@ -85,6 +88,19 @@ class MainViewController: TYViewController {
                 self.tableView.mj_header.hidden = true
             }
         }
+        
+        //农田数据发生变化的通知
+        self.notiToken = farmLands.addNotificationBlock { [weak self] result in
+            switch(result){
+            case .Initial(_):break
+            case .Update(_, deletions: _, insertions: _, modifications: let modify):
+                self?.needAnimation = false
+                if modify.count > 0 {
+                     self?.tableView.reloadRowsAtIndexPaths(modify.map{NSIndexPath(forRow: $0, inSection: 0)}, withRowAnimation: .Automatic)
+                }
+            case .Error(_):break
+            }
+        }
     }
     
     func tableViewConfigure(){
@@ -102,18 +118,23 @@ class MainViewController: TYViewController {
         tableView.showsHorizontalScrollIndicator = false
         tableView.showsVerticalScrollIndicator = false
         self.view.bringSubviewToFront(LabelTip)
-        let headerFresh = MJRefreshNormalHeader {
-            NetWorkManager.updateFarmland({  tag in
-                self.tableView.mj_header.endRefreshing()
+        let headerFresh = MJRefreshNormalHeader {[weak self] in
+            self?.needAnimation = true
+            NetWorkManager.updateFarmland({ tag in
+                self?.tableView.mj_header.endRefreshing()
                 if tag == true{
-                    self.tableView.reloadData()
+                    self?.tableView.reloadData()
                 }
-                if self.farmLands.count > 0{
-                    self.tip = nil
+                if self?.farmLands.count > 0{
+                    self?.tip = nil
+                    for x in (self?.farmLands)!{
+                        x.updateEnvironmentData(nil)
+                    }
                 }else{
-                    self.tip = "NODATA"
+                    self?.tip = "NODATA"
                 }
             })
+            
         }
         headerFresh.setTitle("正在获取农田信息", forState: MJRefreshState.Refreshing)
         headerFresh.setTitle("下拉获取农田信息", forState: MJRefreshState.Idle)
@@ -158,7 +179,7 @@ extension MainViewController:UITableViewDelegate,UITableViewDataSource{
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(indexPath: indexPath) as FarmlandCardTableViewCell
         cell.farmLand = farmLands[indexPath.row]
-        cell.farmLand.updateEnvironmentData(nil)
+        cell.farmLand.fillDataInView()
         return cell
     }
     
@@ -172,7 +193,7 @@ extension MainViewController:UITableViewDelegate,UITableViewDataSource{
     }
     
     func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-        
+        guard needAnimation else {return}
         cell.transform = CGAffineTransformMakeTranslation(0, 80)
         cell.alpha = 0
         UIView.animateWithDuration(1.0) {

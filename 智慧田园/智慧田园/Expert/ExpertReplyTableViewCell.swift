@@ -23,7 +23,7 @@ class ExpertReplyTableViewCell: UITableViewCell,Reusable {
     var message:ExpertMessage!{
         didSet{
             self.content = message.content
-            self.ImageViewHead.sd_setImageWithURL(NSURL(string: message.headPhoto))
+            self.ImageViewHead.sd_setImageWithURL(NSURL(string: message.headPhoto.imageLowQualityURL()))
             self.ButtonTime.setTitle(message.time, forState: .Normal)
         }
     }

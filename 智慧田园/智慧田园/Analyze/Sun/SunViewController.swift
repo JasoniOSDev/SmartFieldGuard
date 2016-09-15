@@ -19,7 +19,7 @@ class SunViewController: TYViewController {
     }
     
     func analyzeViewConfigure(){
-        AnalyzeViewT = NSBundle.mainBundle().loadNibNamed("TYAnalyze", owner: nil, options: nil)[0] as! TYAnalyze
+        AnalyzeViewT = NSBundle.mainBundle().loadNibNamed("TYAnalyze", owner: nil, options: nil)![0] as! TYAnalyze
         AnalyzeViewT.setTitle("光照强度(LUX)")
         self.view.addSubview(AnalyzeViewT)
         AnalyzeViewT.snp_makeConstraints { (make) in

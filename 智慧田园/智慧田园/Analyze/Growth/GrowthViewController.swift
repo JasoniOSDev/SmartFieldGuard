@@ -27,12 +27,12 @@ class GrowthViewController: TYViewController {
     }
 
     func CirChartConfigure(){
+        
         CirChart2 = PNCircleChart(frame: CGRectMake(0, 0, ScreenWidth - 80, ScreenWidth - 80), total: NSNumber(integer: 1), current: NSNumber(integer:1), clockwise: false)
+        CirChart2.center = CGPointMake(ScreenWidth / 2 , ScreenHeight / 2 - 30)
         CirChart2.countingLabel.hidden = true
         CirChart2.strokeColor = UIColor.LowBlackColor()
         CirChart2.backgroundColor = UIColor.clearColor()
-        CirChart2.center = StackViewLabel.center
-        CirChart2.center.y -= 20
         CirChart2.lineWidth = NSNumber(integer: 20)
         CirChart2.displayAnimated = false
         CirChart2.strokeChart()
@@ -40,13 +40,12 @@ class GrowthViewController: TYViewController {
         self.view.addSubview(CirChart2)
         
         CirChart = PNCircleChart(frame: CGRectMake(0, 0, ScreenWidth - 80, ScreenWidth - 80), total: NSNumber(integer: 100), current: NSNumber(integer:90), clockwise: false)
+        CirChart.center = CirChart2.center
         CirChart.countingLabel.hidden = true
         CirChart.current = NSNumber(integer: crop.currentTime)
         CirChart.total = NSNumber(integer: crop.growDays)
         CirChart.strokeColor = UIColor.MainColor()
         CirChart.backgroundColor = UIColor.clearColor()
-        CirChart.center = StackViewLabel.center
-        CirChart.center.y -= 20
         CirChart.lineWidth = NSNumber(integer: 20)
 
         self.view.addSubview(CirChart)

@@ -42,6 +42,7 @@ class FarmlandConfigureViewController: TYViewController {
             preArea = farmLand.mianji
            
             if let crop = farmLand.crops{
+                preCrops = crop.name
                 cropCreateDate = crop.startDate
                 cropCreateTime = crop.starTime
                 preDate = formatter.stringFromDate(cropCreateDate!)
@@ -178,6 +179,9 @@ class FarmlandConfigureViewController: TYViewController {
             crops.id = (farmLand.crops?.id)!
             self.selectCrop = crops
         }
+        if preCrops != farmLand.crops?.name {
+            NetWorkManager.pushAFinishedTask(farmLand.id, cropNo: (self.selectCrop?.id)!, taskNo: "TA000000", operation: "开始种植")
+        }
         NetWorkManager.updateSession{
             TYRequest(ContentType.fieldSet, parameters: ["fieldNo":self.farmLand.id,"fieldName":self.preName!,"fieldArea":String(format: "%.f",self.preArea),"longitude":self.position!.longitude,"latitude":self.position!.latitude,"cropNo":self.selectCrop!.id,"startTime":String(format: "%.f",Double(self.cropCreateTime))]).TYresponseJSON(completionHandler: {  response in
                 try! ModelManager.realm.write({
@@ -200,7 +204,7 @@ class FarmlandConfigureViewController: TYViewController {
                     if let crop = self.selectCrop {
                         NetWorkManager.getCrops(crop.id, action: { crop in
                             try! ModelManager.realm.write({
-                                crop.operatorid = self.farmLand.id + crop.id + String(format: "%.f", (NSDate().timeIntervalSinceReferenceDate)%10000)
+                                crop.operatorid = self.farmLand.id + crop.id + String(format: "%.f", (NSDate().timeIntervalSince1970)%10000)
                                 crop.startDate = self.cropCreateDate!
                                 crop.starTime = self.cropCreateTime
                                 self.farmLand.crops = crop
@@ -316,7 +320,7 @@ extension FarmlandConfigureViewController:UITableViewDelegate,UITableViewDataSou
                 AlertCropsChooseViewController.pushAlertInViewController(self, block: { crop in
                     if self.selectCrop?.id != crop.id{
                         self.selectCrop = crop
-                        self.preName = crop.name
+                        self.preCrops = crop.name
                         self.cropChange = true
                         self.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .None)
                     }

@@ -109,7 +109,8 @@ class Crops: Object {
 //农田类
 class Farmland: Object{
     dynamic var userID:String = ""
-    dynamic var id:String = "" //用户农田的唯一标示
+    dynamic var id:String = ""
+    dynamic var deviceMac = ""
     dynamic var name:String = ""
     dynamic var mianji:Double = 0.0
     dynamic var longitude:Double = 0.0
@@ -200,8 +201,17 @@ class Farmland: Object{
     }
     
     func updateTasking(block:(()->Void)? = nil){
+        
+        try! ModelManager.realm.write{
+            for x in self.tasking{
+                if x.status == false {
+                    ModelManager.realm.delete(x)
+                }
+            }
+        }
         if let crop = self.crops{
-            let taskings = tasking
+            let taskings = self.tasking
+            
             let queue = NSOperationQueue()
             queue.suspended = true
             queue.addOperationWithBlock({
@@ -209,18 +219,18 @@ class Farmland: Object{
                     Block()
                 }
             })
-           var signal = crop.tasks.count
-           for task in crop.tasks{
-              signal -= 1
+            var signal = crop.tasks.count
+            for task in crop.tasks{
+                signal -= 1
                 //从这个作物的任务表里面遍历出符合触发条件的任务
                 switch task.taskType {
                 //判断任务的类型
                 case "Everyday":
                     //判断一下是否符合时间节点以及在做过的任务当中有没有做过
-                    if task.startTime <= crop.currentTime && tasking.filter("self.realTaskNo == %@",task.id).count == 0{
+                    if task.startTime <= crop.currentTime && self.tasking.filter("self.realTaskNo == %@",task.id).count == 0{
                         //判断前驱任务
                         if task.lastTaskid != "0" {
-                            let x = tasking.filter("self.realTaskNo = %@ ",task.lastTaskid).first
+                            let x = self.tasking.filter("self.realTaskNo = %@ ",task.lastTaskid).first
                             if x == nil {
                                 continue
                             }
@@ -242,7 +252,7 @@ class Farmland: Object{
                     }
                 default:
                     //临时任务
-                    if task.startTime <= crop.currentTime && tasking.filter("self.realTaskNo == %@ and self.status == false",task.id).count == 0{
+                    if task.startTime <= crop.currentTime && self.tasking.filter("self.realTaskNo == %@ and self.status == false",task.id).count == 0{
                         //判断触发条件
                         var finishCount = task.fireCondition.count
                         if finishCount != 0 {
@@ -267,8 +277,8 @@ class Farmland: Object{
                             }
                             
                         }else{
-                        //前面都通过了
-                        //说明该任务可做。则生成正在执行的任务
+                            //前面都通过了
+                            //说明该任务可做。则生成正在执行的任务
                             signal += 1
                             Tasking.CreateTasking(self, task: task, block: { (tasking) in
                                 //内层已经处于一个事务当中
@@ -280,7 +290,7 @@ class Farmland: Object{
                             })
                         }
                     }
-
+                    
                 }
             }
             if signal == 0 {
@@ -295,33 +305,36 @@ class Farmland: Object{
         //执行对应的闭包操作
         NetWorkManager.updateSession{
             TYRequest(ContentType.fieldData, parameters: ["fieldNo":self.id]).TYresponseJSON { (response) in
-                print("------ ------ 农田数据")
-                print(response)
-                
                 if let json = response.result.value as? [String:AnyObject]{
                     if let fieldData = json["fieldData"] as? [String:AnyObject]{
-                       try! ModelManager.realm.write({
-                            self.airT = fieldData["airT"] as! Double
-                            self.airW = fieldData["airW"] as! Double
-                            self.co2 = fieldData["co2"] as! Double
-                            self.light = fieldData["light"] as! Double
-                            self.soilT = fieldData["soilT"] as! Double
-                            self.soilW = fieldData["soilW"] as! Double
-                            if let finishBlock = block {
-                                finishBlock(self)
-                            }
-                        
-                            if let action = self.fillDataInViewAction{
-                                action(air_t: self.airT,air_w: self.airW,soil_t: self.soilT,soil_w: self.soilW,co2: self.co2,light: self.light)
-                            }
-                        })
-
+                        self.setEnvironmentData(fieldData)
+                        if let finishBlock = block {
+                            finishBlock(self)
+                        }
                     }
                 }
-                print("------ ------ 农田数据")
             }
         }
     }
+    
+    func setEnvironmentData(json:[String:AnyObject]){
+        try! ModelManager.realm.write({
+            self.airT = json["airT"] as! Double
+            self.airW = json["airW"] as! Double
+            self.co2 = json["co2"] as! Double
+            self.light = json["light"] as! Double
+            self.soilT = json["soilT"] as! Double
+            self.soilW = json["soilW"] as! Double
+        })
+        fillDataInView()
+    }
+    
+    func fillDataInView(){
+        if let action = self.fillDataInViewAction{
+            action(air_t: self.airT,air_w: self.airW,soil_t: self.soilT,soil_w: self.soilW,co2: self.co2,light: self.light)
+        }
+    }
+    
     //检查一下该农田的任务，更新正在进行的任务,并在更新完成之后执行回调
     func dispatchTask(block:()->Void){
         
@@ -338,6 +351,18 @@ class Farmland: Object{
                     action((crop.propertyDict[name] as! NSString).doubleValue)
                 }
             }
+        }
+    }
+    
+    class func getFieldByDeviceMac(deviceMac:String) -> Farmland{
+        let fields = ModelManager.getObjects(Farmland)
+        return fields.filter("self.deviceMac = %@", deviceMac).first!
+    }
+    
+    class func setEnvironMent(json:[String:AnyObject]){
+        if let deviceMac = json["deviceMac"] as? String{
+            let field = getFieldByDeviceMac(deviceMac)
+            field.setEnvironmentData(json)
         }
     }
     
@@ -358,28 +383,22 @@ class Task: Object{
     dynamic var note:String = ""
     dynamic var lastTaskid = ""
     dynamic var type = ""
-//    var lastTask:Task{
-//        get{
-//            
-//        }
-//    }
     dynamic var taskType = ""
     dynamic var startTime = 0//开始时间
     dynamic var needTime = 0
     dynamic var period = ""//属于哪个时期
     dynamic var periodNO = ""
     let fireCondition = List<TaskFireCondition>()
-    override class func primaryKey() -> String{
-        return "id"
-    }
 
 }
 //正在进行的任务，主要是把文本解析成具体的任务
 class Tasking:Object{
+    dynamic var fieldID = ""
     dynamic var id = ""
     dynamic var name = ""
-    dynamic var operation = ""
+    dynamic var operation = ""//解析完成后的内容
     dynamic var note = ""
+    dynamic var realTask:Task?
     dynamic var realTaskNo = ""
     dynamic var finishTime:Double = 0
     dynamic var taskType = ""
@@ -388,7 +407,7 @@ class Tasking:Object{
     dynamic var periodNo = ""
     static var dateFormatter: NSDateFormatter{
         let dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "MM/dd   hh:mm"
+        dateFormatter.dateFormat = "MM/dd   HH:mm"
         return dateFormatter
     }
     static var idCount = 0
@@ -400,19 +419,18 @@ class Tasking:Object{
        try! ModelManager.realm.write {
             self.status = true
             finishTime = NSDate().timeIntervalSince1970
+        let operation = realTask?.operation.componentsSeparatedByString("&&").count > 1 ? self.operation : ""
+        NetWorkManager.pushAFinishedTask(fieldID, cropNo: (crop?.id)!, taskNo:(realTask?.id)!, operation: operation)
             if self.name == "临时加肥"{
                 let fields = ModelManager.getObjects(Farmland)
-                fields.forEach({ (field) in
+                    for field in fields{
                     if field.tasking.filter("self.id == %@",self.id).count > 0{
-                        field.lastFeritilizeTIme = NSDate().timeIntervalSince1970 + 28800
+                        field.lastFeritilizeTIme = NSDate().timeIntervalSince1970
                     }
-                })
+                }
+                
             }
         }
-    }
-    
-    override class func primaryKey() -> String{
-        return "id"
     }
     
     override class func ignoredProperties() -> [String]{
@@ -420,26 +438,26 @@ class Tasking:Object{
     }
     
     class func CreateTasking(field:Farmland,task:Task,block:(Tasking)->Void){
-        WisdomTask.convertToRealStr(task.operation, field: field) { (str) in
+        WisdomTask.convertToRealStr(task.operation, field: field,finishAction:  { (str) in
             dispatch_async(dispatch_get_main_queue(), {
-                try! ModelManager.realm.write({ 
+                try! ModelManager.realm.write({
                     field.crops?.periodNO = task.periodNO
                     let tasking = Tasking()
                     tasking.id = NSUUID().UUIDString
                     tasking.name = task.name
                     tasking.note = task.note
-                    tasking.realTaskNo = task.id
                     tasking.operation = str
                     tasking.taskType = task.taskType
                     tasking.crop = task.crops
                     tasking.periodNo = task.periodNO
+                    tasking.fieldID = field.id
+                    tasking.realTask = task
+                    tasking.realTaskNo = task.id
                     block(tasking)
                 })
             })
-          
-        }
+        })
     }
-    
 }
 
 class TaskFireCondition:Object{
@@ -460,7 +478,7 @@ class ModelManager{
         })
         Realm.Configuration.defaultConfiguration = config
         real = try! Realm()
-        print(config.fileURL)
+        //print(config.fileURL)
         return real!
     }
     

@@ -10,6 +10,7 @@ import UIKit
 import SDWebImage
 class ForumTableViewCell: UITableViewCell,Reusable {
 
+    @IBOutlet weak var LabelName: UILabel!
     @IBOutlet weak var StackViewImgButton: UIStackView!
     @IBOutlet weak var ImgTipSolved: UIImageView!
     @IBOutlet weak var NewContentView: UIView!
@@ -24,31 +25,22 @@ class ForumTableViewCell: UITableViewCell,Reusable {
     var forum:Forum!
     var haveImg:Bool = false{
         didSet{
-            if haveImg == false{
-                ConstraintLabelBottom.constant = 20
-            }else{
-                ConstraintLabelBottom.constant = 110
-            }
+            StackViewImgButton.hidden = !haveImg
+            ConstraintLabelBottom.active = haveImg
         }
     }
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        ImgPhoto.layer.cornerRadius = 17.5
-//        ImgPhoto.clipsToBounds = true
         imageViews.append(ImageViewOne)
         imageViews.append(ImageViewTwo)
         imageViews.append(ImageViewThd)
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        if let view = touches.first?.view where (view.tag >= 101 && view.tag <= 103){
+        if let view = touches.first?.view as? UIImageView where (view.tag >= 101 && view.tag <= 103) && view.image != nil{
             let index = view.tag - 101
-            var array = [UIImageView]()
-            for x in imageViews where x.hidden == false{
-                array.append(x.copy() as! UIImageView)
-            }
-            MessagePhotoScanController.setImages(array, index: index, fromPoint: StackViewImgButton.convertPoint(imageViews[index].center, toView: MessagePhotoScanController.shareMessagePhotoScan.view))
+            MessagePhotoScanController.setImages(imageViews, imagesURL: forum.images, index: index)
             MessagePhotoScanController.pushScanController()
             return
         }
@@ -66,11 +58,12 @@ class ForumTableViewCell: UITableViewCell,Reusable {
             btn.hidden = true
         }
         //可能没有图片，采用默认图片，后期修改
-        ImgPhoto.sd_setImageWithURL(NSURL(string:forum.headImage)!)
+        ImgPhoto.sd_setImageWithURL(NSURL(string:forum.headImage.imageLowQualityURL())!)
+        LabelName.text = forum.username
         LabelContent.text = forum.content
-        LabelTime.setTitle(forum.createDate.ForumDateDescription, forState: .Normal)
+        LabelTime.setTitle(forum.createDate.dateDescription, forState: .Normal)
         for i in 0..<forum.images.count{
-            imageViews[i].sd_setImageWithURL(NSURL(string: forum.images[i]))
+            imageViews[i].sd_setImageWithURL(NSURL(string: forum.images[i].imageLowQualityURL()))
             imageViews[i].hidden = false
         }
     }

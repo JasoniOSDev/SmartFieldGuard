@@ -41,6 +41,7 @@ class ExpertClassChooseController: TYViewController,UITableViewDataSource,UITabl
     }
     
     private func prepareUI(){
+        self.title = "分类选择"
         tableViewConfigure()
         navigationItemConfigure()
     }
@@ -136,7 +137,7 @@ extension ExpertClassChooseController{
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return cropClasses.count
+        return cropClasses.count + 1
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -148,6 +149,7 @@ extension ExpertClassChooseController{
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(indexPath: indexPath) as ExpertClassChooseTableViewCell
+        cell.selectionStyle = .None
         cell.index = indexPath.section
         cell.collectionView.delegate = self
         cell.collectionView.dataSource = self
@@ -207,6 +209,7 @@ extension ExpertClassChooseController:UICollectionViewDelegateFlowLayout,UIColle
             }
             return crops[collectionView.tag - 1] == nil ? 0 : (crops[collectionView.tag - 1]?.count)!
         }
+        
         return 0
     }
     

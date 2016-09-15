@@ -15,7 +15,8 @@ class GPSWayViewController: UIViewController,MAMapViewDelegate {
     @IBOutlet weak var mapView: MAMapView!
     var block:((Double) -> Void)?
     var points = [CLLocationCoordinate2D]()
-    var line:MAPolyline?
+    var prePoint:CLLocationCoordinate2D?
+    var lines = [MAPolyline]()
     var polygon:MAPolygon?
     var drawLine:Bool = false
     lazy var areaViewController:AreaViewController = {
@@ -31,9 +32,19 @@ class GPSWayViewController: UIViewController,MAMapViewDelegate {
         ButtonAgain.addObserver(self, forKeyPath: "hidden", options: .New, context: nil)
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        self.popupController.style = .BottomSheet
+    }
+    
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         self.popupController.navigationBar.tintColor = UIColor.whiteColor()
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.popupController.style = .FormSheet
     }
     
     
@@ -50,13 +61,9 @@ class GPSWayViewController: UIViewController,MAMapViewDelegate {
         }
     }
     
-    deinit{
-        ButtonAgain.removeObserver(self, forKeyPath: "hidden")
-    }
-    
     override func loadView() {
         super.loadView()
-        self.contentSizeInPopup = CGSizeMake(320, 500)
+        self.contentSizeInPopup = CGSizeMake(ScreenWidth, 500)
     }
 
     @IBAction func ButtonMyLocationClicked(sender: AnyObject) {
@@ -77,11 +84,14 @@ class GPSWayViewController: UIViewController,MAMapViewDelegate {
             ButtonAgain.hidden = true
         case "停止"?:
             drawLine = false
-            if let Line = line{
+            if lines.count > 4{
                 polygon = MAPolygon(coordinates: &points, count: UInt(points.count))
                 mapView.addOverlay(polygon)
-                mapView.removeOverlay(Line)
             }
+            for line in lines{
+                mapView.removeOverlay(line)
+            }
+            lines.removeAll()
             sender.setTitle("确定", forState: .Normal)
             ButtonAgain.hidden = false
         case "确定"?:
@@ -272,12 +282,16 @@ class GPSWayViewController: UIViewController,MAMapViewDelegate {
     
     func mapView(mapView: MAMapView!, didUpdateUserLocation userLocation: MAUserLocation!) {
         if(drawLine == true){
-            points.append(userLocation.coordinate)
-            if let preLine = line{
-                mapView.removeOverlay(preLine)
+            let point = userLocation.coordinate
+            if let prePoint = prePoint{
+                var array = [prePoint,point]
+                let line = MAPolyline(coordinates: &array, count: UInt(2))
+                mapView.addOverlay(line)
+                lines.append(line)
             }
-            line = MAPolyline(coordinates: &points, count: UInt(points.count))
-            mapView.addOverlay(line)
+            print("定位了")
+            prePoint = point
+            points.append(point)
         }
     }
     
@@ -285,7 +299,7 @@ class GPSWayViewController: UIViewController,MAMapViewDelegate {
         if let _ = overlay as? MAPolyline{
             let renderer = MAPolylineRenderer(overlay: overlay)
             renderer.strokeColor =  UIColor.DangerColor()
-            renderer.lineWidth = 20
+            renderer.lineWidth = 10
             return renderer
         }else{
             let renderer = MAPolygonRenderer(overlay: overlay)
@@ -294,4 +308,7 @@ class GPSWayViewController: UIViewController,MAMapViewDelegate {
         }
     }
    
+    deinit{
+        ButtonAgain.removeObserver(self, forKeyPath: "hidden")
+    }
 }

@@ -12,6 +12,7 @@ import RealmSwift
 import MBProgressHUD
 class ExpertAndMeViewController: TYViewController {
 
+    @IBOutlet weak var ViewRegionMSG: UIView!//输入框所在的视图
     @IBOutlet weak var TextFieldSend: UITextField!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var ConstraintContentbarBottom: NSLayoutConstraint!
@@ -35,7 +36,7 @@ class ExpertAndMeViewController: TYViewController {
                     switch change{
                     case .Initial(_):
                         self?.tableView.reloadData()
-                        self?.tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: (self?.messages!.count)!, inSection: 0), atScrollPosition: .Bottom, animated: true)
+                        self?.tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: (self?.messages!.count)!, inSection: 0), atScrollPosition: .Bottom, animated: false)
                     case .Update(_, deletions: _, insertions: let insertions, modifications: _):
                         if self?.tableView != nil {
                             if insertions.count>0{
@@ -84,7 +85,6 @@ class ExpertAndMeViewController: TYViewController {
         tableView.registerReusableCell(MyReplyTableViewCell)
         tableView.separatorStyle = .None
         tableView.backgroundColor = UIColor.BackgroundColor()
-        tableView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.TagGestureToScrollView)))
         tableView.contentInset = UIEdgeInsetsMake(10, 0, 0, 0)
         tableView.contentOffset = CGPointMake(0, -10)
         tableView.clearOtherLine()
@@ -111,17 +111,13 @@ class ExpertAndMeViewController: TYViewController {
         return cellHeights[key]!
     }
     
-    func TagGestureToScrollView() {
-        TextFieldSend.resignFirstResponder()
-    }
-    
-    @IBAction func ButtonSendClicked() {
+    func MessageSendAction() {
         self.TextFieldSend.resignFirstResponder()
         if let content = TextFieldSend.text{
             let message = ExpertMessage()
             message.Theme = self.theme
             message.content = content
-            message.headPhoto = TYUserDefaults.headImage.value!
+            message.headPhoto = TYUserDefaults.headImage.value
             message.name = TYUserDefaults.username.value!
             message.userID = TYUserDefaults.userID.value!
             NetWorkManager.PushNewExpertReplay(message, postID: theme.ID,callback: {
@@ -134,9 +130,24 @@ class ExpertAndMeViewController: TYViewController {
                 }
             })
         }
-        
     }
     
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        if let touch = touches.first{
+            let point = touch.locationInView(ViewRegionMSG)
+            if(!ViewRegionMSG.pointInside(point, withEvent: event)){
+                TextFieldSend.resignFirstResponder()
+            }
+        }
+    }
+    
+}
+ 
+extension ExpertAndMeViewController: UITextFieldDelegate{
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        MessageSendAction()
+        return true
+    }
 }
 
 extension ExpertAndMeViewController: UITableViewDelegate,UITableViewDataSource{

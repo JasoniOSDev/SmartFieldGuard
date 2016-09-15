@@ -23,6 +23,7 @@ let UrlPrefixKey = "UrlPrefix"
 let PushNewForumKey = "PushNewForum"
 let RoleNormalMemeber = "NormalMember"
 let RoleExpert = "Expert"
+let NeedShowForumTipKey = "NeedShowForumTip"
 
 struct Listener<T>:Hashable{
     let name:String
@@ -80,6 +81,13 @@ class Listenable<T>{
 public class TYUserDefaults{
     static var defaults = NSUserDefaults(suiteName: "com.jason.TY")!
     
+    static var needShowForumTip:Listenable<Bool> = {
+        let need = defaults.boolForKey(NeedShowForumTipKey)
+        return Listenable<Bool>(need){ need in
+            defaults.setObject(need, forKey: NeedShowForumTipKey)
+        }
+    }()
+    
     static var userID:Listenable<String?> = {
         let userID = defaults.stringForKey(UserIDKey)
         return Listenable<String?>(userID){ userID in
@@ -126,7 +134,7 @@ public class TYUserDefaults{
     static var sessionInvalidTime:Listenable<NSTimeInterval> = {
         var time = defaults.doubleForKey(SessionInvalidTimeKey)
         if time == 0 {
-            time = 1200
+            time = 86400
         }
         return Listenable<NSTimeInterval>(time){ time in
             defaults.setDouble(time, forKey: SessionInvalidTimeKey)
@@ -158,10 +166,10 @@ public class TYUserDefaults{
         }
     }()
     
-    static var headImage:Listenable<String?> = {
-        let headImage = defaults.stringForKey(HeadImageKey) ?? "http://www.jf258.com/uploads/2014-08-28/102343432.jpg"
+    static var headImage:Listenable<String> = {
+        let headImage = defaults.stringForKey(HeadImageKey) ?? ""
         
-        return Listenable<String?>(headImage){ headImage in
+        return Listenable<String>(headImage){ headImage in
             defaults.setObject(headImage, forKey: HeadImageKey)
         }
     }()

@@ -17,7 +17,7 @@ class WisdomTask{
         }
     }
 
-    class func convertToRealStr(Str:String,field:Farmland,finishAction:(str:String) -> Void){
+    class func convertToRealStr(Str:String,field:Farmland,finishAction:(str:String) -> Void,valueBlock:(([Int:Double])->Void)? = nil){
         
         var Contents = Str.componentsSeparatedByString("&&")
         if Contents.count < 2{
@@ -38,6 +38,9 @@ class WisdomTask{
             }
             newStr += one.last!
             finishAction(str: newStr)
+            if let valuesBlock = valueBlock{
+                valuesBlock(values)
+            }
         }
         
         for i in 0..<second.count{
@@ -47,17 +50,15 @@ class WisdomTask{
                 WTProperty.convertToValue(part,field: field, FinishAction: { (value) in
                     values[index] = value
                     finish -= 1
-                    if finish == 0{
-                        queue.suspended = false
-                    }
-                    
+                    queue.suspended = !((finish) == 0)
+                    print(finish)
                 })
             }else{
-                //函数处理
-                WTFunction.convertToValue(part.stringByReplacingOccurrencesOfString("@", withString: ""), field: field, FinishAction: { (value) in
+                WTFunction.convertToValue(part, field: field, FinishAction: { (value) in
                     values[index] = value
                     finish -= 1
                     queue.suspended = !((finish) == 0)
+                    print(finish)
                 })
             }
         }
@@ -78,6 +79,11 @@ class WTProperty:NSObject{
     }
     
     class func convertToValue(propertyStr:String,field:Farmland,FinishAction:(Double) -> Void){
+        //判断是否是函数
+        if propertyStr.hasPrefix("@"){
+            WTFunction.convertToValue(propertyStr, field: field, FinishAction: FinishAction)
+            return
+        }
         //处理尾部限制条件
             let parts = propertyStr.componentsSeparatedByString("(")
             var myCondition = ""
@@ -117,17 +123,20 @@ class WTFunction:NSObject{
     }
     
     class func convertToValue(FuncStr:String,field:Farmland,FinishAction:(Double) -> Void){
-
-            
-        let parts = FuncStr.componentsSeparatedByString("/")
-        let propertyStrs = parts[1]
-        let properties = propertyStrs.componentsSeparatedByString("%")
+        var newStr = NSString(string: FuncStr)
+        let funcTag = newStr.substringWithRange(NSMakeRange(0, 2))
+        newStr = newStr.stringByReplacingCharactersInRange(NSMakeRange(0, 2), withString: "")
+        var parts = NSString(string:FuncStr.substringToIndex(FuncStr.characters.indexOf("/")!))
+        parts = parts.substringWithRange(NSMakeRange(2, parts.length-2))
+        var property = FuncStr.substringFromIndex(FuncStr.characters.indexOf("/")!)
+        property.removeAtIndex(property.characters.indexOf("/")!)
+        var properties = property.componentsSeparatedByString(funcTag)
         var values = [Int:Double]()
         let queue = NSOperationQueue()
         queue.suspended = true
         
         //选择方法
-        switch parts[0] {
+        switch parts {
         case Function.QiCheng.rawValue:
             queue.addOperationWithBlock({ 
                 FinishAction(QiCheng(values))

@@ -50,7 +50,7 @@ class AlertAddDeviceFourViewController: TYViewController,GCDAsyncSocketDelegate 
     func socket(sock: GCDAsyncSocket!, didConnectToHost host: String!, port: UInt16) {
         print("已连接到")
         print("host:\(host)\tport:\(port)")
-        let wifiInfo = "{\"type\":\"connect_wifi\", \"ssid\":\(AlertAddDeviceSecondViewController.wifiName),\"psw\":\(AlertAddDeviceSecondViewController.wifiPassWord), \"encryption\":\"psk2\",\"userId\":\((TYUserDefaults.userID.value)!)}".dataUsingEncoding(NSUTF8StringEncoding)
+        let wifiInfo = "{\"type\":\"connect_wifi\", \"ssid\":\(AlertAddDeviceSecondViewController.wifiName),\"psw\":\(AlertAddDeviceSecondViewController.wifiPassWord), \"encryption\":\"psk2\",\"userId\":\((TYUserDefaults.userID.value)!)}\n".dataUsingEncoding(NSUTF8StringEncoding)
         mySocket.writeData(wifiInfo!, withTimeout: 10, tag: 1)
         
     }

@@ -16,9 +16,6 @@ class InstroduceViewController: TYViewController {
         popController.containerView.layer.cornerRadius = 4
         popController.navigationBar.titleTextAttributes = [NSFontAttributeName:UIFont.NavigationBarNormalTitleFont(),NSForegroundColorAttributeName:UIColor.MidBlackColor()]
         popController.navigationBar.tintColor = UIColor.blackColor()
-        for x in popController.navigationBar.subviews{
-        x.subviews[0].removeFromSuperview()
-        }
         popController.navigationBar.setBackgroundImage(UIImage(named: "NavigationBackgroundImg"), forBarMetrics: UIBarMetrics.Default)
         return popController
     }()
@@ -34,13 +31,20 @@ class InstroduceViewController: TYViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor.whiteColor()
-        tableViewConfigure()
+        prepareUI()
         calcHeight()
         tableView.clearOtherLine()
     }
     
+    func prepareUI(){
+        view.backgroundColor = UIColor.whiteColor()
+        tableViewConfigure()
+        
+    }
+    
     func tableViewConfigure(){
+        tableView.showsVerticalScrollIndicator = false
+        tableView.showsHorizontalScrollIndicator = false
         tableView.separatorStyle = .None
         tableView.registerReusableCell(InstroduceTableViewCell)
     }

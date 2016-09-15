@@ -98,35 +98,43 @@ class Replay:NSObject{
 //private String agreeUsers;点赞用户的编号
 
 
-
 extension NSTimeInterval{
-    var ForumDateDescription:String{
+    
+    var dateDescription:String{
         get{
             let date = NSDate(timeIntervalSince1970: self/1000)
             let dis = -date.timeIntervalSinceNow
-            if dis < 3600 {
-                if dis / 60  <= 2 {
-                    return "刚刚"
-                }
-                return String(format: "%.f分钟前", dis/60)
-            }else{
-                let dateFormatter = NSDateFormatter()
-                dateFormatter.dateFormat = "HH:mm"
-                return dateFormatter.stringFromDate(NSDate(timeIntervalSince1970: self/1000))
+            switch dis/60 {
+            case 0:
+                return self.lessMinDateDescription()
+            case 1..<60:
+                return self.lessHourDateDescription(dis)
+            case 60..<1440:
+                return self.lessDayDateDescription()
+            default:
+                return self.moreDayDateDescription()
             }
         }
     }
-    var ReplyDateDescription:String{
-        get{
-            let date = NSDate(timeIntervalSince1970: self/1000)
-             let dateFormatter = NSDateFormatter()
-            let dis = -date.timeIntervalSinceNow
-            if dis < 86400 {
-                return self.ForumDateDescription
-            }else{
-                dateFormatter.dateFormat = "MM-dd"
-            }
-            return dateFormatter.stringFromDate(NSDate(timeIntervalSince1970: self/1000))
-        }
+    
+    func lessMinDateDescription() -> String{
+        return "刚刚"
+    }
+    
+    func lessHourDateDescription(dis : NSTimeInterval) -> String{
+        return String(format: "%.f分钟前", dis/60)
+    }
+    
+    func lessDayDateDescription()->String{
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "HH:mm"
+        return dateFormatter.stringFromDate(NSDate(timeIntervalSince1970: self/1000))
+    }
+    
+    //超过一天的表示方式
+    func moreDayDateDescription()->String{
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "MM-dd"
+        return dateFormatter.stringFromDate(NSDate(timeIntervalSince1970: self/1000))
     }
 }

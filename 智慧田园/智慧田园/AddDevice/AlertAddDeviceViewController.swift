@@ -31,10 +31,7 @@ class AlertAddDeviceViewController: TYViewController {
         popController.containerView.layer.cornerRadius = 4
         popController.navigationBar.titleTextAttributes = [NSFontAttributeName:UIFont.NavigationBarNormalTitleFont(),NSForegroundColorAttributeName:UIColor.NavigationBarTitleColor()]
         popController.navigationBar.tintColor = UIColor.blackColor()
-        for x in popController.navigationBar.subviews{
-            x.subviews[0].removeFromSuperview()
-        }
-         popController.navigationBar.setBackgroundImage(UIImage(named: "NavigationBackgroundImg"), forBarMetrics: UIBarMetrics.Default)
+        popController.navigationBar.setBackgroundImage(UIImage(named: "NavigationBackgroundImg"), forBarMetrics: UIBarMetrics.Default)
         popController.presentInViewController(viewController)
 
     }

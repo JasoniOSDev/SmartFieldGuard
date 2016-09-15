@@ -55,8 +55,9 @@ class AreaViewController: UIViewController,UITextFieldDelegate {
             self.popupController.popViewControllerAnimated(true)
         }else{
             let viewController = GPSViewController
+            let popController = self.popupController
             self.popupController.popViewControllerAnimated(false)
-            self.popupController.pushViewController(viewController, animated: true)
+            popController.pushViewController(viewController, animated: true)
         }
     }
     @IBAction func ButtonSureClicked(sender: AnyObject) {

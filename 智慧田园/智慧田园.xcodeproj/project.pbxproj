@@ -13,6 +13,7 @@
 		961FFCA01D79A83D001F363B /* TYCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961FFC9F1D79A83D001F363B /* TYCache.swift */; };
 		961FFCA31D79A864001F363B /* NetWork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961FFCA11D79A864001F363B /* NetWork.swift */; };
 		961FFCA41D79A864001F363B /* NetWorkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961FFCA21D79A864001F363B /* NetWorkManager.swift */; };
+		962A351B1D8993D900FACBBF /* TYRefreshNavHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 962A351A1D8993D900FACBBF /* TYRefreshNavHeader.swift */; };
 		962ABF541CF2895800990AC2 /* InstroduceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 962ABF531CF2895800990AC2 /* InstroduceViewController.swift */; };
 		962ABF581CF2898400990AC2 /* InstroduceHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 962ABF571CF2898400990AC2 /* InstroduceHeaderView.swift */; };
 		962ABF5B1CF29ECB00990AC2 /* InstroduceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 962ABF591CF29ECB00990AC2 /* InstroduceTableViewCell.swift */; };
@@ -24,6 +25,7 @@
 		96336E441CED569400BA5BF3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 96336E421CED569400BA5BF3 /* LaunchScreen.storyboard */; };
 		96336E4F1CED569500BA5BF3 /* ____Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96336E4E1CED569500BA5BF3 /* ____Tests.swift */; };
 		96336E5A1CED569500BA5BF3 /* ____UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96336E591CED569500BA5BF3 /* ____UITests.swift */; };
+		963408171D7BF73B00334FC8 /* PhotoScanModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963408161D7BF73B00334FC8 /* PhotoScanModel.swift */; };
 		9638713F1CF4039C00653D11 /* NewRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9638713E1CF4039C00653D11 /* NewRecordViewController.swift */; };
 		963BDD231CFAB0F4003DB16E /* TaskDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963BDD221CFAB0F4003DB16E /* TaskDetailViewController.swift */; };
 		963BDD291CFB427A003DB16E /* AnalyzeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963BDD281CFB427A003DB16E /* AnalyzeViewController.swift */; };
@@ -35,6 +37,8 @@
 		963BDD3F1CFB682A003DB16E /* SoilViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963BDD3E1CFB682A003DB16E /* SoilViewController.swift */; };
 		963BDD421CFB6874003DB16E /* SunViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963BDD411CFB6874003DB16E /* SunViewController.swift */; };
 		963BDD451CFBD152003DB16E /* FertilizeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963BDD441CFBD152003DB16E /* FertilizeViewController.swift */; };
+		964173F41D8829EA00982CE8 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 961DF0741CF6ACE700A8942D /* MapKit.framework */; };
+		96480A8D1D7BB03300C04D5D /* UITableView+ZHTY.m in Sources */ = {isa = PBXBuildFile; fileRef = 96480A8C1D7BB03300C04D5D /* UITableView+ZHTY.m */; };
 		965A53C01CF0011400CA9B53 /* TYConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965A53BE1CF0011400CA9B53 /* TYConfig.swift */; };
 		965A53C21CF014D900CA9B53 /* CardDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965A53C11CF014D900CA9B53 /* CardDetailViewController.swift */; };
 		965A53C71CF073D300CA9B53 /* TYTabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965A53C61CF073D300CA9B53 /* TYTabBarItem.swift */; };
@@ -87,6 +91,7 @@
 		968889121CEEB13800B99FD4 /* AlertAddDeviceFourViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968889111CEEB13800B99FD4 /* AlertAddDeviceFourViewController.swift */; };
 		968889141CEF23BA00B99FD4 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 968889131CEF23BA00B99FD4 /* SystemConfiguration.framework */; };
 		968889161CEF24DE00B99FD4 /* TYExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968889151CEF24DE00B99FD4 /* TYExtension.swift */; };
+		968FFBAA1D89169C009B4DBD /* UIApplication+PushNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968FFBA91D89169C009B4DBD /* UIApplication+PushNotification.swift */; };
 		9697638C1CF83EE700F11E7C /* UserCenterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9697638B1CF83EE700F11E7C /* UserCenterViewController.swift */; };
 		9697638F1CF861F300F11E7C /* ForumModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9697638E1CF861F300F11E7C /* ForumModel.swift */; };
 		9699F1BD1CEF40BF0013031B /* FarmlandCardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9699F1BB1CEF40BF0013031B /* FarmlandCardTableViewCell.swift */; };
@@ -102,6 +107,8 @@
 		96A567B91CF72FEA000733A1 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A567B81CF72FEA000733A1 /* LoginViewController.swift */; };
 		96A567BC1CF73B25000733A1 /* TYUserDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A567BB1CF73B25000733A1 /* TYUserDefault.swift */; };
 		96A567C11CF73D80000733A1 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96A567C01CF73D80000733A1 /* RegisterViewController.swift */; };
+		96AA20371D7BB31C00E22A4E /* PhotoScanCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AA20351D7BB31C00E22A4E /* PhotoScanCollectionViewCell.swift */; };
+		96AA20381D7BB31C00E22A4E /* PhotoScanCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 96AA20361D7BB31C00E22A4E /* PhotoScanCollectionViewCell.xib */; };
 		96AC87521D3F6F5C0075C451 /* ExpertModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AC87511D3F6F5C0075C451 /* ExpertModel.swift */; };
 		96D040951D42343200011D15 /* ExpertClassChooseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D040941D42343200011D15 /* ExpertClassChooseController.swift */; };
 		96D29D8D1D3F976800B990DB /* ExpertClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D29D8C1D3F976800B990DB /* ExpertClient.swift */; };
@@ -170,6 +177,7 @@
 		961FFC9F1D79A83D001F363B /* TYCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TYCache.swift; path = Helper/Cache/TYCache.swift; sourceTree = "<group>"; };
 		961FFCA11D79A864001F363B /* NetWork.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NetWork.swift; path = Helper/NetWorkManager/NetWork.swift; sourceTree = "<group>"; };
 		961FFCA21D79A864001F363B /* NetWorkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NetWorkManager.swift; path = Helper/NetWorkManager/NetWorkManager.swift; sourceTree = "<group>"; };
+		962A351A1D8993D900FACBBF /* TYRefreshNavHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TYRefreshNavHeader.swift; path = FarmlandCard/TYRefreshNavHeader.swift; sourceTree = "<group>"; };
 		962ABF531CF2895800990AC2 /* InstroduceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InstroduceViewController.swift; path = Instroduce/InstroduceViewController.swift; sourceTree = "<group>"; };
 		962ABF571CF2898400990AC2 /* InstroduceHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InstroduceHeaderView.swift; path = Instroduce/InstroduceHeaderView.swift; sourceTree = "<group>"; };
 		962ABF591CF29ECB00990AC2 /* InstroduceTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InstroduceTableViewCell.swift; path = Instroduce/InstroduceTableViewCell.swift; sourceTree = "<group>"; };
@@ -187,6 +195,7 @@
 		96336E551CED569500BA5BF3 /* 智慧田园UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "智慧田园UITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		96336E591CED569500BA5BF3 /* ____UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "____UITests.swift"; sourceTree = "<group>"; };
 		96336E5B1CED569500BA5BF3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		963408161D7BF73B00334FC8 /* PhotoScanModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PhotoScanModel.swift; path = Extension/MessagePhotoScanController/PhotoScanModel.swift; sourceTree = "<group>"; };
 		9638713E1CF4039C00653D11 /* NewRecordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NewRecordViewController.swift; path = Record/NewRecordViewController.swift; sourceTree = "<group>"; };
 		963BDD221CFAB0F4003DB16E /* TaskDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TaskDetailViewController.swift; path = FarmlandCard/TaskDetailViewController.swift; sourceTree = "<group>"; };
 		963BDD281CFB427A003DB16E /* AnalyzeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AnalyzeViewController.swift; path = Analyze/AnalyzeViewController.swift; sourceTree = "<group>"; };
@@ -198,6 +207,8 @@
 		963BDD3E1CFB682A003DB16E /* SoilViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SoilViewController.swift; path = Analyze/Soil/SoilViewController.swift; sourceTree = "<group>"; };
 		963BDD411CFB6874003DB16E /* SunViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SunViewController.swift; path = Analyze/Sun/SunViewController.swift; sourceTree = "<group>"; };
 		963BDD441CFBD152003DB16E /* FertilizeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FertilizeViewController.swift; path = Analyze/Fertilize/FertilizeViewController.swift; sourceTree = "<group>"; };
+		96480A8B1D7BB03300C04D5D /* UITableView+ZHTY.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UITableView+ZHTY.h"; path = "Extension/UITableView+ZHTY.h"; sourceTree = "<group>"; };
+		96480A8C1D7BB03300C04D5D /* UITableView+ZHTY.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UITableView+ZHTY.m"; path = "Extension/UITableView+ZHTY.m"; sourceTree = "<group>"; };
 		965A53BE1CF0011400CA9B53 /* TYConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TYConfig.swift; path = Config/TYConfig.swift; sourceTree = "<group>"; };
 		965A53C11CF014D900CA9B53 /* CardDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CardDetailViewController.swift; path = FarmlandCard/CardDetailViewController.swift; sourceTree = "<group>"; };
 		965A53C61CF073D300CA9B53 /* TYTabBarItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TYTabBarItem.swift; path = Base/TYTabBarItem.swift; sourceTree = "<group>"; };
@@ -258,6 +269,8 @@
 		9677B7E11CF6A3D9008ADEA4 /* AMapSearchKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AMapSearchKit.framework; sourceTree = "<group>"; };
 		9677B7E71CF6A4BB008ADEA4 /* MAMapKit-2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "MAMapKit-2.framework"; path = "../../../Downloads/MAMapKit-2.framework"; sourceTree = "<group>"; };
 		9677B7E91CF6A4BF008ADEA4 /* AMapFoundationKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMapFoundationKit.framework; path = ../../../Downloads/AMapFoundationKit.framework; sourceTree = "<group>"; };
+		968557461D7FF36400856805 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
+		968557471D7FF36500856805 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		968888FC1CEE018A00B99FD4 /* TYViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TYViewController.swift; path = Base/TYViewController.swift; sourceTree = "<group>"; };
 		968888FE1CEE01F800B99FD4 /* TYNavigationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TYNavigationViewController.swift; path = Base/TYNavigationViewController.swift; sourceTree = "<group>"; };
 		968889001CEE027A00B99FD4 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainViewController.swift; path = Home/MainViewController.swift; sourceTree = "<group>"; };
@@ -268,6 +281,8 @@
 		968889111CEEB13800B99FD4 /* AlertAddDeviceFourViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AlertAddDeviceFourViewController.swift; path = AddDevice/AlertAddDeviceFourViewController.swift; sourceTree = "<group>"; };
 		968889131CEF23BA00B99FD4 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		968889151CEF24DE00B99FD4 /* TYExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TYExtension.swift; path = Config/TYExtension.swift; sourceTree = "<group>"; };
+		968FFBA41D891332009B4DBD /* 智慧田园.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "智慧田园.entitlements"; sourceTree = "<group>"; };
+		968FFBA91D89169C009B4DBD /* UIApplication+PushNotification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIApplication+PushNotification.swift"; path = "Helper/UIApplication+PushNotification.swift"; sourceTree = "<group>"; };
 		9697638B1CF83EE700F11E7C /* UserCenterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserCenterViewController.swift; path = Login/UserCenterViewController.swift; sourceTree = "<group>"; };
 		9697638E1CF861F300F11E7C /* ForumModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ForumModel.swift; path = Forum/ForumModel.swift; sourceTree = "<group>"; };
 		9699F1BB1CEF40BF0013031B /* FarmlandCardTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FarmlandCardTableViewCell.swift; path = FarmlandCard/FarmlandCardTableViewCell.swift; sourceTree = "<group>"; };
@@ -283,6 +298,8 @@
 		96A567B81CF72FEA000733A1 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginViewController.swift; path = Login/LoginViewController.swift; sourceTree = "<group>"; };
 		96A567BB1CF73B25000733A1 /* TYUserDefault.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TYUserDefault.swift; path = Config/TYUserDefault.swift; sourceTree = "<group>"; };
 		96A567C01CF73D80000733A1 /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RegisterViewController.swift; path = Login/RegisterViewController.swift; sourceTree = "<group>"; };
+		96AA20351D7BB31C00E22A4E /* PhotoScanCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PhotoScanCollectionViewCell.swift; path = Extension/MessagePhotoScanController/PhotoScanCollectionViewCell.swift; sourceTree = "<group>"; };
+		96AA20361D7BB31C00E22A4E /* PhotoScanCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PhotoScanCollectionViewCell.xib; path = Extension/MessagePhotoScanController/PhotoScanCollectionViewCell.xib; sourceTree = "<group>"; };
 		96AC87511D3F6F5C0075C451 /* ExpertModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExpertModel.swift; path = Expert/ExpertModel.swift; sourceTree = "<group>"; };
 		96D040941D42343200011D15 /* ExpertClassChooseController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExpertClassChooseController.swift; path = Expert/ExpertClassChooseController.swift; sourceTree = "<group>"; };
 		96D29D8C1D3F976800B990DB /* ExpertClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExpertClient.swift; path = Expert/ExpertClient.swift; sourceTree = "<group>"; };
@@ -296,6 +313,7 @@
 			files = (
 				96A567AE1CF71551000733A1 /* Realm.framework in Frameworks */,
 				968889141CEF23BA00B99FD4 /* SystemConfiguration.framework in Frameworks */,
+				964173F41D8829EA00982CE8 /* MapKit.framework in Frameworks */,
 				96A567B21CF71563000733A1 /* RealmSwift.framework in Frameworks */,
 				C9A1C89BA3BC187084745576 /* Pods_____.framework in Frameworks */,
 			);
@@ -366,6 +384,8 @@
 		961FFC9D1D79A7EE001F363B /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				968FFBA91D89169C009B4DBD /* UIApplication+PushNotification.swift */,
+				96A567BB1CF73B25000733A1 /* TYUserDefault.swift */,
 				961FFC9E1D79A802001F363B /* Cache */,
 				96A567C31CF7DF33000733A1 /* NetWorkManager */,
 			);
@@ -448,9 +468,10 @@
 		96336E381CED569400BA5BF3 /* 智慧田园 */ = {
 			isa = PBXGroup;
 			children = (
+				968FFBA41D891332009B4DBD /* 智慧田园.entitlements */,
 				963BDD271CFB424F003DB16E /* Analyze */,
 				96076C501CF9B5E7002E3F1E /* WisdomTask */,
-				96A567B51CF72EEB000733A1 /* Login */,
+				96A567B51CF72EEB000733A1 /* User */,
 				962ABF601CF2B26E00990AC2 /* Record */,
 				962ABF521CF2893200990AC2 /* Instroduce */,
 				965A53FE1CF1D36B00CA9B53 /* Expert */,
@@ -488,6 +509,14 @@
 				96336E5B1CED569500BA5BF3 /* Info.plist */,
 			);
 			path = "智慧田园UITests";
+			sourceTree = "<group>";
+		};
+		963408151D7BF71600334FC8 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				963408161D7BF73B00334FC8 /* PhotoScanModel.swift */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 		963BDD271CFB424F003DB16E /* Analyze */ = {
@@ -571,9 +600,8 @@
 				965B31BA1D5EC2B1000ABA83 /* Reachability.m */,
 				965A53E71CF13BEC00CA9B53 /* PageButton */,
 				96B89AFC1D3625C200B92ECF /* MessagePhotoScanController */,
-				965B31B41D5EC28F000ABA83 /* PageButtonMidLine.swift */,
-				965B31B01D5EC28A000ABA83 /* MessagePhotoScanController.swift */,
-				965B31B11D5EC28A000ABA83 /* MessagePhotoView.swift */,
+				96480A8B1D7BB03300C04D5D /* UITableView+ZHTY.h */,
+				96480A8C1D7BB03300C04D5D /* UITableView+ZHTY.m */,
 			);
 			name = Extension;
 			sourceTree = "<group>";
@@ -600,6 +628,7 @@
 			children = (
 				965A53CE1CF078A500CA9B53 /* TaskTableViewCell.swift */,
 				965A53CF1CF078A500CA9B53 /* TaskTableViewCell.xib */,
+				962A351A1D8993D900FACBBF /* TYRefreshNavHeader.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -659,6 +688,7 @@
 		965A53E71CF13BEC00CA9B53 /* PageButton */ = {
 			isa = PBXGroup;
 			children = (
+				965B31B41D5EC28F000ABA83 /* PageButtonMidLine.swift */,
 			);
 			name = PageButton;
 			sourceTree = "<group>";
@@ -800,7 +830,6 @@
 		968889041CEE035E00B99FD4 /* Config */ = {
 			isa = PBXGroup;
 			children = (
-				96A567BB1CF73B25000733A1 /* TYUserDefault.swift */,
 				965A53BE1CF0011400CA9B53 /* TYConfig.swift */,
 				968889151CEF24DE00B99FD4 /* TYExtension.swift */,
 				961DF08C1CF6C79400A8942D /* TYHeader.h */,
@@ -831,20 +860,20 @@
 		9699F1BA1CEF407C0013031B /* FarmlandCard */ = {
 			isa = PBXGroup;
 			children = (
+				965A53CC1CF0782400CA9B53 /* View */,
 				962ABF5D1CF2AB8C00990AC2 /* Model */,
 				965A53D21CF0895B00CA9B53 /* Config */,
 				965A53CD1CF0782B00CA9B53 /* Controller */,
-				965A53CC1CF0782400CA9B53 /* View */,
 			);
 			name = FarmlandCard;
 			sourceTree = "<group>";
 		};
-		96A567B51CF72EEB000733A1 /* Login */ = {
+		96A567B51CF72EEB000733A1 /* User */ = {
 			isa = PBXGroup;
 			children = (
 				96A567BA1CF72FEF000733A1 /* Controller */,
 			);
-			name = Login;
+			name = User;
 			sourceTree = "<group>";
 		};
 		96A567BA1CF72FEF000733A1 /* Controller */ = {
@@ -867,6 +896,15 @@
 			name = NetWorkManager;
 			sourceTree = "<group>";
 		};
+		96AA20341D7BB30800E22A4E /* View */ = {
+			isa = PBXGroup;
+			children = (
+				96AA20351D7BB31C00E22A4E /* PhotoScanCollectionViewCell.swift */,
+				96AA20361D7BB31C00E22A4E /* PhotoScanCollectionViewCell.xib */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
 		96AC87501D3F6E760075C451 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -879,6 +917,10 @@
 		96B89AFC1D3625C200B92ECF /* MessagePhotoScanController */ = {
 			isa = PBXGroup;
 			children = (
+				963408151D7BF71600334FC8 /* Model */,
+				96AA20341D7BB30800E22A4E /* View */,
+				965B31B11D5EC28A000ABA83 /* MessagePhotoView.swift */,
+				965B31B01D5EC28A000ABA83 /* MessagePhotoScanController.swift */,
 			);
 			name = MessagePhotoScanController;
 			sourceTree = "<group>";
@@ -969,6 +1011,9 @@
 							com.apple.Maps.iOS = {
 								enabled = 1;
 							};
+							com.apple.Push = {
+								enabled = 1;
+							};
 							com.apple.VPNLite = {
 								enabled = 0;
 							};
@@ -1025,6 +1070,7 @@
 				965B31C01D5EC306000ABA83 /* 兰亭细黑 GBK Mobil.TTF in Resources */,
 				9677B7B61CF5D319008ADEA4 /* CropsCollectionViewCell.xib in Resources */,
 				965A53D11CF078A500CA9B53 /* TaskTableViewCell.xib in Resources */,
+				96AA20381D7BB31C00E22A4E /* PhotoScanCollectionViewCell.xib in Resources */,
 				965A540A1CF1D4E600CA9B53 /* AskExpertTableViewCell.xib in Resources */,
 				963BDD391CFB6134003DB16E /* TYAnalyze.xib in Resources */,
 				96336E441CED569400BA5BF3 /* LaunchScreen.storyboard in Resources */,
@@ -1152,11 +1198,13 @@
 				965A53C21CF014D900CA9B53 /* CardDetailViewController.swift in Sources */,
 				96A04E911D44DD3A00EE66CA /* ExpertClassChooseCollectionViewCell.swift in Sources */,
 				965A540F1CF1F03D00CA9B53 /* MyReplyTableViewCell.swift in Sources */,
+				96AA20371D7BB31C00E22A4E /* PhotoScanCollectionViewCell.swift in Sources */,
 				963BDD311CFB4DB8003DB16E /* AnalyzeCollectionViewCell.swift in Sources */,
 				965A54091CF1D4E600CA9B53 /* AskExpertTableViewCell.swift in Sources */,
 				968889161CEF24DE00B99FD4 /* TYExtension.swift in Sources */,
 				965A53DD1CF1369600CA9B53 /* ForumViewController.swift in Sources */,
 				96076C561CF9C1CE002E3F1E /* WisdomTask.swift in Sources */,
+				962A351B1D8993D900FACBBF /* TYRefreshNavHeader.swift in Sources */,
 				965A53EE1CF1618100CA9B53 /* ForumTableViewCell.swift in Sources */,
 				965A53D01CF078A500CA9B53 /* TaskTableViewCell.swift in Sources */,
 				965A540C1CF1E23200CA9B53 /* ExpertAndMeViewController.swift in Sources */,
@@ -1165,11 +1213,13 @@
 				965A54011CF1D38300CA9B53 /* ExpertViewController.swift in Sources */,
 				9677B7AA1CF5B686008ADEA4 /* AlertTimeChooseViewController.swift in Sources */,
 				9677B7B21CF5D233008ADEA4 /* CropsChooseViewController.swift in Sources */,
+				96480A8D1D7BB03300C04D5D /* UITableView+ZHTY.m in Sources */,
 				965A53FA1CF19E5F00CA9B53 /* ForumDetailViewController.swift in Sources */,
 				96AC87521D3F6F5C0075C451 /* ExpertModel.swift in Sources */,
 				9699F1BD1CEF40BF0013031B /* FarmlandCardTableViewCell.swift in Sources */,
 				9697638F1CF861F300F11E7C /* ForumModel.swift in Sources */,
 				9677B7B51CF5D319008ADEA4 /* CropsCollectionViewCell.swift in Sources */,
+				968FFBAA1D89169C009B4DBD /* UIApplication+PushNotification.swift in Sources */,
 				963BDD3C1CFB6513003DB16E /* AirViewController.swift in Sources */,
 				9677B7BC1CF688C1008ADEA4 /* GPSWayViewController.swift in Sources */,
 				962ABF581CF2898400990AC2 /* InstroduceHeaderView.swift in Sources */,
@@ -1218,6 +1268,7 @@
 				968889101CEEAAEB00B99FD4 /* AlertAddDeviceThirdViewController.swift in Sources */,
 				968889121CEEB13800B99FD4 /* AlertAddDeviceFourViewController.swift in Sources */,
 				968889011CEE027A00B99FD4 /* MainViewController.swift in Sources */,
+				963408171D7BF73B00334FC8 /* PhotoScanModel.swift in Sources */,
 				968889081CEE9C1800B99FD4 /* AlertAddDeviceViewController.swift in Sources */,
 				9638713F1CF4039C00653D11 /* NewRecordViewController.swift in Sources */,
 			);
@@ -1259,6 +1310,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				96336E3E1CED569400BA5BF3 /* Base */,
+				968557461D7FF36400856805 /* zh-Hans */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -1267,6 +1319,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				96336E431CED569400BA5BF3 /* Base */,
+				968557471D7FF36500856805 /* zh-Hans */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -1278,6 +1331,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -1323,6 +1377,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -1362,6 +1417,7 @@
 			baseConfigurationReference = 800828A745BC94227B7D9391 /* Pods-智慧田园.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "智慧田园/智慧田园.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1406,6 +1462,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = TYHeader.h;
 				SWIFT_VERSION = 2.3;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -1414,6 +1471,7 @@
 			baseConfigurationReference = BB38657AA1CBDF22B65A16CC /* Pods-智慧田园.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "智慧田园/智慧田园.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1458,6 +1516,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = TYHeader.h;
 				SWIFT_VERSION = 2.3;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

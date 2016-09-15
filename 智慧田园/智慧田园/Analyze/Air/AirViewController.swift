@@ -27,7 +27,7 @@ class AirViewController: TYViewController {
         scrollView.bounces = false
         scrollView.frame = self.view.bounds
         self.view.addSubview(scrollView)
-        AnalyzeViewT = NSBundle.mainBundle().loadNibNamed("TYAnalyze", owner: nil, options: nil)[0] as! TYAnalyze
+        AnalyzeViewT = NSBundle.mainBundle().loadNibNamed("TYAnalyze", owner: nil, options: nil)![0] as! TYAnalyze
         AnalyzeViewT.setTitle("温度(℃)")
         scrollView.addSubview(AnalyzeViewT)
         AnalyzeViewT.frame = CGRectMake(0, 30, ScreenWidth, 300)
@@ -35,7 +35,7 @@ class AirViewController: TYViewController {
         AnalyzeViewT.crop = crop
         AnalyzeViewT.field = self.field
         
-        AnalyzeViewW = NSBundle.mainBundle().loadNibNamed("TYAnalyze", owner: nil, options: nil)[0] as! TYAnalyze
+        AnalyzeViewW = NSBundle.mainBundle().loadNibNamed("TYAnalyze", owner: nil, options: nil)![0] as! TYAnalyze
         AnalyzeViewW.setTitle("湿度(%)")
         scrollView.addSubview(AnalyzeViewW)
         AnalyzeViewW.frame = CGRectMake(0,AnalyzeViewT.frame.maxY, ScreenWidth, 300)
@@ -43,7 +43,7 @@ class AirViewController: TYViewController {
         AnalyzeViewW.crop = crop
         AnalyzeViewW.field = self.field
         
-        AnalyzeViewCO2 = NSBundle.mainBundle().loadNibNamed("TYAnalyze", owner: nil, options: nil)[0] as! TYAnalyze
+        AnalyzeViewCO2 = NSBundle.mainBundle().loadNibNamed("TYAnalyze", owner: nil, options: nil)![0] as! TYAnalyze
         AnalyzeViewCO2.setTitle("CO2浓度(ppm)")
         scrollView.addSubview(AnalyzeViewCO2)
         AnalyzeViewCO2.frame = CGRectMake(0,AnalyzeViewW.frame.maxY, ScreenWidth, 300)

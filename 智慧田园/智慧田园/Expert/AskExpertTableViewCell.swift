@@ -23,6 +23,19 @@ class AskExpertTableViewCell: UITableViewCell,Reusable {
     @IBOutlet weak var imageViewTwo: UIImageView!
     var theme:ExpertTheme!{
         didSet{
+            
+            //由于服务器没有存储类名，所以此处需要从本地获取
+            if theme.classifyName == ""{
+                try! ModelManager.realm.write({
+                    if let name = ModelManager.getObjects(LocalCrops).filter("self.id = %@", theme.classifyID).first?.name{
+                        theme.classifyName = name
+                    }else{
+                        theme.classifyName = ""
+                    }
+                })
+                return 
+            }
+            
             for x in self.imageViews{
                 x.hidden = true
             }
@@ -32,21 +45,15 @@ class AskExpertTableViewCell: UITableViewCell,Reusable {
             }else{
                 ConstraintBottom.constant = 124
                 for x in theme.images.enumerate(){
-                    self.imageViews[x.index].sd_setImageWithURL(NSURL(string: x.element))
+                    self.imageViews[x.index].sd_setImageWithURL(NSURL(string: x.element.imageLowQualityURL()))
                     self.imageViews[x.index].hidden = false
                 }
             }
             
             self.ButtonTime.setTitle(theme.time, forState: .Normal)
-            self.ImageViewHead.sd_setImageWithURL(NSURL(string: theme.headPhoto))
+            self.ImageViewHead.sd_setImageWithURL(NSURL(string: theme.headPhoto.imageLowQualityURL()))
             self.LabelContent.text = theme.content
             self.ImageViewReplayTag.hidden = !theme.unRead
-            //由于服务器没有存储类名，所以此处需要从本地获取
-            if theme.classifyName == ""{
-                try! ModelManager.realm.write({ 
-                    theme.classifyName = (ModelManager.getObjects(LocalCrops).filter("self.id = %@", theme.classifyID).first?.name)!
-                })
-            }
             self.LabelClassify.text = theme.classifyName
         }
     }
@@ -60,13 +67,9 @@ class AskExpertTableViewCell: UITableViewCell,Reusable {
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        if let view = touches.first?.view where (view.tag >= 101 && view.tag <= 103){
+        if let view = touches.first?.view as? UIImageView where (view.tag >= 101 && view.tag <= 103) && view.image != nil{
             let index = view.tag - 101
-            var array = [UIImageView]()
-            for x in imageViews where x.hidden == false{
-                array.append(x.copy() as! UIImageView)
-            }
-            MessagePhotoScanController.setImages(array, index: index, fromPoint: StackViewImageView.convertPoint(imageViews[index].center, toView: MessagePhotoScanController.shareMessagePhotoScan.view))
+            MessagePhotoScanController.setImages(imageViews, imagesURL: theme.images, index: index)
             MessagePhotoScanController.pushScanController()
             return
         }
@@ -74,10 +77,6 @@ class AskExpertTableViewCell: UITableViewCell,Reusable {
     }
     
     func newContentViewUI(){
-//        newContentView.layer.shadowColor = UIColor.LowBlackColor().CGColor
-//        newContentView.layer.shadowOffset = CGSizeMake(1, 1.5)
-//        newContentView.layer.shadowRadius = 2
-//        newContentView.layer.shadowOpacity = 1
         newContentView.layer.cornerRadius = 4
     }
 }

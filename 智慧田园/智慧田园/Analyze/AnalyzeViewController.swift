@@ -60,21 +60,28 @@ class AnalyzeViewController: TYViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        collectionViewConfigure()
-        self.title = "分析"
-         UIApplication.sharedApplication().setStatusBarStyle(.Default, animated: true)
+        prepareUI()
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
         UIApplication.sharedApplication().setStatusBarStyle(.Default, animated: true)
         self.navigationController?.navigationBar.tintColor = UIColor.MidBlackColor()
     }
     
-    func collectionViewConfigure(){
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        self.navigationController?.navigationBar.subviews[0].alpha = 1
+    }
+    
+    private func prepareUI(){
+        collectionViewConfigure()
+        self.title = "分析"
+    }
+    
+    private func collectionViewConfigure(){
         let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSizeMake(collectionView.frame.width, collectionView.frame.height)
+        layout.itemSize = CGSizeMake(self.view.frame.width, self.view.frame.height - 40)
         layout.scrollDirection = .Horizontal
         layout.minimumLineSpacing = 0
         layout.minimumInteritemSpacing = 0
@@ -119,7 +126,7 @@ extension AnalyzeViewController:UICollectionViewDelegate,UICollectionViewDataSou
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return 4
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
@@ -129,14 +136,12 @@ extension AnalyzeViewController:UICollectionViewDelegate,UICollectionViewDataSou
         switch indexPath.row {
         case 0:
             cell.view = growthViewController.view
-        case 2:
-            cell.view = airViewController.view
-        case 4:
-            cell.view = soilViewController.view
-        case 3:
-            cell.view = sunViewController.view
         case 1:
-            cell.view = fertilizeViewController.view
+            cell.view = airViewController.view
+        case 3:
+            cell.view = soilViewController.view
+        case 2:
+            cell.view = sunViewController.view
         default:
             break
         }

@@ -17,7 +17,7 @@ class PhotoScanModel: NSObject {
     var scale:CGFloat!
     var destinationImageWidth = (ScreenWidth - 20) //图片的目标宽度设置为屏幕宽度-40
     lazy var fromTransform:CGAffineTransform = {
-        return CGAffineTransformMakeScale(self.preSize.width/self.aftSize.width, self.preSize.height/self.aftSize.height)
+        return CGAffineTransformMakeScale(80/self.aftSize.width, self.preSize.height/self.aftSize.height/2)
     }()
     
     lazy var toTransform:CGAffineTransform = {
@@ -29,7 +29,7 @@ class PhotoScanModel: NSObject {
         //缩略图的宽高比应该要与原图一致
         self.preImageView = preImageView
         self.url = url
-        self.preSize = preImageView.frame.size
+        self.preSize = preImageView.image!.size
         self.scale = destinationImageWidth/preSize.width
         self.aftSize = CGSizeMake(destinationImageWidth, preSize.height * scale)
     }

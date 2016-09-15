@@ -40,15 +40,12 @@ class TaskTableViewCell: UITableViewCell,Reusable {
                 ViewTag.backgroundColor = UIColor.MainColor()
                 LabelFinishTime.hidden = false
                 ViewFinishTime.hidden = false
-                self.accessoryView = nil
                 LabelFinishTime.text = task.getFinishTimeStr()
             //设置完成时间
             case .Doing:
                 ViewTag.backgroundColor = UIColor.WarnColor()
                 LabelFinishTime.hidden = true
                 ViewFinishTime.hidden = true
-                self.accessoryView = UIImageView(image:
-                    UIImage(named: "Task_FinishAction"))
             }
             ImgViewTag.image = UIImage(named: "Task" + self.taskStatus.rawValue + self.taskStyle.rawValue)
         }

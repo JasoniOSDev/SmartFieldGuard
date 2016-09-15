@@ -7,7 +7,19 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import <MJRefresh/MJRefresh.h>
 @interface UITableView (ZHTY)
+
+@end
+
+@interface UIImage (Screenshot)
+
++ (UIImage *)screenshot;
+
+@end
+
+@interface NSData (ZHTY)
+
+-(int)intValue;
 
 @end

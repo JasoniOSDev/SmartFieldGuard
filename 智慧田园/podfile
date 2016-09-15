@@ -36,5 +36,7 @@ pod 'YYFPSLabel', '~> 0.0.1'
 
 pod 'YYCache', '~> 1.0.3'
 
+pod 'YYWebImage', '~> 1.0.4'
+
 end
 

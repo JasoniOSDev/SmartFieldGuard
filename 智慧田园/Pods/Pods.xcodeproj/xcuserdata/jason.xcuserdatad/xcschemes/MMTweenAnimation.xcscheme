@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '2FD7989B5EF7D0BFD3EBEA72'
+               BlueprintIdentifier = '10ED1D6809B4F7E90DFCEAF3'
                BlueprintName = 'MMTweenAnimation'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'MMTweenAnimation.framework'>

@@ -9,6 +9,7 @@
 import UIKit
 import PNChart
 class TYAnalyze: UIView {
+    
     enum Period:String{
         case Day = "Day"
         case Week = "Week"
@@ -24,6 +25,7 @@ class TYAnalyze: UIView {
         case soilT = "soilT"
         case soilW = "soilW"
     }
+    
     @IBOutlet weak var StackView: UIStackView!
     @IBOutlet weak var LabelTitle: UILabel!
     @IBOutlet weak var ButtonOne: UIButton!
@@ -44,10 +46,10 @@ class TYAnalyze: UIView {
         super.awakeFromNib()
         lineChartConfigure()
         freshDataFromNetWork()
+        ButtonOne.selected = true
     }
     
     func lineChartConfigure(){
-        
         lineChart = PNLineChart(frame: CGRectMake(0, 0, ChartContentView.frame.width, ChartContentView.frame.height) )
         self.ChartContentView.addSubview(lineChart)
         self.lineChart.showCoordinateAxis = true

@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '00D8A9D7D378ACF35C6342A0'
+               BlueprintIdentifier = '39436C9684493F153ECD3442'
                BlueprintName = 'YYFPSLabel'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'YYFPSLabel.framework'>

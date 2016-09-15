@@ -19,9 +19,9 @@ class ReplyTableViewCell: UITableViewCell,Reusable {
     @IBOutlet weak var LabelContent: UILabel!
     var reply:Replay!{
         didSet{
-            ImgPhoto.sd_setImageWithURL(NSURL(string: reply.headImage)!)
+            ImgPhoto.sd_setImageWithURL(NSURL(string: reply.headImage.imageLowQualityURL())!)
             LabelUserName.text = reply.username
-            LabelTime.text = reply.replyDate.ReplyDateDescription
+            LabelTime.text = reply.replyDate.dateDescription
             ButtonSupport.selected = reply.IfSupport
             ButtonSupport.setTitle("\(reply.agreeNum)", forState: .Normal)
             LabelContent.text = reply.content

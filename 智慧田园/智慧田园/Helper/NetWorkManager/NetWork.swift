@@ -9,7 +9,7 @@
 import Foundation
 import Alamofire
 let mainURL:String = "http://139.129.5.192/SZTY/"
-//let mainURL:String = "https://139.129.5.192:8443/SZTY/"
+//let mainURL:String = "http://192.168.31.112:8080/SZTY/"
 public enum ContentType:String{
     
     var url:String{
@@ -20,6 +20,7 @@ public enum ContentType:String{
     case Logout = "user/logout"
     case Login = "user/login"
     case Register = "user/register"
+    case userUplod = "user/upload"
     case PulishNewForum = "post/publish"
     case Forum = "post/list"
     case updateSession = "user/judgeLogin"
@@ -34,6 +35,9 @@ public enum ContentType:String{
     case fieldSet = "field/set"
     case fieldData = "field/data"
     case fieldAnalyze = "field/analyze"
+    case taskFinished = "task/finish"
+    case pastTaskList = "task/fieldRecord"
+
 }
 //Set-Cookie
 public func TYRequest(Type:ContentType,parameters:[String : AnyObject]?) -> Request{
@@ -77,7 +81,6 @@ extension Request{
                             let realSession = sessions[1].componentsSeparatedByString("?")[0]
                             TYUserDefaults.cookie.value = ";jsessionid=" + realSession
                             print(realSession)
-                            print(response)
                         }
                     }
                 }

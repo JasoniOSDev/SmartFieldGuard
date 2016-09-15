@@ -13,22 +13,21 @@ import MBProgressHUD
 import STPopup
 class ForumDetailViewController: TYViewController {
 
-    @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var ConstraintViewTipTop: NSLayoutConstraint!
-    @IBOutlet weak var ViewTip: UIView!
-    @IBOutlet weak var LabelUserName: UILabel!
-    @IBOutlet weak var TextViewContent: UITextView!
-    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var ConstraintUsernameCenterY: NSLayoutConstraint!
+    @IBOutlet weak var ConstraintContentViewTop: NSLayoutConstraint!
+    @IBOutlet weak var ConstraintContentViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var StackViewImageViews: UIStackView!
+    @IBOutlet weak var LabelContent: UILabel!
+    @IBOutlet weak var ViewRegionMSG: UIView!
     @IBOutlet weak var TextFieldSend: UITextField!
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var LabelUserName: UILabel!
     @IBOutlet weak var ConstraintContentbarBottom: NSLayoutConstraint!
-    @IBOutlet weak var ConstraintTableViewHeight: NSLayoutConstraint!
     @IBOutlet weak var LabelClass: UIButton!
     @IBOutlet weak var ButtonTime: UIButton!
     @IBOutlet weak var ImgPhoto: UIImageView!
-    @IBOutlet weak var ConstraintContentHeight: NSLayoutConstraint!
-    @IBOutlet weak var ContentView: UIView!
     @IBOutlet weak var MainContentView: UIView!
-    var MainContentViewScale = true
+    var preDragY:CGFloat!
     var forum:Forum!
     var replies = [Replay]()
     var pageIndex = 1
@@ -42,14 +41,55 @@ class ForumDetailViewController: TYViewController {
         cell.frame.size.width = ScreenWidth
         return cell
     }()
+    var contentViewFold = false{
+        didSet{
+            guard oldValue != contentViewFold else {return}
+            contentViewFlodAction()
+        }
+    }
+    lazy var tipAlertController:UIAlertController = {
+        let alert = UIAlertController(title: nil, message: "点击回答 可将其设为最佳回复^_^", preferredStyle: .Alert)
+        alert.addAction(UIAlertAction(title: "知道了", style: .Default, handler: { (_) in
+            TYUserDefaults.needShowForumTip.value = true
+        }))
+        return alert
+    }()
+    
+    var contentRealHeight:CGFloat!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        ConstraintTableViewHeight.constant = ScreenHeight
-        ImgPhoto.layer.cornerRadius = 17.5
-        ImgPhoto.clipsToBounds = true
+        prepareUI()
+        loadDataFromNet()
+    }
+    
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        if let touch = touches.first{
+            var point = touch.locationInView(ViewRegionMSG)
+            if(!ViewRegionMSG.pointInside(point, withEvent: event)){
+                if(TextFieldSend.isFirstResponder()){
+                    TextFieldSend.resignFirstResponder()
+                }else{
+                    if let view = touch.view where view.tag >= 111 && view.tag <= 113 {
+                        MessagePhotoScanController.setImages(StackViewImageViews.subviews as! [UIImageView], imagesURL: forum.images, index: view.tag - 111)
+                        MessagePhotoScanController.pushScanController()
+                        return
+                    }
+                    point = touch.locationInView(MainContentView)
+                    if(MainContentView.pointInside(point, withEvent: event)){
+                        contentViewFold = !contentViewFold
+                    }
+                }
+                return
+            }
+            
+        }
+    }
+    
+    private func prepareUI(){
         tableViewConfigure()
         loadForum()
+        self.title = "问题详情"
         keyboardMan.animateWhenKeyboardAppear = {
             [weak self] appearPostIndex, keyboardHeight, keyboardHeightIncrement in
             if let sSelf = self{
@@ -63,7 +103,12 @@ class ForumDetailViewController: TYViewController {
                 sSelf.view.layoutIfNeeded()
             }
         }
-        loadDataFromNet()
+        if TYUserDefaults.needShowForumTip.value == false{
+            
+            dispatch_after(dispatch_time( DISPATCH_TIME_NOW, Int64( 500 * NSEC_PER_MSEC)),dispatch_get_main_queue()) {
+                self.presentViewController(self.tipAlertController, animated: true, completion: nil)
+            }
+        }
     }
     
     
@@ -72,31 +117,45 @@ class ForumDetailViewController: TYViewController {
         if cellHeight[index] == nil{
             cell.reply = replies[index]
             cell.layoutIfNeeded()
-            cellHeight[index] = cell.NewContentView.frame.height
+            cellHeight[index] = cell.NewContentView.frame.height + 8
         }
         return cellHeight[index]!
     }
     
     private func loadForum(){
         if forum.userId == TYUserDefaults.userID.value && self.forum.status == "Unsolved"{
-            ConstraintViewTipTop.constant = 0
             myForum = true
         }else{
-            ConstraintViewTipTop.constant = -30
+            myForum = false
         }
         LabelUserName.text = self.forum.username
-        ImgPhoto.sd_setImageWithURL(NSURL(string: self.forum.headImage)!)
-        ButtonTime.setTitle(forum.createDate.ForumDateDescription, forState: .Normal)
-        TextViewContent.text = self.forum.content
+        ImgPhoto.sd_setImageWithURL(NSURL(string: self.forum.headImage.imageLowQualityURL())!)
+        ButtonTime.setTitle(forum.createDate.dateDescription, forState: .Normal)
+        LabelContent.text = self.forum.content
+        
+        StackViewImageViews.hidden = forum.images.count == 0
+        let imageViews = StackViewImageViews.arrangedSubviews as! [UIImageView]
+        for x in imageViews{
+            x.hidden = true
+        }
+        for i in 0..<forum.images.count{
+            imageViews[i].hidden = false
+            imageViews[i].sd_setImageWithURL(NSURL(string: forum.images[i].imageLowQualityURL()))
+        }
+        
+        MainContentView.layoutIfNeeded()
+        //计算一下content的高度
+        let height = LabelContent.frame.maxY + LabelClass.frame.height + 10 + (StackViewImageViews.hidden ? 0 : 90)
+        contentRealHeight = height
+        ConstraintContentViewHeight.constant = contentRealHeight
     }
     
-    func TagGestureToScrollView() {
-        TextFieldSend.resignFirstResponder()
-    }
-    
-    func tableViewConfigure(){
+    private func tableViewConfigure(){
+        tableView.backgroundColor = UIColor.BackgroundColor()
         tableView.clearOtherLine()
         tableView.registerReusableCell(ReplyTableViewCell)
+        tableView.separatorInset = UIEdgeInsetsZero
+        tableView.estimatedRowHeight = 80
         tableView.mj_footer = MJRefreshAutoNormalFooter(refreshingTarget: self, refreshingAction: #selector(self.loadDataFromNet))
     }
     
@@ -136,19 +195,30 @@ class ForumDetailViewController: TYViewController {
         }
     }
     
-    func TapGestureContentViewTap() {
-        MainContentViewScale = !ConstraintContentHeight.active
-        UIView.animateWithDuration(0.5) {
-            self.ConstraintContentHeight.active = !self.ConstraintContentHeight.active
+    private func contentViewFlodAction(){
+
+        UIView.animateWithDuration(0.3,  animations: {
+            if(self.contentViewFold){
+                self.ConstraintContentViewHeight.constant = 99
+                self.LabelContent.numberOfLines = 1
+                self.StackViewImageViews.hidden = true
+                self.ConstraintContentViewTop.constant = -10
+                self.ConstraintUsernameCenterY.constant = -10
+            }else{
+                self.ConstraintContentViewHeight.constant = self.contentRealHeight
+                self.ConstraintContentViewTop.constant = 3
+                self.ConstraintUsernameCenterY.constant = 0
+            }
             self.view.layoutIfNeeded()
+            }) { (_) in
+                if(!self.contentViewFold){
+                    self.LabelContent.numberOfLines = 0
+                    self.StackViewImageViews.hidden = !(self.forum.images.count > 0)
+                }
         }
     }
     
-    @IBAction func ButtonHidenContentView(sender: AnyObject) {
-        TapGestureContentViewTap()
-    }
-    
-    @IBAction func ButtonSenderClicked(sender: UIButton) {
+    func MessageSendAction() {
         if let content = TextFieldSend.text {
             NetWorkManager.updateSession({
                 TYRequest(.PushAReply, parameters: ["content":content,"postNo":self.forum.postNo]).TYresponseJSON(completionHandler: { (response) in
@@ -178,19 +248,26 @@ class ForumDetailViewController: TYViewController {
 extension ForumDetailViewController:UITextFieldDelegate {
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
+        MessageSendAction()
         return true
+    }
+    
+    func textFieldDidBeginEditing(textField: UITextField) {
+        contentViewFold = true
     }
 }
 
 extension ForumDetailViewController:UITableViewDelegate,UITableViewDataSource{
     
+    func scrollViewWillBeginDragging(scrollView: UIScrollView) {
+        preDragY = scrollView.panGestureRecognizer.locationInView(self.view).y
+    }
+    
     func scrollViewDidScroll(scrollView: UIScrollView) {
-        guard MainContentViewScale == false else {return}
-        UIView.animateWithDuration(0.5) {
-            self.ConstraintContentHeight.active = !self.ConstraintContentHeight.active
-            self.view.layoutIfNeeded()
-        }
+        guard  !contentViewFold else {return}
+        let nowDragY = scrollView.panGestureRecognizer.locationInView(self.view).y
+        guard nowDragY - preDragY < 0 else {return}
+        contentViewFold = true
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -227,7 +304,12 @@ extension ForumDetailViewController:UITableViewDelegate,UITableViewDataSource{
                     if let sSelf = self {
                         NetWorkManager.updateSession({
                             TYRequest(.ForumChooseAgreedAnswer, parameters: ["postNo":sSelf.forum.postNo,"replySn":sSelf.replies[indexPath.row].replySn]).TYresponseJSON(completionHandler: { (response) in
-                                print(response)
+                                sSelf.replies.removeAll()
+                                sSelf.cellHeight.removeAll()
+                                sSelf.currentCount = 0
+                                sSelf.pageIndex = 1
+                                sSelf.loadDataFromNet()
+                                sSelf.myForum = false
                             })
                         })
                     }
@@ -236,5 +318,9 @@ extension ForumDetailViewController:UITableViewDelegate,UITableViewDataSource{
                 self.presentViewController(alertController, animated: true, completion: nil)
             }
         }
+    }
+    
+    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        cell.layoutMargins = UIEdgeInsetsZero
     }
 }

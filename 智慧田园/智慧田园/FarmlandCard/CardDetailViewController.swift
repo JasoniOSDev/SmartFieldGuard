@@ -45,7 +45,7 @@ class CardDetailViewController: TYViewController {
     @IBOutlet weak var LabelCO2Strength: UILabel!
     @IBOutlet weak var FertilizerSlider: UISlider!
     @IBOutlet weak var LabeFertilizer: UILabel!
-    lazy var fillAction: Farmland.fillAction! = {
+    lazy var fillAction: Farmland.fillAction? = {
         return {
             [weak self] air_t,air_w,soil_t,soil_w,co2,light in
             if let sSelf = self {
@@ -56,7 +56,7 @@ class CardDetailViewController: TYViewController {
                 sSelf.LabelCO2Strength.text = String(format: "%.fppm", co2)
                 sSelf.LabelSunStrength.text = String(format: "%.fLUX", light)
                 //更新颜色及对应的图标
-                //                sSelf.updateModuleState()
+//              sSelf.updateModuleState()
             }
         }
 
@@ -75,7 +75,7 @@ class CardDetailViewController: TYViewController {
         }
         return vc
     }()
-    
+    var taskViewDismiss = false //用来标记引起当前页面出现的原因是否是因为任务窗口的关闭
     lazy var taskDetailViewController:TaskDetailViewController = {
         let story = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
         let vc = story.instantiateViewControllerWithIdentifier("TaskDetailViewController") as! TaskDetailViewController
@@ -84,23 +84,22 @@ class CardDetailViewController: TYViewController {
     
     var farmland:Farmland!{
         didSet{
-            farmland.fillDataInViewAction = self.fillAction
+            farmland.fillDataInViewAction = fillAction
             farmland.updateEnvironmentData(nil)
         }
     }
     var visbileTask:Results<Tasking>!
+    var panGesture:UIPanGestureRecognizer!
+    var panStartPoint:CGPoint?
+    var headRefreshView:TYRefreshNavView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         prepareUI()
+        grestureConfigure()
+        notificationConfigure()
         //第一次更新数据
-        scrollView.mj_header.beginRefreshing()
-        NSNotificationCenter.defaultCenter().addObserverForName(NOTIFICATIONFARMLANDCONFIGUREMODIFYFINISH, object: nil, queue: nil) { noti in
-            self.fillFarmLandData()
-            if let result = noti.userInfo!["result"] as? Bool where result == true{
-                self.loadData()
-            }
-        }
+        headRefreshView.beginRefreshing()
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -110,17 +109,59 @@ class CardDetailViewController: TYViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        self.scrollView.contentOffset.y = 0
-        self.navigationController?.navigationBar.subviews[0].alpha = 0
+        FertilizerSlider.value = 0
         self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
         UIApplication.sharedApplication().setStatusBarStyle(.LightContent, animated: true)
+        if taskViewDismiss {
+            taskViewDismiss = false
+        }else{
+            scrollView.contentOffset.y = 0
+            SliderValueChange()
+        }
+        if scrollView.contentOffset.y == 0{
+            self.navigationController?.navigationBar.subviews[0].alpha = 0
+        }
     }
     
-    func prepareUI(){
+    private func grestureConfigure(){
+        self.panGesture = scrollView.panGestureRecognizer
+        self.panGesture.addTarget(self, action: #selector(self.panGestureAction))
+    }
+    
+    private func prepareUI(){
         tableViewConfigure()
         sliderConfigure()
         navigationItemConfigure()
         fillFarmLandData()
+        self.view.addSubview(headRefreshView)
+        headRefreshView.frame = CGRectMake(0, -54, ScreenWidth, 54)
+    }
+    private func notificationConfigure(){
+        NSNotificationCenter.defaultCenter().addObserverForName(NOTIFICATIONFARMLANDCONFIGUREMODIFYFINISH, object: nil, queue: nil) { noti in
+            self.fillFarmLandData()
+            if let result = noti.userInfo!["result"] as? Bool where result == true{
+                self.loadData()
+            }
+        }
+    }
+    
+    func panGestureAction(){
+        let point = self.panGesture.locationInView(self.scrollView)
+        print(point)
+        switch self.panGesture.state {
+        case .Began:
+            self.panStartPoint = point
+        case .Ended:
+            self.panStartPoint = nil
+            headRefreshView.changePosition(0,end: true)
+        case .Changed:
+            guard headRefreshView.state != .Refreshing else {return }
+            let dis = point.y - self.panStartPoint!.y
+            guard dis > 0 else {return}
+            headRefreshView.changePosition(dis)
+        default:
+            break
+        }
     }
     
     func fillFarmLandData(){
@@ -176,16 +217,13 @@ class CardDetailViewController: TYViewController {
     }
     
     func tableViewConfigure(){
-        let headFresh = MJRefreshNormalHeader { [weak self] in
+        headRefreshView = TYRefreshNavView.createWithExecuteBlock({ [weak self] in
             if let sSelf = self {
                 sSelf.loadData(){
-                    sSelf.scrollView.mj_header.endRefreshing()
+                    sSelf.headRefreshView.endRefreshing()
                 }
             }
-        }
-        headFresh.setTitle("正在刷新农田数据", forState: .Refreshing)
-        headFresh.setTitle("下拉获取农田数据和任务情况", forState: .Idle)
-        scrollView.mj_header = headFresh
+        })
         tableView.registerReusableCell(TaskTableViewCell)
         tableView.separatorStyle = .SingleLine
         tableView.backgroundColor = UIColor.BackgroundColor()
@@ -206,10 +244,8 @@ class CardDetailViewController: TYViewController {
             vc.crop = self.farmland.crops
             vc.field = self.farmland
         }
-        if let vc = segue.destinationViewController as? TYNavigationViewController{
-            if let vc2 = vc.visibleViewController as? NewRecordViewController{
-                vc2.Tasks = farmland.tasking
-            }
+        if let vc = segue.destinationViewController as? NewRecordViewController{
+            vc.Tasks = farmland.tasking.filter(){$0.status == true}
         }
         if let vc = segue.destinationViewController as? TYNavigationViewController{
             if let vc2 = vc.visibleViewController as? ForumViewController{
@@ -310,6 +346,7 @@ extension CardDetailViewController:UITableViewDelegate,UITableViewDataSource{
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         taskDetailViewController.tasking = visbileTask[indexPath.row]
         taskDetailViewController.PushViewControllerInViewController(self)
+        taskViewDismiss = true
     }
 }
 
@@ -332,6 +369,7 @@ extension CardDetailViewController:UIScrollViewDelegate{
     }
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
+        guard scrollView.contentSize.height > ScreenHeight + 50 else {return}
         if(scrollView.contentOffset.y > 0 && self.navigationController?.navigationBar.subviews[0].alpha == 1){
             return
         }

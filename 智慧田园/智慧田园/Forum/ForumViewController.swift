@@ -11,14 +11,19 @@ import MJRefresh
 import MBProgressHUD
 class ForumViewController: TYViewController{
 
+    
+    @IBOutlet weak var ConstraintPageViewTop: NSLayoutConstraint!
     @IBOutlet weak var ConstraintContentWidth: NSLayoutConstraint!
-    @IBOutlet weak var ConstraintContentHeight: NSLayoutConstraint!
     @IBOutlet weak var PageButtonUnSolve: PageButtonMidLine!
     @IBOutlet weak var PageButtonSolve: PageButtonMidLine!
-    @IBOutlet weak var HScrollView: UIScrollView!
     @IBOutlet weak var VScrollView: UIScrollView!
     @IBOutlet weak var unSolveTableView: UITableView!
     @IBOutlet weak var SolveTableView: UITableView!
+    @IBOutlet weak var NavBarButtonItemMe: UIBarButtonItem!
+    var OnlyMeData = false
+    var pageViewHidden = false
+    var direction:Bool = false//false 表示向上 true表示向下
+    var preDragY:CGFloat! = 0
     var solveForm = [Forum]()
     var unSolveForm = [Forum]()
     var selectedForum:Forum!
@@ -138,7 +143,6 @@ class ForumViewController: TYViewController{
     
     override func viewWillLayoutSubviews() {
         ConstraintContentWidth.constant = 2 * self.view.frame.size.width
-        ConstraintContentHeight.constant = self.view.frame.size.height - 64
         super.viewWillLayoutSubviews()
     }
     
@@ -164,13 +168,13 @@ class ForumViewController: TYViewController{
         UIApplication.sharedApplication().setStatusBarStyle(.Default, animated: true)
         tableViewConfigure()
         self.title = crops.name + "讨论区"
-        self.view.addSubview(fpsLabel)
+        //self.view.addSubview(fpsLabel)
     }
     
     func LoadData(){
         NetWorkManager.updateSession{
             let tableViewTmp = self.tableView
-            TYRequest(.Forum, parameters: ["pageIndex":self.dataInfo.0 + 1,"pageCount":self.dataInfo.3,"parentArea":"","status":self.forumStatus]).TYresponseJSON { response in
+            TYRequest(.Forum, parameters: ["pageIndex":self.dataInfo.0 + 1,"pageCount":self.dataInfo.3,"parentArea":"","status":self.forumStatus,"type":"Discuss"]).TYresponseJSON { response in
                 if response.result.isSuccess{
                     if let json = response.result.value as? [String:AnyObject] {
                         if let message = json["message"] as? String where message == "success"{
@@ -187,6 +191,9 @@ class ForumViewController: TYViewController{
                                             let forumObject = Forum(dict: dict2)
                                             self.forums.append(forumObject)
                                         }
+                                    }
+                                    if self.OnlyMeData {
+                                        self.forums = self.forums.filter{$0.userId == TYUserDefaults.userID.value}
                                     }
                                     tableViewTmp.mj_footer.endRefreshing()
                                     tableViewTmp.reloadData()
@@ -205,9 +212,11 @@ class ForumViewController: TYViewController{
     }
     
     private func tableViewConfigure(){
+        unSolveTableView.separatorInset = UIEdgeInsetsZero
         unSolveTableView.clearOtherLine()
         unSolveTableView.registerReusableCell(ForumTableViewCell)
         unSolveTableView.mj_footer = MJRefreshAutoNormalFooter(refreshingTarget: self, refreshingAction: #selector(self.LoadData))
+        SolveTableView.separatorInset = UIEdgeInsetsZero
         SolveTableView.registerReusableCell(ForumTableViewCell)
         SolveTableView.clearOtherLine()
         SolveTableView.mj_footer = MJRefreshAutoNormalFooter(refreshingTarget: self, refreshingAction: #selector(self.LoadData))
@@ -240,9 +249,7 @@ class ForumViewController: TYViewController{
     }
     
     @IBAction func LeftButtonClicked(sender: UIBarButtonItem) {
-        
         self.dismissViewControllerAnimated(true, completion: nil)
-        
     }
     
     @IBAction func ButtonAddClicked(sender: AnyObject) {
@@ -250,11 +257,11 @@ class ForumViewController: TYViewController{
     }
     
     @IBAction func ButtonMeClicked(sender: AnyObject) {
-        
-    }
-    
-    deinit{
-        TYUserDefaults.NewForum.removeListenerWithName("ForumViewController")
+        dataInfo.index = 0
+        self.forums.removeAll()
+        self.OnlyMeData = !self.OnlyMeData
+        self.NavBarButtonItemMe.tintColor = self.OnlyMeData ? UIColor.MainColor():UIColor.MidBlackColor()
+        LoadData()
     }
 }
 
@@ -283,18 +290,17 @@ extension ForumViewController:UITableViewDelegate,UITableViewDataSource{
         selectedForum = self.forums[indexPath.row]
         self.performSegueWithIdentifier("ShowDetail", sender: self)
     }
+    
+    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        cell.layoutMargins = UIEdgeInsetsZero
+    }
 }
 
 extension ForumViewController:UIScrollViewDelegate{
     
+    
+    
     func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
-        
-        if(scrollView.tag != 111){
-            if(scrollView.contentOffset.y <= 5){
-                HScrollView.setContentOffset(CGPointMake(0, 0), animated: true)
-            }
-            return
-        }
         if(scrollView.contentOffset.x / self.view.frame.size.width == 1){
             ButtonPageClicked(PageButtonSolve)
         }else{
@@ -303,20 +309,35 @@ extension ForumViewController:UIScrollViewDelegate{
     }
     
     func scrollViewWillBeginDragging(scrollView: UIScrollView) {
-        if(scrollView.tag == 111){
-            return
-        }
-        if(scrollView.contentOffset.x == 0 && scrollView.contentOffset.y >= 0){
-            HScrollView.setContentOffset(CGPointMake(0, 40), animated: true)
-        }
+        preDragY = scrollView.panGestureRecognizer.locationInView(view).y
     }
     
-    func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        if(scrollView.tag == 111){
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+         let nowDragY = scrollView.panGestureRecognizer.locationInView(view).y
+        if(preDragY == nowDragY){
             return
         }
-        if(scrollView.contentOffset.y <= 5){
-            HScrollView.setContentOffset(CGPointMake(0, 0), animated: true)
+        let direction = nowDragY - preDragY
+        if(!(scrollView.contentOffset.x == 0 || scrollView.contentOffset.x == ScreenWidth)) {
+            return
+        }
+        if(direction < 0){
+            if(!pageViewHidden){
+                pageViewHidden = true
+                UIView.animateWithDuration(0.3, animations: { 
+                    self.ConstraintPageViewTop.constant = -40
+                    self.view.layoutIfNeeded()
+                })
+                
+            }
+        }else{
+            if(pageViewHidden && scrollView.contentOffset.y < 20){
+                pageViewHidden = false
+                UIView.animateWithDuration(0.3, animations: {
+                    self.ConstraintPageViewTop.constant = 0
+                    self.view.layoutIfNeeded()
+                })
+            }
         }
     }
     

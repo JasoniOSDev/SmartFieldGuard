@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="16A254g" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="16A313a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <mutableArray key="兰亭黑 GBK.TTF">
+        <array key="兰亭黑 GBK.TTF">
             <string>FZLTHK--GBK1-0</string>
-            <string>FZLTHK--GBK1-0</string>
-        </mutableArray>
+        </array>
     </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -17,36 +17,30 @@
             <rect key="frame" x="0.0" y="0.0" width="665" height="395"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" horizontalHuggingPriority="249" verticalHuggingPriority="249" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="749" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="665" height="394"/>
+                <frame key="frameInset" width="665" height="394"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="831-Nx-J1M">
-                        <rect key="frame" x="0.0" y="0.0" width="665" height="307"/>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="831-Nx-J1M">
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" image="Forum_Photo" translatesAutoresizingMaskIntoConstraints="NO" id="JZQ-rz-JSl">
-                                <rect key="frame" x="15" y="15" width="35" height="36"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="35" id="gdO-DI-5fp"/>
                                     <constraint firstAttribute="height" constant="36" id="ks3-vh-H2b"/>
                                 </constraints>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="wnQ-xW-Swc">
-                                <rect key="frame" x="60" y="190" width="244" height="80"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" tag="102" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="mdu-is-w58" customClass="MessagePhotoView" customModule="智慧田园" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
+                                    <imageView clipsSubviews="YES" tag="101" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="mdu-is-w58" customClass="MessagePhotoView" customModule="智慧田园" customModuleProvider="target">
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="mdu-is-w58" secondAttribute="height" multiplier="1:1" id="kK6-et-CoH"/>
                                         </constraints>
                                     </imageView>
-                                    <imageView clipsSubviews="YES" tag="101" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="yqD-YQ-E8D" customClass="MessagePhotoView" customModule="智慧田园" customModuleProvider="target">
-                                        <rect key="frame" x="82" y="0.0" width="80" height="80"/>
+                                    <imageView clipsSubviews="YES" tag="102" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="yqD-YQ-E8D" customClass="MessagePhotoView" customModule="智慧田园" customModuleProvider="target">
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="yqD-YQ-E8D" secondAttribute="height" multiplier="1:1" id="ccO-r3-uMz"/>
                                         </constraints>
                                     </imageView>
                                     <imageView clipsSubviews="YES" tag="103" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qrZ-hc-XdT" customClass="MessagePhotoView" customModule="智慧田园" customModuleProvider="target">
-                                        <rect key="frame" x="164" y="0.0" width="80" height="80"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="qrZ-hc-XdT" secondAttribute="height" multiplier="1:1" id="AdR-CW-l3i"/>
                                         </constraints>
@@ -63,40 +57,43 @@
                                 </variation>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2uW-nn-3uA">
-                                <rect key="frame" x="617" y="179" width="43" height="16"/>
                                 <subviews>
-                                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Forum_Solve" translatesAutoresizingMaskIntoConstraints="NO" id="DTZ-KU-LMc">
-                                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="16"/>
-                                    </imageView>
+                                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Forum_Solve" translatesAutoresizingMaskIntoConstraints="NO" id="DTZ-KU-LMc"/>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e0Q-FO-enw">
-                                        <rect key="frame" x="0.0" y="0.0" width="43" height="16"/>
                                         <fontDescription key="fontDescription" name="FZLTHK--GBK1-0" family="FZLanTingHei-R-GBK" pointSize="8"/>
-                                        <state key="normal" title="15分钟前" image="Forum_Time">
-                                            <color key="titleColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal" title="15分钟前">
+                                            <color key="titleColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                     </button>
                                 </subviews>
                             </stackView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0vo-pu-ptT">
-                                <rect key="frame" x="60" y="15" width="590" height="165"/>
-                                <string key="text">稻米的种植技术，包括稻田和插秧，是在中国发明的。传说中是神农氏教导人们如何种稻。 　　目前稻的耕种除传统的人工耕种方式，亦有高度机械化的耕种方式。但仍不失下列步骤： 　　整地： 　　种稻之前，必须先将稻田的土壤翻过，使其松软，这个过程分为粗耕、细耕和盖平三个期间。过去使用兽力和犁具，主要是水牛来整地犁田，但现在多用机器整地了。 　　育苗： 　　农民先在某块田中培育秧苗，此田往往会被称为秧田，在撒下稻种後，农人多半会在土上洒一层稻壳灰；现代则多由专门的育苗中心使用育苗箱来使稻苗成长，好的稻苗是稻作成功的关键。在秧苗长高约八公分时，就可以进行插秧了。 　　插秧： 　　将秧苗仔细的插进稻田中，间格有序。传统的插秧法会使用秧绳、秧标或插秧轮，来在稻田中做记号...</string>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oBR-RH-2O4">
                                 <fontDescription key="fontDescription" name="FZLTHK--GBK1-0" family="FZLanTingHei-R-GBK" pointSize="16"/>
-                                <color key="textColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.40000000000000002" green="0.80000000000000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="好人" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0vo-pu-ptT">
+                                <fontDescription key="fontDescription" name="FZLTHK--GBK1-0" family="FZLanTingHei-R-GBK" pointSize="16"/>
+                                <color key="textColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="wnQ-xW-Swc" firstAttribute="leading" secondItem="831-Nx-J1M" secondAttribute="leading" constant="60" id="0U3-d1-6Jg"/>
-                            <constraint firstAttribute="bottom" secondItem="0vo-pu-ptT" secondAttribute="bottom" constant="20" id="1lo-By-XZG"/>
+                            <constraint firstAttribute="bottom" secondItem="wnQ-xW-Swc" secondAttribute="bottom" constant="20" id="0dC-ty-rUF"/>
+                            <constraint firstAttribute="bottom" secondItem="0vo-pu-ptT" secondAttribute="bottom" priority="750" constant="45" id="1lo-By-XZG"/>
                             <constraint firstItem="wnQ-xW-Swc" firstAttribute="top" secondItem="0vo-pu-ptT" secondAttribute="bottom" constant="10" id="ILZ-vS-1KA"/>
+                            <constraint firstItem="0vo-pu-ptT" firstAttribute="top" secondItem="JZQ-rz-JSl" secondAttribute="bottom" constant="3" id="JSm-a8-coP"/>
                             <constraint firstAttribute="trailing" secondItem="0vo-pu-ptT" secondAttribute="trailing" constant="15" id="MZW-LW-A6Q"/>
-                            <constraint firstItem="0vo-pu-ptT" firstAttribute="top" secondItem="831-Nx-J1M" secondAttribute="top" constant="15" id="avY-ky-DTj"/>
+                            <constraint firstItem="oBR-RH-2O4" firstAttribute="leading" secondItem="0vo-pu-ptT" secondAttribute="leading" id="NEO-LB-qiR"/>
+                            <constraint firstItem="oBR-RH-2O4" firstAttribute="centerY" secondItem="JZQ-rz-JSl" secondAttribute="centerY" id="V19-jY-A7B"/>
                             <constraint firstAttribute="trailing" secondItem="2uW-nn-3uA" secondAttribute="trailing" constant="5" id="eVs-33-9B0"/>
                             <constraint firstItem="wnQ-xW-Swc" firstAttribute="leading" secondItem="JZQ-rz-JSl" secondAttribute="trailing" constant="10" id="gXB-Hp-9FU"/>
                             <constraint firstItem="JZQ-rz-JSl" firstAttribute="top" secondItem="831-Nx-J1M" secondAttribute="top" constant="15" id="hJx-Pa-Zon"/>
                             <constraint firstAttribute="bottom" secondItem="2uW-nn-3uA" secondAttribute="bottom" constant="5" id="k2M-8m-wMM"/>
                             <constraint firstItem="0vo-pu-ptT" firstAttribute="leading" secondItem="JZQ-rz-JSl" secondAttribute="trailing" constant="10" id="l5o-z3-ICL"/>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" priority="750" constant="90" id="uvU-wo-kDz"/>
                             <constraint firstItem="JZQ-rz-JSl" firstAttribute="leading" secondItem="831-Nx-J1M" secondAttribute="leading" constant="15" id="yED-Ys-pJc"/>
                         </constraints>
                         <variation key="default">
@@ -113,23 +110,23 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
-                <outlet property="ConstraintLabelBottom" destination="1lo-By-XZG" id="mCE-vn-cSW"/>
-                <outlet property="ImageViewOne" destination="yqD-YQ-E8D" id="LsD-Ho-Ibz"/>
+                <outlet property="ConstraintLabelBottom" destination="0dC-ty-rUF" id="bDw-c0-fxh"/>
+                <outlet property="ImageViewOne" destination="mdu-is-w58" id="dFC-9u-Gl4"/>
                 <outlet property="ImageViewThd" destination="qrZ-hc-XdT" id="wIP-pS-zKT"/>
-                <outlet property="ImageViewTwo" destination="mdu-is-w58" id="ygq-7h-gB4"/>
+                <outlet property="ImageViewTwo" destination="yqD-YQ-E8D" id="5Ob-6W-eC2"/>
                 <outlet property="ImgPhoto" destination="JZQ-rz-JSl" id="I2f-Pb-c7A"/>
                 <outlet property="ImgTipSolved" destination="DTZ-KU-LMc" id="sxV-IB-13K"/>
                 <outlet property="LabelContent" destination="0vo-pu-ptT" id="YTV-Fy-DT0"/>
+                <outlet property="LabelName" destination="oBR-RH-2O4" id="tJp-dC-K6r"/>
                 <outlet property="LabelTime" destination="e0Q-FO-enw" id="gOM-mx-dy1"/>
                 <outlet property="NewContentView" destination="831-Nx-J1M" id="rfP-ZA-SV7"/>
                 <outlet property="StackViewImgButton" destination="wnQ-xW-Swc" id="jhA-9v-PaQ"/>
             </connections>
-            <point key="canvasLocation" x="728.5" y="315.5"/>
+            <point key="canvasLocation" x="-412" y="-97"/>
         </tableViewCell>
     </objects>
     <resources>
         <image name="Forum_Photo" width="35" height="36"/>
         <image name="Forum_Solve" width="54" height="16"/>
-        <image name="Forum_Time" width="9" height="9"/>
     </resources>
 </document>

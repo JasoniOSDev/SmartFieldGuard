@@ -1,0 +1,195 @@
+
+/* Class = "UIButton"; normalTitle = "生长情况"; ObjectID = "0Uw-91-92T"; */
+"0Uw-91-92T.normalTitle" = "生长情况";
+
+/* Class = "UILabel"; text = "??"; ObjectID = "1gw-km-OIZ"; */
+"1gw-km-OIZ.text" = "??";
+
+/* Class = "UILabel"; text = "浓度"; ObjectID = "3DZ-eW-WTM"; */
+"3DZ-eW-WTM.text" = "浓度";
+
+/* Class = "UIButton"; normalTitle = "开始"; ObjectID = "6WA-xo-aQg"; */
+"6WA-xo-aQg.normalTitle" = "开始";
+
+/* Class = "UIButton"; selectedTitle = "开始"; ObjectID = "6WA-xo-aQg"; */
+"6WA-xo-aQg.selectedTitle" = "开始";
+
+/* Class = "UILabel"; text = "至"; ObjectID = "89p-a1-yQP"; */
+"89p-a1-yQP.text" = "至";
+
+/* Class = "UITabBarItem"; title = "履历"; ObjectID = "8Il-bf-tGT"; */
+"8Il-bf-tGT.title" = "履历";
+
+/* Class = "UILabel"; text = "围绕田园走一圈，即可得出面积"; ObjectID = "8S9-qM-QOa"; */
+"8S9-qM-QOa.text" = "围绕田园走一圈，即可得出面积";
+
+/* Class = "UITextField"; placeholder = "手机号码"; ObjectID = "8bg-7B-D38"; */
+"8bg-7B-D38.placeholder" = "手机号码";
+
+/* Class = "UILabel"; text = "??"; ObjectID = "8ff-B2-VAY"; */
+"8ff-B2-VAY.text" = "??";
+
+/* Class = "UITextField"; placeholder = "密码"; ObjectID = "8oB-67-OLz"; */
+"8oB-67-OLz.placeholder" = "密码";
+
+/* Class = "UIButton"; normalTitle = "丢弃该农田"; ObjectID = "9bt-ON-SoC"; */
+"9bt-ON-SoC.normalTitle" = "丢弃该农田";
+
+/* Class = "UINavigationItem"; title = "智慧田园"; ObjectID = "AzW-q8-esq"; */
+"AzW-q8-esq.title" = "智慧田园";
+
+/* Class = "UIButton"; normalTitle = "周"; ObjectID = "B6l-U4-xQj"; */
+"B6l-U4-xQj.normalTitle" = "周";
+
+/* Class = "UILabel"; text = "??"; ObjectID = "Cdn-aP-jTs"; */
+"Cdn-aP-jTs.text" = "??";
+
+/* Class = "UILabel"; text = "温度"; ObjectID = "E8x-AQ-sBi"; */
+"E8x-AQ-sBi.text" = "温度";
+
+/* Class = "UILabel"; text = "120"; ObjectID = "EkC-0u-j5A"; */
+"EkC-0u-j5A.text" = "120";
+
+/* Class = "UITextField"; placeholder = "手机号码"; ObjectID = "FR3-8f-UsO"; */
+"FR3-8f-UsO.placeholder" = "手机号码";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "FRN-8C-G03"; */
+"FRN-8C-G03.text" = "Label";
+
+/* Class = "UITextField"; placeholder = "用户名"; ObjectID = "GJb-qw-cEz"; */
+"GJb-qw-cEz.placeholder" = "用户名";
+
+/* Class = "UIButton"; normalTitle = "土壤"; ObjectID = "I0d-Jv-XWJ"; */
+"I0d-Jv-XWJ.normalTitle" = "土壤";
+
+/* Class = "UIButton"; selectedTitle = "土壤"; ObjectID = "I0d-Jv-XWJ"; */
+"I0d-Jv-XWJ.selectedTitle" = "土壤";
+
+/* Class = "UITabBarItem"; title = "讨论"; ObjectID = "LE8-jv-Ymm"; */
+"LE8-jv-Ymm.title" = "讨论";
+
+/* Class = "UILabel"; text = "强度"; ObjectID = "OjR-Ga-7j5"; */
+"OjR-Ga-7j5.text" = "强度";
+
+/* Class = "UIButton"; normalTitle = "水稻专区"; ObjectID = "P6d-WQ-2Ok"; */
+"P6d-WQ-2Ok.normalTitle" = "水稻专区";
+
+/* Class = "UITextField"; placeholder = "密码"; ObjectID = "PFl-de-TS6"; */
+"PFl-de-TS6.placeholder" = "密码";
+
+/* Class = "UILabel"; text = "当前位置 贫瘠（0%)"; ObjectID = "PX8-pw-Age"; */
+"PX8-pw-Age.text" = "当前位置 贫瘠（0%)";
+
+/* Class = "UITabBarItem"; title = "介绍"; ObjectID = "Ral-lJ-lFr"; */
+"Ral-lJ-lFr.title" = "介绍";
+
+/* Class = "UIButton"; normalTitle = "15分钟前"; ObjectID = "UZI-5z-ihR"; */
+"UZI-5z-ihR.normalTitle" = "15分钟前";
+
+/* Class = "UIButton"; normalTitle = "年"; ObjectID = "W5b-xI-GmR"; */
+"W5b-xI-GmR.normalTitle" = "年";
+
+/* Class = "UILabel"; text = "肥料用量(克）"; ObjectID = "WXE-eo-2h8"; */
+"WXE-eo-2h8.text" = "肥料用量(克）";
+
+/* Class = "UILabel"; text = "??"; ObjectID = "c39-qz-sAf"; */
+"c39-qz-sAf.text" = "??";
+
+/* Class = "UILabel"; text = "Jason"; ObjectID = "cpP-kd-dNr"; */
+"cpP-kd-dNr.text" = "Jason";
+
+/* Class = "UIButton"; normalTitle = "水稻专区"; ObjectID = "d6q-Rz-ffA"; */
+"d6q-Rz-ffA.normalTitle" = "水稻专区";
+
+/* Class = "UIButton"; normalTitle = "空气"; ObjectID = "dbi-BO-D0x"; */
+"dbi-BO-D0x.normalTitle" = "空气";
+
+/* Class = "UIButton"; selectedTitle = "空气"; ObjectID = "dbi-BO-D0x"; */
+"dbi-BO-D0x.selectedTitle" = "空气";
+
+/* Class = "UIButton"; normalTitle = "月"; ObjectID = "e5w-ze-Ip2"; */
+"e5w-ze-Ip2.normalTitle" = "月";
+
+/* Class = "UITabBarItem"; title = "分析"; ObjectID = "eJI-9E-a8A"; */
+"eJI-9E-a8A.title" = "分析";
+
+/* Class = "UILabel"; text = "空气"; ObjectID = "fde-qi-7d9"; */
+"fde-qi-7d9.text" = "空气";
+
+/* Class = "UIButton"; normalTitle = "2016/5/20"; ObjectID = "gb2-hu-d9o"; */
+"gb2-hu-d9o.normalTitle" = "2016/5/20";
+
+/* Class = "UILabel"; text = "阳光"; ObjectID = "hH9-49-mex"; */
+"hH9-49-mex.text" = "阳光";
+
+/* Class = "UIButton"; normalTitle = "天"; ObjectID = "i2C-hF-JB5"; */
+"i2C-hF-JB5.normalTitle" = "天";
+
+/* Class = "UILabel"; text = "/150天"; ObjectID = "iRk-0c-WxK"; */
+"iRk-0c-WxK.text" = "/150天";
+
+/* Class = "UITabBarItem"; title = "专家"; ObjectID = "jN5-20-wgG"; */
+"jN5-20-wgG.title" = "专家";
+
+/* Class = "UIButton"; normalTitle = "确定"; ObjectID = "jOc-X3-xjD"; */
+"jOc-X3-xjD.normalTitle" = "确定";
+
+/* Class = "UIButton"; normalTitle = "光照"; ObjectID = "jdW-lv-vL7"; */
+"jdW-lv-vL7.normalTitle" = "光照";
+
+/* Class = "UIButton"; selectedTitle = "光照"; ObjectID = "jdW-lv-vL7"; */
+"jdW-lv-vL7.selectedTitle" = "光照";
+
+/* Class = "UILabel"; text = "点击右上角\"+\"添加设备"; ObjectID = "jjT-3G-ax7"; */
+"jjT-3G-ax7.text" = "点击右上角\"+\"添加设备";
+
+/* Class = "UILabel"; text = "湿度"; ObjectID = "lhC-FF-A3u"; */
+"lhC-FF-A3u.text" = "湿度";
+
+/* Class = "UILabel"; text = "土壤"; ObjectID = "lya-kY-r5S"; */
+"lya-kY-r5S.text" = "土壤";
+
+/* Class = "UILabel"; text = "未设置"; ObjectID = "m2E-g6-Qto"; */
+"m2E-g6-Qto.text" = "未设置";
+
+/* Class = "UITextField"; placeholder = "输入您的农田面积 (平方米)"; ObjectID = "nCs-lC-VtJ"; */
+"nCs-lC-VtJ.placeholder" = "输入您的农田面积 (平方米)";
+
+/* Class = "UILabel"; text = "播种日期 2016年1月1日"; ObjectID = "nHA-CW-jHZ"; */
+"nHA-CW-jHZ.text" = "播种日期 2016年1月1日";
+
+/* Class = "UILabel"; text = "播种日期 2016年1月1日"; ObjectID = "nzw-wR-BFO"; */
+"nzw-wR-BFO.text" = "播种日期 2016年1月1日";
+
+/* Class = "UILabel"; text = "湿度"; ObjectID = "pCF-Sh-8ds"; */
+"pCF-Sh-8ds.text" = "湿度";
+
+/* Class = "UILabel"; text = "??"; ObjectID = "q7g-3O-VCc"; */
+"q7g-3O-VCc.text" = "??";
+
+/* Class = "UILabel"; text = "未设置"; ObjectID = "qUG-r2-JK3"; */
+"qUG-r2-JK3.text" = "未设置";
+
+/* Class = "UIButton"; normalTitle = "施肥"; ObjectID = "sMJ-1Z-HQe"; */
+"sMJ-1Z-HQe.normalTitle" = "施肥";
+
+/* Class = "UIButton"; selectedTitle = "施肥"; ObjectID = "sMJ-1Z-HQe"; */
+"sMJ-1Z-HQe.selectedTitle" = "施肥";
+
+/* Class = "UIButton"; normalTitle = "今天"; ObjectID = "uIW-xA-dlp"; */
+"uIW-xA-dlp.normalTitle" = "今天";
+
+/* Class = "UILabel"; text = "二氧化碳"; ObjectID = "ugg-wg-WLJ"; */
+"ugg-wg-WLJ.text" = "二氧化碳";
+
+/* Class = "UILabel"; text = "温度"; ObjectID = "ugl-g1-t1U"; */
+"ugl-g1-t1U.text" = "温度";
+
+/* Class = "UIButton"; normalTitle = "2016/5/20"; ObjectID = "xbT-No-iGL"; */
+"xbT-No-iGL.normalTitle" = "2016/5/20";
+
+/* Class = "UINavigationItem"; title = "发问题"; ObjectID = "ytp-Rw-JKy"; */
+"ytp-Rw-JKy.title" = "发问题";
+
+/* Class = "UILabel"; text = "??"; ObjectID = "zHe-YZ-2rF"; */
+"zHe-YZ-2rF.text" = "??";

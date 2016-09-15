@@ -21,7 +21,7 @@ class FarmlandCardTableViewCell: UITableViewCell,Reusable {
     @IBOutlet weak var LabelDataCO2: UILabel!
     @IBOutlet weak var ConstraintLabelTitleCenterX: NSLayoutConstraint!
     @IBOutlet weak var ConstraintLabelTitleLeft: NSLayoutConstraint!
-    var farmLand:Farmland!{
+     var farmLand:Farmland!{
         didSet{
             LabelTitle.text = farmLand.name
             if let url = farmLand.crops?.urlHome{
@@ -35,21 +35,19 @@ class FarmlandCardTableViewCell: UITableViewCell,Reusable {
                 ConstraintLabelTitleCenterX.active = false
                 ConstraintLabelTitleLeft.active = true
             }
-            farmLand.fillDataInViewAction = fillAction
-            farmLand.updateEnvironmentData(nil)
+                farmLand.fillDataInViewAction = fillAction
         }
     }
-//    (air_t:Double,air_w:Double,soil_t:Double,soil_w:Double,co2:Double,light:Double) -> Void
-    var fillAction: Farmland.fillAction!
+    
+    var fillAction: Farmland.fillAction?
     
     override func awakeFromNib() {
         super.awakeFromNib()
         self.backgroundColor = UIColor.BackgroundColor()
         self.contentView.frame.size = CGSizeMake(ScreenWidth - 10, 120)
-        contentView.layer.shadowColor = UIColor.LowBlackColor().CGColor
-        contentView.layer.shadowOffset = CGSizeMake(1, 1.5)
-        contentView.layer.shadowRadius = 2
-        contentView.layer.shadowOpacity = 1
+//        contentView.layer.shadowColor = UIColor.LowBlackColor().CGColor
+//        contentView.layer.shadowOffset = CGSizeMake(1, 1.5)
+//        contentView.layer.shadowOpacity = 1
         fillAction  = {
             [weak self] air_t,air_w,soil_t,soil_w,co2,light in
             if let sSelf = self {
@@ -63,6 +61,11 @@ class FarmlandCardTableViewCell: UITableViewCell,Reusable {
                 sSelf.updateModuleState()
             }
         }
+        if(self.farmLand != nil && self.farmLand.fillDataInViewAction == nil){
+            self.farmLand.fillDataInViewAction = fillAction
+            self.farmLand.fillDataInView()
+        }
+        
     }
     
     //采取遍历的方式去更新每一个模块的颜色

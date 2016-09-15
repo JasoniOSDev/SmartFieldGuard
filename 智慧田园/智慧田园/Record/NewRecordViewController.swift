@@ -20,7 +20,7 @@ class NewRecordViewController: TYViewController {
     @IBOutlet weak var ButtonEnd: UIButton!
     @IBOutlet weak var tableView: UITableView!
     let calendarManager = JTCalendarManager()
-    var Tasks = List<Tasking>()
+    var Tasks = [Tasking]()
     var visibleTask = [Tasking]()
     var buttonTag = 0
     var calendarHidden = false
@@ -63,16 +63,34 @@ class NewRecordViewController: TYViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-         UIApplication.sharedApplication().setStatusBarStyle(.Default, animated: true)
+        calenderManagerConfigure()
+        prepareUI()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        UIApplication.sharedApplication().setStatusBarStyle(.Default, animated: true)
+        self.navigationController?.navigationBar.tintColor = UIColor.MidBlackColor()
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        self.navigationController?.navigationBar.subviews[0].alpha = 1
+    }
+    
+    private func calenderManagerConfigure(){
         calendarManager.delegate = self
         calendarManager.menuView = calendarMenuView
         calendarManager.contentView = calendarContentView
         calendarManager.setDate(NSDate())
+    }
+    
+    private func prepareUI(){
+        CloseCalenderView(0)
+        tableViewConfigure()
         self.title = "作物履历"
         ButtonStart.setTitleColor(UIColor.DangerColor(), forState: .Selected)
         ButtonEnd.setTitleColor(UIColor.DangerColor(), forState: .Selected)
-        CloseCalenderView(0)
-        tableViewConfigure()
         self.StartSelectDate = NSDate()
         self.EndSelectDate = self.StartSelectDate
         ButtonCalenderSureClicked(ButtonSure)
@@ -87,15 +105,14 @@ class NewRecordViewController: TYViewController {
     }
     
     private func CloseCalenderView(timeInterval:Double){
-        dispatch_async(dispatch_get_main_queue()) {
-            UIView.animateWithDuration(timeInterval) {
-                if(self.calendarHidden == false){
-                    self.calendarHidden = true
+        if self.calendarHidden == false{
+            self.calendarHidden = true
+            dispatch_async(dispatch_get_main_queue()) {
+                UIView.animateWithDuration(timeInterval) {
                     self.ConstraintCalenderTop.constant = -self.CalendarViewContent.frame.height
                     self.view.layoutIfNeeded()
                 }
-            }
-            
+           }
         }
     }
     
@@ -108,7 +125,9 @@ class NewRecordViewController: TYViewController {
                     self.view.layoutIfNeeded()
                 }
             })
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), {                 NSThread.sleepForTimeInterval(timeInterval)
+        
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), {
+                NSThread.sleepForTimeInterval(timeInterval)
                     dispatch_async(dispatch_get_main_queue(), {
                         self.calendarManager.setDate(self.currentSelectDate ?? NSDate())
                     })

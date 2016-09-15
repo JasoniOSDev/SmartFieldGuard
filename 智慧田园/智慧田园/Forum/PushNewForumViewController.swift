@@ -21,6 +21,8 @@ class PushNewForumViewController: TYViewController,UITextViewDelegate,UIImagePic
     @IBOutlet weak var StackViewAddPicture: UIStackView!
     @IBOutlet weak var ButtonContentClass: UIButton!
     @IBOutlet weak var StackViewImg: UIStackView!
+    var finishBlock:((Bool)->Void)?
+    var completeBlock:((Bool)->Void)?//发送完毕的回调
     var cropsID:String!
     var cropsName:String!
     var imgs = [UIImage]()
@@ -39,18 +41,8 @@ class PushNewForumViewController: TYViewController,UITextViewDelegate,UIImagePic
     
     lazy var ImgPickViewController:UIImagePickerController = {
         let viewController = UIImagePickerController()
-        viewController.sourceType = .PhotoLibrary
         viewController.allowsEditing = false
         viewController.delegate = self
-        viewController.navigationBar.titleTextAttributes = [NSFontAttributeName:UIFont.NavigationBarNormalTitleFont(),NSForegroundColorAttributeName:UIColor.NavigationBarTitleColor()]
-        if let leftItem:UIBarButtonItem = viewController.navigationItem.leftBarButtonItem{
-            leftItem.image = UIImage(named:"Close_White")
-            leftItem.tintColor = UIColor.LowBlackColor()
-        }
-        if let rightItem:UIBarButtonItem = viewController.navigationItem.rightBarButtonItem{
-            rightItem.image = UIImage(named:"OK_White")
-            rightItem.tintColor = UIColor.LowBlackColor()
-        }
         return viewController
     }()
     
@@ -98,7 +90,6 @@ class PushNewForumViewController: TYViewController,UITextViewDelegate,UIImagePic
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
         AddImg(image)
-        print(editingInfo)
         picker.dismissViewControllerAnimated(true, completion: nil)
     }
     
@@ -116,31 +107,14 @@ class PushNewForumViewController: TYViewController,UITextViewDelegate,UIImagePic
         TextViewContent.resignFirstResponder()
         if style == .Forum{
             if let content = TextViewContent.text {
-                NetWorkManager.updateSession({ 
-                    Alamofire.upload(.POST, ContentType.PulishNewForum.url, multipartFormData: { data in
-                    
-                        var i = 0
-                        for image in self.imgs{
-                            if let imageData = UIImageJPEGRepresentation(image, 0.95) {
-                                //                            data.appendBodyPa rt(data: imageData, name: "fileImages")
-                                data.appendBodyPart(data: imageData, name: "file", fileName: "images.jpg", mimeType: "image/jpg")
-                                i += 1
-                            }
-                        }
-                        let contentData = content.dataUsingEncoding(NSUTF8StringEncoding)
-                        data.appendBodyPart(data: contentData!, name: "content")
-                        data.appendBodyPart(data: (self.cropsID)!.dataUsingEncoding(NSUTF8StringEncoding)!, name: "parentArea")
-                        }, encodingCompletion: { (result) in
-                            switch result{
-                            case .Success(let request,  _,  _):
-                                request.TYresponseJSON(completionHandler: { (response) in
-                                    TYUserDefaults.NewForum.value = true
-                                })
-                            case .Failure(_):
-                                break
-                            }
-                    })
+                NetWorkManager.PushNewForum(content, images: imgs, cropsID: self.cropsID,block:{tg in
+                    if let block = self.completeBlock{
+                        block(tg)
+                    }
                 })
+                if let block = finishBlock{
+                    block(imgs.count != 0)
+                }
                 self.dismissViewControllerAnimated(true, completion: nil)
             }
         }else{
@@ -148,24 +122,48 @@ class PushNewForumViewController: TYViewController,UITextViewDelegate,UIImagePic
                 let topic = ExpertTheme()
                 topic.classifyID = cropsID
                 topic.classifyName = cropsName
-                topic.content = content
-                topic.headPhoto = TYUserDefaults.headImage.value!
+                topic.content = content 
+                topic.headPhoto = TYUserDefaults.headImage.value
                 topic.userID = TYUserDefaults.userID.value!
                 NetWorkManager.PushNewExpertTopic(topic, images: imgs, callback: { tag in
-                    if tag {
-                        MBProgressHUD.showSuccess("发送成功", toView: nil)
-                    }else{
-                        UIApplication.sharedApplication().keyWindow?.rootViewController?.presentViewController((self.navigationController)!, animated: true, completion: nil)
-                        MBProgressHUD.showError("发送失败", toView: nil)
+                    if let block = self.completeBlock{
+                        block(tag)
                     }
                 })
+                if let block = finishBlock{
+                    block(imgs.count != 0)
+                }
                 self.dismissViewControllerAnimated(true, completion: nil)
             }
         }
     }
     
     @IBAction func ButtonAddClicked(sender: AnyObject) {
-        self.presentViewController(ImgPickViewController, animated: true, completion: nil)
+        self.view.endEditing(true)
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
+        alertController.addAction(UIAlertAction(title: "从相册选择", style: .Default, handler: { [weak self] _ in
+            guard UIImagePickerController.isSourceTypeAvailable(.PhotoLibrary) else{
+                MBProgressHUD.showError("访问相册失败", toView: nil)
+                return
+            }
+            if let sSelf = self {
+                sSelf.ImgPickViewController.sourceType = .PhotoLibrary
+                sSelf.presentViewController(sSelf.ImgPickViewController, animated: true, completion: nil)
+            }
+        }))
+        alertController.addAction(UIAlertAction(title: "拍照", style: .Default, handler: { [weak self] _ in
+            guard UIImagePickerController.isSourceTypeAvailable(.Camera) else{
+                MBProgressHUD.showError("无法打开相机", toView: nil)
+                return
+            }
+            if let sSelf = self {
+                sSelf.ImgPickViewController.sourceType = .Camera
+                sSelf.presentViewController(sSelf.ImgPickViewController, animated: true, completion: nil)
+            }
+
+        }))
+        alertController.addAction(UIAlertAction(title: "取消", style: .Cancel, handler: nil))
+        self.presentViewController(alertController, animated: true, completion: nil)
     }
 
 }

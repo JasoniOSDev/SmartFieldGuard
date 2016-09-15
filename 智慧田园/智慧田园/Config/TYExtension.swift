@@ -31,6 +31,21 @@ extension UIDevice{
     }
 }
 
+extension String{
+    
+    func imageLowQualityURL() -> String{
+        var parts = self.componentsSeparatedByString(".")
+        let len = parts.count
+        parts[len - 2] += "_mini"
+        print(parts.reduce("", combine: { (pre, now) -> String in
+            return pre + (pre == "" ? "" : ".") + now
+        }))
+        return parts.reduce("", combine: { (pre, now) -> String in
+            return pre + (pre == "" ? "" : ".") + now
+        })
+    }
+}
+
 extension MBProgressHUD{
     
     class func show(text:String,icon:String,  view:UIView?){
@@ -62,6 +77,9 @@ extension MBProgressHUD{
         let hud = MBProgressHUD.showHUDAddedTo(toView, animated: true)
         hud.removeFromSuperViewOnHide = true
         hud.dimBackground = false
+        if let MSG = msg {
+            hud.labelText = MSG
+        }
         return hud
     }
 }
@@ -218,6 +236,17 @@ extension UITableView {
     }
 }
 
+extension UICollectionView{
+    func registerReusableCell<T: UICollectionViewCell where T: Reusable>(_: T.Type) {
+        if let nib = T.nib {
+            self.registerNib(nib, forCellWithReuseIdentifier: T.reuseIdentifier)
+        } else {
+            self.registerClass(T.self, forCellWithReuseIdentifier: T.reuseIdentifier)
+        }
+    }
+    
+}
+
 extension CALayer{
     
     func makeCornerRadius(radius:CGFloat){
@@ -234,17 +263,17 @@ extension UIImage{
         let rect = CGRect(origin: CGPoint(x: 0, y: 0), size: sizetoFit)
         
         UIGraphicsBeginImageContextWithOptions(rect.size, false, UIScreen.mainScreen().scale)
-        CGContextAddPath(UIGraphicsGetCurrentContext(),
+        CGContextAddPath(UIGraphicsGetCurrentContext()!,
                          UIBezierPath(roundedRect: rect, byRoundingCorners: UIRectCorner.AllCorners,
                             cornerRadii: CGSize(width: radius, height: radius)).CGPath)
-        CGContextClip(UIGraphicsGetCurrentContext())
+        CGContextClip(UIGraphicsGetCurrentContext()!)
         
         self.drawInRect(rect)
-        CGContextDrawPath(UIGraphicsGetCurrentContext(), .FillStroke)
+        CGContextDrawPath(UIGraphicsGetCurrentContext()!, .FillStroke)
         let output = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();
         
-        return output
+        return output!
     }
     
 }

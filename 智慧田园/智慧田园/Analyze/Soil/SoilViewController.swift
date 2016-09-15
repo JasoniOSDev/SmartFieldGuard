@@ -20,7 +20,7 @@ class SoilViewController: TYViewController {
     }
     
     func analyzeViewConfigure(){
-        AnalyzeViewT = NSBundle.mainBundle().loadNibNamed("TYAnalyze", owner: nil, options: nil)[0] as! TYAnalyze
+        AnalyzeViewT = NSBundle.mainBundle().loadNibNamed("TYAnalyze", owner: nil, options: nil)![0] as! TYAnalyze
         AnalyzeViewT.setTitle("温度(℃)")
         self.view.addSubview(AnalyzeViewT)
         AnalyzeViewT.snp_makeConstraints { (make) in
@@ -31,7 +31,7 @@ class SoilViewController: TYViewController {
         AnalyzeViewT.dataType = .soilT
         AnalyzeViewT.crop = crop
         AnalyzeViewT.field = field
-            AnalyzeViewW = NSBundle.mainBundle().loadNibNamed("TYAnalyze", owner: nil, options: nil)[0] as! TYAnalyze
+            AnalyzeViewW = NSBundle.mainBundle().loadNibNamed("TYAnalyze", owner: nil, options: nil)![0] as! TYAnalyze
         AnalyzeViewW.setTitle("湿度(%)")
         self.view.addSubview(AnalyzeViewW)
         AnalyzeViewW.snp_makeConstraints { (make) in

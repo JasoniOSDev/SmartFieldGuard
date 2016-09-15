@@ -628,7 +628,7 @@ public enum Notification: String {
 }
 
 /// Closure to run when the data in a Realm was modified.
-public typealias NotificationBlock = (notification: Notification, realm: Realm) -> Void
+public typealias NotificationBlock = (_ notification: Notification, _ realm: Realm) -> Void
 
 
 // MARK: Unavailable
@@ -1130,13 +1130,15 @@ public final class Realm {
 
      - returns: A token which must be retained for as long as you wish to continue receiving change notifications.
      */
+    let RLMRealmRefreshRequiredNotification = "RLMRealmRefreshRequiredNotification";
+    let RLMRealmDidChangeNotification = "RLMRealmDidChangeNotification";
     @warn_unused_result(message="You must hold on to the NotificationToken returned from addNotificationBlock")
     public func addNotificationBlock(block: NotificationBlock) -> NotificationToken {
         return rlmRealm.addNotificationBlock { rlmNotification, _ in
             switch rlmNotification {
-            case RLMRealmDidChangeNotification:
+            case self.RLMRealmDidChangeNotification:
                 block(notification: .DidChange, realm: self)
-            case RLMRealmRefreshRequiredNotification:
+            case self.RLMRealmRefreshRequiredNotification:
                 block(notification: .RefreshRequired, realm: self)
             default:
                 fatalError("Unhandled notification type: \(rlmNotification)")

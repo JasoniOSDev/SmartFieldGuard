@@ -20,7 +20,7 @@ class ExpertMessage:Object {
     dynamic var replySn:Int = 0 //第几个回复
     var time:String{
         get{
-            return NSTimeInterval(timeInterval).ReplyDateDescription
+            return NSTimeInterval(timeInterval).dateDescription
         }
     }
     dynamic var content:String = ""
@@ -58,7 +58,7 @@ class ExpertTheme:Object{
 
     var time:String{
         get{
-            return NSTimeInterval(timeInterval).ReplyDateDescription
+            return NSTimeInterval(timeInterval).dateDescription
         }
     }
     

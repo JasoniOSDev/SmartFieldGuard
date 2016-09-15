@@ -30,6 +30,12 @@ class AreaGetWayChooseViewController: UIViewController {
         self.title = "测量方式"
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        if self.popupController.style != .FormSheet{
+            self.popupController.style = .FormSheet
+        }
+    }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)

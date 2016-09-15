@@ -36,10 +36,13 @@ class MessagePhotoScanController: UIViewController,UIScrollViewDelegate {
     private(set) var toPoint:CGPoint = CGPointMake(UIScreen.mainScreen().bounds.width / 2, UIScreen.mainScreen().bounds.height / 2)
     private var currentCell:PhotoScanCollectionViewCell? {
         get{
-            if(collectionView.visibleCells().count > 1){
-                return collectionView.visibleCells().last as? PhotoScanCollectionViewCell
+            let indexPath = collectionView.indexPathsForVisibleItems()
+            for x in indexPath.enumerate(){
+                if(x.element.row == index){
+                    return collectionView.visibleCells()[x.index] as! PhotoScanCollectionViewCell
+                }
             }
-            return collectionView.visibleCells().first as? PhotoScanCollectionViewCell
+            return nil
         }
     }
     private var currentModel:PhotoScanModel {
@@ -64,6 +67,9 @@ class MessagePhotoScanController: UIViewController,UIScrollViewDelegate {
         collectionView.registerReusableCell(PhotoScanCollectionViewCell)
         collectionView.backgroundColor = UIColor.clearColor()
         collectionView.pagingEnabled = true
+        collectionView.bounces = false
+        collectionView.showsHorizontalScrollIndicator = false
+        collectionView.showsVerticalScrollIndicator = false
         return collectionView
     }()
     
@@ -147,7 +153,7 @@ class MessagePhotoScanController: UIViewController,UIScrollViewDelegate {
         let percent = (contentOffset.x ) / width * 10 % 10 / 10
         let newIndex = Int((contentOffset.x) / width)
         let result = newIndex != index ? percent < 0.3 : percent > 0.7
-        if let cell = (index < newIndex ? collectionView.visibleCells().last : collectionView.visibleCells().first) as? PhotoScanCollectionViewCell where  result{
+        if let cell = currentCell where  result{
             cell.zoom(1)
             index = newIndex
         }
@@ -161,6 +167,10 @@ class MessagePhotoScanController: UIViewController,UIScrollViewDelegate {
         }else{
             UIApplication.sharedApplication().keyWindow?.rootViewController!.presentViewController(shareMessagePhotoScan, animated: true, completion: nil)
         }
+        let imageView = UIImageView()
+        for x in shareMessagePhotoScan.photoScanData.enumerate(){
+            imageView.yy_setImageWithURL(NSURL(string: x.element.url), options: .AvoidSetImage)
+        }   
     }
 
 }

@@ -45,7 +45,7 @@ class PhotoScanCollectionViewCell: UICollectionViewCell,Reusable,UIScrollViewDel
     }
 
     func loadImage(placehold:UIImage,url:String){
-        imageView.yy_setImageWithURL(NSURL(string: url), placeholder: placehold, options: [.ProgressiveBlur,.SetImageWithFadeAnimation], completion: nil)
+        imageView.yy_setImageWithURL(NSURL(string: url), placeholder: placehold, options: [.ProgressiveBlur,.SetImageWithFadeAnimation,.ShowNetworkActivity], completion: nil)
     }
     
     func setImageViewSize(size:CGSize){
@@ -79,7 +79,6 @@ class PhotoScanCollectionViewCell: UICollectionViewCell,Reusable,UIScrollViewDel
     }
     
     func scrollViewDidZoom(scrollView: UIScrollView) {
-        print(scrollView.contentSize)
         let offx = (scrollView.frame.width - scrollView.contentSize.width)
         let offy = (scrollView.frame.height - scrollView.contentSize.height)
         imageView.center = CGPointMake((scrollView.contentSize.width  + (offx > 0 ? offx : 0))/2, (scrollView.contentSize.height  + (offy > 0 ? offy : 0))/2)

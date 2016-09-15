@@ -23,6 +23,7 @@ public class NetWorkManager:NSObject{
                 TYUserDefaults.tel.value = userInfo[TelKey] as? String
                 TYUserDefaults.username.value = userInfo[UsernameKey] as? String
                 TYUserDefaults.passWord.value = parameters["password"] as? String
+                TYUserDefaults.lastConnectTime.value = NSDate().timeIntervalSince1970
                 TYUserDefaults.userID.value = userInfo[UserIDKey] as? String
                 ExpertClient.shareClient.connect()
             }else{
@@ -32,6 +33,38 @@ public class NetWorkManager:NSObject{
             }
             action(json: json)
         }
+    }
+    
+    
+    class func uploadUserPhoto(realImage:UIImage,lowQualityImage:UIImage,block:((Bool)->Void)){
+        NetWorkManager.updateSession({
+            Alamofire.upload(.POST, ContentType.userUplod.url, multipartFormData: { (data) in
+                if let realData =
+                    UIImagePNGRepresentation(realImage),let lowQuealityData = UIImagePNGRepresentation(lowQualityImage){
+                    data.appendBodyPart(data: realData, name: "file", fileName: "images.png", mimeType: "image/png")
+                    data.appendBodyPart(data: lowQuealityData, name: "file", fileName: "images.png", mimeType: "image/png")
+                }else{
+                    block(false)
+                    return
+                }
+                let fileTypeData = "UserHead".dataUsingEncoding(NSUTF8StringEncoding)
+                data.appendBodyPart(data: fileTypeData!, name: "fileType")
+                }, encodingCompletion: {  (result) in
+                    switch result{
+                    case .Success(let request,  _,  _):
+                        request.TYResponseJSON(Block: { (JSON) in
+                            if let msg = JSON["message"] as? String where msg == "success"{
+                                block(true)
+                            }else{
+                                block(false)
+                            }
+                        })
+                    case .Failure(_):
+                        block(false)
+                        break
+                    }
+            })
+        })
     }
     //message:unlogin
     class func updateSession(action:(()->Void)? = nil) {
@@ -158,11 +191,56 @@ public class NetWorkManager:NSObject{
             })
         }
     }
+    class func getPastTaskList(fieldNo:String,block:()->Void){
+        if let _ = ModelManager.getObjects(Tasking).filter("self.fieldID = %@",fieldNo).first {
+            block()
+        }else{
+            updateSession {
+                TYRequest(ContentType.pastTaskList, parameters: ["fieldNo":fieldNo]).TYResponseJSON(Block: { (JSON) in
+                    if let field = ModelManager.getObjects(Farmland).filter("self.id = %@",fieldNo).first{
+                        if let cropsList = JSON["taskRecords"] as? NSArray where cropsList.count > 0 {
+                            if let list = cropsList[0]["fieldRecords"] as? NSArray{
+                                for x in list {
+                                    if let object = x as? [String:AnyObject]{
+                                        let tasking = Tasking()
+                                        tasking.note = object["attention"] as? String ?? "无"
+                                        tasking.fieldID = fieldNo
+                                        tasking.finishTime = (object["finishTime"] as! Double)/1000
+                                        tasking.name = object["taskName"] as! String
+                                        tasking.periodNo = object["periodNo"] as! String
+                                        tasking.operation = object["taskFormula"] as! String
+                                        tasking.crop = field.crops
+                                        tasking.realTaskNo = object["taskNo"] as! String
+                                        tasking.taskType = object["taskType"] as! String
+                                        tasking.status = true
+                                        try! ModelManager.realm.write({
+                                            field.tasking.append(tasking)
+                                        })
+                                    }
+                                }
+                            }
+                        }
+                        block()
+                    }
+                })
+            }
+        }
+    }
+    
+    class func pushAFinishedTask(fieldNo:String,cropNo:String,taskNo:String,operation:String){
+        
+        updateSession{
+            TYRequest(ContentType.taskFinished, parameters: ["fieldNo":fieldNo,"cropNo":cropNo,"taskNo":taskNo,"variables":operation]).TYResponseJSON(Block: { (JSON) in
+                if let msg = JSON["message"] as? String where msg == "success"{
+                    print("提交成功")
+                }
+            })
+        }
+    }
     
     class func updateFarmland(action:((Bool)->Void)?=nil){
         updateSession{
             TYRequest(ContentType.updateFarmland, parameters: nil).TYresponseJSON(completionHandler: { (response) in
-                print(response)
                 var tag = false
                 if response.result.isSuccess{
                     if let json = response.result.value as? [String:AnyObject]{
@@ -170,11 +248,12 @@ public class NetWorkManager:NSObject{
                             if let fields = json["fields"] as? NSArray{
                                 let myFields = ModelManager.getObjects(Farmland).filter("self.userID = %@",TYUserDefaults.userID.value!)
                                 var finish = fields.count
-                                fields.forEach({ (x) in
+                                for x in fields{
                                     if let object = x as? [String:AnyObject]{
                                         let field = Farmland()
+                                        field.deviceMac = object["deviceMac"] as! String
                                         field.id = object["fieldNo"] as! String
-                                        field.name = object["fieldName"] as! String
+                                        field.name = (object["fieldName"] as? String) ?? "未设置"
                                         field.latitude = object["latitude"] as? Double ?? 0.0
                                         field.longitude = object["longitude"] as? Double ?? 0.0
                                         field.status = object["status"] as! String
@@ -184,18 +263,22 @@ public class NetWorkManager:NSObject{
                                             tag = true
                                             if let cropNo = object["cropNo"] as? String{
                                                 //如果crop在上一步被赋值，则将crop相关的任务数据，参数一并下载下来，存储本地
+                                                //下载任务履历
                                                 getCrops(cropNo, action: { (crop) in
                                                     field.crops = crop
                                                     crop.starTime = (object["startTime"] as! Double)/1000
                                                     crop.startDate = NSDate(timeIntervalSince1970: crop.starTime)
                                                     ModelManager.add(field)
-                                                    finish -= 1
-                                                    if finish == 0{
-                                                        if let finishAction = action{
-                                                            finishAction(tag)
+                                                    getPastTaskList(field.id, block: {
+                                                        finish -= 1
+                                                        if finish == 0{
+                                                            if let finishAction = action{
+                                                                finishAction(tag)
+                                                            }
                                                         }
-                                                    }
+                                                    })
                                                 })
+                                                
                                             }else{
                                                 //否则的话直接存储就可以了
                                                 ModelManager.add(field)
@@ -226,16 +309,47 @@ public class NetWorkManager:NSObject{
                                             }
                                         }
                                     }
-                                })
+                                }
                             }
                         }
                     }
-                }
-                if let finishBlock = action{
-                    finishBlock(false)
+                }else{
+                    if let finishBlock = action{
+                        finishBlock(false)
+                    }
                 }
             })
         }
+    }
+    
+    class func PushNewForum(content:String,images:[UIImage],cropsID:String,block:(Bool)->Void){
+        NetWorkManager.updateSession({
+            Alamofire.upload(.POST, ContentType.PulishNewForum.url, multipartFormData: { data in
+                var i = 0
+                for image in images{
+                    if let imageData = UIImageJPEGRepresentation(image, 0.95),let lowQualityImageData = UIImageJPEGRepresentation(image.resizeToSize(CGSizeMake(160, image.size.height / ( image.size.width / 160)), withInterpolationQuality: CGInterpolationQuality.High)!,1) {
+                        data.appendBodyPart(data: imageData, name: "file", fileName: "images.jpg", mimeType: "image/jpg")
+                        data.appendBodyPart(data: lowQualityImageData, name: "file", fileName: "images.jpg", mimeType: "image/jpg")
+                        i += 1
+                    }
+                }
+                let contentData = content.dataUsingEncoding(NSUTF8StringEncoding)
+                data.appendBodyPart(data: contentData!, name: "content")
+                data.appendBodyPart(data: cropsID.dataUsingEncoding(NSUTF8StringEncoding)!, name: "parentArea")
+                data.appendBodyPart(data: "Discuss".dataUsingEncoding(NSUTF8StringEncoding)!, name: "type")
+                }, encodingCompletion: { (result) in
+                    switch result{
+                    case .Success(let request,  _,  _):
+                        request.TYresponseJSON(completionHandler: { (response) in
+                            TYUserDefaults.NewForum.value = true
+                        })
+                        block(true)
+                    case .Failure(_):
+                        block(false)
+                        break
+                    }
+            })
+        })
     }
     
     class func PushNewExpertTopic(topic:ExpertTheme,images:[UIImage],callback:((Bool)->Void)? = nil){
@@ -244,8 +358,9 @@ public class NetWorkManager:NSObject{
                 data in
                     var i = 0
                     for image in images{
-                        if let imageData = UIImageJPEGRepresentation(image, 0.95) {
+                        if let imageData = UIImageJPEGRepresentation(image, 0.95),let lowQualityImageData = UIImageJPEGRepresentation(image.resizeToSize(CGSizeMake(160, image.size.height / ( image.size.width / 160)), withInterpolationQuality: CGInterpolationQuality.High)!,1) {
                             data.appendBodyPart(data: imageData, name: "file", fileName: "images.jpg", mimeType: "image/jpg")
+                            data.appendBodyPart(data: lowQualityImageData, name: "file", fileName: "images.jpg", mimeType: "image/jpg")
                             i += 1
                         }
                     }
@@ -278,9 +393,6 @@ public class NetWorkManager:NSObject{
                                         block(true)
                                     }
                                 }else{
-                                    topic.ID = NSUUID().UUIDString
-                                    topic.timeInterval = (NSDate().timeIntervalSince1970 + 28800)*1000
-                                    ModelManager.add(topic)
                                     if let block = callback{
                                         block(false)
                                     }
@@ -443,8 +555,7 @@ public class NetWorkManager:NSObject{
                             message.name = object["username"] as! String
                             message.timeInterval = object["replyDate"]  as! Double
                             message.Theme = topic
-                            dispatch_async(dispatch_get_main_queue(), { 
-                                message.updateTheme(true)
+                            dispatch_async(dispatch_get_main_queue(), {
                                 ModelManager.add(message)
                             })
                         })
