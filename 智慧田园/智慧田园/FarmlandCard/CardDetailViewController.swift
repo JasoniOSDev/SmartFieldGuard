@@ -147,7 +147,6 @@ class CardDetailViewController: TYViewController {
     
     func panGestureAction(){
         let point = self.panGesture.locationInView(self.scrollView)
-        print(point)
         switch self.panGesture.state {
         case .Began:
             self.panStartPoint = point

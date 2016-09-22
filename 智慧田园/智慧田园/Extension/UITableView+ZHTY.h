@@ -23,3 +23,9 @@
 -(int)intValue;
 
 @end
+
+@interface UIImage (BinaryCode)
+
++ (UIImage *)createNonInterpolatedUIImageFormCIImage:(CIImage *)image withSize:(CGFloat) size;
+
+@end

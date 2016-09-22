@@ -289,7 +289,6 @@ class GPSWayViewController: UIViewController,MAMapViewDelegate {
                 mapView.addOverlay(line)
                 lines.append(line)
             }
-            print("定位了")
             prePoint = point
             points.append(point)
         }

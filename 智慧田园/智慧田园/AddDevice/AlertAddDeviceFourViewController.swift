@@ -47,22 +47,22 @@ class AlertAddDeviceFourViewController: TYViewController,GCDAsyncSocketDelegate 
     }
     
     //socket代理
-    func socket(sock: GCDAsyncSocket!, didConnectToHost host: String!, port: UInt16) {
-        print("已连接到")
-        print("host:\(host)\tport:\(port)")
+    func socket(sock: GCDAsyncSocket, didConnectToHost host: String, port: UInt16) {
+//        print("已连接到")
+//        print("host:\(host)\tport:\(port)")
         let wifiInfo = "{\"type\":\"connect_wifi\", \"ssid\":\(AlertAddDeviceSecondViewController.wifiName),\"psw\":\(AlertAddDeviceSecondViewController.wifiPassWord), \"encryption\":\"psk2\",\"userId\":\((TYUserDefaults.userID.value)!)}\n".dataUsingEncoding(NSUTF8StringEncoding)
         mySocket.writeData(wifiInfo!, withTimeout: 10, tag: 1)
         
     }
     
-    func socket(sock: GCDAsyncSocket!, didWriteDataWithTag tag: Int) {
-        print("成功写入数据tag:\(tag)")
+    func socket(sock: GCDAsyncSocket, didWriteDataWithTag tag: Int) {
+//        print("成功写入数据tag:\(tag)")
         mySocket.readDataWithTimeout(5, tag: 1)
     }
     
-    func socket(sock: GCDAsyncSocket!, didReadData data: NSData!, withTag tag: Int) {
-        print("成功读取到数据")
-        print( String(data: data, encoding: NSUTF8StringEncoding))
+    func socket(sock: GCDAsyncSocket, didReadData data: NSData, withTag tag: Int) {
+//        print("成功读取到数据")
+//        print( String(data: data, encoding: NSUTF8StringEncoding))
     }
     
     func setProgress(){

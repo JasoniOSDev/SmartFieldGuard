@@ -37,7 +37,7 @@ public enum ContentType:String{
     case fieldAnalyze = "field/analyze"
     case taskFinished = "task/finish"
     case pastTaskList = "task/fieldRecord"
-
+    case CropsData = "field/cropRecord"
 }
 //Set-Cookie
 public func TYRequest(Type:ContentType,parameters:[String : AnyObject]?) -> Request{
@@ -80,7 +80,6 @@ extension Request{
                         if sessions.count >= 2{
                             let realSession = sessions[1].componentsSeparatedByString("?")[0]
                             TYUserDefaults.cookie.value = ";jsessionid=" + realSession
-                            print(realSession)
                         }
                     }
                 }
@@ -149,9 +148,9 @@ extension Request{
     
     func TYResponseJSON(options options: NSJSONReadingOptions = .AllowFragments,Block:(JSON:[String:AnyObject])->Void) -> Self{
         return TYResponse(responseSerializer: Request.JSONResponseSerializer(options: options),completionHandler: { (response) in
-            print("---------response-------------")
-            print(response)
-            print("---------response-------------")
+//            print("---------response-------------")
+//            print(response)
+//            print("---------response-------------")
             if response.result.isSuccess {
                 if let json = response.result.value as? [String:AnyObject]{
                     Block(JSON:json)

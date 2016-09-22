@@ -17,9 +17,6 @@ class FarmlandConfigureViewController: TYViewController {
     @IBOutlet weak var tableView: UITableView!
     var titles = ["名称","播种日期","农作物","农田面积","农田位置"]
     weak var textFieldName:UITextField?
-//    weak var labelTime:UILabel?
-//    weak var labelCropsName:UILabel?
-//    weak var labelArea:UILabel?
     weak var labelPostion:UILabel?
     var position:CLLocationCoordinate2D?
     var cropCreateTime:NSTimeInterval = 0
@@ -58,6 +55,12 @@ class FarmlandConfigureViewController: TYViewController {
         let formatter = NSDateFormatter()
         formatter.dateFormat = "yyyy年MM月dd日"
         return formatter
+    }()
+    lazy var cropsDataViewController:CropsDataViewController = {
+        let story = UIStoryboard(name: "FarmlandCard", bundle: NSBundle.mainBundle())
+        let vc = story.instantiateViewControllerWithIdentifier("CropsDataViewController") as! CropsDataViewController
+        vc.field = self.farmLand
+        return vc
     }()
     
     override func viewDidLoad() {
@@ -102,7 +105,7 @@ class FarmlandConfigureViewController: TYViewController {
         locationManager.requestLocationWithReGeocode(true) { [weak self] location, geoCode, error in
             if let sSelf = self where error == nil{
                 sSelf.position = location.coordinate
-                sSelf.prePosition = geoCode.province + " " + geoCode.city + " " + geoCode.district
+                sSelf.prePosition = geoCode.formattedAddress
                 sSelf.positionChange = true
                 sSelf.tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: 4, inSection: 0)], withRowAnimation: .None)
             }
@@ -186,7 +189,7 @@ class FarmlandConfigureViewController: TYViewController {
             TYRequest(ContentType.fieldSet, parameters: ["fieldNo":self.farmLand.id,"fieldName":self.preName!,"fieldArea":String(format: "%.f",self.preArea),"longitude":self.position!.longitude,"latitude":self.position!.latitude,"cropNo":self.selectCrop!.id,"startTime":String(format: "%.f",Double(self.cropCreateTime))]).TYresponseJSON(completionHandler: {  response in
                 try! ModelManager.realm.write({
                     if self.positionChange == true{
-                        self.farmLand.positionStr = self.labelPostion!.text!
+                        self.farmLand.positionStr = self.prePosition!
                         self.farmLand.latitude = self.position!.latitude
                         self.farmLand.longitude = self.position!.longitude
                     }
@@ -231,6 +234,11 @@ class FarmlandConfigureViewController: TYViewController {
         tableView.registerReusableCell(FarmlandConfigTableViewCell)
         tableView.clearOtherLine()
     }
+    
+    @IBAction func ButtonCropsDataClicked() {
+        self.presentViewController(cropsDataViewController, animated: true, completion: nil)
+    }
+    
     
 }
 extension FarmlandConfigureViewController:UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate{

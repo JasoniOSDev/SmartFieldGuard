@@ -23,13 +23,18 @@ class MessagePhotoScanController: UIViewController,UIScrollViewDelegate {
     private var photoScanData = [PhotoScanModel]()
     private var labelInfo:UILabel = UILabel()
     private var slide = false
-    private var singleTapGesture:UITapGestureRecognizer!
-    private var doubleTapGesture:UITapGestureRecognizer!
+    var singleTapGesture:UITapGestureRecognizer!
+    var doubleTapGesture:UITapGestureRecognizer!
     private var fromPoint:CGPoint!{
         get{
             let preImageView = photoScanData[index].preImageView
             let preSupreView = preImageView.superview
-            let point = preSupreView?.convertPoint(preImageView.center, toView: self.view)
+            let point:CGPoint!
+            if preSupreView != nil {
+                point = preSupreView?.convertPoint(preImageView.center, toView: self.view)
+            }else{
+                point = self.view.center
+            }
             return point
         }
     }
@@ -160,17 +165,21 @@ class MessagePhotoScanController: UIViewController,UIScrollViewDelegate {
     }
     
     class func pushScanController(point:CGPoint? = nil){
-        shareMessagePhotoScan.modalPresentationStyle = .Custom
-        shareMessagePhotoScan.transitioningDelegate = shareMessagePhotoScan
+        shareMessagePhotoScan.pushScanController(point)
+    }
+    
+    func pushScanController(point:CGPoint? = nil){
+        self.modalPresentationStyle = .Custom
+        self.transitioningDelegate = self
         if let rootViewController = UIApplication.sharedApplication().keyWindow?.rootViewController as? TYNavigationViewController{
-            rootViewController.visibleViewController!.presentViewController(shareMessagePhotoScan, animated: true, completion: nil)
+            rootViewController.visibleViewController!.presentViewController(self, animated: true, completion: nil)
         }else{
-            UIApplication.sharedApplication().keyWindow?.rootViewController!.presentViewController(shareMessagePhotoScan, animated: true, completion: nil)
+            UIApplication.sharedApplication().keyWindow?.rootViewController!.presentViewController(self, animated: true, completion: nil)
         }
         let imageView = UIImageView()
-        for x in shareMessagePhotoScan.photoScanData.enumerate(){
+        for x in self.photoScanData.enumerate(){
             imageView.yy_setImageWithURL(NSURL(string: x.element.url), options: .AvoidSetImage)
-        }   
+        }
     }
 
 }

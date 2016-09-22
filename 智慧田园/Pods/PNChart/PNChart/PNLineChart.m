@@ -754,7 +754,7 @@
 
 - (void)setupDefaultValues {
     [super setupDefaultValues];
-    // Initialization code
+    // Initialization codechartLineArray
     self.backgroundColor = [UIColor whiteColor];
     self.clipsToBounds = YES;
     self.chartLineArray = [NSMutableArray new];

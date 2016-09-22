@@ -203,7 +203,7 @@ class ForumViewController: TYViewController{
                                 }
                             }
                         }else{
-                            print(json["message"])
+//                            print(json["message"])
                         }
                     }
                 }

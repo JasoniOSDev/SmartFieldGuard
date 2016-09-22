@@ -37,9 +37,6 @@ extension String{
         var parts = self.componentsSeparatedByString(".")
         let len = parts.count
         parts[len - 2] += "_mini"
-        print(parts.reduce("", combine: { (pre, now) -> String in
-            return pre + (pre == "" ? "" : ".") + now
-        }))
         return parts.reduce("", combine: { (pre, now) -> String in
             return pre + (pre == "" ? "" : ".") + now
         })

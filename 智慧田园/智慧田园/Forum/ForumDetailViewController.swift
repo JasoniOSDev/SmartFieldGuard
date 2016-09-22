@@ -187,7 +187,7 @@ class ForumDetailViewController: TYViewController {
                                 }
                             }
                         }else{
-                            print(json["message"])
+//                            print(json["message"])
                         }
                     }
                 }

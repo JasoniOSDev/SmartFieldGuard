@@ -35,6 +35,30 @@ public class NetWorkManager:NSObject{
         }
     }
     
+    class func uploadBinaryCode(image:UIImage,block:(String?)->Void){
+        updateSession { 
+            Alamofire.upload(.POST, ContentType.userUplod.url, multipartFormData: { (mutableData) in
+                if let realData = UIImagePNGRepresentation(image){
+                     mutableData.appendBodyPart(data: realData, name: "file", fileName: "images.png", mimeType: "image/png")
+                    let fileTypeData = "CropRecord".dataUsingEncoding(NSUTF8StringEncoding)
+                    mutableData.appendBodyPart(data: fileTypeData!, name: "fileType")
+                }
+                }, encodingCompletion: { (result) in
+                    switch result{
+                    case .Success(request: let request, streamingFromDisk: _, streamFileURL: _):
+                        request.TYResponseJSON(Block: { (JSON) in
+                            if let msg = JSON["message"] as? String where msg == "success"{
+                                if let imageURL = JSON["imageUrl"] as? String{
+                                    block(TYUserDefaults.UrlPrefix.value + imageURL)
+                                }
+                            }
+                        })
+                    case .Failure(_):
+                        block(nil)
+                    }
+            })
+        }
+    }
     
     class func uploadUserPhoto(realImage:UIImage,lowQualityImage:UIImage,block:((Bool)->Void)){
         NetWorkManager.updateSession({
@@ -89,10 +113,30 @@ public class NetWorkManager:NSObject{
         }
     }
     
+    class func getCropsData(fieldNo:String,block:(temp:Double?,sun:Double?,water:Double?,liusuanjia:Double?,puGai:Double?,niaosu:Double?,tag:Bool)->Void){
+        updateSession { 
+            TYRequest(.CropsData, parameters: ["fieldNo":fieldNo]).TYResponseJSON(Block: { (JSON) in
+                if let msg = JSON["message"] as? String where msg == "success"{
+                    if let records = JSON["cropRecord"] as? [String:AnyObject]{
+                        let temp = records["T"] as! Double
+                        let liusunjia = records["liuSuanJia"] as! Double
+                        let pugai = records["puGai"] as! Double
+                        let niaosu = records["niaoSu"] as! Double
+                        let sun = records["sun"] as! Double
+                        let water = records["water"] as! Double
+                        block(temp: temp, sun: sun, water: water, liusuanjia: liusunjia, puGai: pugai, niaosu: niaosu, tag: true)
+                    }else{
+                        block(temp: nil, sun: nil, water: nil, liusuanjia: nil, puGai: nil, niaosu: nil, tag: true)
+                    }
+                }
+            })
+        }
+    }
+    
     class func getCrops(no:String,action:(Crops)->Void){
         updateSession{
             TYRequest(ContentType.Crop, parameters: ["cropNo":no]).TYresponseJSON(completionHandler: { (response) in
-                print(response)
+//                print(response)
                 if response.result.isSuccess {
                     if let json = response.result.value as? [String:AnyObject]{
                         if let message = json["message"] as? String where message == "success"{
@@ -232,7 +276,7 @@ public class NetWorkManager:NSObject{
         updateSession{
             TYRequest(ContentType.taskFinished, parameters: ["fieldNo":fieldNo,"cropNo":cropNo,"taskNo":taskNo,"variables":operation]).TYResponseJSON(Block: { (JSON) in
                 if let msg = JSON["message"] as? String where msg == "success"{
-                    print("提交成功")
+//                    print("提交成功")
                 }
             })
         }
@@ -451,7 +495,6 @@ public class NetWorkManager:NSObject{
                 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), {
                     let localTheme = ModelManager.getObjects(ExpertTheme)
                     if let msg = JSON["message"] as? String where msg == "success"{
-                        print(JSON)
                         if let array = (JSON["postList"] as! [String:AnyObject])["list"] as? NSArray{
                             for x in array{
                                 let object = x as! [String:AnyObject]

@@ -97,8 +97,9 @@ class TYAnalyze: UIView {
                     if let json = response.result.value as? [String:AnyObject]{
                         if let msg = json["message"] as? String where msg == "success"{
                            if let dataArry = json["fieldDatas"] as? NSArray{
-                            for x in dataArry{
+                            for x in dataArry {
                                     if let object = x as? [String:AnyObject]{
+                                        if(object["recordTime"] == nil){break}
                                         let recordDate = NSDate(timeIntervalSince1970: (object["recordTime"] as! Double)/1000)
                                         XLabels.append(dateFormatter.stringFromDate(recordDate))
                                         Yvalues.append(object[self.dataType.rawValue] as! CGFloat)
@@ -114,10 +115,7 @@ class TYAnalyze: UIView {
                                 return PNLineChartDataItem(y: value)
                             }
                             self.lineChart.chartData = [dataY]
-                            
                             self.lineChart.strokeChart()
-            
-                            
                             }
                         }
                     }

@@ -817,9 +817,13 @@
                                                         </connections>
                                                     </tableView>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9bt-ON-SoC">
-                                                        <state key="normal" title="丢弃该农田" backgroundImage="Button_DeleteFarmland">
+                                                        <state key="normal" image="Configure_CropData_enable">
                                                             <color key="titleColor" red="1" green="0.99997437000274658" blue="0.99999129772186279" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </state>
+                                                        <state key="disabled" image="Configure_CropData_disable"/>
+                                                        <connections>
+                                                            <action selector="ButtonCropsDataClicked" destination="tpe-fz-uAh" eventType="touchUpInside" id="RSO-jQ-eeY"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                                 <color key="backgroundColor" red="0.93609845638275146" green="0.93607044219970703" blue="0.93608629703521729" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -2746,7 +2750,7 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W8S-rF-0b1">
                                 <subviews>
-                                    <textField opaque="NO" clipsSubviews="YES" tag="101" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="手机号码" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" background="761C7650-06CF-45FF-95C2-FAF1B4827042" translatesAutoresizingMaskIntoConstraints="NO" id="8bg-7B-D38">
+                                    <textField opaque="NO" clipsSubviews="YES" tag="101" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="手机号码" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" background="BAFA695E-E8EA-43A4-92BF-4CF0C636CE39" translatesAutoresizingMaskIntoConstraints="NO" id="8bg-7B-D38">
                                         <constraints>
                                             <constraint firstAttribute="width" constant="200" id="dkG-YI-f3h"/>
                                             <constraint firstAttribute="height" constant="30" id="vYQ-Kx-I4T"/>
@@ -2758,7 +2762,7 @@
                                             <outlet property="delegate" destination="mWM-wd-HMh" id="oJR-bs-26p"/>
                                         </connections>
                                     </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" tag="102" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="密码" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" background="761C7650-06CF-45FF-95C2-FAF1B4827042" translatesAutoresizingMaskIntoConstraints="NO" id="PFl-de-TS6">
+                                    <textField opaque="NO" clipsSubviews="YES" tag="102" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="密码" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" background="BAFA695E-E8EA-43A4-92BF-4CF0C636CE39" translatesAutoresizingMaskIntoConstraints="NO" id="PFl-de-TS6">
                                         <constraints>
                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="150" id="KOC-Tg-E8y"/>
                                             <constraint firstAttribute="height" constant="30" id="YbV-Xk-eRv"/>
@@ -2800,7 +2804,7 @@
                                             <constraint firstItem="mkZ-3u-ZhX" firstAttribute="centerX" secondItem="fVI-Ej-0Lq" secondAttribute="centerX" id="vBz-xT-u4B"/>
                                         </constraints>
                                     </view>
-                                    <textField opaque="NO" clipsSubviews="YES" tag="103" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="用户名" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" background="761C7650-06CF-45FF-95C2-FAF1B4827042" translatesAutoresizingMaskIntoConstraints="NO" id="GJb-qw-cEz">
+                                    <textField opaque="NO" clipsSubviews="YES" tag="103" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="用户名" textAlignment="center" clearsOnBeginEditing="YES" minimumFontSize="17" background="BAFA695E-E8EA-43A4-92BF-4CF0C636CE39" translatesAutoresizingMaskIntoConstraints="NO" id="GJb-qw-cEz">
                                         <constraints>
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="3v4-gH-vap"/>
                                             <constraint firstAttribute="width" constant="200" id="Sxi-BL-wJp"/>
@@ -3000,7 +3004,19 @@
         </scene>
     </scenes>
     <resources>
-        <image name="761C7650-06CF-45FF-95C2-FAF1B4827042" width="200" height="30">
+        <image name="Add" width="20" height="20"/>
+        <image name="Air_Green_Small" width="18" height="12"/>
+        <image name="Analyze_ButtonBackground" width="119" height="40"/>
+        <image name="Area_Background_OK" width="133" height="36"/>
+        <image name="Area_Button_ manualWay" width="150" height="40"/>
+        <image name="Area_Button_AgainGPS" width="133" height="36"/>
+        <image name="Area_Button_Finished" width="120" height="40"/>
+        <image name="Area_Button_GPS" width="150" height="40"/>
+        <image name="Area_Button_GPSWay" width="150" height="40"/>
+        <image name="Area_Button_OnceAgain" width="150" height="40"/>
+        <image name="Area_MyLocationButton" width="30" height="30"/>
+        <image name="Area_TextBackground" width="284" height="40"/>
+        <image name="BAFA695E-E8EA-43A4-92BF-4CF0C636CE39" width="200" height="30">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGOzxYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK0HCBMU
 GR4fJSYsLzU4VSRudWxs1QkKCwwNDg8QERJWTlNTaXplViRjbGFzc1xOU0ltYWdlRmxhZ3NWTlNSZXBz
@@ -3016,21 +3032,10 @@ mAGfAacBtAG5AbsBvQHCAcoBzQHSAdoB3QHvAfIB9wAAAAAAAAIBAAAAAAAAAD8AAAAAAAAAAAAAAAAA
 AAH5A
 </mutableData>
         </image>
-        <image name="Add" width="20" height="20"/>
-        <image name="Air_Green_Small" width="18" height="12"/>
-        <image name="Analyze_ButtonBackground" width="119" height="40"/>
-        <image name="Area_Background_OK" width="133" height="36"/>
-        <image name="Area_Button_ manualWay" width="150" height="40"/>
-        <image name="Area_Button_AgainGPS" width="133" height="36"/>
-        <image name="Area_Button_Finished" width="120" height="40"/>
-        <image name="Area_Button_GPS" width="150" height="40"/>
-        <image name="Area_Button_GPSWay" width="150" height="40"/>
-        <image name="Area_Button_OnceAgain" width="150" height="40"/>
-        <image name="Area_MyLocationButton" width="30" height="30"/>
-        <image name="Area_TextBackground" width="284" height="40"/>
-        <image name="Button_DeleteFarmland" width="148" height="40"/>
         <image name="CO2_Green_Small" width="13" height="13"/>
         <image name="Close_White" width="16" height="16"/>
+        <image name="Configure_CropData_disable" width="148" height="40"/>
+        <image name="Configure_CropData_enable" width="148" height="40"/>
         <image name="Expert_Add" width="50" height="50"/>
         <image name="Expert_Class" width="50" height="50"/>
         <image name="Expert_Menu" width="50" height="49"/>

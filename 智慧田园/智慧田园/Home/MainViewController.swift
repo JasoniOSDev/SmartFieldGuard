@@ -82,23 +82,21 @@ class MainViewController: TYViewController {
                 }else{
                     self.tableView.mj_header.beginRefreshing()
                 }
+                self.notiToken = self.farmLands.addNotificationBlock { [weak self] result in
+                    switch(result){
+                    case .Initial(_):break
+                    case .Update(_, deletions: _, insertions: _, modifications: let modify):
+                        self?.needAnimation = false
+                        if modify.count > 0 {
+                            self?.tableView.reloadRowsAtIndexPaths(modify.map{NSIndexPath(forRow: $0, inSection: 0)}, withRowAnimation: .Automatic)
+                        }
+                    case .Error(_):break
+                    }
+                }
             }else{
                 self.tip = "NOLOGIN"
                 self.tableView.reloadData()
                 self.tableView.mj_header.hidden = true
-            }
-        }
-        
-        //农田数据发生变化的通知
-        self.notiToken = farmLands.addNotificationBlock { [weak self] result in
-            switch(result){
-            case .Initial(_):break
-            case .Update(_, deletions: _, insertions: _, modifications: let modify):
-                self?.needAnimation = false
-                if modify.count > 0 {
-                     self?.tableView.reloadRowsAtIndexPaths(modify.map{NSIndexPath(forRow: $0, inSection: 0)}, withRowAnimation: .Automatic)
-                }
-            case .Error(_):break
             }
         }
     }

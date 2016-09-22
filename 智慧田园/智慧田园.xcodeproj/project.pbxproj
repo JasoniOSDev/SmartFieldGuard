@@ -19,6 +19,9 @@
 		962ABF5B1CF29ECB00990AC2 /* InstroduceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 962ABF591CF29ECB00990AC2 /* InstroduceTableViewCell.swift */; };
 		962ABF5C1CF29ECB00990AC2 /* InstroduceTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 962ABF5A1CF29ECB00990AC2 /* InstroduceTableViewCell.xib */; };
 		962ABF5F1CF2ABAD00990AC2 /* TaskModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 962ABF5E1CF2ABAD00990AC2 /* TaskModel.swift */; };
+		96326BEE1D9175F100C621C1 /* CropsDataBackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96326BED1D9175F100C621C1 /* CropsDataBackView.swift */; };
+		96326BF01D92498B00C621C1 /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96326BEF1D92498B00C621C1 /* CoreImage.framework */; };
+		96326BF21D924A0600C621C1 /* String+BinaryCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96326BF11D924A0600C621C1 /* String+BinaryCode.swift */; };
 		96336E3A1CED569400BA5BF3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96336E391CED569400BA5BF3 /* AppDelegate.swift */; };
 		96336E3F1CED569400BA5BF3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 96336E3D1CED569400BA5BF3 /* Main.storyboard */; };
 		96336E411CED569400BA5BF3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 96336E401CED569400BA5BF3 /* Assets.xcassets */; };
@@ -38,6 +41,9 @@
 		963BDD421CFB6874003DB16E /* SunViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963BDD411CFB6874003DB16E /* SunViewController.swift */; };
 		963BDD451CFBD152003DB16E /* FertilizeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963BDD441CFBD152003DB16E /* FertilizeViewController.swift */; };
 		964173F41D8829EA00982CE8 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 961DF0741CF6ACE700A8942D /* MapKit.framework */; };
+		9643B63F1D9110F800AD6005 /* CropsDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9643B63D1D9110F800AD6005 /* CropsDataViewController.swift */; };
+		9643B6421D91184E00AD6005 /* FarmlandCard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9643B6411D91184E00AD6005 /* FarmlandCard.storyboard */; };
+		9643B6441D911DF200AD6005 /* 方正粗圆_GBK.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9643B6431D911DB000AD6005 /* 方正粗圆_GBK.ttf */; };
 		96480A8D1D7BB03300C04D5D /* UITableView+ZHTY.m in Sources */ = {isa = PBXBuildFile; fileRef = 96480A8C1D7BB03300C04D5D /* UITableView+ZHTY.m */; };
 		965A53C01CF0011400CA9B53 /* TYConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965A53BE1CF0011400CA9B53 /* TYConfig.swift */; };
 		965A53C21CF014D900CA9B53 /* CardDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 965A53C11CF014D900CA9B53 /* CardDetailViewController.swift */; };
@@ -112,6 +118,7 @@
 		96AC87521D3F6F5C0075C451 /* ExpertModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AC87511D3F6F5C0075C451 /* ExpertModel.swift */; };
 		96D040951D42343200011D15 /* ExpertClassChooseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D040941D42343200011D15 /* ExpertClassChooseController.swift */; };
 		96D29D8D1D3F976800B990DB /* ExpertClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D29D8C1D3F976800B990DB /* ExpertClient.swift */; };
+		96DD73D31D916DBA006CCC23 /* CropsDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96DD73D21D916DBA006CCC23 /* CropsDataView.swift */; };
 		C9A1C89BA3BC187084745576 /* Pods_____.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 369374F3B9AB6392C3D772EC /* Pods_____.framework */; };
 /* End PBXBuildFile section */
 
@@ -183,6 +190,9 @@
 		962ABF591CF29ECB00990AC2 /* InstroduceTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InstroduceTableViewCell.swift; path = Instroduce/InstroduceTableViewCell.swift; sourceTree = "<group>"; };
 		962ABF5A1CF29ECB00990AC2 /* InstroduceTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = InstroduceTableViewCell.xib; path = Instroduce/InstroduceTableViewCell.xib; sourceTree = "<group>"; };
 		962ABF5E1CF2ABAD00990AC2 /* TaskModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TaskModel.swift; path = FarmlandCard/Model/TaskModel.swift; sourceTree = "<group>"; };
+		96326BED1D9175F100C621C1 /* CropsDataBackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CropsDataBackView.swift; path = CropsData/CropsDataBackView.swift; sourceTree = "<group>"; };
+		96326BEF1D92498B00C621C1 /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
+		96326BF11D924A0600C621C1 /* String+BinaryCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "String+BinaryCode.swift"; path = "Helper/String+BinaryCode.swift"; sourceTree = "<group>"; };
 		96336E361CED569400BA5BF3 /* 智慧田园.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "智慧田园.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		96336E391CED569400BA5BF3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		96336E3E1CED569400BA5BF3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -207,6 +217,9 @@
 		963BDD3E1CFB682A003DB16E /* SoilViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SoilViewController.swift; path = Analyze/Soil/SoilViewController.swift; sourceTree = "<group>"; };
 		963BDD411CFB6874003DB16E /* SunViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SunViewController.swift; path = Analyze/Sun/SunViewController.swift; sourceTree = "<group>"; };
 		963BDD441CFBD152003DB16E /* FertilizeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FertilizeViewController.swift; path = Analyze/Fertilize/FertilizeViewController.swift; sourceTree = "<group>"; };
+		9643B63D1D9110F800AD6005 /* CropsDataViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CropsDataViewController.swift; path = CropsData/CropsDataViewController.swift; sourceTree = "<group>"; };
+		9643B6411D91184E00AD6005 /* FarmlandCard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = FarmlandCard.storyboard; path = FarmlandCard/FarmlandCard.storyboard; sourceTree = "<group>"; };
+		9643B6431D911DB000AD6005 /* 方正粗圆_GBK.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "方正粗圆_GBK.ttf"; sourceTree = "<group>"; };
 		96480A8B1D7BB03300C04D5D /* UITableView+ZHTY.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UITableView+ZHTY.h"; path = "Extension/UITableView+ZHTY.h"; sourceTree = "<group>"; };
 		96480A8C1D7BB03300C04D5D /* UITableView+ZHTY.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UITableView+ZHTY.m"; path = "Extension/UITableView+ZHTY.m"; sourceTree = "<group>"; };
 		965A53BE1CF0011400CA9B53 /* TYConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TYConfig.swift; path = Config/TYConfig.swift; sourceTree = "<group>"; };
@@ -303,6 +316,7 @@
 		96AC87511D3F6F5C0075C451 /* ExpertModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExpertModel.swift; path = Expert/ExpertModel.swift; sourceTree = "<group>"; };
 		96D040941D42343200011D15 /* ExpertClassChooseController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExpertClassChooseController.swift; path = Expert/ExpertClassChooseController.swift; sourceTree = "<group>"; };
 		96D29D8C1D3F976800B990DB /* ExpertClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExpertClient.swift; path = Expert/ExpertClient.swift; sourceTree = "<group>"; };
+		96DD73D21D916DBA006CCC23 /* CropsDataView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CropsDataView.swift; path = CropsData/CropsDataView.swift; sourceTree = "<group>"; };
 		BB38657AA1CBDF22B65A16CC /* Pods-智慧田园.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-智慧田园.release.xcconfig"; path = "Pods/Target Support Files/Pods-智慧田园/Pods-智慧田园.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -311,6 +325,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				96326BF01D92498B00C621C1 /* CoreImage.framework in Frameworks */,
 				96A567AE1CF71551000733A1 /* Realm.framework in Frameworks */,
 				968889141CEF23BA00B99FD4 /* SystemConfiguration.framework in Frameworks */,
 				964173F41D8829EA00982CE8 /* MapKit.framework in Frameworks */,
@@ -348,6 +363,7 @@
 		7BE539810E714B91C1B5BA81 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				96326BEF1D92498B00C621C1 /* CoreImage.framework */,
 				961DF0761CF6B95D00A8942D /* libz.tbd */,
 				961DF0741CF6ACE700A8942D /* MapKit.framework */,
 				9677B7E91CF6A4BF008ADEA4 /* AMapFoundationKit.framework */,
@@ -388,6 +404,7 @@
 				96A567BB1CF73B25000733A1 /* TYUserDefault.swift */,
 				961FFC9E1D79A802001F363B /* Cache */,
 				96A567C31CF7DF33000733A1 /* NetWorkManager */,
+				96326BF11D924A0600C621C1 /* String+BinaryCode.swift */,
 			);
 			name = Helper;
 			sourceTree = "<group>";
@@ -476,6 +493,7 @@
 				962ABF521CF2893200990AC2 /* Instroduce */,
 				965A53FE1CF1D36B00CA9B53 /* Expert */,
 				965A53DB1CF1366C00CA9B53 /* Forum */,
+				9643B63C1D9110BC00AD6005 /* CropsData */,
 				9699F1BA1CEF407C0013031B /* FarmlandCard */,
 				9688890A1CEE9C2700B99FD4 /* AddDevice */,
 				968889021CEE028100B99FD4 /* Home */,
@@ -612,6 +630,16 @@
 				9638713E1CF4039C00653D11 /* NewRecordViewController.swift */,
 			);
 			name = Controller;
+			sourceTree = "<group>";
+		};
+		9643B63C1D9110BC00AD6005 /* CropsData */ = {
+			isa = PBXGroup;
+			children = (
+				96DD73D11D916D9B006CCC23 /* View */,
+				9643B63D1D9110F800AD6005 /* CropsDataViewController.swift */,
+				9643B6411D91184E00AD6005 /* FarmlandCard.storyboard */,
+			);
+			name = CropsData;
 			sourceTree = "<group>";
 		};
 		965A53C31CF072AD00CA9B53 /* View */ = {
@@ -756,6 +784,7 @@
 		965B31BC1D5EC306000ABA83 /* Font */ = {
 			isa = PBXGroup;
 			children = (
+				9643B6431D911DB000AD6005 /* 方正粗圆_GBK.ttf */,
 				965B31BD1D5EC306000ABA83 /* 兰亭细黑 GBK Mobil.TTF */,
 				965B31BE1D5EC306000ABA83 /* 兰亭黑 GBK.TTF */,
 			);
@@ -860,9 +889,9 @@
 		9699F1BA1CEF407C0013031B /* FarmlandCard */ = {
 			isa = PBXGroup;
 			children = (
+				965A53D21CF0895B00CA9B53 /* Config */,
 				965A53CC1CF0782400CA9B53 /* View */,
 				962ABF5D1CF2AB8C00990AC2 /* Model */,
-				965A53D21CF0895B00CA9B53 /* Config */,
 				965A53CD1CF0782B00CA9B53 /* Controller */,
 			);
 			name = FarmlandCard;
@@ -923,6 +952,15 @@
 				965B31B01D5EC28A000ABA83 /* MessagePhotoScanController.swift */,
 			);
 			name = MessagePhotoScanController;
+			sourceTree = "<group>";
+		};
+		96DD73D11D916D9B006CCC23 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				96DD73D21D916DBA006CCC23 /* CropsDataView.swift */,
+				96326BED1D9175F100C621C1 /* CropsDataBackView.swift */,
+			);
+			name = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1069,6 +1107,7 @@
 				96A04E921D44DD3A00EE66CA /* ExpertClassChooseCollectionViewCell.xib in Resources */,
 				965B31C01D5EC306000ABA83 /* 兰亭细黑 GBK Mobil.TTF in Resources */,
 				9677B7B61CF5D319008ADEA4 /* CropsCollectionViewCell.xib in Resources */,
+				9643B6421D91184E00AD6005 /* FarmlandCard.storyboard in Resources */,
 				965A53D11CF078A500CA9B53 /* TaskTableViewCell.xib in Resources */,
 				96AA20381D7BB31C00E22A4E /* PhotoScanCollectionViewCell.xib in Resources */,
 				965A540A1CF1D4E600CA9B53 /* AskExpertTableViewCell.xib in Resources */,
@@ -1077,6 +1116,7 @@
 				96336E411CED569400BA5BF3 /* Assets.xcassets in Resources */,
 				96336E3F1CED569400BA5BF3 /* Main.storyboard in Resources */,
 				962ABF5C1CF29ECB00990AC2 /* InstroduceTableViewCell.xib in Resources */,
+				9643B6441D911DF200AD6005 /* 方正粗圆_GBK.ttf in Resources */,
 				965B31C21D5EC306000ABA83 /* MBProgressHUD.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1255,11 +1295,15 @@
 				965A54051CF1D4BE00CA9B53 /* ExpertReplyTableViewCell.swift in Sources */,
 				96A567B91CF72FEA000733A1 /* LoginViewController.swift in Sources */,
 				962ABF541CF2895800990AC2 /* InstroduceViewController.swift in Sources */,
+				96DD73D31D916DBA006CCC23 /* CropsDataView.swift in Sources */,
 				968888FD1CEE018A00B99FD4 /* TYViewController.swift in Sources */,
 				9697638C1CF83EE700F11E7C /* UserCenterViewController.swift in Sources */,
+				96326BEE1D9175F100C621C1 /* CropsDataBackView.swift in Sources */,
 				963BDD351CFB5002003DB16E /* GrowthViewController.swift in Sources */,
+				9643B63F1D9110F800AD6005 /* CropsDataViewController.swift in Sources */,
 				96076C541CF9C1B7002E3F1E /* WidomTaskModel.swift in Sources */,
 				96A567B71CF72F03000733A1 /* LoginHomeViewController.swift in Sources */,
+				96326BF21D924A0600C621C1 /* String+BinaryCode.swift in Sources */,
 				963BDD3F1CFB682A003DB16E /* SoilViewController.swift in Sources */,
 				965A53D91CF0916100CA9B53 /* FarmlandConfigTableViewCell.swift in Sources */,
 				968888FF1CEE01F800B99FD4 /* TYNavigationViewController.swift in Sources */,

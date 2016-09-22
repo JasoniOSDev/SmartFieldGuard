@@ -51,14 +51,12 @@ class WisdomTask{
                     values[index] = value
                     finish -= 1
                     queue.suspended = !((finish) == 0)
-                    print(finish)
                 })
             }else{
                 WTFunction.convertToValue(part, field: field, FinishAction: { (value) in
                     values[index] = value
                     finish -= 1
                     queue.suspended = !((finish) == 0)
-                    print(finish)
                 })
             }
         }

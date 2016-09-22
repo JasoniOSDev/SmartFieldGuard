@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16A313a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="方正粗圆_GBK.ttf">
+            <string>FZY4K--GBK1-0</string>
+        </array>
+    </customFonts>
+    <scenes>
+        <!--Crops Data View Controller-->
+        <scene sceneID="eYf-Lg-Uh7">
+            <objects>
+                <viewController storyboardIdentifier="CropsDataViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="1x2-3b-TZN" customClass="CropsDataViewController" customModule="智慧田园" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="D3d-cy-bfc"/>
+                        <viewControllerLayoutGuide type="bottom" id="oQc-8N-v1O"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="bQL-jz-OXv">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FBX-K4-EVw" customClass="CropsDataBackView" customModule="智慧田园" customModuleProvider="target">
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="shuidao" translatesAutoresizingMaskIntoConstraints="NO" id="qyD-G8-Ybb">
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="140" id="VMp-Zp-pgn"/>
+                                            <constraint firstAttribute="height" constant="140" id="mfE-yP-j9y"/>
+                                        </constraints>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CropsData_PhotoBoard" translatesAutoresizingMaskIntoConstraints="NO" id="QNf-oh-JdE">
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="146" id="R0R-5c-KLa"/>
+                                            <constraint firstAttribute="width" constant="146" id="cPE-Sm-ex1"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="绿色尊享体验，源于田园智慧管家24小时悉心呵护" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4fU-w5-iOk">
+                                        <fontDescription key="fontDescription" name="FZY4K--GBK1-0" family="FZCuYuan-M03" pointSize="14"/>
+                                        <color key="textColor" red="1" green="0.99997437" blue="0.99999129769999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="NpB-Me-kwi">
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="JvD-M5-fQg">
+                                                <subviews>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CropsData_Sun" translatesAutoresizingMaskIntoConstraints="NO" id="RaU-Xy-vBx"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="吸收阳光总量" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9vO-wr-Oa9">
+                                                        <fontDescription key="fontDescription" name="FZY4K--GBK1-0" family="FZCuYuan-M03" pointSize="8"/>
+                                                        <color key="textColor" red="1" green="0.99997437" blue="0.99999129769999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="QX1-jU-7Cv">
+                                                <subviews>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CropsData_Water" translatesAutoresizingMaskIntoConstraints="NO" id="SGR-rp-6bc"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="吸收水分总量" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PQN-re-get">
+                                                        <fontDescription key="fontDescription" name="FZY4K--GBK1-0" family="FZCuYuan-M03" pointSize="8"/>
+                                                        <color key="textColor" red="1" green="0.99997437" blue="0.99999129769999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="lbN-g2-WFg">
+                                                <subviews>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CropsData_Fertilizer" translatesAutoresizingMaskIntoConstraints="NO" id="noZ-mK-HEh"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="施肥总量" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hhc-t7-OeY">
+                                                        <fontDescription key="fontDescription" name="FZY4K--GBK1-0" family="FZCuYuan-M03" pointSize="8"/>
+                                                        <color key="textColor" red="1" green="0.99997437" blue="0.99999129769999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="iIT-RF-eef">
+                                                <subviews>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CropsData_Temp" translatesAutoresizingMaskIntoConstraints="NO" id="0wk-W8-8Lf"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="平均最大温差" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sr1-MX-vaH">
+                                                        <fontDescription key="fontDescription" name="FZY4K--GBK1-0" family="FZCuYuan-M03" pointSize="8"/>
+                                                        <color key="textColor" red="1" green="0.99997437" blue="0.99999129769999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="qOH-Y4-axc">
+                                                <subviews>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CropsData_Arrow" translatesAutoresizingMaskIntoConstraints="NO" id="Zz7-hX-V0I"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="高于/低于正常值范围" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qRq-X8-OJI">
+                                                        <fontDescription key="fontDescription" name="FZY4K--GBK1-0" family="FZCuYuan-M03" pointSize="8"/>
+                                                        <color key="textColor" red="1" green="0.99997437" blue="0.99999129769999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                    </stackView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="品名：新杂交水稻" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ei8-sf-Pub">
+                                        <fontDescription key="fontDescription" name="FZY4K--GBK1-0" family="FZCuYuan-M03" pointSize="16"/>
+                                        <color key="textColor" red="1" green="0.99997437" blue="0.99999129769999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3og-Gq-T0K">
+                                        <state key="normal" image="Close_White"/>
+                                        <connections>
+                                            <action selector="ButtonCloseClicked" destination="1x2-3b-TZN" eventType="touchUpInside" id="ivA-B2-tq1"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AMe-cD-FWf">
+                                        <state key="normal" image="CropsData_ButtonCode"/>
+                                        <connections>
+                                            <action selector="ButtonCreateCodeClicked:" destination="1x2-3b-TZN" eventType="touchUpInside" id="UpE-nY-fmj"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.61568627450000002" green="0.82745098039999998" blue="0.53725490200000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="qyD-G8-Ybb" firstAttribute="centerY" secondItem="FBX-K4-EVw" secondAttribute="centerY" id="Bi9-L1-pbB"/>
+                                    <constraint firstItem="3og-Gq-T0K" firstAttribute="leading" secondItem="FBX-K4-EVw" secondAttribute="leading" constant="15" id="HIC-tW-RkQ"/>
+                                    <constraint firstItem="3og-Gq-T0K" firstAttribute="top" secondItem="ei8-sf-Pub" secondAttribute="top" id="Jod-rN-PDP"/>
+                                    <constraint firstItem="4fU-w5-iOk" firstAttribute="centerX" secondItem="FBX-K4-EVw" secondAttribute="centerX" id="LUa-hk-brf"/>
+                                    <constraint firstItem="ei8-sf-Pub" firstAttribute="top" secondItem="FBX-K4-EVw" secondAttribute="top" constant="50" id="P3D-Xq-pT3"/>
+                                    <constraint firstItem="qyD-G8-Ybb" firstAttribute="centerX" secondItem="FBX-K4-EVw" secondAttribute="centerX" id="fFd-Cn-OzJ"/>
+                                    <constraint firstItem="AMe-cD-FWf" firstAttribute="top" secondItem="QNf-oh-JdE" secondAttribute="bottom" constant="120" id="ml6-wF-qzZ"/>
+                                    <constraint firstItem="ei8-sf-Pub" firstAttribute="centerX" secondItem="FBX-K4-EVw" secondAttribute="centerX" id="qgx-iI-LbE"/>
+                                    <constraint firstItem="QNf-oh-JdE" firstAttribute="centerY" secondItem="FBX-K4-EVw" secondAttribute="centerY" id="rzc-xZ-bV2"/>
+                                    <constraint firstItem="4fU-w5-iOk" firstAttribute="top" secondItem="NpB-Me-kwi" secondAttribute="bottom" constant="30" id="vOZ-YQ-NYZ"/>
+                                    <constraint firstAttribute="bottom" secondItem="4fU-w5-iOk" secondAttribute="bottom" constant="15" id="w3x-wa-JLQ"/>
+                                    <constraint firstItem="AMe-cD-FWf" firstAttribute="centerX" secondItem="FBX-K4-EVw" secondAttribute="centerX" id="w6f-eN-HYz"/>
+                                    <constraint firstItem="NpB-Me-kwi" firstAttribute="centerX" secondItem="FBX-K4-EVw" secondAttribute="centerX" id="wdo-Fi-vvz"/>
+                                    <constraint firstItem="QNf-oh-JdE" firstAttribute="centerX" secondItem="FBX-K4-EVw" secondAttribute="centerX" id="wlJ-JK-SQl"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="FBX-K4-EVw" firstAttribute="leading" secondItem="bQL-jz-OXv" secondAttribute="leading" id="1GD-4t-EPY"/>
+                            <constraint firstAttribute="trailing" secondItem="FBX-K4-EVw" secondAttribute="trailing" id="Z99-zW-pWN"/>
+                            <constraint firstItem="FBX-K4-EVw" firstAttribute="top" secondItem="bQL-jz-OXv" secondAttribute="top" id="jcs-AS-vc8"/>
+                            <constraint firstItem="oQc-8N-v1O" firstAttribute="top" secondItem="FBX-K4-EVw" secondAttribute="bottom" id="vnI-ey-oGq"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="ButtonClose" destination="3og-Gq-T0K" id="GDg-4v-g2T"/>
+                        <outlet property="ButtonCreateCode" destination="AMe-cD-FWf" id="U5D-Rd-eOI"/>
+                        <outlet property="ImageViewCrops" destination="qyD-G8-Ybb" id="YXb-p1-iOe"/>
+                        <outlet property="LabelCropsName" destination="ei8-sf-Pub" id="0S4-9p-rKv"/>
+                        <outlet property="cropsDataBackView" destination="FBX-K4-EVw" id="Q7Q-Bx-DTL"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="94m-3h-tlx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-657" y="-258"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="Close_White" width="16" height="16"/>
+        <image name="CropsData_Arrow" width="16" height="12"/>
+        <image name="CropsData_ButtonCode" width="120" height="30"/>
+        <image name="CropsData_Fertilizer" width="17" height="17"/>
+        <image name="CropsData_PhotoBoard" width="146" height="146"/>
+        <image name="CropsData_Sun" width="15" height="16"/>
+        <image name="CropsData_Temp" width="5" height="15"/>
+        <image name="CropsData_Water" width="10" height="16"/>
+        <image name="shuidao" width="800" height="600"/>
+    </resources>
+</document>
