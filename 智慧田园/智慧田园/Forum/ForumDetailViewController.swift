@@ -12,7 +12,10 @@ import MJRefresh
 import MBProgressHUD
 import STPopup
 class ForumDetailViewController: TYViewController {
-
+    
+    @IBOutlet weak var ButtonAdd: UIButton!
+    @IBOutlet weak var ButtonAddImg: UIButton!
+    @IBOutlet weak var StackViewPhoto: UIStackView!
     @IBOutlet weak var ConstraintUsernameCenterY: NSLayoutConstraint!
     @IBOutlet weak var ConstraintContentViewTop: NSLayoutConstraint!
     @IBOutlet weak var ConstraintContentViewHeight: NSLayoutConstraint!
@@ -54,8 +57,47 @@ class ForumDetailViewController: TYViewController {
         }))
         return alert
     }()
-    
     var contentRealHeight:CGFloat!
+    var replaing = false
+    var replyImages = [UIImage](){
+        didSet{
+            if replaing == true {
+                return
+            }
+            UIView.animateWithDuration(0.3) {
+                if self.replyImages.count > 0{
+                    if self.ConstraintContentbarBottom.constant != 120{
+                        self.ConstraintContentbarBottom.constant = 120
+                    }
+                    
+                    self.ButtonAdd.setImage(UIImage(named: "Forum_Send"),forState: .Normal)
+                }else{
+                    self.ConstraintContentbarBottom.constant = 0
+                    self.ButtonAdd.setImage(UIImage(named: "item_more"),forState: .Normal)
+                }
+                self.view.layoutIfNeeded()
+            }
+        }
+    }
+    var imgButtons = [UIButton]()
+    var imgButton:UIButton {
+        get{
+            let btn = UIButton()
+            btn.setImage(UIImage(named:"PushNew_Button_Delete"), forState: .Normal)
+            btn.addTarget(self, action: #selector(self.imgButtonDelete(_:)), forControlEvents: .TouchUpInside)
+            btn.snp_makeConstraints { (make) in
+                make.height.width.equalTo(80)
+            }
+            return btn
+        }
+    }
+    lazy var imagePickViewController:UIImagePickerController = {
+        let viewController = UIImagePickerController()
+        viewController.allowsEditing = false
+        viewController.delegate = self
+        return viewController
+    }()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -99,7 +141,7 @@ class ForumDetailViewController: TYViewController {
         }
         keyboardMan.animateWhenKeyboardDisappear = { [weak self] keyboardHeight in
             if let sSelf = self {
-                sSelf.ConstraintContentbarBottom.constant = 0
+                sSelf.ConstraintContentbarBottom.constant = sSelf.replyImages.count > 0 && sSelf.replaing == false ? 120 : 0
                 sSelf.view.layoutIfNeeded()
             }
         }
@@ -108,6 +150,19 @@ class ForumDetailViewController: TYViewController {
             dispatch_after(dispatch_time( DISPATCH_TIME_NOW, Int64( 500 * NSEC_PER_MSEC)),dispatch_get_main_queue()) {
                 self.presentViewController(self.tipAlertController, animated: true, completion: nil)
             }
+        }
+    }
+    
+    private func AddImg(img:UIImage){
+        let btn = imgButton
+        btn.tag = replyImages.count
+        btn.setBackgroundImage(img, forState: .Normal)
+        replyImages.append(img)
+        imgButtons.append(btn)
+        StackViewPhoto.addArrangedSubview(btn)
+        if btn.tag == 2 {
+            ButtonAddImg.hidden = true
+            
         }
     }
     
@@ -220,30 +275,81 @@ class ForumDetailViewController: TYViewController {
     
     func MessageSendAction() {
         if let content = TextFieldSend.text {
-            NetWorkManager.updateSession({
-                TYRequest(.PushAReply, parameters: ["content":content,"postNo":self.forum.postNo]).TYresponseJSON(completionHandler: { (response) in
-                    if response.result.isSuccess{
-                        if let json = response.result.value as? [String:AnyObject]{
-                            if let msg = json["message"] as? String where msg == "success"{
-                                dispatch_async(dispatch_get_main_queue(), { 
-                                    MBProgressHUD.showSuccess("发送成功", toView: nil)
-                                    self.loadDataFromNet()
-                                })
-                            }else{
-                                dispatch_async(dispatch_get_main_queue(), {
-                                    MBProgressHUD.showError("发送失败", toView: nil)
-                                })
-                            }
-                        }
-                    }
-                })
+            NetWorkManager.PushNewForumReplay(content, postno: self.forum.postNo, images: replyImages, callback: { (tag) in
+                if tag == true {
+                    MBProgressHUD.showSuccess("发送成功", toView: nil)
+                    self.loadDataFromNet()
+                }else{
+                     MBProgressHUD.showError("发送失败", toView: nil)
+                }
             })
+        }
+        for x in self.imgButtons{
+            self.imgButtonDelete(x)
         }
         TextFieldSend.text = nil
         TextFieldSend.resignFirstResponder()
     }
+    
+    func imgButtonDelete(sender:UIButton){
+        StackViewPhoto.removeArrangedSubview(sender)
+        replyImages.removeAtIndex(replyImages.indexOf(sender.backgroundImageForState(.Normal)!)!)
+        imgButtons.removeAtIndex(imgButtons.indexOf(sender)!)
+        sender.removeFromSuperview()
+        if ButtonAddImg.hidden == true{
+            ButtonAddImg.hidden = false
+        }
+    }
+    
+    @IBAction func ButtonMoreClicked() {
+        if(replyImages.count > 0){
+            MessageSendAction()
+        }else{
+            ButtonAddClicked()
+        }
+    }
+    
+    @IBAction func ButtonAddClicked() {
+        self.view.endEditing(true)
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
+        alertController.addAction(UIAlertAction(title: "从相册选择", style: .Default, handler: { [weak self] _ in
+            guard UIImagePickerController.isSourceTypeAvailable(.PhotoLibrary) else{
+                MBProgressHUD.showError("访问相册失败", toView: nil)
+                return
+            }
+            if let sSelf = self {
+                sSelf.imagePickViewController.sourceType = .PhotoLibrary
+                sSelf.presentViewController(sSelf.imagePickViewController, animated: true, completion: nil)
+            }
+            }))
+        alertController.addAction(UIAlertAction(title: "拍照", style: .Default, handler: { [weak self] _ in
+            guard UIImagePickerController.isSourceTypeAvailable(.Camera) else{
+                MBProgressHUD.showError("无法打开相机", toView: nil)
+                return
+            }
+            if let sSelf = self {
+                sSelf.imagePickViewController.sourceType = .Camera
+                sSelf.presentViewController(sSelf.imagePickViewController, animated: true, completion: nil)
+            }
+            
+            }))
+        alertController.addAction(UIAlertAction(title: "取消", style: .Cancel, handler: nil))
+        self.presentViewController(alertController, animated: true, completion: nil)
+    }
 
 }
+
+extension ForumDetailViewController:UIImagePickerControllerDelegate,UINavigationControllerDelegate{
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
+        AddImg(image)
+        picker.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    func imagePickerControllerDidCancel(picker: UIImagePickerController) {
+        picker.dismissViewControllerAnimated(true, completion: nil)
+    }
+}
+
 
 extension ForumDetailViewController:UITextFieldDelegate {
     

@@ -9,7 +9,7 @@
 import Foundation
 import Alamofire
 let mainURL:String = "http://139.129.5.192/SZTY/"
-//let mainURL:String = "http://192.168.31.112:8080/SZTY/"
+//let mainURL:String = "http://192.168.20.153:8080/SZTY/"
 public enum ContentType:String{
     
     var url:String{
@@ -18,10 +18,12 @@ public enum ContentType:String{
         }
     }
     case Logout = "user/logout"
+    case userList = "user/list"
     case Login = "user/login"
     case Register = "user/register"
     case userUplod = "user/upload"
     case PulishNewForum = "post/publish"
+    case PulishNewExpertTopic = "post/ask"
     case Forum = "post/list"
     case updateSession = "user/judgeLogin"
     case Reply = "post/replyList"
@@ -85,8 +87,7 @@ extension Request{
                 }
                 dispatch_async(queue ?? dispatch_get_main_queue()) { completionHandler(response) }
             }
-            
-            return self
+        return self
     }
     
     public func TYSResponse<T: ResponseSerializerType>(
@@ -156,7 +157,7 @@ extension Request{
                     Block(JSON:json)
                 }
             }else{
-                Block(JSON:["msg":"failure"])
+                Block(JSON:["message":"failure"])
             }
         })
     }

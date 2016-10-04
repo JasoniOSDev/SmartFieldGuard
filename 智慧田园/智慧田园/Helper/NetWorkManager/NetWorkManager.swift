@@ -60,6 +60,28 @@ public class NetWorkManager:NSObject{
         }
     }
     
+    class func getExpertList(cropsID:String,block:([(name:String,photo:String,id:String)])->Void){
+        NetWorkManager.updateSession { 
+            TYRequest(.userList, parameters: ["cropNo":cropsID,"role":"Expert"]).TYResponseJSON(Block: { (JSON) in
+                if let msg = JSON["message"] as? String where msg == "success"{
+                    var array = [(name:String,photo:String,id:String)]()
+                    if let list = JSON["userList"] as? NSArray{
+                        for x in list {
+                            if let dict = x as? [String:AnyObject]{
+                                var user:(name:String,photo:String,id:String)
+                                user.name = dict["username"] as! String
+                                user.id = dict["userId"] as! String
+                                user.photo = TYUserDefaults.UrlPrefix.value +  (dict["headImage"] as! String)
+                                array.append(user)
+                            }
+                        }
+                        block(array)
+                    }
+                }
+            })
+        }
+    }
+    
     class func uploadUserPhoto(realImage:UIImage,lowQualityImage:UIImage,block:((Bool)->Void)){
         NetWorkManager.updateSession({
             Alamofire.upload(.POST, ContentType.userUplod.url, multipartFormData: { (data) in
@@ -396,9 +418,49 @@ public class NetWorkManager:NSObject{
         })
     }
     
-    class func PushNewExpertTopic(topic:ExpertTheme,images:[UIImage],callback:((Bool)->Void)? = nil){
+    class func PushNewForumReplay(content:String,postno:String,images:[UIImage],callback:((Bool)->Void)? = nil){
         NetWorkManager.updateSession({
-            Alamofire.upload(.POST, ContentType.PulishNewForum.url, multipartFormData: {
+            
+            Alamofire.upload(.POST, ContentType.PushAReply.url, multipartFormData: { data in
+                for image in images{
+                    if let imageData = UIImageJPEGRepresentation(image, 0.95),let lowQualityImageData = UIImageJPEGRepresentation(image.resizeToSize(CGSizeMake(160, image.size.height / ( image.size.width / 160)), withInterpolationQuality: CGInterpolationQuality.High)!,1) {
+                        data.appendBodyPart(data: imageData, name: "file", fileName: "images.jpg", mimeType: "image/jpg")
+                        data.appendBodyPart(data: lowQualityImageData, name: "file", fileName: "images.jpg", mimeType: "image/jpg")
+                    }
+                }
+                let contentData = content.dataUsingEncoding(NSUTF8StringEncoding)
+                data.appendBodyPart(data: contentData!, name: "content")
+                data.appendBodyPart(data: postno.dataUsingEncoding(NSUTF8StringEncoding)!, name: "postNo")
+                }, encodingCompletion: { (result) in
+                    switch result{
+                    case .Success(let request,  _,  _):
+                        request.TYresponseJSON(completionHandler: { (response) in
+                            if response.result.isSuccess{
+                                if let json = response.result.value as? [String:AnyObject]{
+                                    if let msg = json["message"] as? String where msg == "success"{
+                                        if let block = callback{
+                                            block(true)
+                                        }
+                                    }else{
+                                        if let block = callback{
+                                            block(false)
+                                        }
+                                    }
+                                }
+                            }
+                        })
+                    case .Failure(_):
+                        if let block = callback{
+                            block(false)
+                        }
+                    }
+            })
+        })
+    }
+    
+    class func PushNewExpertTopic(expertID:String,topic:ExpertTheme,images:[UIImage],callback:((Bool)->Void)? = nil){
+        NetWorkManager.updateSession({
+            Alamofire.upload(.POST, ContentType.PulishNewExpertTopic.url, multipartFormData: {
                 data in
                     var i = 0
                     for image in images{
@@ -414,6 +476,7 @@ public class NetWorkManager:NSObject{
                 data.appendBodyPart(data: contentData!, name: "content")
                 data.appendBodyPart(data: plantid!, name: "parentArea")
                 data.appendBodyPart(data: type!, name: "type")
+                data.appendBodyPart(data: expertID.dataUsingEncoding(NSUTF8StringEncoding)!, name: "expertId")
                 }, encodingCompletion: { (result) in
                     switch result{
                     case .Success(let request,  _,  _):
@@ -452,35 +515,63 @@ public class NetWorkManager:NSObject{
         })
     }
     
-    class func PushNewExpertReplay(message:ExpertMessage,postID:String,callback:((Bool)->Void)? = nil){
+    class func PushNewExpertReplay(message:ExpertMessage,postID:String,images:[UIImage],callback:((Bool)->Void)? = nil){
         NetWorkManager.updateSession({
-                TYRequest(.PushAReply, parameters: ["content":message.content,"postNo":postID]).TYresponseJSON(completionHandler: { (response) in
-                    if response.result.isSuccess{
-                        if let json = response.result.value as? [String:AnyObject]{
-                            if let msg = json["message"] as? String where msg == "success"{
-                                dispatch_async(dispatch_get_main_queue(), {
-                                    var replyInfo = (json["replyInfo"] as! String).componentsSeparatedByString("|")
-                                    let sn = Int(replyInfo[1])!
-                                    let time = Double(replyInfo[2])!
-                                    message.replySn = sn
-                                    message.timeInterval = time
-                                    ModelManager.add(message)
-                                    message.updateTheme()
-                                    if let block = callback{
-                                        block(true)
-                                    }
-                                })
-                            }else{
-                                dispatch_async(dispatch_get_main_queue(), {
-                                    if let block = callback{
-                                        block(false)
-                                    }
-                                })
-                            }
-                        }
+            
+            Alamofire.upload(.POST, ContentType.PushAReply.url, multipartFormData: { data in
+                for image in images{
+                    if let imageData = UIImageJPEGRepresentation(image, 0.95),let lowQualityImageData = UIImageJPEGRepresentation(image.resizeToSize(CGSizeMake(160, image.size.height / ( image.size.width / 160)), withInterpolationQuality: CGInterpolationQuality.High)!,1) {
+                        data.appendBodyPart(data: imageData, name: "file", fileName: "images.jpg", mimeType: "image/jpg")
+                        data.appendBodyPart(data: lowQualityImageData, name: "file", fileName: "images.jpg", mimeType: "image/jpg")
                     }
-                })
+                }
+                let contentData = message.content.dataUsingEncoding(NSUTF8StringEncoding)
+                data.appendBodyPart(data: contentData!, name: "content")
+                data.appendBodyPart(data: postID.dataUsingEncoding(NSUTF8StringEncoding)!, name: "postNo")
+                }, encodingCompletion: { (result) in
+                    switch result{
+                    case .Success(let request,  _,  _):
+                        request.TYresponseJSON(completionHandler: { (response) in
+                            if response.result.isSuccess{
+                                if let json = response.result.value as? [String:AnyObject]{
+                                    if let msg = json["message"] as? String where msg == "success"{
+                                        dispatch_async(dispatch_get_main_queue(), {
+                                            var replyInfo = (json["replyInfo"] as! String).componentsSeparatedByString("|")
+                                            let sn = Int(replyInfo[1])!
+                                            let time = Double(replyInfo[2])!
+                                            message.replySn = sn
+                                            message.timeInterval = time
+                                            if let imageurls = json["imageUrls"] as? String{
+                                                let urls = imageurls.componentsSeparatedByString("|")
+                                                var arrays = [String]()
+                                                for x in urls{
+                                                    arrays.append(TYUserDefaults.UrlPrefix.value + x)
+                                                }
+                                                message.images = arrays
+                                            }
+                                            ModelManager.add(message)
+                                            message.updateTheme()
+                                            if let block = callback{
+                                                block(true)
+                                            }
+                                        })
+                                    }else{
+                                        dispatch_async(dispatch_get_main_queue(), {
+                                            if let block = callback{
+                                                block(false)
+                                            }
+                                        })
+                                    }
+                                }
+                            }
+                        })
+                    case .Failure(_):
+                        if let block = callback{
+                            block(false)
+                        }
+                }
             })
+        })
     }
     
     //下载专家区的帖子，更新本地
@@ -511,6 +602,7 @@ public class NetWorkManager:NSObject{
                                 topic.lastReply = object["lastReplyDate"] as! Double
                                 topic.name = object["username"] as! String
                                 topic.userID = object["userId"] as! String
+                                topic.status = object["status"] as! String == "Unsolved" ? 0 : 1
                                 if let images = object["images"] as? String{
                                     topic.images = images.componentsSeparatedByString("|").map(){return TYUserDefaults.UrlPrefix.value + $0}
                                 }
@@ -552,12 +644,14 @@ public class NetWorkManager:NSObject{
                                     }else{
                                         topic.content = ""
                                     }
+                                    topic.classifyID = object["parentArea"] as! String
                                     topic.timeInterval = object["createDate"] as! Double
                                     topic.ID = object["postNo"] as! String
                                     topic.headPhoto = TYUserDefaults.UrlPrefix.value + (object["headImage"] as! String)
                                     topic.lastReply = object["lastReplyDate"] as! Double
                                     topic.name = object["username"] as! String
                                     topic.userID = object["userId"] as! String
+                                    topic.status = object["status"] as! String == "Unsolved" ? 0 : 1
                                     if let images = object["images"] as? [String]{
                                         topic.images = images.map(){TYUserDefaults.UrlPrefix.value + $0}
                                     }
@@ -598,6 +692,14 @@ public class NetWorkManager:NSObject{
                             message.name = object["username"] as! String
                             message.timeInterval = object["replyDate"]  as! Double
                             message.Theme = topic
+                            if let images = object["images"] as? String{
+                                let urls = images.componentsSeparatedByString("|")
+                                var array = [String]()
+                                for x in urls{
+                                    array.append(TYUserDefaults.UrlPrefix.value + x)
+                                }
+                                message.images = array
+                            }
                             dispatch_async(dispatch_get_main_queue(), {
                                 ModelManager.add(message)
                             })

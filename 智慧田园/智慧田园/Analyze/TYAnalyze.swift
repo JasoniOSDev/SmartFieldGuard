@@ -100,11 +100,12 @@ class TYAnalyze: UIView {
                             for x in dataArry {
                                     if let object = x as? [String:AnyObject]{
                                         if(object["recordTime"] == nil){break}
-                                        let recordDate = NSDate(timeIntervalSince1970: (object["recordTime"] as! Double)/1000)
+                                        let recordDate = NSDate(timeIntervalSince1970: (object["recordTime"] as! Double)/1000 - 28800)
                                         XLabels.append(dateFormatter.stringFromDate(recordDate))
                                         Yvalues.append(object[self.dataType.rawValue] as! CGFloat)
                                     }
                                 }
+                            }
                             self.lineChart.xLabels = XLabels
                             let dataY = PNLineChartData()
                             dataY.color = UIColor.MainColor()
@@ -116,7 +117,6 @@ class TYAnalyze: UIView {
                             }
                             self.lineChart.chartData = [dataY]
                             self.lineChart.strokeChart()
-                            }
                         }
                     }
                 }

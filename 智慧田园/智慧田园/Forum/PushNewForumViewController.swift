@@ -16,6 +16,7 @@ class PushNewForumViewController: TYViewController,UITextViewDelegate,UIImagePic
         case Expert
     }
     
+    @IBOutlet weak var ButtonChooseExpert: UIButton!
     @IBOutlet weak var ButtonAdd: UIButton!
     @IBOutlet weak var TextViewContent: UITextView!
     @IBOutlet weak var StackViewAddPicture: UIStackView!
@@ -45,6 +46,22 @@ class PushNewForumViewController: TYViewController,UITextViewDelegate,UIImagePic
         viewController.delegate = self
         return viewController
     }()
+    var expert:(name:String,id:String)?
+    lazy var expertChooseViewController:ChooseExpertsViewController = {
+        let flowLayout = UICollectionViewFlowLayout()
+        flowLayout.scrollDirection = .Vertical
+        flowLayout.minimumLineSpacing = 1
+        flowLayout.minimumInteritemSpacing = 1
+        let viewController = ChooseExpertsViewController(collectionViewLayout: flowLayout)
+        viewController.cropsID = self.cropsID
+        viewController.block = {
+            [weak self] name,photo,id in
+            self?.expert = (name,id)
+            self?.ButtonChooseExpert.sd_setImageWithURL(NSURL(string:photo.imageLowQualityURL()), forState: .Normal)
+            self?.ButtonChooseExpert.setTitle(name, forState: .Normal)
+        }
+        return viewController
+    }()
     
     var style:NewStyle = .Forum
     override func viewDidLoad() {
@@ -52,10 +69,13 @@ class PushNewForumViewController: TYViewController,UITextViewDelegate,UIImagePic
         switch style {
         case .Forum:
             self.title = "发问题"
+            ButtonChooseExpert.hidden = true
         case .Expert:
             self.title = "专家咨询"
+            ButtonChooseExpert.hidden = false
         }
         ButtonContentClass.setTitle(self.cropsName, forState: .Normal)
+        ButtonChooseExpert.imageView?.contentMode = .ScaleAspectFit
     }
     
     private func AddImg(img:UIImage){
@@ -76,6 +96,9 @@ class PushNewForumViewController: TYViewController,UITextViewDelegate,UIImagePic
         for x in imgButtons{
             imgButtonDelete(x)
         }
+        expert = nil
+        self.ButtonChooseExpert.setTitle("点击选择专家", forState: .Normal)
+        self.ButtonChooseExpert.setImage(nil, forState: .Normal)
     }
     
     func imgButtonDelete(sender:UIButton){
@@ -100,7 +123,6 @@ class PushNewForumViewController: TYViewController,UITextViewDelegate,UIImagePic
     @IBAction func LeftButtonClicked(sender: UIBarButtonItem) {
         TextViewContent.resignFirstResponder()
         self.dismissViewControllerAnimated(true, completion: nil)
-        
     }
     
     @IBAction func RightBarButtonClicked(sender: AnyObject) {
@@ -118,6 +140,10 @@ class PushNewForumViewController: TYViewController,UITextViewDelegate,UIImagePic
                 self.dismissViewControllerAnimated(true, completion: nil)
             }
         }else{
+            if expert == nil {
+                MBProgressHUD.showError("还未选择专家", toView: nil)
+                return
+            }
             if let content = TextViewContent.text {
                 let topic = ExpertTheme()
                 topic.classifyID = cropsID
@@ -125,7 +151,7 @@ class PushNewForumViewController: TYViewController,UITextViewDelegate,UIImagePic
                 topic.content = content 
                 topic.headPhoto = TYUserDefaults.headImage.value
                 topic.userID = TYUserDefaults.userID.value!
-                NetWorkManager.PushNewExpertTopic(topic, images: imgs, callback: { tag in
+                NetWorkManager.PushNewExpertTopic(expert!.id,topic: topic, images: imgs, callback: { tag in
                     if let block = self.completeBlock{
                         block(tag)
                     }
@@ -166,4 +192,8 @@ class PushNewForumViewController: TYViewController,UITextViewDelegate,UIImagePic
         self.presentViewController(alertController, animated: true, completion: nil)
     }
 
+    @IBAction func ButtonChooseExpertClicked() {
+        self.expertChooseViewController.title = self.cropsName + "专家"
+        self.navigationController?.pushViewController(self.expertChooseViewController, animated: true)
+    }
 }

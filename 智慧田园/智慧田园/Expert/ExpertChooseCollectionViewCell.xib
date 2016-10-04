@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="16B2327e" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="兰亭黑 GBK.TTF">
+            <string>FZLTHK--GBK1-0</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="ExpertChooseCollectionViewCell" customModule="智慧田园" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="143" height="187"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="143" height="187"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="1Tm-w4-tR4">
+                        <constraints>
+                            <constraint firstAttribute="height" constant="70" id="Jlk-Iu-4TW"/>
+                            <constraint firstAttribute="width" constant="70" id="XqY-O6-b5x"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QZz-yI-iyV">
+                        <fontDescription key="fontDescription" name="FZLTHK--GBK1-0" family="FZLanTingHei-R-GBK" pointSize="16"/>
+                        <color key="textColor" red="0.40000000000000002" green="0.80000000000000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="获得过3次打赏" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nwU-01-O5D">
+                        <fontDescription key="fontDescription" name="FZLTHK--GBK1-0" family="FZLanTingHei-R-GBK" pointSize="14"/>
+                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="¥500" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KJz-Pa-nQz">
+                        <frame key="frameInset" minX="52" minY="121" width="39" height="21"/>
+                        <fontDescription key="fontDescription" name="TrebuchetMS" family="Trebuchet MS" pointSize="18"/>
+                        <color key="textColor" red="1" green="0.35318088409999998" blue="0.3538865967" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+            </view>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="nwU-01-O5D" secondAttribute="bottom" constant="5" id="EVH-1E-Cb7"/>
+                <constraint firstItem="QZz-yI-iyV" firstAttribute="top" secondItem="1Tm-w4-tR4" secondAttribute="bottom" constant="10" id="WA9-0l-EgV"/>
+                <constraint firstItem="nwU-01-O5D" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="Wx9-qA-Oqo"/>
+                <constraint firstItem="1Tm-w4-tR4" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="ZUI-cb-TJV"/>
+                <constraint firstItem="1Tm-w4-tR4" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="10" id="cAL-kE-7bb"/>
+                <constraint firstItem="KJz-Pa-nQz" firstAttribute="top" secondItem="QZz-yI-iyV" secondAttribute="bottom" constant="5" id="exQ-bS-vz1"/>
+                <constraint firstItem="KJz-Pa-nQz" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="hX5-Jv-9XL"/>
+                <constraint firstItem="QZz-yI-iyV" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="zIR-rw-eNO"/>
+            </constraints>
+            <size key="customSize" width="150" height="193"/>
+            <connections>
+                <outlet property="ImageViewPhoto" destination="1Tm-w4-tR4" id="kXe-jW-UGI"/>
+                <outlet property="LabelName" destination="QZz-yI-iyV" id="EKh-vL-Acd"/>
+            </connections>
+            <point key="canvasLocation" x="-135.5" y="-3.5"/>
+        </collectionViewCell>
+    </objects>
+</document>

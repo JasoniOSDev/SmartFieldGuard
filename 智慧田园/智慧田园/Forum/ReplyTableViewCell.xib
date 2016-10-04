@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="16A313a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="16B2327e" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -13,11 +14,11 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="165" id="KGk-i7-Jjw" customClass="ReplyTableViewCell" customModule="智慧田园" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="541" height="165"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="237" id="KGk-i7-Jjw" customClass="ReplyTableViewCell" customModule="智慧田园" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="541" height="237"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <frame key="frameInset" width="541" height="164"/>
+                <frame key="frameInset" width="541" height="236"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LLe-e3-Cb5">
@@ -57,6 +58,34 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Forum_FinalAnswer" translatesAutoresizingMaskIntoConstraints="NO" id="Iky-tB-XeQ"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="RKW-s4-ljX">
+                                <subviews>
+                                    <imageView clipsSubviews="YES" tag="101" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="YKe-J5-Qp5" customClass="MessagePhotoView" customModule="智慧田园" customModuleProvider="target">
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="YKe-J5-Qp5" secondAttribute="height" multiplier="1:1" id="Rcz-9G-dP6"/>
+                                        </constraints>
+                                    </imageView>
+                                    <imageView clipsSubviews="YES" tag="102" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="RmI-IB-huZ" customClass="MessagePhotoView" customModule="智慧田园" customModuleProvider="target">
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="RmI-IB-huZ" secondAttribute="height" multiplier="1:1" id="zlW-RV-ey6"/>
+                                        </constraints>
+                                    </imageView>
+                                    <imageView clipsSubviews="YES" tag="103" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ets-Mw-2Dc" customClass="MessagePhotoView" customModule="智慧田园" customModuleProvider="target">
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="ets-Mw-2Dc" secondAttribute="height" multiplier="1:1" id="8jB-LN-ueM"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="80" id="qlv-aE-2Ka"/>
+                                    <constraint firstAttribute="width" constant="300" id="yrd-dw-w0P"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="yrd-dw-w0P"/>
+                                    </mask>
+                                </variation>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -66,11 +95,13 @@
                             <constraint firstItem="IHn-fQ-Wo3" firstAttribute="leading" secondItem="74l-bQ-O9p" secondAttribute="trailing" constant="5" id="Uc3-w6-BkJ"/>
                             <constraint firstItem="OHt-kb-GBp" firstAttribute="top" secondItem="IHn-fQ-Wo3" secondAttribute="bottom" constant="10" id="YaF-kU-9tG"/>
                             <constraint firstAttribute="trailing" secondItem="8Jd-tJ-LnI" secondAttribute="trailing" constant="5" id="ZWA-lc-mZP"/>
+                            <constraint firstAttribute="bottom" secondItem="RKW-s4-ljX" secondAttribute="bottom" constant="10" id="alg-2Q-jGO"/>
                             <constraint firstItem="Iky-tB-XeQ" firstAttribute="top" secondItem="LLe-e3-Cb5" secondAttribute="top" constant="5" id="fYw-li-71G"/>
                             <constraint firstAttribute="trailing" secondItem="OHt-kb-GBp" secondAttribute="trailing" constant="20" id="gSP-67-xVc"/>
-                            <constraint firstAttribute="bottom" secondItem="OHt-kb-GBp" secondAttribute="bottom" constant="15" id="ht4-hw-zgQ"/>
+                            <constraint firstAttribute="bottom" secondItem="OHt-kb-GBp" secondAttribute="bottom" constant="100" id="ht4-hw-zgQ"/>
                             <constraint firstItem="IHn-fQ-Wo3" firstAttribute="top" secondItem="pcm-hY-vm8" secondAttribute="bottom" constant="2" id="htx-WQ-ANk"/>
                             <constraint firstItem="pcm-hY-vm8" firstAttribute="leading" secondItem="74l-bQ-O9p" secondAttribute="trailing" constant="5" id="iPR-IM-ecZ"/>
+                            <constraint firstItem="RKW-s4-ljX" firstAttribute="leading" secondItem="OHt-kb-GBp" secondAttribute="leading" id="kvQ-RY-Uno"/>
                             <constraint firstItem="74l-bQ-O9p" firstAttribute="top" secondItem="LLe-e3-Cb5" secondAttribute="top" constant="5" id="qV5-ej-edo"/>
                             <constraint firstItem="74l-bQ-O9p" firstAttribute="leading" secondItem="LLe-e3-Cb5" secondAttribute="leading" constant="5" id="tiC-ir-enh"/>
                             <constraint firstItem="OHt-kb-GBp" firstAttribute="leading" secondItem="pcm-hY-vm8" secondAttribute="leading" id="zF0-Ho-t5V"/>
@@ -91,14 +122,18 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="ButtonSupport" destination="8Jd-tJ-LnI" id="Jf4-Ox-w63"/>
+                <outlet property="ConstraintBottom" destination="ht4-hw-zgQ" id="PcI-gx-KOv"/>
                 <outlet property="ImgFinalAnswer" destination="Iky-tB-XeQ" id="Oyj-2T-z66"/>
                 <outlet property="ImgPhoto" destination="74l-bQ-O9p" id="5TJ-ai-VGU"/>
                 <outlet property="LabelContent" destination="OHt-kb-GBp" id="5uk-Ec-RRy"/>
                 <outlet property="LabelTime" destination="IHn-fQ-Wo3" id="dSb-8n-7cd"/>
                 <outlet property="LabelUserName" destination="pcm-hY-vm8" id="xFv-zn-oop"/>
                 <outlet property="NewContentView" destination="LLe-e3-Cb5" id="yDO-5D-Tde"/>
+                <outlet property="imageViewOne" destination="YKe-J5-Qp5" id="iw1-CQ-Pn3"/>
+                <outlet property="imageViewThd" destination="ets-Mw-2Dc" id="gWv-U9-E57"/>
+                <outlet property="imageViewTwo" destination="RmI-IB-huZ" id="oJk-GU-P8a"/>
             </connections>
-            <point key="canvasLocation" x="383" y="531"/>
+            <point key="canvasLocation" x="431.5" y="568.5"/>
         </tableViewCell>
     </objects>
     <resources>

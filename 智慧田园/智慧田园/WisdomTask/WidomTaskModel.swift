@@ -478,7 +478,7 @@ class ModelManager{
         })
         Realm.Configuration.defaultConfiguration = config
         real = try! Realm()
-        //print(config.fileURL)
+        print(config.fileURL)
         return real!
     }
     

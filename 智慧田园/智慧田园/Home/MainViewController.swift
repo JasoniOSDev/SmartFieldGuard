@@ -44,6 +44,7 @@ class MainViewController: TYViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         prepareUI()
         notificationConfigure()
     }

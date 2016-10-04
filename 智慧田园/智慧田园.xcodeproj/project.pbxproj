@@ -10,9 +10,15 @@
 		96076C541CF9C1B7002E3F1E /* WidomTaskModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96076C531CF9C1B7002E3F1E /* WidomTaskModel.swift */; };
 		96076C561CF9C1CE002E3F1E /* WisdomTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96076C551CF9C1CE002E3F1E /* WisdomTask.swift */; };
 		960C45D51D2EBD1F00E896CC /* (null) in Embed Frameworks */ = {isa = PBXBuildFile; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		961FD0281D94CC6A00D5B8C8 /* ExpertPresentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961FD0271D94CC6A00D5B8C8 /* ExpertPresentViewController.swift */; };
+		961FD02C1D94CCCE00D5B8C8 /* ExpertPresentCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961FD02A1D94CCCE00D5B8C8 /* ExpertPresentCollectionViewCell.swift */; };
+		961FD02D1D94CCCE00D5B8C8 /* ExpertPresentCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 961FD02B1D94CCCE00D5B8C8 /* ExpertPresentCollectionViewCell.xib */; };
 		961FFCA01D79A83D001F363B /* TYCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961FFC9F1D79A83D001F363B /* TYCache.swift */; };
 		961FFCA31D79A864001F363B /* NetWork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961FFCA11D79A864001F363B /* NetWork.swift */; };
 		961FFCA41D79A864001F363B /* NetWorkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961FFCA21D79A864001F363B /* NetWorkManager.swift */; };
+		9623B38A1D9448D4009C991F /* ChooseExpertsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9623B3891D9448D4009C991F /* ChooseExpertsViewController.swift */; };
+		9623B38D1D944C49009C991F /* ExpertChooseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9623B38B1D944C49009C991F /* ExpertChooseTableViewCell.swift */; };
+		9623B38E1D944C49009C991F /* ExpertChooseTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9623B38C1D944C49009C991F /* ExpertChooseTableViewCell.xib */; };
 		962A351B1D8993D900FACBBF /* TYRefreshNavHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 962A351A1D8993D900FACBBF /* TYRefreshNavHeader.swift */; };
 		962ABF541CF2895800990AC2 /* InstroduceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 962ABF531CF2895800990AC2 /* InstroduceViewController.swift */; };
 		962ABF581CF2898400990AC2 /* InstroduceHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 962ABF571CF2898400990AC2 /* InstroduceHeaderView.swift */; };
@@ -116,6 +122,8 @@
 		96AA20371D7BB31C00E22A4E /* PhotoScanCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AA20351D7BB31C00E22A4E /* PhotoScanCollectionViewCell.swift */; };
 		96AA20381D7BB31C00E22A4E /* PhotoScanCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 96AA20361D7BB31C00E22A4E /* PhotoScanCollectionViewCell.xib */; };
 		96AC87521D3F6F5C0075C451 /* ExpertModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AC87511D3F6F5C0075C451 /* ExpertModel.swift */; };
+		96AE3D491D94BEFA0041C3BE /* ExpertChooseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AE3D471D94BEFA0041C3BE /* ExpertChooseCollectionViewCell.swift */; };
+		96AE3D4A1D94BEFA0041C3BE /* ExpertChooseCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 96AE3D481D94BEFA0041C3BE /* ExpertChooseCollectionViewCell.xib */; };
 		96D040951D42343200011D15 /* ExpertClassChooseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D040941D42343200011D15 /* ExpertClassChooseController.swift */; };
 		96D29D8D1D3F976800B990DB /* ExpertClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D29D8C1D3F976800B990DB /* ExpertClient.swift */; };
 		96DD73D31D916DBA006CCC23 /* CropsDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96DD73D21D916DBA006CCC23 /* CropsDataView.swift */; };
@@ -181,9 +189,15 @@
 		961DF0741CF6ACE700A8942D /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		961DF0761CF6B95D00A8942D /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		961DF08C1CF6C79400A8942D /* TYHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TYHeader.h; sourceTree = SOURCE_ROOT; };
+		961FD0271D94CC6A00D5B8C8 /* ExpertPresentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExpertPresentViewController.swift; path = ExpertPresent/ExpertPresentViewController.swift; sourceTree = "<group>"; };
+		961FD02A1D94CCCE00D5B8C8 /* ExpertPresentCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExpertPresentCollectionViewCell.swift; path = ExpertPresent/ExpertPresentCollectionViewCell.swift; sourceTree = "<group>"; };
+		961FD02B1D94CCCE00D5B8C8 /* ExpertPresentCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ExpertPresentCollectionViewCell.xib; path = ExpertPresent/ExpertPresentCollectionViewCell.xib; sourceTree = "<group>"; };
 		961FFC9F1D79A83D001F363B /* TYCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TYCache.swift; path = Helper/Cache/TYCache.swift; sourceTree = "<group>"; };
 		961FFCA11D79A864001F363B /* NetWork.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NetWork.swift; path = Helper/NetWorkManager/NetWork.swift; sourceTree = "<group>"; };
 		961FFCA21D79A864001F363B /* NetWorkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NetWorkManager.swift; path = Helper/NetWorkManager/NetWorkManager.swift; sourceTree = "<group>"; };
+		9623B3891D9448D4009C991F /* ChooseExpertsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChooseExpertsViewController.swift; path = Expert/ChooseExpertsViewController.swift; sourceTree = "<group>"; };
+		9623B38B1D944C49009C991F /* ExpertChooseTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExpertChooseTableViewCell.swift; path = Expert/ExpertChooseTableViewCell.swift; sourceTree = "<group>"; };
+		9623B38C1D944C49009C991F /* ExpertChooseTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ExpertChooseTableViewCell.xib; path = Expert/ExpertChooseTableViewCell.xib; sourceTree = "<group>"; };
 		962A351A1D8993D900FACBBF /* TYRefreshNavHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TYRefreshNavHeader.swift; path = FarmlandCard/TYRefreshNavHeader.swift; sourceTree = "<group>"; };
 		962ABF531CF2895800990AC2 /* InstroduceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InstroduceViewController.swift; path = Instroduce/InstroduceViewController.swift; sourceTree = "<group>"; };
 		962ABF571CF2898400990AC2 /* InstroduceHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InstroduceHeaderView.swift; path = Instroduce/InstroduceHeaderView.swift; sourceTree = "<group>"; };
@@ -294,7 +308,6 @@
 		968889111CEEB13800B99FD4 /* AlertAddDeviceFourViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AlertAddDeviceFourViewController.swift; path = AddDevice/AlertAddDeviceFourViewController.swift; sourceTree = "<group>"; };
 		968889131CEF23BA00B99FD4 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		968889151CEF24DE00B99FD4 /* TYExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TYExtension.swift; path = Config/TYExtension.swift; sourceTree = "<group>"; };
-		968FFBA41D891332009B4DBD /* 智慧田园.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "智慧田园.entitlements"; sourceTree = "<group>"; };
 		968FFBA91D89169C009B4DBD /* UIApplication+PushNotification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIApplication+PushNotification.swift"; path = "Helper/UIApplication+PushNotification.swift"; sourceTree = "<group>"; };
 		9697638B1CF83EE700F11E7C /* UserCenterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserCenterViewController.swift; path = Login/UserCenterViewController.swift; sourceTree = "<group>"; };
 		9697638E1CF861F300F11E7C /* ForumModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ForumModel.swift; path = Forum/ForumModel.swift; sourceTree = "<group>"; };
@@ -314,6 +327,8 @@
 		96AA20351D7BB31C00E22A4E /* PhotoScanCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PhotoScanCollectionViewCell.swift; path = Extension/MessagePhotoScanController/PhotoScanCollectionViewCell.swift; sourceTree = "<group>"; };
 		96AA20361D7BB31C00E22A4E /* PhotoScanCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PhotoScanCollectionViewCell.xib; path = Extension/MessagePhotoScanController/PhotoScanCollectionViewCell.xib; sourceTree = "<group>"; };
 		96AC87511D3F6F5C0075C451 /* ExpertModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExpertModel.swift; path = Expert/ExpertModel.swift; sourceTree = "<group>"; };
+		96AE3D471D94BEFA0041C3BE /* ExpertChooseCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExpertChooseCollectionViewCell.swift; path = Expert/ExpertChooseCollectionViewCell.swift; sourceTree = "<group>"; };
+		96AE3D481D94BEFA0041C3BE /* ExpertChooseCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ExpertChooseCollectionViewCell.xib; path = Expert/ExpertChooseCollectionViewCell.xib; sourceTree = "<group>"; };
 		96D040941D42343200011D15 /* ExpertClassChooseController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExpertClassChooseController.swift; path = Expert/ExpertClassChooseController.swift; sourceTree = "<group>"; };
 		96D29D8C1D3F976800B990DB /* ExpertClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExpertClient.swift; path = Expert/ExpertClient.swift; sourceTree = "<group>"; };
 		96DD73D21D916DBA006CCC23 /* CropsDataView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CropsDataView.swift; path = CropsData/CropsDataView.swift; sourceTree = "<group>"; };
@@ -397,13 +412,39 @@
 			name = WisdomTask;
 			sourceTree = "<group>";
 		};
+		961FD0251D94CB8B00D5B8C8 /* ExpertPresent */ = {
+			isa = PBXGroup;
+			children = (
+				961FD0291D94CCB400D5B8C8 /* View */,
+				961FD0261D94CBAC00D5B8C8 /* Controller */,
+			);
+			name = ExpertPresent;
+			sourceTree = "<group>";
+		};
+		961FD0261D94CBAC00D5B8C8 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				961FD0271D94CC6A00D5B8C8 /* ExpertPresentViewController.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		961FD0291D94CCB400D5B8C8 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				961FD02A1D94CCCE00D5B8C8 /* ExpertPresentCollectionViewCell.swift */,
+				961FD02B1D94CCCE00D5B8C8 /* ExpertPresentCollectionViewCell.xib */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
 		961FFC9D1D79A7EE001F363B /* Helper */ = {
 			isa = PBXGroup;
 			children = (
-				968FFBA91D89169C009B4DBD /* UIApplication+PushNotification.swift */,
-				96A567BB1CF73B25000733A1 /* TYUserDefault.swift */,
 				961FFC9E1D79A802001F363B /* Cache */,
 				96A567C31CF7DF33000733A1 /* NetWorkManager */,
+				968FFBA91D89169C009B4DBD /* UIApplication+PushNotification.swift */,
+				96A567BB1CF73B25000733A1 /* TYUserDefault.swift */,
 				96326BF11D924A0600C621C1 /* String+BinaryCode.swift */,
 			);
 			name = Helper;
@@ -485,13 +526,13 @@
 		96336E381CED569400BA5BF3 /* 智慧田园 */ = {
 			isa = PBXGroup;
 			children = (
-				968FFBA41D891332009B4DBD /* 智慧田园.entitlements */,
 				963BDD271CFB424F003DB16E /* Analyze */,
 				96076C501CF9B5E7002E3F1E /* WisdomTask */,
 				96A567B51CF72EEB000733A1 /* User */,
 				962ABF601CF2B26E00990AC2 /* Record */,
 				962ABF521CF2893200990AC2 /* Instroduce */,
 				965A53FE1CF1D36B00CA9B53 /* Expert */,
+				961FD0251D94CB8B00D5B8C8 /* ExpertPresent */,
 				965A53DB1CF1366C00CA9B53 /* Forum */,
 				9643B63C1D9110BC00AD6005 /* CropsData */,
 				9699F1BA1CEF407C0013031B /* FarmlandCard */,
@@ -612,12 +653,12 @@
 		963D2D8B1D4CD76000375E23 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				965A53E71CF13BEC00CA9B53 /* PageButton */,
+				96B89AFC1D3625C200B92ECF /* MessagePhotoScanController */,
 				965B31B61D5EC29A000ABA83 /* MBProgressHUD+MJ.h */,
 				965B31B71D5EC29A000ABA83 /* MBProgressHUD+MJ.m */,
 				965B31B91D5EC2B1000ABA83 /* Reachability.h */,
 				965B31BA1D5EC2B1000ABA83 /* Reachability.m */,
-				965A53E71CF13BEC00CA9B53 /* PageButton */,
-				96B89AFC1D3625C200B92ECF /* MessagePhotoScanController */,
 				96480A8B1D7BB03300C04D5D /* UITableView+ZHTY.h */,
 				96480A8C1D7BB03300C04D5D /* UITableView+ZHTY.m */,
 			);
@@ -759,6 +800,7 @@
 				965A540B1CF1E23200CA9B53 /* ExpertAndMeViewController.swift */,
 				965A54001CF1D38300CA9B53 /* ExpertViewController.swift */,
 				96D040941D42343200011D15 /* ExpertClassChooseController.swift */,
+				9623B3891D9448D4009C991F /* ChooseExpertsViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -777,6 +819,10 @@
 				96A04E8D1D44DA6D00EE66CA /* ExpertClassChooseTableHeadView.swift */,
 				96A04E8F1D44DD3A00EE66CA /* ExpertClassChooseCollectionViewCell.swift */,
 				96A04E901D44DD3A00EE66CA /* ExpertClassChooseCollectionViewCell.xib */,
+				9623B38B1D944C49009C991F /* ExpertChooseTableViewCell.swift */,
+				9623B38C1D944C49009C991F /* ExpertChooseTableViewCell.xib */,
+				96AE3D471D94BEFA0041C3BE /* ExpertChooseCollectionViewCell.swift */,
+				96AE3D481D94BEFA0041C3BE /* ExpertChooseCollectionViewCell.xib */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -1050,7 +1096,7 @@
 								enabled = 1;
 							};
 							com.apple.Push = {
-								enabled = 1;
+								enabled = 0;
 							};
 							com.apple.VPNLite = {
 								enabled = 0;
@@ -1105,11 +1151,14 @@
 				9688890C1CEE9C5700B99FD4 /* AddDevice.storyboard in Resources */,
 				965B31C11D5EC306000ABA83 /* 兰亭黑 GBK.TTF in Resources */,
 				96A04E921D44DD3A00EE66CA /* ExpertClassChooseCollectionViewCell.xib in Resources */,
+				9623B38E1D944C49009C991F /* ExpertChooseTableViewCell.xib in Resources */,
 				965B31C01D5EC306000ABA83 /* 兰亭细黑 GBK Mobil.TTF in Resources */,
 				9677B7B61CF5D319008ADEA4 /* CropsCollectionViewCell.xib in Resources */,
+				961FD02D1D94CCCE00D5B8C8 /* ExpertPresentCollectionViewCell.xib in Resources */,
 				9643B6421D91184E00AD6005 /* FarmlandCard.storyboard in Resources */,
 				965A53D11CF078A500CA9B53 /* TaskTableViewCell.xib in Resources */,
 				96AA20381D7BB31C00E22A4E /* PhotoScanCollectionViewCell.xib in Resources */,
+				96AE3D4A1D94BEFA0041C3BE /* ExpertChooseCollectionViewCell.xib in Resources */,
 				965A540A1CF1D4E600CA9B53 /* AskExpertTableViewCell.xib in Resources */,
 				963BDD391CFB6134003DB16E /* TYAnalyze.xib in Resources */,
 				96336E441CED569400BA5BF3 /* LaunchScreen.storyboard in Resources */,
@@ -1247,6 +1296,7 @@
 				962A351B1D8993D900FACBBF /* TYRefreshNavHeader.swift in Sources */,
 				965A53EE1CF1618100CA9B53 /* ForumTableViewCell.swift in Sources */,
 				965A53D01CF078A500CA9B53 /* TaskTableViewCell.swift in Sources */,
+				961FD0281D94CC6A00D5B8C8 /* ExpertPresentViewController.swift in Sources */,
 				965A540C1CF1E23200CA9B53 /* ExpertAndMeViewController.swift in Sources */,
 				96D29D8D1D3F976800B990DB /* ExpertClient.swift in Sources */,
 				965B31B51D5EC28F000ABA83 /* PageButtonMidLine.swift in Sources */,
@@ -1266,6 +1316,7 @@
 				965B31B31D5EC28A000ABA83 /* MessagePhotoView.swift in Sources */,
 				965B31B21D5EC28A000ABA83 /* MessagePhotoScanController.swift in Sources */,
 				961FFCA31D79A864001F363B /* NetWork.swift in Sources */,
+				96AE3D491D94BEFA0041C3BE /* ExpertChooseCollectionViewCell.swift in Sources */,
 				96A04E8E1D44DA6D00EE66CA /* ExpertClassChooseTableHeadView.swift in Sources */,
 				963BDD291CFB427A003DB16E /* AnalyzeViewController.swift in Sources */,
 				965A53C71CF073D300CA9B53 /* TYTabBarItem.swift in Sources */,
@@ -1279,6 +1330,7 @@
 				963BDD421CFB6874003DB16E /* SunViewController.swift in Sources */,
 				962ABF5F1CF2ABAD00990AC2 /* TaskModel.swift in Sources */,
 				965A53D41CF0898800CA9B53 /* FarmlandConfigureViewController.swift in Sources */,
+				961FD02C1D94CCCE00D5B8C8 /* ExpertPresentCollectionViewCell.swift in Sources */,
 				965A53C01CF0011400CA9B53 /* TYConfig.swift in Sources */,
 				9677B7BA1CF688AF008ADEA4 /* AreaViewController.swift in Sources */,
 				9677B7AC1CF5C63A008ADEA4 /* AlertCropsChooseViewController.swift in Sources */,
@@ -1291,6 +1343,7 @@
 				965A53F71CF19A7200CA9B53 /* ReplyTableViewCell.swift in Sources */,
 				965A53F21CF1727400CA9B53 /* MeForumViewController.swift in Sources */,
 				96A04E8B1D44D9EB00EE66CA /* ExpertClassChooseTableViewCell.swift in Sources */,
+				9623B38D1D944C49009C991F /* ExpertChooseTableViewCell.swift in Sources */,
 				963BDD231CFAB0F4003DB16E /* TaskDetailViewController.swift in Sources */,
 				965A54051CF1D4BE00CA9B53 /* ExpertReplyTableViewCell.swift in Sources */,
 				96A567B91CF72FEA000733A1 /* LoginViewController.swift in Sources */,
@@ -1298,6 +1351,7 @@
 				96DD73D31D916DBA006CCC23 /* CropsDataView.swift in Sources */,
 				968888FD1CEE018A00B99FD4 /* TYViewController.swift in Sources */,
 				9697638C1CF83EE700F11E7C /* UserCenterViewController.swift in Sources */,
+				9623B38A1D9448D4009C991F /* ChooseExpertsViewController.swift in Sources */,
 				96326BEE1D9175F100C621C1 /* CropsDataBackView.swift in Sources */,
 				963BDD351CFB5002003DB16E /* GrowthViewController.swift in Sources */,
 				9643B63F1D9110F800AD6005 /* CropsDataViewController.swift in Sources */,
@@ -1461,7 +1515,6 @@
 			baseConfigurationReference = 800828A745BC94227B7D9391 /* Pods-智慧田园.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = "智慧田园/智慧田园.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1515,7 +1568,6 @@
 			baseConfigurationReference = BB38657AA1CBDF22B65A16CC /* Pods-智慧田园.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = "智慧田园/智慧田园.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

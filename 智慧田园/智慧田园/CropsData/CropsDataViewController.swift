@@ -30,6 +30,7 @@ class CropsDataViewController: UIViewController {
     }()
     lazy var imageScanController:MessagePhotoScanController = {
         let viewController = MessagePhotoScanController(OK: "123")
+        viewController.labelInfo.hidden = true
         viewController.view.addGestureRecognizer(self.longPressGesture)
         viewController.singleTapGesture.requireGestureRecognizerToFail(self.longPressGesture)
         viewController.view.removeGestureRecognizer(viewController.doubleTapGesture)
@@ -39,6 +40,7 @@ class CropsDataViewController: UIViewController {
         super.viewDidLoad()
         ImageViewCropsConfigure()
         cropsDataViewConfgire()
+        NSNotificationCenter.defaultCenter().addObserver(<#T##observer: AnyObject##AnyObject#>, selector: <#T##Selector#>, name: <#T##String?#>, object: <#T##AnyObject?#>)
     }
     
     override func viewWillAppear(animated: Bool) {

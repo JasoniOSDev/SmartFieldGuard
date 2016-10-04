@@ -17,6 +17,7 @@ class ExpertMessage:Object {
     dynamic var name:String = ""
     dynamic var userID:String = ""
     dynamic var timeInterval = 0.0
+    dynamic var imagesString = ""
     dynamic var replySn:Int = 0 //第几个回复
     var time:String{
         get{
@@ -24,6 +25,20 @@ class ExpertMessage:Object {
         }
     }
     dynamic var content:String = ""
+    
+    var images:[String]!{
+        get{
+            var array = imagesString.componentsSeparatedByString("|")
+            array.popLast()
+            return array
+        }
+        set{
+            imagesString = newValue.reduce("", combine: { (origin, now) -> String in
+                return origin + now + "|"
+            })
+        }
+    }
+    
     //当收到一条新的回复时，需要更新对应话题的相关值
     func updateTheme(unRead:Bool = false){
         try! ModelManager.realm.write {
@@ -33,10 +48,18 @@ class ExpertMessage:Object {
             self.Theme!.lastReply = max(self.Theme!.lastReply,timeInterval)
         }
     }
+    override static func ignoredProperties() -> [String] {
+        return ["images"]
+    }
+
 }
 
 //话题Model
 class ExpertTheme:Object{
+    enum ThemeStatus:Int{
+        case Finish = 1
+        case newAt = 2 //新的@话题
+    }
     //话题所属的类别名称、类别ID、话题的ID
     dynamic var classifyName:String = ""
     dynamic var classifyID:String = ""
@@ -50,6 +73,7 @@ class ExpertTheme:Object{
     dynamic var imagesString = ""
     dynamic var timeInterval = 0.0
     dynamic var lastReply = 0.0
+    dynamic var status:Int = 0
     func setRead(){
         try! ModelManager.realm.write {
             self.unRead = false
@@ -79,6 +103,4 @@ class ExpertTheme:Object{
     override static func ignoredProperties() -> [String] {
         return ["images"]
     }
-    
-    
 }

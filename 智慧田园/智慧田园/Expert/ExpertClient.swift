@@ -64,6 +64,52 @@ class ExpertClient:NSObject,GCDAsyncSocketDelegate{
                     if length <= self.finalReceiveData.length - 5,let json = try? NSJSONSerialization.JSONObjectWithData(self.finalReceiveData.subdataWithRange(NSMakeRange(5, length)), options: NSJSONReadingOptions.AllowFragments){
                         if let type = json["type"] as? String{
                             switch type{
+                                case "NewExpertAsk":
+                                    if let key = json["key"] as? Int{
+                                        let json = ["mType":"GetInform","sendUser":TYUserDefaults.userID.value!,"informKey":key]
+                                        let headArray:[UInt8] = [2]
+                                        let content = try! NSJSONSerialization.dataWithJSONObject(json, options: NSJSONWritingOptions())
+                                        let head = NSData(bytes: headArray, length: 1)
+                                        var lengthArray:[UInt8] = []
+                                        var contentLength = content.length
+                                        for _ in 0...3{
+                                            lengthArray.append(UInt8(contentLength%256))
+                                            contentLength/=256
+                                        }
+                                        lengthArray = lengthArray.reverse()
+                                        let length = NSData(bytes: lengthArray, length: 4)
+                                        let finalData = NSMutableData()
+                                        finalData.appendData(head)
+                                        finalData.appendData(length)
+                                        finalData.appendData(content)
+                                        self.socket.writeData(finalData, withTimeout: -1, tag: 111)
+                                }
+                                    if let list = json["posts"] as? NSArray{
+                                        for x in list {
+                                            if let object = x as? [String:AnyObject]{
+                                                let topic = ExpertTheme()
+                                                if let content = object["content"] as? String{
+                                                    topic.content = content
+                                                }else{
+                                                    topic.content = ""
+                                                }
+                                                topic.classifyID = object["parentArea"] as! String
+                                                topic.timeInterval = object["createDate"] as! Double
+                                                topic.ID = object["postNo"] as! String
+                                                topic.headPhoto = TYUserDefaults.UrlPrefix.value + (object["headImage"] as! String)
+                                                topic.lastReply = object["lastReplyDate"] as! Double
+                                                topic.name = object["username"] as! String
+                                                topic.userID = object["userId"] as! String
+                                                topic.status = 2
+                                                if let images = object["images"] as? [String]{
+                                                    topic.images = images.map(){TYUserDefaults.UrlPrefix.value + $0}
+                                                }
+                                                dispatch_async(dispatch_get_main_queue(), {
+                                                    ModelManager.add(topic)
+                                                })
+                                            }
+                                        }
+                                }
                                 case "NewFieldData":
                                     if let fieldData = json["fieldData"] as? [String:AnyObject]{
                                         Farmland.setEnvironMent(fieldData)
@@ -135,10 +181,10 @@ class ExpertClient:NSObject,GCDAsyncSocketDelegate{
     }
     
     private func scheduleNotification(title:String,body:String){
-        AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
-        if UIApplication.sharedApplication().applicationState != .Active {
-            UIApplication.scheduleNotification(0, body: body, title: title)
-        }
+//        AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
+//        if UIApplication.sharedApplication().applicationState != .Active {
+//            UIApplication.scheduleNotification(0, body: body, title: title)
+//        }
     }
     
     //已连接

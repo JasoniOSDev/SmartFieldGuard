@@ -166,7 +166,6 @@ class ExpertViewController: TYViewController {
         tableView.contentInset = UIEdgeInsetsMake(10, 0, 0, 0)
         tableView.contentOffset = CGPointMake(0, -10)
         tableView.backgroundColor = UIColor.BackgroundColor()
-        tableView.estimatedRowHeight = 80
         tableView.registerReusableCell(AskExpertTableViewCell)
         tableView.clearOtherLine()
     }
@@ -223,7 +222,7 @@ class ExpertViewController: TYViewController {
         vc.own = false
         UIApplication.sharedApplication().keyWindow?.rootViewController?.presentViewController(TYNavigationViewController(rootViewController: vc), animated: true, completion: nil)
     }
-    
+
     @IBAction func ButtonAddClicked() {
         pushNewForumViewController(true)
     }

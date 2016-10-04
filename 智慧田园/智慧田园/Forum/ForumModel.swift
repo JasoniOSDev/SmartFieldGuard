@@ -54,6 +54,7 @@ class Replay:NSObject{
     var agreeNum:Int!
     var replyDate:NSTimeInterval!
     var IfSupport:Bool!
+    var images = [String]()
     init(dict:[String:AnyObject]){
         super.init()
         postNo = dict["postNo"] as! String
@@ -64,6 +65,12 @@ class Replay:NSObject{
         content = dict["content"] as! String
         agreeNum = dict["agreeNum"] as! Int
         replyDate = dict["replyDate"] as! NSTimeInterval
+        if let urls = dict["images"] as? String{
+            let array = urls.componentsSeparatedByString("|")
+            for x in array{
+                images.append(TYUserDefaults.UrlPrefix.value + x)
+            }
+        }
         IfSupport = false
         if let agreeUserstr = dict["agreeUsers"] as? String {
             let agreeUsers = agreeUserstr.componentsSeparatedByString("|")

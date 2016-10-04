@@ -21,8 +21,8 @@ class MessagePhotoScanController: UIViewController,UIScrollViewDelegate {
     private let scrollViewContentView = UIView()
     private var total:Int!
     private var photoScanData = [PhotoScanModel]()
-    private var labelInfo:UILabel = UILabel()
     private var slide = false
+    var labelInfo:UILabel = UILabel()
     var singleTapGesture:UITapGestureRecognizer!
     var doubleTapGesture:UITapGestureRecognizer!
     private var fromPoint:CGPoint!{
