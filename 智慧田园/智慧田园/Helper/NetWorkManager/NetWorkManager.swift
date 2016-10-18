@@ -376,6 +376,12 @@ public class NetWorkManager:NSObject{
                                         }
                                     }
                                 }
+                                finish -= 1
+                                if finish == 0{
+                                    if let finishAction = action{
+                                        finishAction(tag)
+                                    }
+                                }
                             }
                         }
                     }

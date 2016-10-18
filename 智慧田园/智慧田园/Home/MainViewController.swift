@@ -118,6 +118,7 @@ class MainViewController: TYViewController {
         tableView.showsVerticalScrollIndicator = false
         self.view.bringSubviewToFront(LabelTip)
         let headerFresh = MJRefreshNormalHeader {[weak self] in
+            guard !(self?.needAnimation)! else {return}
             self?.needAnimation = true
             NetWorkManager.updateFarmland({ tag in
                 self?.tableView.mj_header.endRefreshing()

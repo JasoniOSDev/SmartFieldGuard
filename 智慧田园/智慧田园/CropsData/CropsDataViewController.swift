@@ -40,7 +40,6 @@ class CropsDataViewController: UIViewController {
         super.viewDidLoad()
         ImageViewCropsConfigure()
         cropsDataViewConfgire()
-        NSNotificationCenter.defaultCenter().addObserver(<#T##observer: AnyObject##AnyObject#>, selector: <#T##Selector#>, name: <#T##String?#>, object: <#T##AnyObject?#>)
     }
     
     override func viewWillAppear(animated: Bool) {
