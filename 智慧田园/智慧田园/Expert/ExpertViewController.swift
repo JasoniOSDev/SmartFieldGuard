@@ -117,10 +117,13 @@ class ExpertViewController: TYViewController {
         if own == true || TYUserDefaults.role.value == RoleNormalMemeber{
             self.ExpertThemes = self.ExpertThemes?.filter("self.userID = %@", TYUserDefaults.userID.value!)
         }
-        self.token = self.ExpertThemes!.addNotificationBlock({[weak self] change in
+
+        self.token = self.ExpertThemes?.addNotificationBlock({
+            [weak self] change in
             switch change{
             case .Initial(_):self?.tableView.reloadData()
             case .Update(_, deletions: let deletions, insertions: let news, modifications: let modify):
+                self?.cellHeight.removeAll()
                 if modify.count > 0 {
                     //有数据发生改变
                     self?.tableView.reloadRowsAtIndexPaths(modify.map{NSIndexPath(forRow: $0, inSection: 0)}, withRowAnimation: .Automatic)
@@ -133,7 +136,6 @@ class ExpertViewController: TYViewController {
                     //有数据被删除
                     self?.tableView.deleteRowsAtIndexPaths(deletions.map{NSIndexPath(forRow: $0, inSection: 0)}, withRowAnimation: .None)
                 }
-                self?.cellHeight.removeAll()
             case .Error(_):break
             }
         })
@@ -260,6 +262,7 @@ extension ExpertViewController:UITableViewDelegate,UITableViewDataSource{
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(indexPath: indexPath) as AskExpertTableViewCell
         cell.theme = self.ExpertThemes![indexPath.row]
+        cell.ImageViewReplayTag.hidden = indexPath.row != 0
         return cell
     }
     

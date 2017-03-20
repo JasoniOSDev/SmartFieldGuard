@@ -1516,7 +1516,7 @@
 			baseConfigurationReference = 800828A745BC94227B7D9391 /* Pods-智慧田园.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = PG83M8BXTM;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1558,11 +1558,13 @@
 					"-framework",
 					"\"pop\"",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.jason.ZHTYS;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jason.smart.field.guard;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = TYHeader.h;
 				SWIFT_VERSION = 2.3;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -1571,7 +1573,7 @@
 			baseConfigurationReference = BB38657AA1CBDF22B65A16CC /* Pods-智慧田园.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = PG83M8BXTM;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1613,11 +1615,13 @@
 					"-framework",
 					"\"pop\"",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.jason.ZHTYS;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jason.smart.field.guard;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = TYHeader.h;
 				SWIFT_VERSION = 2.3;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

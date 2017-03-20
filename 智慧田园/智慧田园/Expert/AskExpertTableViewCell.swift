@@ -23,14 +23,13 @@ class AskExpertTableViewCell: UITableViewCell,Reusable {
     @IBOutlet weak var imageViewTwo: UIImageView!
     var theme:ExpertTheme!{
         didSet{
-            
             //由于服务器没有存储类名，所以此处需要从本地获取
-            if theme.classifyName == ""{
+            if theme.classifyName == "未知"{
                 try! ModelManager.realm.write({
                     if let name = ModelManager.getObjects(LocalCrops).filter("self.id = %@", theme.classifyID).first?.name{
                         theme.classifyName = name
                     }else{
-                        theme.classifyName = ""
+                        theme.classifyName = "水稻专区"
                     }
                 })
                 return 

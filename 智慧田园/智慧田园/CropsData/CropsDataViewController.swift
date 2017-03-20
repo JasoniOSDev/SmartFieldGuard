@@ -130,7 +130,7 @@ class CropsDataViewController: UIViewController {
     private func loadData(){
         //模拟
         LabelCropsName.text = "品名: " + (field.crops?.name)!
-        CropsDataViewAddress.title = field.positionStr
+        CropsDataViewAddress.title = field.positionStr == "" ? "农场地址" : field.positionStr;
         CropsDataViewAddress.contentPosition = .Top
         CropsDataViewSun.contentPosition = .Right
         CropsDataViewWater.contentPosition = .Right

@@ -24,7 +24,7 @@ class MainViewController: TYViewController {
         return vc
     }()
     let farmLands = ModelManager.getObjects(Farmland)
-    var needAnimation = true
+    var needAnimation = false
     var notiToken:NotificationToken!
     var tip:String? = nil{
         didSet{
