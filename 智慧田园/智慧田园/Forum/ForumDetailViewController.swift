@@ -124,7 +124,6 @@ class ForumDetailViewController: TYViewController {
                 }
                 return
             }
-            
         }
     }
     
@@ -165,7 +164,6 @@ class ForumDetailViewController: TYViewController {
             
         }
     }
-    
     
     private func calcHeightAtIndex(index:Int) -> CGFloat{
         //计算

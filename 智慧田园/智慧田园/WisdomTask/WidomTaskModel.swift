@@ -52,6 +52,7 @@ class Fertilize:Object{
     }
 }
 
+//作物类
 class Crops: Object {
     dynamic var operatorid = ""//唯一确定这块田的这次种植
     dynamic var id:String = ""
@@ -129,7 +130,10 @@ class Farmland: Object{
     dynamic var light = 0.0
     dynamic var status = ""
     dynamic var periodNo = ""
-    
+    let pastCrops = List<Crops>()
+    let tasking = List<Tasking>()//该农田正在进行的任务
+    let pastFertilities = List<Fertility>()
+
     var linshibili:Int{
         get{
             return Int(lastFertility)
@@ -152,10 +156,7 @@ class Farmland: Object{
         }
     }
     
-    let pastCrops = List<Crops>()
-    let tasking = List<Tasking>()//该农田正在进行的任务
-    let pastFertilities = List<Fertility>()
-    typealias fillAction = (air_t:Double,air_w:Double,soil_t:Double,soil_w:Double,co2:Double,light:Double) -> Void
+       typealias fillAction = (air_t:Double,air_w:Double,soil_t:Double,soil_w:Double,co2:Double,light:Double) -> Void
     var fillDataInViewAction:fillAction?
     var propertyDict:[String:Double] {
         get{
@@ -374,7 +375,7 @@ class Fertility:Object{
     dynamic var value = 0.0
 }
 
-//任务类---泛型
+//任务类
 class Task: Object{
     dynamic var id:String = ""
     dynamic var crops:Crops?
@@ -391,7 +392,7 @@ class Task: Object{
     let fireCondition = List<TaskFireCondition>()
 
 }
-//正在进行的任务，主要是把文本解析成具体的任务
+//正在进行的任务，主要是保存翻译完成的任务
 class Tasking:Object{
     dynamic var fieldID = ""
     dynamic var id = ""
@@ -460,11 +461,11 @@ class Tasking:Object{
     }
 }
 
+//触发条件类
 class TaskFireCondition:Object{
     dynamic var property = ""//根据变量的公式
     dynamic var method = ""//比对的方法，比大小还是
     dynamic var value = ""//对比的值
-    
 }
 
 class ModelManager{

@@ -10,8 +10,6 @@ import UIKit
 import MJRefresh
 import MBProgressHUD
 class ForumViewController: TYViewController{
-
-    
     @IBOutlet weak var ConstraintPageViewTop: NSLayoutConstraint!
     @IBOutlet weak var ConstraintContentWidth: NSLayoutConstraint!
     @IBOutlet weak var PageButtonUnSolve: PageButtonMidLine!
@@ -297,8 +295,6 @@ extension ForumViewController:UITableViewDelegate,UITableViewDataSource{
 }
 
 extension ForumViewController:UIScrollViewDelegate{
-    
-    
     
     func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
         if(scrollView.contentOffset.x / self.view.frame.size.width == 1){

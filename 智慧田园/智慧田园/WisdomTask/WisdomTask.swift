@@ -83,20 +83,20 @@ class WTProperty:NSObject{
             return
         }
         //处理尾部限制条件
-            let parts = propertyStr.componentsSeparatedByString("(")
-            var myCondition = ""
-            if parts.count == 2{
-                let condictions = parts[1].componentsSeparatedByString("|")
-                condictions.forEach({ (condition) in
-                    switch condition{
-                    case ConditionStr.Region.rawValue:
-                        actionConditionRegion({ (name) in
-                            myCondition += name
-                        })
-                    default:break
-                    }
-                })
-            }
+        let parts = propertyStr.componentsSeparatedByString("(")
+        var myCondition = ""
+        if parts.count == 2{
+            let condictions = parts[1].componentsSeparatedByString("|")
+            condictions.forEach({ (condition) in
+                switch condition{
+                case ConditionStr.Region.rawValue:
+                    actionConditionRegion({ (name) in
+                        myCondition += name
+                    })
+                default:break
+                }
+            })
+        }
         //处理前驱阶段问题
         var destStr = ""
         if parts[0].hasPrefix("!") == false{

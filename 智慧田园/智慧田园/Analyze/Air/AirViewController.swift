@@ -22,7 +22,6 @@ class AirViewController: TYViewController {
     }
     
     func analyzeViewConfigure(){
-        
         scrollView = UIScrollView()
         scrollView.bounces = false
         scrollView.frame = self.view.bounds

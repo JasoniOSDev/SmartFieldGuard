@@ -15,9 +15,7 @@ extension UIDevice{
      var SSID:String?{
         get{
             if let interfaces:NSArray = CNCopySupportedInterfaces() {
-                
                 if let interfaceName:CFString = interfaces[0] as! CFString {
-                    
                     if let dict:NSDictionary = CNCopyCurrentNetworkInfo(interfaceName){
                         return dict.objectForKey("SSID") as! String
                     }

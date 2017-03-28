@@ -10,7 +10,6 @@
 ////用来监测一些值的改变，从而触发对应的注册闭包和操作
 import Alamofire
 public class NetWorkManager:NSObject{
-    static let shareManager = NetWorkManager()
     
     class func login(parameters:[String:AnyObject],action:(json:[String:AnyObject])->Void){
         TYRequest(.Login, parameters: parameters).TYResponseJSON { (json) in

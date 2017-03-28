@@ -85,7 +85,8 @@ class MainViewController: TYViewController {
                 }
                 self.notiToken = self.farmLands.addNotificationBlock { [weak self] result in
                     switch(result){
-                    case .Initial(_):break
+                    case .Initial(_):
+                        self?.tableView.reloadData()
                     case .Update(_, deletions: _, insertions: _, modifications: let modify):
                         self?.needAnimation = false
                         if modify.count > 0 {

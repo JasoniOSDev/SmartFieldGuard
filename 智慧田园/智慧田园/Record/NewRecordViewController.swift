@@ -218,7 +218,6 @@ extension NewRecordViewController:UITableViewDelegate,UITableViewDataSource{
 
 extension NewRecordViewController:JTCalendarDelegate{
     
-    
     func calendar(calendar: JTCalendarManager!, prepareMenuItemView menuItemView: UIView!, date: NSDate!) {
         func StringFromdateFormatterWithYearAndMonth(date:NSDate) -> String{
             let formatter = NSDateFormatter()
@@ -229,8 +228,6 @@ extension NewRecordViewController:JTCalendarDelegate{
             label.text = StringFromdateFormatterWithYearAndMonth(date)
         }
     }
-    
-    
     
     func calendar(calendar: JTCalendarManager!, prepareDayView dayView: UIView!) {
         if let dayView = dayView as? JTCalendarDayView{

@@ -42,25 +42,12 @@ class FertilizeViewController: TYViewController {
         super.viewDidAppear(animated)
         pieChart?.strokeChart()
     }
+    
     func freshDataFromNetWork(){
         if let _ = pieChart{
             pieChart!.removeFromSuperview()
         }
-        
-//        let datas = ModelManager.getObjects(HistoryFertilize).filter("self.time <= %@ and self.time >= %@", todayDate.timeIntervalSince1970,destdate)
-//        var dict = [String:Double]()
-//        datas.forEach { (x) in
-//            x.history.forEach({ (y) in
-//                if dict[y.name] == nil{
-//                    dict[y.name] = y.value
-//                }else{
-//                    dict[y.name] = dict[y.name]! + y.value
-//                }
-//            })
-//        }
-        
         var dataItems = [PNPieChartDataItem]()
-        
         var i = 0
         var dis = 0
         if ModelManager.realm.objects(Tasking).filter("self.status = true and self.name = '临时加肥'").count > 0{

@@ -44,7 +44,7 @@ class MessagePhotoScanController: UIViewController,UIScrollViewDelegate {
             let indexPath = collectionView.indexPathsForVisibleItems()
             for x in indexPath.enumerate(){
                 if(x.element.row == index){
-                    return collectionView.visibleCells()[x.index] as! PhotoScanCollectionViewCell
+                    return collectionView.visibleCells()[x.index] as? PhotoScanCollectionViewCell
                 }
             }
             return nil
@@ -164,18 +164,24 @@ class MessagePhotoScanController: UIViewController,UIScrollViewDelegate {
         }
     }
     
-    class func pushScanController(point:CGPoint? = nil){
-        shareMessagePhotoScan.pushScanController(point)
+    class func pushScanController(){
+        shareMessagePhotoScan.pushScanController()
     }
     
-    func pushScanController(point:CGPoint? = nil){
+    func pushScanController(){
         self.modalPresentationStyle = .Custom
         self.transitioningDelegate = self
-        if let rootViewController = UIApplication.sharedApplication().keyWindow?.rootViewController as? TYNavigationViewController{
-            rootViewController.visibleViewController!.presentViewController(self, animated: true, completion: nil)
-        }else{
-            UIApplication.sharedApplication().keyWindow?.rootViewController!.presentViewController(self, animated: true, completion: nil)
+        var window = UIApplication.sharedApplication().keyWindow
+        if nil == window {
+            window = UIApplication.sharedApplication().delegate?.window ?? window
         }
+        var rootViewController = window!.rootViewController;
+        if rootViewController?.isKindOfClass(TYNavigationViewController) == true{
+            rootViewController = (rootViewController as! TYNavigationViewController).visibleViewController
+        }
+        
+        rootViewController?.presentViewController(self, animated: true, completion: nil);
+        
         let imageView = UIImageView()
         for x in self.photoScanData.enumerate(){
             imageView.yy_setImageWithURL(NSURL(string: x.element.url), options: .AvoidSetImage)

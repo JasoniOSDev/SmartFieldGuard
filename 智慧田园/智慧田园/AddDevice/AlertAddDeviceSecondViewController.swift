@@ -27,7 +27,6 @@ class AlertAddDeviceSecondViewController: TYViewController,UITextFieldDelegate {
                 self?.nextworkStatusChange()
             }
         }
-        
         self.reach!.unreachableBlock = {
             [weak self] reach in
             dispatch_async(dispatch_get_main_queue()) {
@@ -35,6 +34,7 @@ class AlertAddDeviceSecondViewController: TYViewController,UITextFieldDelegate {
             }
         }
         self.reach!.startNotifier()
+        
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.updateButtonNext(_:)), name: UITextFieldTextDidChangeNotification, object: nil)
     }
     
@@ -68,7 +68,6 @@ class AlertAddDeviceSecondViewController: TYViewController,UITextFieldDelegate {
             LabelWiFiName.textColor = UIColor.HightBlackColor()
             TextFieldWiFiPassWord.enabled = true
             TextFieldWiFiPassWord.text = nil
-            
         }else{
             LabelWiFiName.text = "请连接Wi-Fi"
             LabelWiFiName.textColor = UIColor.LowBlackColor()
