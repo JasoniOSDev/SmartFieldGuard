@@ -61,14 +61,14 @@
 
 @implementation UITableView (ZHTY)
 
-+ (void)load{
-    [self exchangeInstanceMethod1:@selector(touchesBegan:withEvent:) method2:@selector(ZHTYTouchesBegan:withEvent:)];
-}
-
-- (void)ZHTYTouchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
-    [self ZHTYTouchesBegan:touches withEvent:event];
-    [self.nextResponder touchesBegan:touches withEvent:event];
-}
+//+ (void)load{
+//    [self exchangeInstanceMethod1:@selector(touchesBegan:withEvent:) method2:@selector(ZHTYTouchesBegan:withEvent:)];
+//}
+//
+//- (void)ZHTYTouchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+//    [self ZHTYTouchesBegan:touches withEvent:event];
+//    [self.nextResponder touchesBegan:touches withEvent:event];
+//}
 
 @end
 

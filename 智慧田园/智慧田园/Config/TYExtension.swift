@@ -279,4 +279,60 @@ extension UIImageView {
     }
 }
 
+extension UIView{
+    
+    var width:CGFloat{
+        get{
+            return self.frame.width
+        }
+        set {
+            self.frame = CGRectMake(self.left, self.top, newValue, self.height)
+        }
+    }
+    
+    var height:CGFloat{
+        get{
+            return self.frame.height
+        }
+        set {
+            self.frame = CGRectMake(self.left, self.top, self.width, newValue)
+        }
+    }
+    
+    var left:CGFloat{
+        get{
+            return self.frame.origin.x;
+        }
+        set {
+            self.frame = CGRectMake(newValue, self.top, self.width, self.height)
+        }
+    }
+    
+    var right:CGFloat{
+        get{
+            return self.left + self.width
+        }
+        set {
+            self.frame = CGRectMake(newValue - self.width, self.top, self.width, self.height)
+        }
+    }
+    
+    var top:CGFloat{
+        get{
+            return self.frame.origin.y
+        }
+        set{
+            self.frame = CGRectMake(self.left, newValue, self.width, self.height)
+        }
+    }
+    
+    var bottom:CGFloat{
+        get{
+            return self.top + self.height
+        }
+        set{
+           self.frame = CGRectMake(self.left, newValue - self.height, self.width, self.height)
+        }
+    }
+}
 

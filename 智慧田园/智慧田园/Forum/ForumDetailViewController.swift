@@ -105,7 +105,7 @@ class ForumDetailViewController: TYViewController {
         loadDataFromNet()
     }
     
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
         if let touch = touches.first{
             var point = touch.locationInView(ViewRegionMSG)
             if(!ViewRegionMSG.pointInside(point, withEvent: event)){
@@ -125,6 +125,7 @@ class ForumDetailViewController: TYViewController {
                 return
             }
         }
+        super.touchesEnded(touches, withEvent: event)
     }
     
     private func prepareUI(){
@@ -367,8 +368,16 @@ extension ForumDetailViewController:UITableViewDelegate,UITableViewDataSource{
         preDragY = scrollView.panGestureRecognizer.locationInView(self.view).y
     }
     
+    func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        preDragY = -1
+    }
+    
+    func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
+        preDragY = -1
+    }
+    
     func scrollViewDidScroll(scrollView: UIScrollView) {
-        guard  !contentViewFold else {return}
+        guard  !contentViewFold  || preDragY != -1 else {return}
         let nowDragY = scrollView.panGestureRecognizer.locationInView(self.view).y
         guard nowDragY - preDragY < 0 else {return}
         contentViewFold = true

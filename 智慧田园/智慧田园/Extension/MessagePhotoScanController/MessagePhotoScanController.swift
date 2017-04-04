@@ -133,7 +133,6 @@ class MessagePhotoScanController: UIViewController,UIScrollViewDelegate {
     private func loadCurrentCell(){
         collectionView.reloadData()
         //不加reloadData的话，再选择一个图片数量不一样的时候会发生崩溃
-        collectionView.contentSize = CGSizeMake(ScreenWidth * CGFloat(total), ScreenHeight)
         collectionView.scrollToItemAtIndexPath(NSIndexPath(forRow: index, inSection: 0), atScrollPosition: .None, animated: false)
         collectionView.reloadItemsAtIndexPaths([NSIndexPath(forRow: index, inSection: 0)])
     }
@@ -224,7 +223,7 @@ extension MessagePhotoScanController:UIViewControllerAnimatedTransitioning,UIVie
     }
     
     func transitionDuration(transitionContext: UIViewControllerContextTransitioning?) -> NSTimeInterval {
-        return 0.3
+        return 0.15
     }
     
     func animateTransition(transitionContext: UIViewControllerContextTransitioning){
@@ -241,7 +240,7 @@ extension MessagePhotoScanController:UIViewControllerAnimatedTransitioning,UIVie
                 animatedView.transform = model.fromTransform
                 animatedView.center = toVC.fromPoint
                 backView.alpha = 0
-                UIView.animateWithDuration(duration, animations: {
+                UIView.animateWithDuration(duration, delay: 0, options: .CurveEaseOut, animations: { 
                     animatedView.transform = model.toTransform
                     animatedView.center = toVC.toPoint
                     backView.alpha = 0.6

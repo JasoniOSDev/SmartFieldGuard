@@ -53,14 +53,14 @@ class MyReplyTableViewCell: UITableViewCell,Reusable {
         imageViews.appendContentsOf([imageViewOne,imageViewTwo,imageViewThd])
     }
     
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
         if let view = touches.first?.view as? UIImageView where (view.tag >= 101 && view.tag <= 103) && view.image != nil{
             let index = view.tag - 101
             MessagePhotoScanController.setImages(imageViews, imagesURL: message.images, index: index)
             MessagePhotoScanController.pushScanController()
             return
         }
-        super.touchesBegan(touches, withEvent: event)
+        super.touchesEnded(touches, withEvent: event)
     }
 
     func newContentViewUI(){

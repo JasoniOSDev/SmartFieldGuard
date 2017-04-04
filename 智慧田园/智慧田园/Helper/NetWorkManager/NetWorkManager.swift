@@ -371,14 +371,15 @@ public class NetWorkManager:NSObject{
                                                     }
                                                 }
                                                 })
+                                            } else {
+                                                finish -= 1
+                                                if finish == 0{
+                                                    if let finishAction = action{
+                                                        finishAction(tag)
+                                                    }
+                                                }
                                             }
                                         }
-                                    }
-                                }
-                                finish -= 1
-                                if finish == 0{
-                                    if let finishAction = action{
-                                        finishAction(tag)
                                     }
                                 }
                             }

@@ -262,7 +262,6 @@ extension ExpertViewController:UITableViewDelegate,UITableViewDataSource{
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(indexPath: indexPath) as AskExpertTableViewCell
         cell.theme = self.ExpertThemes![indexPath.row]
-        cell.ImageViewReplayTag.hidden = indexPath.row != 0
         return cell
     }
     

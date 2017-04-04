@@ -133,7 +133,7 @@ class Farmland: Object{
     let pastCrops = List<Crops>()
     let tasking = List<Tasking>()//该农田正在进行的任务
     let pastFertilities = List<Fertility>()
-
+    
     var linshibili:Int{
         get{
             return Int(lastFertility)
@@ -479,7 +479,7 @@ class ModelManager{
         })
         Realm.Configuration.defaultConfiguration = config
         real = try! Realm()
-        print(config.fileURL)
+//        print(config.fileURL)
         return real!
     }
     

@@ -90,7 +90,12 @@ class MainViewController: TYViewController {
                     case .Update(_, deletions: _, insertions: _, modifications: let modify):
                         self?.needAnimation = false
                         if modify.count > 0 {
-                            self?.tableView.reloadRowsAtIndexPaths(modify.map{NSIndexPath(forRow: $0, inSection: 0)}, withRowAnimation: .Automatic)
+                            let maxRow = modify.maxElement({$0>$1})
+                            if self?.tableView.numberOfSections > 0 && self?.tableView.numberOfRowsInSection(0) > maxRow{
+                                self?.tableView.reloadRowsAtIndexPaths(modify.map{NSIndexPath(forRow: $0, inSection: 0)}, withRowAnimation: .Automatic)
+                            }else {
+                                self?.tableView.reloadData()
+                            }
                         }
                     case .Error(_):break
                     }
