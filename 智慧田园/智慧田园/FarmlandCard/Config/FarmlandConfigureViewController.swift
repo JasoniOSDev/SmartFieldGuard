@@ -78,7 +78,10 @@ class FarmlandConfigureViewController: TYViewController {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.subviews[0].alpha = 0
         self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
-        UIApplication.sharedApplication().setStatusBarStyle(.LightContent, animated: true)
+    }
+    
+    override func prefersStatusBarHidden() -> Bool {
+        return true
     }
     
     private func prepareUI(){

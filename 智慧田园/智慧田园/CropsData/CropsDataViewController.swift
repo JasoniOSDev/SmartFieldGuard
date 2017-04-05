@@ -42,16 +42,6 @@ class CropsDataViewController: UIViewController {
         cropsDataViewConfgire()
     }
     
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        UIApplication.sharedApplication().setStatusBarHidden(true, withAnimation: .None)
-    }
-    
-    override func viewWillDisappear(animated: Bool) {
-        super.viewWillDisappear(animated)
-        UIApplication.sharedApplication().setStatusBarHidden(false, withAnimation: .Fade)
-    }
-    
     override func prefersStatusBarHidden() -> Bool {
         return true
     }

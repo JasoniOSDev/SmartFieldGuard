@@ -92,7 +92,7 @@ class CardDetailViewController: TYViewController {
     var panGesture:UIPanGestureRecognizer!
     var panStartPoint:CGPoint?
     var headRefreshView:TYRefreshNavView!
-    
+    var statusBarStyle:UIStatusBarStyle = .LightContent
     override func viewDidLoad() {
         super.viewDidLoad()
         prepareUI()
@@ -111,7 +111,6 @@ class CardDetailViewController: TYViewController {
         super.viewWillAppear(animated)
         FertilizerSlider.value = 0
         self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
-        UIApplication.sharedApplication().setStatusBarStyle(.LightContent, animated: true)
         if taskViewDismiss {
             taskViewDismiss = false
         }else{
@@ -121,6 +120,10 @@ class CardDetailViewController: TYViewController {
         if scrollView.contentOffset.y == 0{
             self.navigationController?.navigationBar.subviews[0].alpha = 0
         }
+    }
+    
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return self.statusBarStyle
     }
     
     private func grestureConfigure(){
@@ -261,7 +264,7 @@ class CardDetailViewController: TYViewController {
     }
 
     @IBAction func ButtonFertilizerClicked(sender: AnyObject) {
-        if let task = farmland.tasking.filter("self.name = '检测土壤肥力' and self.status = false").first{
+        if farmland.tasking.filter("self.name = '检测土壤肥力' and self.status = false").first != nil{
             farmland.updateFertility(Double(FertilizerSlider.value * 100))
             MBProgressHUD.showSuccess("成功录入肥力数据", toView: nil)
         }else{
@@ -358,12 +361,14 @@ extension CardDetailViewController:UIScrollViewDelegate{
             self.title = LabelTitle.text
             self.navigationController?.navigationBar.tintColor = UIColor.MidBlackColor()
             self.navigationItem.rightBarButtonItem!.image = UIImage(named: "Edit_Black")
-            UIApplication.sharedApplication().setStatusBarStyle(.Default, animated: true)
+            self.statusBarStyle = .Default
+            self.setNeedsStatusBarAppearanceUpdate()
         }else{
             self.title = nil
             self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
             self.navigationItem.rightBarButtonItem!.image = UIImage(named: "Edit")
-            UIApplication.sharedApplication().setStatusBarStyle(.LightContent, animated: true)
+            self.statusBarStyle = .LightContent
+            self.setNeedsStatusBarAppearanceUpdate()
         }
     }
     

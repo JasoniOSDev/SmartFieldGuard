@@ -53,13 +53,16 @@ class MainViewController: TYViewController {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.subviews[0].alpha = 0
         self.navigationController?.navigationBar.tintColor = UIColor.MidBlackColor()
-        UIApplication.sharedApplication().setStatusBarStyle(.Default, animated: true)
     }
     
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
         return .Default
     }
 
+    override func prefersStatusBarHidden() -> Bool {
+        return false
+    }
+    
     func prepareUI(){
         tableViewConfigure()
     }

@@ -47,6 +47,7 @@
 		963BDD421CFB6874003DB16E /* SunViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963BDD411CFB6874003DB16E /* SunViewController.swift */; };
 		963BDD451CFBD152003DB16E /* FertilizeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963BDD441CFBD152003DB16E /* FertilizeViewController.swift */; };
 		964173F41D8829EA00982CE8 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 961DF0741CF6ACE700A8942D /* MapKit.framework */; };
+		9641C0AF1E94C13000182927 /* TYTransitionPull.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9641C0AE1E94C13000182927 /* TYTransitionPull.swift */; };
 		9643B63F1D9110F800AD6005 /* CropsDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9643B63D1D9110F800AD6005 /* CropsDataViewController.swift */; };
 		9643B6421D91184E00AD6005 /* FarmlandCard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9643B6411D91184E00AD6005 /* FarmlandCard.storyboard */; };
 		9643B6441D911DF200AD6005 /* 方正粗圆_GBK.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9643B6431D911DB000AD6005 /* 方正粗圆_GBK.ttf */; };
@@ -231,6 +232,7 @@
 		963BDD3E1CFB682A003DB16E /* SoilViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SoilViewController.swift; path = Analyze/Soil/SoilViewController.swift; sourceTree = "<group>"; };
 		963BDD411CFB6874003DB16E /* SunViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SunViewController.swift; path = Analyze/Sun/SunViewController.swift; sourceTree = "<group>"; };
 		963BDD441CFBD152003DB16E /* FertilizeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FertilizeViewController.swift; path = Analyze/Fertilize/FertilizeViewController.swift; sourceTree = "<group>"; };
+		9641C0AE1E94C13000182927 /* TYTransitionPull.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TYTransitionPull.swift; path = Extension/Transition/TYTransitionPull.swift; sourceTree = "<group>"; };
 		9643B63D1D9110F800AD6005 /* CropsDataViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CropsDataViewController.swift; path = CropsData/CropsDataViewController.swift; sourceTree = "<group>"; };
 		9643B6411D91184E00AD6005 /* FarmlandCard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = FarmlandCard.storyboard; path = FarmlandCard/FarmlandCard.storyboard; sourceTree = "<group>"; };
 		9643B6431D911DB000AD6005 /* 方正粗圆_GBK.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "方正粗圆_GBK.ttf"; sourceTree = "<group>"; };
@@ -653,6 +655,7 @@
 		963D2D8B1D4CD76000375E23 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				9641C0AA1E94C0B900182927 /* Transition */,
 				965A53E71CF13BEC00CA9B53 /* PageButton */,
 				96B89AFC1D3625C200B92ECF /* MessagePhotoScanController */,
 				965B31B61D5EC29A000ABA83 /* MBProgressHUD+MJ.h */,
@@ -671,6 +674,14 @@
 				9638713E1CF4039C00653D11 /* NewRecordViewController.swift */,
 			);
 			name = Controller;
+			sourceTree = "<group>";
+		};
+		9641C0AA1E94C0B900182927 /* Transition */ = {
+			isa = PBXGroup;
+			children = (
+				9641C0AE1E94C13000182927 /* TYTransitionPull.swift */,
+			);
+			name = Transition;
 			sourceTree = "<group>";
 		};
 		9643B63C1D9110BC00AD6005 /* CropsData */ = {
@@ -1355,6 +1366,7 @@
 				9623B38A1D9448D4009C991F /* ChooseExpertsViewController.swift in Sources */,
 				96326BEE1D9175F100C621C1 /* CropsDataBackView.swift in Sources */,
 				963BDD351CFB5002003DB16E /* GrowthViewController.swift in Sources */,
+				9641C0AF1E94C13000182927 /* TYTransitionPull.swift in Sources */,
 				9643B63F1D9110F800AD6005 /* CropsDataViewController.swift in Sources */,
 				96076C541CF9C1B7002E3F1E /* WidomTaskModel.swift in Sources */,
 				96A567B71CF72F03000733A1 /* LoginHomeViewController.swift in Sources */,

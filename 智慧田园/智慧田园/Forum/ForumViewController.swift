@@ -163,7 +163,6 @@ class ForumViewController: TYViewController{
     }
     
     private func prepareUI(){
-        UIApplication.sharedApplication().setStatusBarStyle(.Default, animated: true)
         tableViewConfigure()
         self.title = crops.name + "讨论区"
         //self.view.addSubview(fpsLabel)

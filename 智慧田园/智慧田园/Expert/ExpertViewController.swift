@@ -152,7 +152,6 @@ class ExpertViewController: TYViewController {
     }
     
     private func prepareUI(){
-        UIApplication.sharedApplication().setStatusBarStyle(.Default, animated: true)
         tableViewConfigure()
         if cropsName != ""{
             self.title = "专家咨询区(\(cropsName))"
@@ -268,7 +267,6 @@ extension ExpertViewController:UITableViewDelegate,UITableViewDataSource{
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return cellHeightForIndex(indexPath.row)
     }
-    
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         selectIndex = indexPath.row

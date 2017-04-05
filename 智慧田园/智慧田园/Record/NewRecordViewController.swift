@@ -69,13 +69,16 @@ class NewRecordViewController: TYViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        UIApplication.sharedApplication().setStatusBarStyle(.Default, animated: true)
         self.navigationController?.navigationBar.tintColor = UIColor.MidBlackColor()
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         self.navigationController?.navigationBar.subviews[0].alpha = 1
+    }
+    
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return .Default
     }
     
     private func calenderManagerConfigure(){

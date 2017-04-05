@@ -71,18 +71,18 @@ class CropsDataView: UIView {
         get{
             switch contentPosition {
             case .Left:
-                return CGPointMake(width - 5, height / 2)
+                return CGPointMake(tmpWidth - 5, tmpHeight / 2)
             case .Right:
-                return CGPointMake(5, height / 2)
+                return CGPointMake(5, tmpHeight / 2)
             case .Top:
-                return CGPointMake(width / 2, height - 3)
+                return CGPointMake(tmpWidth / 2, tmpHeight - 3)
             case .Bottom:
-                return CGPointMake(width / 2, 3)
+                return CGPointMake(tmpWidth / 2, 3)
             }
         }
     }
-    var height:CGFloat = 25
-    var width:CGFloat = 0.0
+    var tmpHeight:CGFloat = 25
+    var tmpWidth:CGFloat = 0.0
     
     convenience init (dataType:CropsDataType,contentPosition:Position){
         self.init()
@@ -99,7 +99,7 @@ class CropsDataView: UIView {
         titleLabel.sizeToFit()
         imageView.sizeToFit()
         arrowView.sizeToFit()
-        width = imageView.frame.width + titleLabel.frame.width + 21 + (arrowType == .Normal ? 0 : 15)
+        tmpWidth = imageView.frame.width + titleLabel.frame.width + 21 + (arrowType == .Normal ? 0 : 15)
         var startX:CGFloat = 0.0
         switch contentPosition {
         case .Left:
@@ -138,8 +138,8 @@ class CropsDataView: UIView {
             self.titleLabel.textColor = UIColor.whiteColor()
         }
         self.snp_makeConstraints { (make) in
-            make.height.equalTo(height)
-            make.width.equalTo(width)
+            make.height.equalTo(tmpHeight)
+            make.width.equalTo(tmpWidth)
         }
     }
 

@@ -65,8 +65,11 @@ class AnalyzeViewController: TYViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        UIApplication.sharedApplication().setStatusBarStyle(.Default, animated: true)
         self.navigationController?.navigationBar.tintColor = UIColor.MidBlackColor()
+    }
+    
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return .Default
     }
     
     override func viewDidAppear(animated: Bool) {
