@@ -592,7 +592,7 @@ public class NetWorkManager:NSObject{
                 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), {
                     let localTheme = ModelManager.getObjects(ExpertTheme)
                     if let msg = JSON["message"] as? String where msg == "success"{
-                        if let array = (JSON["postList"] as! [String:AnyObject])["list"] as? NSArray{
+                        if let dict = JSON["postList"] as? [String:AnyObject],let array = dict["list"] as? NSArray{
                             for x in array{
                                 let object = x as! [String:AnyObject]
                                 let topic = ExpertTheme()

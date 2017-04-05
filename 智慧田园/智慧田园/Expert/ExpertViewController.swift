@@ -95,6 +95,16 @@ class ExpertViewController: TYViewController {
         self.navigationController?.navigationBar.addSubview(uploadingTagView)
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.tintColor = UIColor.MidBlackColor()
+        self.navigationController?.navigationBar.subviews[0].alpha = 1
+    }
+    
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return .Default
+    }
+    
     override func viewDidDisappear(animated: Bool) {
         super.viewDidDisappear(animated)
         setMenuHidden(true)
@@ -226,10 +236,6 @@ class ExpertViewController: TYViewController {
 
     @IBAction func ButtonAddClicked() {
         pushNewForumViewController(true)
-    }
-    
-    @IBAction func LeftButtonClicked(sender: UIBarButtonItem) {
-        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     @IBAction func ButtonMenuClicked(sender: AnyObject) {

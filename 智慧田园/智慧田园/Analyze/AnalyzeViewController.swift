@@ -66,15 +66,11 @@ class AnalyzeViewController: TYViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.tintColor = UIColor.MidBlackColor()
+        self.navigationController?.navigationBar.subviews[0].alpha = 1
     }
     
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
         return .Default
-    }
-    
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-        self.navigationController?.navigationBar.subviews[0].alpha = 1
     }
     
     private func prepareUI(){

@@ -249,16 +249,12 @@ class CardDetailViewController: TYViewController {
         if let vc = segue.destinationViewController as? NewRecordViewController{
             vc.Tasks = farmland.tasking.filter(){$0.status == true}
         }
-        if let vc = segue.destinationViewController as? TYNavigationViewController{
-            if let vc2 = vc.visibleViewController as? ForumViewController{
-                vc2.crops = self.farmland.crops
-            }
+        if let vc = segue.destinationViewController as? ForumViewController{
+            vc.crops = self.farmland.crops
         }
-        if let vc = segue.destinationViewController as? TYNavigationViewController{
-            if let vc2 = vc.visibleViewController as? ExpertViewController{
-                vc2.cropsID = (self.farmland.crops?.id)!
-                vc2.cropsName = (self.farmland.crops?.name)!
-            }
+        if let vc = segue.destinationViewController as? ExpertViewController{
+                vc.cropsID = (self.farmland.crops?.id)!
+                vc.cropsName = (self.farmland.crops?.name)!
         }
         
     }

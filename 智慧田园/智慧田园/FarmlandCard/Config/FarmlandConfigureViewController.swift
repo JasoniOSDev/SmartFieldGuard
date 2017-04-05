@@ -100,6 +100,7 @@ class FarmlandConfigureViewController: TYViewController {
     private func locationManagerConfigure(){
         AMapServices.sharedServices().apiKey = GDKey
         locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
+        self.getFarmLandPostion()
     }
     
     private func getFarmLandPostion(){

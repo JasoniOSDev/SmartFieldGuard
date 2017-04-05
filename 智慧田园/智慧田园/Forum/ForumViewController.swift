@@ -144,6 +144,12 @@ class ForumViewController: TYViewController{
         super.viewWillLayoutSubviews()
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.tintColor = UIColor.MidBlackColor()
+        self.navigationController?.navigationBar.subviews[0].alpha = 1
+    }
+    
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
         return .Default
     }
@@ -246,10 +252,6 @@ class ForumViewController: TYViewController{
         if dataInfo.index == 0 {
             LoadData()
         }
-    }
-    
-    @IBAction func LeftButtonClicked(sender: UIBarButtonItem) {
-        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     @IBAction func ButtonAddClicked(sender: AnyObject) {

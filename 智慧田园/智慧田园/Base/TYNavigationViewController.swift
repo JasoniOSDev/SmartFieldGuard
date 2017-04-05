@@ -99,7 +99,7 @@ class TYNavigationTransition:NSObject,UINavigationControllerDelegate{
 class TYNavigationPopTransition: NSObject,UIViewControllerAnimatedTransitioning {
     
     func transitionDuration(transitionContext: UIViewControllerContextTransitioning?) -> NSTimeInterval {
-        return 0.35
+        return 0.15
     }
     
     func animateTransition(transitionContext: UIViewControllerContextTransitioning) {

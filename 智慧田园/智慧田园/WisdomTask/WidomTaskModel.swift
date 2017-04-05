@@ -355,15 +355,15 @@ class Farmland: Object{
         }
     }
     
-    class func getFieldByDeviceMac(deviceMac:String) -> Farmland{
+    class func getFieldByDeviceMac(deviceMac:String) -> Farmland?{
         let fields = ModelManager.getObjects(Farmland)
-        return fields.filter("self.deviceMac = %@", deviceMac).first!
+        return fields.filter("self.deviceMac = %@", deviceMac).first
     }
     
     class func setEnvironMent(json:[String:AnyObject]){
         if let deviceMac = json["deviceMac"] as? String{
             let field = getFieldByDeviceMac(deviceMac)
-            field.setEnvironmentData(json)
+            field?.setEnvironmentData(json)
         }
     }
     

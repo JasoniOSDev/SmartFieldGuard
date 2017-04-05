@@ -33,7 +33,7 @@ class ForumDetailViewController: TYViewController {
     var preDragY:CGFloat!
     var forum:Forum!
     var replies = [Replay]()
-    var pageIndex = 1
+    var pageIndex = 0
     var pageCount = 20
     var currentCount = 0
     let keyboardMan = KeyboardMan()
@@ -216,7 +216,7 @@ class ForumDetailViewController: TYViewController {
     func loadDataFromNet(){
         NetWorkManager.updateSession{
             let tableViewTmp = self.tableView
-            TYRequest(.Reply, parameters: ["pageIndex":self.pageIndex + (self.currentCount == self.pageCount ? 1 : 0),"pageCount":self.pageCount,"postNo":self.forum.postNo]).TYresponseJSON { response in
+            TYRequest(.Reply, parameters: ["pageIndex":self.pageIndex + 1,"pageCount":self.pageCount,"postNo":self.forum.postNo]).TYresponseJSON { response in
                 if response.result.isSuccess{
                     if let json = response.result.value as? [String:AnyObject] {
                         if let message = json["message"] as? String where message == "success"{
@@ -235,9 +235,6 @@ class ForumDetailViewController: TYViewController {
                                     self.currentCount = content["currentCount"] as! Int
                                     tableViewTmp.mj_footer.endRefreshing()
                                     tableViewTmp.reloadData()
-                                }else{
-                                    tableViewTmp.mj_footer.endRefreshingWithNoMoreData()
-                                    tableViewTmp.mj_footer.resetNoMoreData()
                                 }
                             }
                         }
