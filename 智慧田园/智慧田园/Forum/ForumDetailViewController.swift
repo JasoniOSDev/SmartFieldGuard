@@ -240,8 +240,11 @@ class ForumDetailViewController: TYViewController {
                                     tableViewTmp.mj_footer.resetNoMoreData()
                                 }
                             }
-                        }else{
-//                            print(json["message"])
+                        }
+                        if let hasMore = json["hasMore"] as? NSNumber{
+                            if (hasMore.boolValue == false){
+                                tableViewTmp.mj_footer.state = .NoMoreData
+                            }
                         }
                     }
                 }

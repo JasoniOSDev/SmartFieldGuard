@@ -91,6 +91,8 @@ class AnalyzeViewController: TYViewController {
         collectionView.backgroundColor = UIColor.clearColor()
         collectionView.pagingEnabled = true
         collectionView.collectionViewLayout = layout
+        collectionView.bounces = false
+        collectionView.showsHorizontalScrollIndicator = false
         collectionView.registerClass(AnalyzeCollectionViewCell.self, forCellWithReuseIdentifier: "cell")
     }
 

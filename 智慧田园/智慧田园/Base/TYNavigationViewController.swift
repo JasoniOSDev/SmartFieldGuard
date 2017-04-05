@@ -13,6 +13,7 @@ class TYNavigationViewController: UINavigationController {
     lazy var newNavigationPopGesture:UIPanGestureRecognizer = {
         let gesture = UIPanGestureRecognizer()
         gesture.addTarget(self, action: #selector(TYNavigationViewController.handlePopGesture(_:)))
+        gesture.delegate = self
         return gesture
     }()
     
@@ -40,17 +41,19 @@ class TYNavigationViewController: UINavigationController {
     }
     
     func handlePopGesture(gesture:UIPanGestureRecognizer){
-        var progress = gesture.translationInView(gesture.view).x / self.view.width
-        progress = min(progress, 1)
+        var progress = gesture.translationInView(gesture.view).x / gesture.view!.width
+        progress = min(max(0,progress), 1)
         switch gesture.state {
         case .Began:
             if self.childViewControllers.count > 1 {
+                self.newNavigationTransition.interactiveEnable = true
                 self.popViewControllerAnimated(true)
+                self.newNavigationTransition.interactiveEnable = false
             }
         case .Changed:
             self.newNavigationTransition.drivenInteractiveManager.updateInteractiveTransition(progress)
         case .Ended,.Cancelled:
-            if progress > 0.5{
+            if progress > 0.3{
                 self.newNavigationTransition.drivenInteractiveManager.finishInteractiveTransition()
             }else {
                 self.newNavigationTransition.drivenInteractiveManager.cancelInteractiveTransition()
@@ -61,13 +64,28 @@ class TYNavigationViewController: UINavigationController {
     }
 }
 
+extension TYNavigationViewController:UIGestureRecognizerDelegate{
+    func gestureRecognizerShouldBegin(gestureRecognizer: UIGestureRecognizer) -> Bool {
+        if let panGesture = gestureRecognizer as? UIPanGestureRecognizer{
+            let velocity = panGesture.velocityInView(panGesture.view)
+            return velocity.x > 0 && velocity.x > velocity.y
+        }
+        return false
+    }
+}
+
 class TYNavigationTransition:NSObject,UINavigationControllerDelegate{
-    var drivenInteractiveManager:UIPercentDrivenInteractiveTransition = UIPercentDrivenInteractiveTransition()
+    var interactiveEnable = false
+    lazy var drivenInteractiveManager:UIPercentDrivenInteractiveTransition = {
+        let interactiveTransition = UIPercentDrivenInteractiveTransition()
+        interactiveTransition.completionCurve = .EaseOut
+        return interactiveTransition
+    }()
     lazy var animationPopTransition:UIViewControllerAnimatedTransitioning = {
         return TYNavigationPopTransition()
     }()
     func navigationController(navigationController: UINavigationController, interactionControllerForAnimationController animationController: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
-        return self.drivenInteractiveManager
+        return self.interactiveEnable ? self.drivenInteractiveManager : nil
     }
     
     func navigationController(navigationController: UINavigationController, animationControllerForOperation operation: UINavigationControllerOperation, fromViewController fromVC: UIViewController, toViewController toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
@@ -93,7 +111,7 @@ class TYNavigationPopTransition: NSObject,UIViewControllerAnimatedTransitioning 
         let duration = self .transitionDuration(transitionContext)
         contaierView.insertSubview(toView, belowSubview: fromView)
         toView.transform = CGAffineTransformMakeScale(0.98, 0.98)
-        UIView.animateWithDuration(duration, delay: 0, options: .CurveEaseOut, animations: {
+        UIView.animateWithDuration(duration, delay: 0, options: .CurveLinear, animations: {
             toView.transform = CGAffineTransformIdentity
             fromView.transform = CGAffineTransformMakeTranslation(fromView.width, 0)
             }) { finish in
